@@ -1,0 +1,16 @@
+---
+title: "What the Package Does (Title Case)"
+output:
+  github_document:
+    fig_width: 9
+    fig_height: 5
+---
+
+## Getting Started
+
+Build the package then launch this `htmlwidget` as follows:
+
+```{r eval=FALSE}
+library(d3)
+d3("Hello World")
+```
