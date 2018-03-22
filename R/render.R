@@ -39,14 +39,19 @@ d3_render <- function(
     width = width,
     height = height,
     package = 'd3',
-    dependencies = htmltools::htmlDependency(
-      "d3",
-      version,
-      system.file(
-        file.path("d3", version),
-        package = "d3"
+    dependencies = list(
+      htmltools::htmlDependency(
+        name = "d3",
+        version = version,
+        src = system.file(file.path("d3", version), package = "d3"),
+        script = "d3.js"
       ),
-      script = "d3.js"
+      htmltools::htmlDependency(
+        name = "d3-rendering",
+        version = "1.0.0",
+        src = dirname(script),
+        script = basename(script)
+      )
     )
   )
 }
