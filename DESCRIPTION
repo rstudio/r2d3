@@ -13,3 +13,4 @@ Depends:
   R (>= 3.1.2)
 Imports:
   htmlwidgets
+RoxygenNote: 6.0.1
