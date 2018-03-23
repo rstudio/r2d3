@@ -12,7 +12,7 @@
 #' @export
 d3_render <- function(
   data = islands,
-  script = system.file("samples/barchart-json.js", package = "d3"),
+  script = system.file("samples/barchart-variable.js", package = "d3"),
   width = NULL,
   height = NULL,
   version = "5.0.0")
@@ -32,7 +32,7 @@ d3_render <- function(
 
   # forward options using x
   x <- list(
-    message = df
+    data = c(4, 8, 15, 16, 23, 42)
   )
   
   wrapped_script <- d3_wrap_script(script)

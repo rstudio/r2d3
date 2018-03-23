@@ -1,3 +1,5 @@
+var d3 = d3 ? d3 : {};
+
 HTMLWidgets.widget({
   name: 'd3',
   type: 'output',
@@ -7,6 +9,11 @@ HTMLWidgets.widget({
 
     return {
       renderValue: function(x) {
+        d3.r = function() {
+          return new Promise(function(resolve, reject) {
+            resolve(x.data);
+          });
+        };
         d3_script();
       },
 
