@@ -12,11 +12,14 @@
 #' @export
 d3_render <- function(
   data = islands,
-  script = system.file("samples/bubbles.js", package = "d3"),
+  script = system.file("samples/barchart.js", package = "d3"),
   width = NULL,
   height = NULL,
   version = "5.0.0")
 {
+  
+  if (!file.exists(script))
+    stop("File ", script, " does not exist.")
   
   # convert to data frames
   df <- data
@@ -31,6 +34,8 @@ d3_render <- function(
   x <- list(
     message = df
   )
+  
+  wrapped_script <- d3_wrap_script(script)
 
   # create widget
   htmlwidgets::createWidget(
@@ -49,8 +54,8 @@ d3_render <- function(
       htmltools::htmlDependency(
         name = "d3-rendering",
         version = "1.0.0",
-        src = dirname(script),
-        script = basename(script)
+        src = dirname(wrapped_script),
+        script = basename(wrapped_script)
       )
     )
   )
