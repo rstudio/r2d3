@@ -5,6 +5,9 @@ d3.r().then(function(data) {
         .data(data)
       .enter().append("div")
         .style("width", function(d) { return d * 10 + "px"; })
-        .style("background-color", "#DDD")
+        .style("background-color", "steelblue")
+        .style("border", "1px solid white")
+        .style("color", "white")
+        .style("padding-left", "2px")
         .text(function(d) { return d; });
 });

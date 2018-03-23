@@ -9,7 +9,14 @@ HTMLWidgets.widget({
 
     return {
       renderValue: function(x) {
-        d3.r = function() {
+        d3.r = function(update) {
+          
+          if (typeof(update) != "undefined" && typeof(Shiny) !== "undefined") {
+            Shiny.addCustomMessageHandler("d3_update", function(x) {
+              update(x.data);
+            });
+          }
+          
           return new Promise(function(resolve, reject) {
             resolve(x.data);
           });
