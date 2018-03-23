@@ -12,7 +12,7 @@
 #' @export
 d3_render <- function(
   data = islands,
-  script = system.file("samples/barchart.js", package = "d3"),
+  script = system.file("samples/barchart-json.js", package = "d3"),
   width = NULL,
   height = NULL,
   version = "5.0.0")
