@@ -6,6 +6,7 @@
 #' @param script The 'JavaScript' file containing the D3.js script.
 #' @param width The desired width of the widget.
 #' @param height The desired height of the widget.
+#' @param inject The variable name used to inject data into a D3 script.
 #' @param version The D3 version to use.
 #'
 #' @import htmlwidgets
@@ -16,6 +17,7 @@ d3_render <- function(
   script = system.file("samples/barchart-variable.js", package = "d3"),
   width = NULL,
   height = NULL,
+  inject = "data",
   version = "5.0.0")
 {
   
@@ -36,7 +38,7 @@ d3_render <- function(
     data = data
   )
   
-  wrapped_script <- d3_wrap_script(script)
+  wrapped_script <- d3_wrap_script(script, inject)
 
   # create widget
   htmlwidgets::createWidget(

@@ -11,17 +11,23 @@ HTMLWidgets.widget({
       renderValue: function(x) {
         d3.r = function(update) {
           
-          if (typeof(update) != "undefined" && typeof(Shiny) !== "undefined") {
-            Shiny.addCustomMessageHandler("d3_update", function(x) {
+          if (typeof(update) != "undefined") {
+            update(x.data);
+            
+            if (typeof(Shiny) !== "undefined") {
               update(x.data);
-            });
+              Shiny.addCustomMessageHandler("d3_update", function(x) {
+                update(x.data);
+              });
+            }
           }
           
           return new Promise(function(resolve, reject) {
             resolve(x.data);
           });
         };
-        d3_script();
+        
+        d3_script(x.data, "#" + el.id);
       },
 
       resize: function(width, height) {

@@ -1,13 +1,25 @@
 D3 rendering for R
 ================
 
+-   Render [D3](https://d3js.org/) scripts with ease in R as [htmlwidgets](https://www.htmlwidgets.org/).
+-   Bind R data to D3 with minimal changes to D3 source.
+-   Easily animate D3 with data driven from R.
+
+Installation
+------------
+
 Install this package by running:
 
 ``` r
 devtools::install_github("rstudio/d3")
 ```
 
-Lets start with a static D3 script:
+Getting Started
+---------------
+
+### Static Data
+
+Lets start with a static D3 script that renders a simple bar chart:
 
     var data = [4, 8, 15, 16, 23, 42];
 
@@ -23,7 +35,7 @@ Lets start with a static D3 script:
           .style("padding-left", "2px")
           .text(function(d) { return d; });
 
-This can be rendered using:
+This D3 script can be rendered R by running:
 
 ``` r
 library(d3)
@@ -32,55 +44,63 @@ d3_render(script = system.file("samples/barchart-static.js", package = "d3"))
 
 ![](tools/README/d3-static.png)
 
-While this is helpful, data is usually not static, in `D3`, one can download JSON data using:
+Since we probably want to change the barchart data from R, we can copy this script as `barchart-variable.js` and remove the following line from the D3 script:
 
-    d3.json("https://s3.amazonaws.com/javierluraschi/d3/barchart-json.json").then(function(data) {
-      d3.select("body")
-        .append("div")
-          .selectAll("div")
-            .data(data)
-          .enter().append("div")
-            .style("width", function(d) { return d * 10 + "px"; })
-            .style("background-color", "steelblue")
-            .style("border", "1px solid white")
-            .style("color", "white")
-            .style("padding-left", "2px")
-            .text(function(d) { return d; });
-    });
-
-This file can be rendered as well by the same command for this file:
-
-``` r
-d3_render(script = system.file("samples/barchart-json.js", package = "d3"))
+``` js
+var data = [4, 8, 15, 16, 23, 42];
 ```
 
-![](tools/README/d3-static.png)
-
-Now, what is more helpful for R users is to provide this data from R, this can be done by using `d3.r()` instead of `d3.json()` as follows:
-
-    d3.r().then(function(data) {
-      d3.select("body")
-        .append("div")
-          .selectAll("div")
-            .data(data)
-          .enter().append("div")
-            .style("width", function(d) { return d * 10 + "px"; })
-            .style("background-color", "steelblue")
-            .style("border", "1px solid white")
-            .style("color", "white")
-            .style("padding-left", "2px")
-            .text(function(d) { return d; });
-    });
+then, from R we can pass this data as follows:
 
 ``` r
 d3_render(
-  data = c(10, 30, 40, 35, 20, 10),
-  script = system.file("samples/barchart-variable.js", package = "d3"))
+  c(4, 8, 15, 16, 23, 42),
+  script = system.file("samples/barchart-variable.js", package = "d3")
+)
 ```
 
-![](tools/README/d3-variable.png)
+By default, data is injected to the D3 script as `data`; however, if the static data is contained in the D3 script with a different name, say as:
 
-Finally, instead of providing static data, one can provide a function that provides data. Since `d3.json()` an `d3.r()` expect promises and for animations we rather need to update data continuosly, we will pass a function to `d3.r()` as follows:
+``` js
+var values = [4, 8, 15, 16, 23, 42];
+```
+
+we can then inject the data with that specific name as:
+
+``` r
+d3_render(
+  c(4, 8, 15, 16, 23, 42),
+  script = system.file("samples/barchart-variable.js", package = "d3"),
+  inject = "values"
+)
+```
+
+### Dynamic Data
+
+Data in D3 scripts is usually not static. Instead, D3 scripts make use of `d3.csv()`, `d3.json()` and similar functions to fetch data, this usually looks like the following D3 script:
+
+    d3.json("https://s3.amazonaws.com/javierluraschi/d3/barchart-json.json").then(function(data) {
+      var bars = d3.select("#d3")
+        .selectAll("div")
+          .data(data);
+          
+      bars.enter().append("div")
+        .style("width", function(d) { return 4 + d * 10 + "px"; })
+        .style("background-color", "steelblue")
+        .style("border", "1px solid white")
+        .style("color", "white")
+        .style("padding-left", "2px")
+        .text(function(d) { return d; });
+      
+      bars.exit().remove();
+      
+      bars.transition()
+        .duration(250)
+        .style("width", function(d) { return 4 + d * 10 + "px"; })
+        .text(function(d) { return d; });
+    });
+
+To make use of this D3 in R, we need to replace the data function (`d3.csv()`, `d3.tsv()`, `d3.json()`, `d3.xml()`, etc.) with `d3.r()` as follows:
 
     d3.r(function(data) {
       var bars = d3.select("#d3")
@@ -103,12 +123,21 @@ Finally, instead of providing static data, one can provide a function that provi
         .text(function(d) { return d; });
     });
 
-To render an animation, we will use `d3_animate()` instead and provide a function that provide data instead of data on it's own:
+``` r
+d3_render(
+  data = c(10, 30, 40, 35, 20, 10),
+  script = system.file("samples/barchart-dynamic.js", package = "d3")
+)
+```
+
+![](tools/README/d3-variable.png)
+
+Finally, instead of providing static data, one can also provide a function that provides variable data and use `d3_animate()` instead to process animation frames with the D3 script:
 
 ``` r
 d3_animate(
   function() floor(runif(6, 1, 40)),
-  system.file("samples/barchart-animate.js", package = "d3")
+  system.file("samples/barchart-dynamic.js", package = "d3")
 )
 ```
 

@@ -6,6 +6,7 @@
 #' @param script The 'JavaScript' file containing the D3.js script.
 #' @param width The desired width of the widget.
 #' @param height The desired height of the widget.
+#' @param inject The variable name used to inject data into a D3 script.
 #' @param version The D3 version to use.
 #' @param interval The animation inverval in milliseconds.
 #'
@@ -19,6 +20,7 @@ d3_animate <- function(
   script = system.file("samples/barchart-animation.js", package = "d3"),
   width = NULL,
   height = NULL,
+  inject = "data",
   version = "5.0.0",
   interval = 1000
 ) {
@@ -31,7 +33,7 @@ d3_animate <- function(
   
   server <- function(input, output, session) {
     output$d3 <- d3_shiny_render(
-      d3_render(data(), script, width, height, version)
+      d3_render(data(), script, width, height, inject, version)
     )
     
     observeEvent(input$done, {
