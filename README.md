@@ -55,7 +55,7 @@ then, from R we can pass this data as follows:
 ``` r
 render(
   c(4, 8, 15, 16, 23, 42),
-  script = system.file("samples/barchart-variable.js", package = "r2d3")
+  system.file("samples/barchart-variable.js", package = "r2d3")
 )
 ```
 
@@ -100,7 +100,7 @@ Data in D3 scripts is usually not static. Instead, D3 scripts make use of `d3.cs
         .text(function(d) { return d; });
     });
 
-To make use of this D3 in R, we need to replace the data function (`d3.csv()`, `d3.tsv()`, `d3.json()`, `d3.xml()`, etc.) with `r2.d3()` as follows. Also, you should replaced your root element selector, `d3.select("body")` in the example above with the `r2.root` selector as follows:
+To make use of this script in R, we need to replace the data function (`d3.csv()`, `d3.tsv()`, `d3.json()`, `d3.xml()`, etc.) with `r2.d3()`. Also, you should replaced your root element selector, `d3.select("body")` in the example above, with the `r2.root` selector as follows:
 
     r2.d3(function(data) {
       var bars = d3.select(r2.root)
@@ -123,16 +123,18 @@ To make use of this D3 in R, we need to replace the data function (`d3.csv()`, `
         .text(function(d) { return d; });
     });
 
+With the modified script, data can be rendered in D3 as follows:
+
 ``` r
 render(
   data = c(10, 30, 40, 35, 20, 10),
-  script = system.file("samples/barchart-dynamic.js", package = "r2d3")
+  system.file("samples/barchart-dynamic.js", package = "r2d3")
 )
 ```
 
 ![](tools/README/d3-variable.png)
 
-Finally, instead of providing static data, one can also provide a function that provides variable data and use `d3_animate()` instead to process animation frames with the D3 script:
+Finally, we can also animate data by proving a function and using `animate()`:
 
 ``` r
 animate(
