@@ -103,5 +103,5 @@ animate(
   system.file("samples/barchart-dynamic.js", package = "r2d3")
 )
 ```
-![](tools/README/r2d3-animate.gif)
 
+<img src="tools/README/r2d3-animate.gif" width=460/>

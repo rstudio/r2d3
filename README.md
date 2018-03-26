@@ -147,4 +147,4 @@ animate(
 )
 ```
 
-![](tools/README/r2d3-animate.gif)
+<img src="tools/README/r2d3-animate.gif" width=460/>
