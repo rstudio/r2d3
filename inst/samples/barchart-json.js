@@ -1,5 +1,5 @@
 d3.json("https://s3.amazonaws.com/javierluraschi/d3/barchart-json.json").then(function(data) {
-  var bars = d3.select("#d3")
+  var bars = d3.select("body")
     .selectAll("div")
       .data(data);
       

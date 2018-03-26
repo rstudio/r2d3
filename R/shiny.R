@@ -15,15 +15,15 @@
 #' @name d3-shiny
 #'
 #' @export
-d3_shiny_output <- function(outputId, width = '100%', height = '400px')
+shiny_output <- function(outputId, width = '100%', height = '400px')
 {
-  htmlwidgets::shinyWidgetOutput(outputId, 'd3', width, height, package = 'd3')
+  htmlwidgets::shinyWidgetOutput(outputId, 'r2d3', width, height, package = 'r2d3')
 }
 
 #' @rdname d3-shiny
 #' @export
-d3_shiny_render <- function(expr, env = parent.frame(), quoted = FALSE)
+shiny_render <- function(expr, env = parent.frame(), quoted = FALSE)
 {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  htmlwidgets::shinyRenderWidget(expr, d3_shiny_output, env, quoted = TRUE)
+  htmlwidgets::shinyRenderWidget(expr, shiny_output, env, quoted = TRUE)
 }

@@ -1,9 +1,9 @@
-D3 rendering for R
+R to D3 rendering tools
 ================
 
 -   Render [D3](https://d3js.org/) scripts with ease in R as [htmlwidgets](https://www.htmlwidgets.org/).
--   Bind R data to D3 with minimal changes to D3 source.
--   Easily animate D3 with data driven from R.
+-   Send data from R to D3 with minimal changes to the D3 source.
+-   Animate R data with D3 scripts.
 
 Installation
 ------------
@@ -100,9 +100,9 @@ Data in D3 scripts is usually not static. Instead, D3 scripts make use of `d3.cs
         .text(function(d) { return d; });
     });
 
-To make use of this D3 in R, we need to replace the data function (`d3.csv()`, `d3.tsv()`, `d3.json()`, `d3.xml()`, etc.) with `d3.r()` as follows:
+To make use of this D3 in R, we need to replace the data function (`d3.csv()`, `d3.tsv()`, `d3.json()`, `d3.xml()`, etc.) with `r2.d3()` as follows:
 
-    d3.r(function(data) {
+    r2.d3(function(data) {
       var bars = d3.select("#d3")
         .selectAll("div")
           .data(data);

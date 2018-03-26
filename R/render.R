@@ -12,9 +12,9 @@
 #' @import htmlwidgets
 #'
 #' @export
-d3_render <- function(
+render <- function(
   data = floor(runif(6, 1, 40)),
-  script = system.file("samples/barchart-variable.js", package = "d3"),
+  script = system.file("samples/barchart-variable.js", package = "r2d3"),
   width = NULL,
   height = NULL,
   inject = "data",
@@ -38,24 +38,24 @@ d3_render <- function(
     data = data
   )
   
-  wrapped_script <- d3_wrap_script(script, inject)
+  wrapped_script <- script_wrap(script, inject)
 
   # create widget
   htmlwidgets::createWidget(
-    name = 'd3',
+    name = 'r2d3',
     x,
     width = width,
     height = height,
-    package = 'd3',
+    package = 'r2d3',
     dependencies = list(
       htmltools::htmlDependency(
         name = "d3",
         version = version,
-        src = system.file(file.path("d3", version), package = "d3"),
+        src = system.file(file.path("d3", version), package = "r2d3"),
         script = "d3.js"
       ),
       htmltools::htmlDependency(
-        name = "d3-rendering",
+        name = "r2d3-rendering",
         version = "1.0.0",
         src = dirname(wrapped_script),
         script = basename(wrapped_script)

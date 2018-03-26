@@ -1,5 +1,5 @@
-d3.r(function(data) {
-  var bars = d3.select("#d3")
+r2.d3(function(data) {
+  var bars = d3.select(r2.root)
     .selectAll("div")
       .data(data);
       

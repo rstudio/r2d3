@@ -15,9 +15,9 @@
 #' @import miniUI
 #' 
 #' @export
-d3_animate <- function(
+animate <- function(
   data = function() floor(runif(6, 1, 40)),
-  script = system.file("samples/barchart-animation.js", package = "d3"),
+  script = system.file("samples/barchart-animation.js", package = "r2d3"),
   width = NULL,
   height = NULL,
   inject = "data",
@@ -25,15 +25,15 @@ d3_animate <- function(
   interval = 1000
 ) {
   ui <- miniPage(
-    gadgetTitleBar("D3"),
+    gadgetTitleBar("R2D3"),
     miniContentPanel(
-      d3_shiny_output("d3")
+      shiny_output("r2d3")
     )
   )
   
   server <- function(input, output, session) {
-    output$d3 <- d3_shiny_render(
-      d3_render(data(), script, width, height, inject, version)
+    output$r2d3 <- shiny_render(
+      render(data(), script, width, height, inject, version)
     )
     
     observeEvent(input$done, {

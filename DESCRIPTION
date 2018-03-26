@@ -1,6 +1,6 @@
-Package: d3
+Package: r2d3
 Type: Package
-Title: What the Package Does (Title Case)
+Title: R to D3 rendering tools
 Version: 0.1.0
 Author: Who wrote it
 Maintainer: The package maintainer <yourself@somewhere.net>
