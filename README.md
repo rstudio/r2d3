@@ -79,7 +79,7 @@ render(
 
 Data in D3 scripts is usually not static. Instead, D3 scripts make use of `d3.csv()`, `d3.json()` and similar functions to fetch data, this usually looks like the following D3 script:
 
-    d3.json("https://s3.amazonaws.com/javierluraschi/d3/barchart-json.json").then(function(data) {
+    d3.json("https://s3.amazonaws.com/javierluraschi/d3/barchart-json.json", function(data) {
       var bars = d3.select("body")
         .selectAll("div")
           .data(data);
