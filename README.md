@@ -1,6 +1,10 @@
 R to D3 rendering tools
 ================
 
+<img src="tools/README/r2d3-hex.svg" width=220 align="right"/>
+
+`R2D3` provides tools to render D3 scripts from R and integrates with `knitr`, `rmarkdown` and RStudio to provide native `d3` output chunks. Specifically, with `R2D3` you can:
+
 -   Render [D3](https://d3js.org/) scripts with ease in R as [htmlwidgets](https://www.htmlwidgets.org/).
 -   Send data from R to D3 with minimal changes to the D3 source.
 -   Animate R data with D3 scripts.
@@ -11,7 +15,7 @@ Installation
 Install this package by running:
 
 ``` r
-devtools::install_github("rstudio/d3")
+devtools::install_github("rstudio/r2d3")
 ```
 
 Getting Started
@@ -42,7 +46,7 @@ library(r2d3)
 render(script = system.file("samples/barchart-static.js", package = "r2d3"))
 ```
 
-![](tools/README/d3-static.png)
+![](tools/README/r2d3-static.png)
 
 Since we probably want to change the barchart data from R, we can copy this script as `barchart-variable.js` and remove the following line from the D3 script:
 
@@ -132,7 +136,7 @@ render(
 )
 ```
 
-![](tools/README/d3-variable.png)
+![](tools/README/r2d3-variable.png)
 
 Finally, we can also animate data by proving a function and using `animate()`:
 
@@ -143,4 +147,4 @@ animate(
 )
 ```
 
-![](tools/README/d3-animate.gif)
+![](tools/README/r2d3-animate.gif)
