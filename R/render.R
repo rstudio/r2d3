@@ -35,7 +35,8 @@ render <- function(
 
   # forward options using x
   x <- list(
-    data = data
+    data = data,
+    type = class(data)[[1]]
   )
   
   wrapped_script <- script_wrap(script, inject)

@@ -8,6 +8,9 @@ HTMLWidgets.widget({
     return {
       renderValue: function(x) {
         r2.data(x);
+        r2.width(width);
+        r2.height(height);
+        
         d3Script(x.data, r2);
       },
 
