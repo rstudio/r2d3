@@ -1,6 +1,12 @@
-var svg = d3.select("svg"),
-    width = +svg.attr("width"),
-    height = +svg.attr("height");
+var svg = d3.select(r2.root).append("svg")
+  .attr("width", r2.width)
+  .attr("height", r2.height)
+  .attr("font-family", "sans-serif")
+  .attr("font-size", "10")
+  .attr("text-anchor", "middle");
+
+var width = +svg.attr("width");
+var height = +svg.attr("height");
 
 var format = d3.format(",d");
 
@@ -10,12 +16,12 @@ var pack = d3.pack()
     .size([width, height])
     .padding(1.5);
 
-d3.csv("flare.csv", function(d) {
+r2.d3(function(d) {
   d.value = +d.value;
   if (d.value) return d;
 }, function(error, classes) {
   if (error) throw error;
-
+  
   var root = d3.hierarchy({children: classes})
       .sum(function(d) { return d.value; })
       .each(function(d) {

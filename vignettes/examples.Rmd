@@ -1,0 +1,34 @@
+---
+title: "Examples"
+output:
+  html_document:
+    toc: yes
+    toc_float:
+      collapsed: no
+---
+
+## Examples
+
+### Bubbles
+
+Using the example from [https://bl.ocks.org/mbostock/4063269](https://bl.ocks.org/mbostock/4063269) requires creating the `svg` element in d3 instead of HTML as follows:
+
+```{js}
+var svg = d3.select(r2.root).append("svg")
+  .attr("width", r2.width)
+  .attr("height", r2.height)
+  .attr("font-family", "sans-serif")
+  .attr("font-size", "10")
+  .attr("text-anchor", "middle");
+```
+
+and also replacing `d3.csv` with `r2.d3` to render:
+
+```{r}
+library(r2d3)
+render(
+  read.csv(system.file("samples/flare.csv", package = "r2d3")),
+  system.file("samples/bubbles.js", package = "r2d3"),
+  version = "4.13.0"
+)
+```
