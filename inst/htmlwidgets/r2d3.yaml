@@ -1,6 +1,6 @@
 dependencies:
-  - name: r2
+  - name: r2d3-render
     version: 0.1.0
     src: htmlwidgets/lib
     script:
-      - r2.js
+      - r2d3-render.js
