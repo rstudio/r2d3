@@ -1,37 +1,27 @@
-var svg = d3.select(r2.root).append("svg")
-  .attr("width", r2.width)
-  .attr("height", r2.height)
-  .attr("font-family", "sans-serif")
+// Initialization
+root.attr("font-family", "sans-serif")
   .attr("font-size", "10")
   .attr("text-anchor", "middle");
-
-var width = +svg.attr("width");
-var height = +svg.attr("height");
-
+    
+var pack = d3.pack()
+  .size([width, height])
+  .padding(1.5);
+    
 var format = d3.format(",d");
-
 var color = d3.scaleOrdinal(d3.schemeCategory20c);
 
-var pack = d3.pack()
-    .size([width, height])
-    .padding(1.5);
-
-r2.d3(function(d) {
-  d.value = +d.value;
-  if (d.value) return d;
-}, function(error, classes) {
-  if (error) throw error;
-  
+// Rendering
+r2d3.onRender(function(classes, svg, width, height, options) {
   var root = d3.hierarchy({children: classes})
-      .sum(function(d) { return d.value; })
-      .each(function(d) {
-        if (id = d.data.id) {
-          var id, i = id.lastIndexOf(".");
-          d.id = id;
-          d.package = id.slice(0, i);
-          d.class = id.slice(i + 1);
-        }
-      });
+    .sum(function(d) { return d.value; })
+    .each(function(d) {
+      if (id = d.data.id) {
+        var id, i = id.lastIndexOf(".");
+        d.id = id;
+        d.package = id.slice(0, i);
+        d.class = id.slice(i + 1);
+      }
+    });
 
   var node = svg.selectAll(".node")
     .data(pack(root).leaves())
