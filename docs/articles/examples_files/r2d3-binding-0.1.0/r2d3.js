@@ -3,19 +3,31 @@ HTMLWidgets.widget({
   type: 'output',
   factory: function(el, width, height) {
 
-    var r2 = new R2(el);
+    var r2d3 = new R2D3();
 
     return {
       renderValue: function(x) {
-        r2.data(x);
-        r2.width(width);
-        r2.height(height);
+        if (!r2d3.root) {
+          var root = d3.select(el).append(x.tag)
+            .attr("width", width)
+            .attr("height", height);
+            
+          r2d3.setRoot(root);
+        }
         
-        d3Script(x.data, r2);
+        r2d3.setX(x);
+        r2d3.setWidth(width);
+        r2d3.setHeight(height);
+        
+        d3Script(r2d3, x.data, r2d3.root, width, height, x.options);
       },
 
       resize: function(width, height) {
-        // TODO: code to re-render the widget with a new size
+        r2d3.root
+          .attr("width", width)
+          .attr("height", height);
+          
+        r2d3.resize(width, height);
       }
     };
   }

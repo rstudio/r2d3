@@ -52,19 +52,18 @@
 <!--/.navbar -->
 
       
-      </header><div class="row">
+      </header><script src="index_files/htmlwidgets-0.9/htmlwidgets.js"></script><script src="index_files/r2d3-render-0.1.0/r2d3-render.js"></script><script src="index_files/r2d3-binding-0.1.0/r2d3.js"></script><script src="index_files/d3-4.13.0/d3.js"></script><script src="index_files/r2d3-rendering-1.0.0/d3-wrapper.js"></script><div class="row">
   <div class="col-md-9">
     
 
     
     
 <div class="contents">
-<p><img src="tools/README/r2d3-hex.svg" width="220" align="right"></p>
+<p><img src="tools/README/r2d3-hex.svg" width="200" align="right"></p>
 <p><code>R2D3</code> provides tools to render D3 scripts from R and integrates with <code>knitr</code>, <code>rmarkdown</code> and RStudio to provide native <code>d3</code> output chunks. Specifically, with <code>R2D3</code> you can:</p>
 <ul>
 <li>Render <a href="https://d3js.org/">D3</a> scripts with ease in R as <a href="https://www.htmlwidgets.org/">htmlwidgets</a>.</li>
-<li>Send data from R to D3 with minimal changes to the D3 source.</li>
-<li>Animate R data with D3 scripts.</li>
+<li>Use <a href="http://shiny.rstudio.com/">Shiny</a> to create interactive D3 applications.</li>
 </ul>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -75,109 +74,102 @@
 <div id="getting-started" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting Started</h2>
-<div id="static-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#static-data" class="anchor"></a>Static Data</h3>
-<p>Lets start with a static D3 script that renders a simple bar chart:</p>
-<pre><code>var data = [4, 8, 15, 16, 23, 42];
+<p>For simple scripts we can rely on <code>r2d3</code> injecting javascript variables for the <code>root</code> html element, <code>data</code>, <code>width</code> and <code>height</code> as follows:</p>
+<pre><code>// data, root, width, height and options are provided by r2d3
 
-d3.select("body")
-  .append("div")
-    .selectAll("div")
-      .data(data)
-    .enter().append("div")
-      .style("width", function(d) { return d * 10 + "px"; })
-      .style("background-color", "steelblue")
-      .style("border", "1px solid white")
-      .style("color", "white")
-      .style("padding-left", "2px")
-      .text(function(d) { return d; });</code></pre>
-<p>This D3 script can be rendered R by running:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(r2d3)
-<span class="kw"><a href="reference/render.html">render</a></span>(<span class="dt">script =</span> <span class="kw">system.file</span>(<span class="st">"samples/barchart-static.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>))</code></pre></div>
-<div class="figure">
-<img src="tools/README/r2d3-static.png">
-</div>
-<p>Since we probably want to change the barchart data from R, we can copy this script as <code>barchart-variable.js</code> and remove the following line from the D3 script:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> data <span class="op">=</span> [<span class="dv">4</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">15</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">23</span><span class="op">,</span> <span class="dv">42</span>]<span class="op">;</span></code></pre></div>
-<script type="text/javascript">
-var data = [4, 8, 15, 16, 23, 42];
-</script><p>then, from R we can pass this data as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/render.html">render</a></span>(
-  <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">23</span>, <span class="dv">42</span>),
-  <span class="kw">system.file</span>(<span class="st">"samples/barchart-variable.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)
-)</code></pre></div>
-<p>By default, data is injected to the D3 script as <code>data</code>; however, if the static data is contained in the D3 script with a different name, say as:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> values <span class="op">=</span> [<span class="dv">4</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">15</span><span class="op">,</span> <span class="dv">16</span><span class="op">,</span> <span class="dv">23</span><span class="op">,</span> <span class="dv">42</span>]<span class="op">;</span></code></pre></div>
-<script type="text/javascript">
-var values = [4, 8, 15, 16, 23, 42];
-</script><p>we can then inject the data with that specific name as:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/render.html">render</a></span>(
-  <span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">8</span>, <span class="dv">15</span>, <span class="dv">16</span>, <span class="dv">23</span>, <span class="dv">42</span>),
-  <span class="dt">script =</span> <span class="kw">system.file</span>(<span class="st">"samples/barchart-variable.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>),
-  <span class="dt">inject =</span> <span class="st">"values"</span>
-)</code></pre></div>
-</div>
-<div id="dynamic-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#dynamic-data" class="anchor"></a>Dynamic Data</h3>
-<p>Data in D3 scripts is usually not static. Instead, D3 scripts make use of <code>d3.csv()</code>, <code>d3.json()</code> and similar functions to fetch data, this usually looks like the following D3 script:</p>
-<pre><code>d3.json("https://s3.amazonaws.com/javierluraschi/d3/barchart-json.json", function(data) {
-  var bars = d3.select("body")
-    .selectAll("div")
-      .data(data);
-      
-  bars.enter().append("div")
-    .style("width", function(d) { return 4 + d * 10 + "px"; })
-    .style("background-color", "steelblue")
-    .style("border", "1px solid white")
-    .style("color", "white")
-    .style("padding-left", "2px")
-    .text(function(d) { return d; });
-  
-  bars.exit().remove();
-  
-  bars.transition()
-    .duration(250)
-    .style("width", function(d) { return 4 + d * 10 + "px"; })
-    .text(function(d) { return d; });
-});</code></pre>
-<p>To make use of this script in R, we need to replace the data function (<code>d3.csv()</code>, <code>d3.tsv()</code>, <code>d3.json()</code>, <code>d3.xml()</code>, etc.) with <code>r2.d3()</code>. Also, you should replaced your root element selector, <code>d3.select("body")</code> in the example above, with the <code>r2.root</code> selector as follows:</p>
-<pre><code>r2.d3(function(data) {
-  var bars = d3.select(r2.root)
-    .selectAll("div")
-      .data(data);
-      
-  bars.enter().append("div")
-    .style("width", function(d) { return 4 + d * 10 + "px"; })
-    .style("background-color", "steelblue")
-    .style("border", "1px solid white")
-    .style("color", "white")
-    .style("padding-left", "2px")
-    .text(function(d) { return d; });
-  
-  bars.exit().remove();
-  
-  bars.transition()
-    .duration(250)
-    .style("width", function(d) { return 4 + d * 10 + "px"; })
-    .text(function(d) { return d; });
-});</code></pre>
-<p>With the modified script, data can be rendered in D3 as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/render.html">render</a></span>(
-  <span class="dt">data =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">35</span>, <span class="dv">20</span>, <span class="dv">10</span>),
-  <span class="kw">system.file</span>(<span class="st">"samples/barchart-dynamic.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)
+var bars = root
+  .selectAll("div")
+    .data(data);
+    
+bars.enter().append("div")
+  .style("width", function(d) { return 4 + d * 10 + "px"; })
+  .style("background-color", "steelblue")
+  .style("border", "1px solid white")
+  .style("color", "white")
+  .style("padding-left", "2px")
+  .text(function(d) { return d; });
+
+bars.exit().remove();
+
+bars.transition()
+  .duration(250)
+  .style("width", function(d) { return 4 + d * 10 + "px"; })
+  .text(function(d) { return d; });</code></pre>
+<p>Thenn, data can be rendered in D3 from R as follows, notice that we’ve changed the default element to <code>"div"</code> to create a <code>&lt;div&gt;</code> tag element instead of the default <code>&lt;svg&gt;</code> element:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r2d3<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/r2d3/topics/r2d3">r2d3</a></span>(
+  <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">35</span>, <span class="dv">20</span>, <span class="dv">10</span>),
+  <span class="kw">system.file</span>(<span class="st">"samples/barchart.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>),
+  <span class="dt">tag =</span> <span class="st">"div"</span>
 )</code></pre></div>
 <div class="figure">
 <img src="tools/README/r2d3-variable.png">
 </div>
-<p>Finally, we can also animate data by proving a function and using <code><a href="reference/animate.html">animate()</a></code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/animate.html">animate</a></span>(
-  <span class="cf">function</span>() <span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">6</span>, <span class="dv">1</span>, <span class="dv">40</span>)),
-  <span class="kw">system.file</span>(<span class="st">"samples/barchart-dynamic.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)
-)</code></pre></div>
-<p><img src="tools/README/r2d3-animate.gif" width="460/"></p>
 </div>
+<div id="advanced-rendering" class="section level2">
+<h2 class="hasAnchor">
+<a href="#advanced-rendering" class="anchor"></a>Advanced Rendering</h2>
+<p>More advanced scripts can rely can make use of <code>r2d3.onRender()</code> which is similar to <code>d3.csv()</code>, <code>d3.json()</code>, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code, for instace:</p>
+<pre><code>// Initialization
+root.attr("font-family", "sans-serif")
+  .attr("font-size", "10")
+  .attr("text-anchor", "middle");
+    
+var pack = d3.pack()
+  .size([width, height])
+  .padding(1.5);
+    
+var format = d3.format(",d");
+var color = d3.scaleOrdinal(d3.schemeCategory20c);
+
+// Rendering
+r2d3.onRender(function(classes, svg, width, height, options) {
+  var root = d3.hierarchy({children: classes})
+    .sum(function(d) { return d.value; })
+    .each(function(d) {
+      if (id = d.data.id) {
+        var id, i = id.lastIndexOf(".");
+        d.id = id;
+        d.package = id.slice(0, i);
+        d.class = id.slice(i + 1);
+      }
+    });
+
+  var node = svg.selectAll(".node")
+    .data(pack(root).leaves())
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+  node.append("circle")
+      .attr("id", function(d) { return d.id; })
+      .attr("r", function(d) { return d.r; })
+      .style("fill", function(d) { return color(d.package); });
+
+  node.append("clipPath")
+      .attr("id", function(d) { return "clip-" + d.id; })
+    .append("use")
+      .attr("xlink:href", function(d) { return "#" + d.id; });
+
+  node.append("text")
+      .attr("clip-path", function(d) { return "url(#clip-" + d.id + ")"; })
+    .selectAll("tspan")
+    .data(function(d) { return d.class.split(/(?=[A-Z][^A-Z])/g); })
+    .enter().append("tspan")
+      .attr("x", 0)
+      .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 10; })
+      .text(function(d) { return d; });
+
+  node.append("title")
+      .text(function(d) { return d.id + "\n" + format(d.value); });
+});</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">flares &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="kw">system.file</span>(<span class="st">"samples/flare.csv"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>))
+r2d3<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/r2d3/topics/r2d3">r2d3</a></span>(
+  flares[<span class="op">!</span><span class="kw">is.na</span>(flares<span class="op">$</span>value), ],
+  <span class="kw">system.file</span>(<span class="st">"samples/bubbles.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>),
+  <span class="dt">version =</span> <span class="st">"4.13.0"</span>
+)</code></pre></div>
+<div id="htmlwidget-e22bae6c3fc3afeaa76d" style="width:672px;height:480px;" class="r2d3 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e22bae6c3fc3afeaa76d">{"x":{"data":{"id":["flare.analytics.cluster.AgglomerativeCluster","flare.analytics.cluster.CommunityStructure","flare.analytics.cluster.HierarchicalCluster","flare.analytics.cluster.MergeEdge","flare.analytics.graph.BetweennessCentrality","flare.analytics.graph.LinkDistance","flare.analytics.graph.MaxFlowMinCut","flare.analytics.graph.ShortestPaths","flare.analytics.graph.SpanningTree","flare.analytics.optimization.AspectRatioBanker","flare.animate.Easing","flare.animate.FunctionSequence","flare.animate.interpolate.ArrayInterpolator","flare.animate.interpolate.ColorInterpolator","flare.animate.interpolate.DateInterpolator","flare.animate.interpolate.Interpolator","flare.animate.interpolate.MatrixInterpolator","flare.animate.interpolate.NumberInterpolator","flare.animate.interpolate.ObjectInterpolator","flare.animate.interpolate.PointInterpolator","flare.animate.interpolate.RectangleInterpolator","flare.animate.ISchedulable","flare.animate.Parallel","flare.animate.Pause","flare.animate.Scheduler","flare.animate.Sequence","flare.animate.Transition","flare.animate.Transitioner","flare.animate.TransitionEvent","flare.animate.Tween","flare.data.converters.Converters","flare.data.converters.DelimitedTextConverter","flare.data.converters.GraphMLConverter","flare.data.converters.IDataConverter","flare.data.converters.JSONConverter","flare.data.DataField","flare.data.DataSchema","flare.data.DataSet","flare.data.DataSource","flare.data.DataTable","flare.data.DataUtil","flare.display.DirtySprite","flare.display.LineSprite","flare.display.RectSprite","flare.display.TextSprite","flare.flex.FlareVis","flare.physics.DragForce","flare.physics.GravityForce","flare.physics.IForce","flare.physics.NBodyForce","flare.physics.Particle","flare.physics.Simulation","flare.physics.Spring","flare.physics.SpringForce","flare.query.AggregateExpression","flare.query.And","flare.query.Arithmetic","flare.query.Average","flare.query.BinaryExpression","flare.query.Comparison","flare.query.CompositeExpression","flare.query.Count","flare.query.DateUtil","flare.query.Distinct","flare.query.Expression","flare.query.ExpressionIterator","flare.query.Fn","flare.query.If","flare.query.IsA","flare.query.Literal","flare.query.Match","flare.query.Maximum","flare.query.methods.add","flare.query.methods.and","flare.query.methods.average","flare.query.methods.count","flare.query.methods.distinct","flare.query.methods.div","flare.query.methods.eq","flare.query.methods.fn","flare.query.methods.gt","flare.query.methods.gte","flare.query.methods.iff","flare.query.methods.isa","flare.query.methods.lt","flare.query.methods.lte","flare.query.methods.max","flare.query.methods.min","flare.query.methods.mod","flare.query.methods.mul","flare.query.methods.neq","flare.query.methods.not","flare.query.methods.or","flare.query.methods.orderby","flare.query.methods.range","flare.query.methods.select","flare.query.methods.stddev","flare.query.methods.sub","flare.query.methods.sum","flare.query.methods.update","flare.query.methods.variance","flare.query.methods.where","flare.query.methods.xor","flare.query.methods._","flare.query.Minimum","flare.query.Not","flare.query.Or","flare.query.Query","flare.query.Range","flare.query.StringUtil","flare.query.Sum","flare.query.Variable","flare.query.Variance","flare.query.Xor","flare.scale.IScaleMap","flare.scale.LinearScale","flare.scale.LogScale","flare.scale.OrdinalScale","flare.scale.QuantileScale","flare.scale.QuantitativeScale","flare.scale.RootScale","flare.scale.Scale","flare.scale.ScaleType","flare.scale.TimeScale","flare.util.Arrays","flare.util.Colors","flare.util.Dates","flare.util.Displays","flare.util.Filter","flare.util.Geometry","flare.util.heap.FibonacciHeap","flare.util.heap.HeapNode","flare.util.IEvaluable","flare.util.IPredicate","flare.util.IValueProxy","flare.util.math.DenseMatrix","flare.util.math.IMatrix","flare.util.math.SparseMatrix","flare.util.Maths","flare.util.Orientation","flare.util.palette.ColorPalette","flare.util.palette.Palette","flare.util.palette.ShapePalette","flare.util.palette.SizePalette","flare.util.Property","flare.util.Shapes","flare.util.Sort","flare.util.Stats","flare.util.Strings","flare.vis.axis.Axes","flare.vis.axis.Axis","flare.vis.axis.AxisGridLine","flare.vis.axis.AxisLabel","flare.vis.axis.CartesianAxes","flare.vis.controls.AnchorControl","flare.vis.controls.ClickControl","flare.vis.controls.Control","flare.vis.controls.ControlList","flare.vis.controls.DragControl","flare.vis.controls.ExpandControl","flare.vis.controls.HoverControl","flare.vis.controls.IControl","flare.vis.controls.PanZoomControl","flare.vis.controls.SelectionControl","flare.vis.controls.TooltipControl","flare.vis.data.Data","flare.vis.data.DataList","flare.vis.data.DataSprite","flare.vis.data.EdgeSprite","flare.vis.data.NodeSprite","flare.vis.data.render.ArrowType","flare.vis.data.render.EdgeRenderer","flare.vis.data.render.IRenderer","flare.vis.data.render.ShapeRenderer","flare.vis.data.ScaleBinding","flare.vis.data.Tree","flare.vis.data.TreeBuilder","flare.vis.events.DataEvent","flare.vis.events.SelectionEvent","flare.vis.events.TooltipEvent","flare.vis.events.VisualizationEvent","flare.vis.legend.Legend","flare.vis.legend.LegendItem","flare.vis.legend.LegendRange","flare.vis.operator.distortion.BifocalDistortion","flare.vis.operator.distortion.Distortion","flare.vis.operator.distortion.FisheyeDistortion","flare.vis.operator.encoder.ColorEncoder","flare.vis.operator.encoder.Encoder","flare.vis.operator.encoder.PropertyEncoder","flare.vis.operator.encoder.ShapeEncoder","flare.vis.operator.encoder.SizeEncoder","flare.vis.operator.filter.FisheyeTreeFilter","flare.vis.operator.filter.GraphDistanceFilter","flare.vis.operator.filter.VisibilityFilter","flare.vis.operator.IOperator","flare.vis.operator.label.Labeler","flare.vis.operator.label.RadialLabeler","flare.vis.operator.label.StackedAreaLabeler","flare.vis.operator.layout.AxisLayout","flare.vis.operator.layout.BundledEdgeRouter","flare.vis.operator.layout.CircleLayout","flare.vis.operator.layout.CirclePackingLayout","flare.vis.operator.layout.DendrogramLayout","flare.vis.operator.layout.ForceDirectedLayout","flare.vis.operator.layout.IcicleTreeLayout","flare.vis.operator.layout.IndentedTreeLayout","flare.vis.operator.layout.Layout","flare.vis.operator.layout.NodeLinkTreeLayout","flare.vis.operator.layout.PieLayout","flare.vis.operator.layout.RadialTreeLayout","flare.vis.operator.layout.RandomLayout","flare.vis.operator.layout.StackedAreaLayout","flare.vis.operator.layout.TreeMapLayout","flare.vis.operator.Operator","flare.vis.operator.OperatorList","flare.vis.operator.OperatorSequence","flare.vis.operator.OperatorSwitch","flare.vis.operator.SortOperator","flare.vis.Visualization"],"value":[3938,3812,6714,743,3534,5731,7840,5914,3416,7074,17010,5842,1983,2047,1375,8746,2202,1382,1629,1675,2042,1041,5176,449,5593,5534,9201,19975,1116,6006,721,4294,9800,1314,2220,1759,2165,586,3331,772,3322,8833,1732,3623,10066,4116,1082,1336,319,10498,2822,9983,2213,1681,1616,1027,3891,891,2893,5103,3677,781,4141,933,5130,3617,3240,2732,2039,1214,3748,843,593,330,287,277,292,595,594,460,603,625,748,461,597,619,283,283,591,603,599,386,323,307,772,296,363,600,280,307,335,299,354,264,843,1554,970,13896,1594,4130,791,1124,1876,1101,2105,1316,3151,3770,2435,4839,1756,4268,1821,5833,8258,10001,8217,12555,2324,10993,9354,1233,335,383,874,3165,2815,3366,17705,1486,6367,1229,2059,2291,5559,19118,6887,6557,22026,1302,24593,652,636,6703,2138,3824,1353,4665,2649,2832,4896,763,5222,7862,8435,20544,19788,10349,3301,19382,698,5569,353,2247,11275,7147,9930,2313,1880,1701,1117,20859,4614,10530,4461,6314,3444,3179,4060,4138,1690,1830,5219,3165,3509,1286,9956,3899,3202,6725,3727,9317,12003,4853,8411,4864,3174,7881,12870,2728,12348,870,9121,9191,2490,5248,4190,2581,2023,16540]},"type":"data.frame","tag":"svg","options":null},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
   </div>
@@ -186,14 +178,15 @@ var values = [4, 8, 15, 16, 23, 42];
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Report a bug at <br><a href="https://github.com/rstudio/sparklyr/issues">https://​github.com/​rstudio/​sparklyr/​issues</a>
+<li>Report a bug at <br><a href="https://github.com/rstudio/r2d3/issues">https://​github.com/​rstudio/​r2d3/​issues</a>
 </li>
 </ul>
 </div>
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li>What license is it under?</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/BSD-3-Clause">BSD_3_clause</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 <div class="developers">

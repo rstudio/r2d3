@@ -6,8 +6,7 @@ R to D3 rendering tools
 `R2D3` provides tools to render D3 scripts from R and integrates with `knitr`, `rmarkdown` and RStudio to provide native `d3` output chunks. Specifically, with `R2D3` you can:
 
 -   Render [D3](https://d3js.org/) scripts with ease in R as [htmlwidgets](https://www.htmlwidgets.org/).
--   Send data from R to D3 with minimal changes to the D3 source.
--   Animate R data with D3 scripts.
+-   Use [Shiny](http://shiny.rstudio.com/) to create interactive D3 applications.
 
 Installation
 ------------
@@ -21,130 +20,107 @@ devtools::install_github("rstudio/r2d3")
 Getting Started
 ---------------
 
-### Static Data
+For simple scripts we can rely on `r2d3` injecting javascript variables for the `root` html element, `data`, `width` and `height` as follows:
 
-Lets start with a static D3 script that renders a simple bar chart:
+    // data, root, width, height and options are provided by r2d3
 
-    var data = [4, 8, 15, 16, 23, 42];
+    var bars = root
+      .selectAll("div")
+        .data(data);
+        
+    bars.enter().append("div")
+      .style("width", function(d) { return 4 + d * 10 + "px"; })
+      .style("background-color", "steelblue")
+      .style("border", "1px solid white")
+      .style("color", "white")
+      .style("padding-left", "2px")
+      .text(function(d) { return d; });
 
-    d3.select("body")
-      .append("div")
-        .selectAll("div")
-          .data(data)
-        .enter().append("div")
-          .style("width", function(d) { return d * 10 + "px"; })
-          .style("background-color", "steelblue")
-          .style("border", "1px solid white")
-          .style("color", "white")
-          .style("padding-left", "2px")
-          .text(function(d) { return d; });
+    bars.exit().remove();
 
-This D3 script can be rendered R by running:
+    bars.transition()
+      .duration(250)
+      .style("width", function(d) { return 4 + d * 10 + "px"; })
+      .text(function(d) { return d; });
 
-``` r
-library(r2d3)
-render(script = system.file("samples/barchart-static.js", package = "r2d3"))
-```
-
-![](tools/README/r2d3-static.png)
-
-Since we probably want to change the barchart data from R, we can copy this script as `barchart-variable.js` and remove the following line from the D3 script:
-
-``` js
-var data = [4, 8, 15, 16, 23, 42];
-```
-
-then, from R we can pass this data as follows:
+Thenn, data can be rendered in D3 from R as follows, notice that we've changed the default element to `"div"` to create a `<div>` tag element instead of the default `<svg>` element:
 
 ``` r
-render(
-  c(4, 8, 15, 16, 23, 42),
-  system.file("samples/barchart-variable.js", package = "r2d3")
-)
-```
-
-By default, data is injected to the D3 script as `data`; however, if the static data is contained in the D3 script with a different name, say as:
-
-``` js
-var values = [4, 8, 15, 16, 23, 42];
-```
-
-we can then inject the data with that specific name as:
-
-``` r
-render(
-  c(4, 8, 15, 16, 23, 42),
-  script = system.file("samples/barchart-variable.js", package = "r2d3"),
-  inject = "values"
-)
-```
-
-### Dynamic Data
-
-Data in D3 scripts is usually not static. Instead, D3 scripts make use of `d3.csv()`, `d3.json()` and similar functions to fetch data, this usually looks like the following D3 script:
-
-    d3.json("https://s3.amazonaws.com/javierluraschi/d3/barchart-json.json", function(data) {
-      var bars = d3.select("body")
-        .selectAll("div")
-          .data(data);
-          
-      bars.enter().append("div")
-        .style("width", function(d) { return 4 + d * 10 + "px"; })
-        .style("background-color", "steelblue")
-        .style("border", "1px solid white")
-        .style("color", "white")
-        .style("padding-left", "2px")
-        .text(function(d) { return d; });
-      
-      bars.exit().remove();
-      
-      bars.transition()
-        .duration(250)
-        .style("width", function(d) { return 4 + d * 10 + "px"; })
-        .text(function(d) { return d; });
-    });
-
-To make use of this script in R, we need to replace the data function (`d3.csv()`, `d3.tsv()`, `d3.json()`, `d3.xml()`, etc.) with `r2.d3()`. Also, you should replaced your root element selector, `d3.select("body")` in the example above, with the `r2.root` selector as follows:
-
-    r2.d3(function(data) {
-      var bars = d3.select(r2.root)
-        .selectAll("div")
-          .data(data);
-          
-      bars.enter().append("div")
-        .style("width", function(d) { return 4 + d * 10 + "px"; })
-        .style("background-color", "steelblue")
-        .style("border", "1px solid white")
-        .style("color", "white")
-        .style("padding-left", "2px")
-        .text(function(d) { return d; });
-      
-      bars.exit().remove();
-      
-      bars.transition()
-        .duration(250)
-        .style("width", function(d) { return 4 + d * 10 + "px"; })
-        .text(function(d) { return d; });
-    });
-
-With the modified script, data can be rendered in D3 as follows:
-
-``` r
-render(
-  data = c(10, 30, 40, 35, 20, 10),
-  system.file("samples/barchart-dynamic.js", package = "r2d3")
+r2d3::r2d3(
+  c(10, 30, 40, 35, 20, 10),
+  system.file("samples/barchart.js", package = "r2d3"),
+  tag = "div"
 )
 ```
 
 ![](tools/README/r2d3-variable.png)
 
-Finally, we can also animate data by proving a function and using `animate()`:
+Advanced Rendering
+------------------
+
+More advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code, for instace:
+
+    // Initialization
+    root.attr("font-family", "sans-serif")
+      .attr("font-size", "10")
+      .attr("text-anchor", "middle");
+        
+    var pack = d3.pack()
+      .size([width, height])
+      .padding(1.5);
+        
+    var format = d3.format(",d");
+    var color = d3.scaleOrdinal(d3.schemeCategory20c);
+
+    // Rendering
+    r2d3.onRender(function(classes, svg, width, height, options) {
+      var root = d3.hierarchy({children: classes})
+        .sum(function(d) { return d.value; })
+        .each(function(d) {
+          if (id = d.data.id) {
+            var id, i = id.lastIndexOf(".");
+            d.id = id;
+            d.package = id.slice(0, i);
+            d.class = id.slice(i + 1);
+          }
+        });
+
+      var node = svg.selectAll(".node")
+        .data(pack(root).leaves())
+        .enter().append("g")
+          .attr("class", "node")
+          .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+      node.append("circle")
+          .attr("id", function(d) { return d.id; })
+          .attr("r", function(d) { return d.r; })
+          .style("fill", function(d) { return color(d.package); });
+
+      node.append("clipPath")
+          .attr("id", function(d) { return "clip-" + d.id; })
+        .append("use")
+          .attr("xlink:href", function(d) { return "#" + d.id; });
+
+      node.append("text")
+          .attr("clip-path", function(d) { return "url(#clip-" + d.id + ")"; })
+        .selectAll("tspan")
+        .data(function(d) { return d.class.split(/(?=[A-Z][^A-Z])/g); })
+        .enter().append("tspan")
+          .attr("x", 0)
+          .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 10; })
+          .text(function(d) { return d; });
+
+      node.append("title")
+          .text(function(d) { return d.id + "\n" + format(d.value); });
+    });
 
 ``` r
-animate(
-  function() floor(runif(6, 1, 40)),
-  system.file("samples/barchart-dynamic.js", package = "r2d3")
+flares <- read.csv(system.file("samples/flare.csv", package = "r2d3"))
+r2d3::r2d3(
+  flares[!is.na(flares$value), ],
+  system.file("samples/bubbles.js", package = "r2d3"),
+  version = "4.13.0"
 )
 ```
 
-<img src="tools/README/r2d3-animate.gif" width=460/>
+![](tools/README/bubbles-chart-1.png)
