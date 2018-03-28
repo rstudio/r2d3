@@ -6,23 +6,26 @@
 #' @param script The 'JavaScript' file containing the D3 script.
 #' @param options The options to be passed to D3 script.
 #' @param tag The html tag to create for the D3 script.
-#' @param version The D3 version to use.
+#' @param version The major D3 version to use, the latest minor version
+#'   is automatically picked.
 #' @param dependencies Additional javascript or css dependencies.
 #'
 #' @import htmlwidgets
 #'
 #' @export
 r2d3 <- function(
-  data = floor(runif(6, 1, 40)),
-  script = system.file("samples/barchart-variable.js", package = "r2d3"),
+  data,
+  script,
   options = NULL,
   tag = "svg",
-  version = "5.0.0",
+  version = c(4, 5),
   dependencies = NULL
   )
 {
   if (!file.exists(script))
     stop("D3 script '", script, "' does not exist.")
+  
+  version <- version_complete(version[[1]])
   
   # convert to data frames
   df <- data

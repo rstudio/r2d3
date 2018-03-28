@@ -33,7 +33,7 @@ flares <- read.csv(system.file("samples/flare.csv", package = "r2d3"))
 r2d3(
   flares[!is.na(flares$value), ],
   system.file("samples/bubbles.js", package = "r2d3"),
-  version = "4.13.0"
+  version = 4
 )
 ```
 
