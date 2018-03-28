@@ -10,7 +10,7 @@ output:
 knitr::opts_chunk$set(fig.path = "tools/README/", dev = "png")
 ```
 
-<img src="tools/README/r2d3-hex.svg" width=220 align="right"/>
+<img src="tools/README/r2d3-hex.svg" width=200 align="right"/>
 
 `R2D3` provides tools to render D3 scripts from R and integrates with `knitr`, `rmarkdown` and RStudio to provide native `d3` output chunks. Specifically, with `R2D3` you can:
 
