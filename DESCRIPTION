@@ -12,7 +12,7 @@ Description: Render 'D3' scripts with ease in R as 'htmlwidgets', sends data fro
   minimal changes to the D3 source and animates R data with D3 scripts.
 License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
-BugReports: https://github.com/rstudio/sparklyr/issues
+BugReports: https://github.com/rstudio/r2d3/issues
 LazyData: TRUE
 Depends:
   R (>= 3.1.2)
