@@ -1,28 +1,28 @@
 #' Render Data with D3
 #'
-#' Renders a data with D3 as an HtmlWidget using a generic D3.js script.
+#' Renders data with D3 as an HtmlWidget using a D3.js script.
 #'
-#' @param data The data to be passed to D3.js script.
-#' @param script The 'JavaScript' file containing the D3.js script.
-#' @param width The desired width of the widget.
-#' @param height The desired height of the widget.
-#' @param inject The variable name used to inject data into a D3 script.
+#' @param data The data to be passed to D3 script.
+#' @param script The 'JavaScript' file containing the D3 script.
+#' @param options The options to be passed to D3 script.
+#' @param tag The html tag to create for the D3 script.
 #' @param version The D3 version to use.
+#' @param dependencies Additional javascript or css dependencies.
 #'
 #' @import htmlwidgets
 #'
 #' @export
-render <- function(
+r2d3 <- function(
   data = floor(runif(6, 1, 40)),
   script = system.file("samples/barchart-variable.js", package = "r2d3"),
-  width = NULL,
-  height = NULL,
-  inject = "data",
-  version = "5.0.0")
+  options = NULL,
+  tag = "svg",
+  version = "5.0.0",
+  dependencies = NULL
+  )
 {
-  
   if (!file.exists(script))
-    stop("File ", script, " does not exist.")
+    stop("D3 script '", script, "' does not exist.")
   
   # convert to data frames
   df <- data
@@ -36,17 +36,17 @@ render <- function(
   # forward options using x
   x <- list(
     data = data,
-    type = class(data)[[1]]
+    type = class(data)[[1]],
+    tag = tag,
+    options = options
   )
   
-  wrapped_script <- script_wrap(script, inject)
+  wrapped_d3 <- script_wrap(script)
 
   # create widget
   htmlwidgets::createWidget(
     name = 'r2d3',
     x,
-    width = width,
-    height = height,
     package = 'r2d3',
     dependencies = list(
       htmltools::htmlDependency(
@@ -58,8 +58,8 @@ render <- function(
       htmltools::htmlDependency(
         name = "r2d3-rendering",
         version = "1.0.0",
-        src = dirname(wrapped_script),
-        script = basename(wrapped_script)
+        src = dirname(wrapped_d3),
+        script = basename(wrapped_d3)
       )
     )
   )
