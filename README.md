@@ -6,8 +6,7 @@ R to D3 rendering tools
 `R2D3` provides tools to render D3 scripts from R and integrates with `knitr`, `rmarkdown` and RStudio to provide native `d3` output chunks. Specifically, with `R2D3` you can:
 
 -   Render [D3](https://d3js.org/) scripts with ease in R as [htmlwidgets](https://www.htmlwidgets.org/).
--   Send data from R to D3 with minimal changes to the D3 source.
--   Animate R data with D3 scripts.
+-   Use [Shiny](http://shiny.rstudio.com/) to create interactive D3 applications.
 
 Installation
 ------------
@@ -124,4 +123,4 @@ r2d3::r2d3(
 )
 ```
 
-![](tools/readme/bubbles-chart-1.png)
+![](tools/README/bubbles-chart-1.png)

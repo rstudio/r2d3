@@ -7,7 +7,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(fig.path = "tools/readme/", dev = "png")
+knitr::opts_chunk$set(fig.path = "tools/README/", dev = "png")
 ```
 
 <img src="tools/README/r2d3-hex.svg" width=220 align="right"/>
