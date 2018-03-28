@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Shiny bindings for d3 — d3-shiny • r2d3</title>
+<title>Render Data with D3 — r2d3 • r2d3</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,10 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-<meta property="og:title" content="Shiny bindings for d3 — d3-shiny" />
+<meta property="og:title" content="Render Data with D3 — r2d3" />
 
-<meta property="og:description" content="Output and render functions for using d3 within Shiny
-applications and interactive Rmd documents." />
+<meta property="og:description" content="Renders data with D3 as an HtmlWidget using a D3.js script." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -83,44 +82,53 @@ applications and interactive Rmd documents." />
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Shiny bindings for d3</h1>
+    <h1>Render Data with D3</h1>
     
     </div>
 
     
-    <p>Output and render functions for using d3 within Shiny
-applications and interactive Rmd documents.</p>
+    <p>Renders data with D3 as an HtmlWidget using a D3.js script.</p>
     
 
-    <pre class="usage"><span class='fu'>r2d3Output</span>(<span class='no'>outputId</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"100%"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='st'>"400px"</span>)
-
-<span class='fu'>renderR2D3</span>(<span class='no'>expr</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>(), <span class='kw'>quoted</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>r2d3</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>floor</span>(<span class='fu'>runif</span>(<span class='fl'>6</span>, <span class='fl'>1</span>, <span class='fl'>40</span>)),
+  <span class='kw'>script</span> <span class='kw'>=</span> <span class='fu'>system.file</span>(<span class='st'>"samples/barchart-variable.js"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"r2d3"</span>),
+  <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"5.0.0"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>outputId</th>
-      <td><p>output variable to read from</p></td>
+      <th>data</th>
+      <td><p>The data to be passed to D3.js script.</p></td>
     </tr>
     <tr>
-      <th>width, height</th>
-      <td><p>Must be a valid CSS unit (like <code>'100%'</code>,
-<code>'400px'</code>, <code>'auto'</code>) or a number, which will be coerced to a
-string and have <code>'px'</code> appended.</p></td>
+      <th>script</th>
+      <td><p>Script(s) to include within the document.</p></td>
     </tr>
     <tr>
-      <th>expr</th>
-      <td><p>An expression that generates a d3</p></td>
+      <th>width</th>
+      <td><p>The desired width of the widget.</p></td>
     </tr>
     <tr>
-      <th>env</th>
-      <td><p>The environment in which to evaluate <code>expr</code>.</p></td>
+      <th>height</th>
+      <td><p>The desired height of the widget.</p></td>
     </tr>
     <tr>
-      <th>quoted</th>
-      <td><p>Is <code>expr</code> a quoted expression (with <code>quote()</code>)? This
-is useful if you want to save an expression in a variable.</p></td>
+      <th>version</th>
+      <td><p>The D3 version to use.</p></td>
+    </tr>
+    <tr>
+      <th>d3</th>
+      <td><p>The 'JavaScript' file containing the D3.js script.</p></td>
+    </tr>
+    <tr>
+      <th>inject</th>
+      <td><p>The variable name used to inject data into a D3 script.</p></td>
+    </tr>
+    <tr>
+      <th>stylesheet</th>
+      <td><p>Stylesheet(s) to include within the document.</p></td>
     </tr>
     </table>
     
