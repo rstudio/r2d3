@@ -1,5 +1,5 @@
 // Initialization
-root.attr("font-family", "sans-serif")
+svg.attr("font-family", "sans-serif")
   .attr("font-size", "10")
   .attr("text-anchor", "middle");
     

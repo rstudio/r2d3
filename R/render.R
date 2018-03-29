@@ -25,7 +25,8 @@ r2d3 <- function(
   if (!file.exists(script))
     stop("D3 script '", script, "' does not exist.")
   
-  version <- version_complete(version[[1]])
+  version <- version[[1]]
+  version_long <- version_complete(version)
   
   # convert to data frames
   df <- data
@@ -35,16 +36,17 @@ r2d3 <- function(
       df$names <- rownames(df)
     }
   }
+  
+  wrapped_d3 <- script_wrap(script, tag)
 
   # forward options using x
   x <- list(
     data = data,
     type = class(data)[[1]],
     tag = tag,
-    options = options
+    options = options,
+    script = paste(readLines(wrapped_d3), collapse = "\n")
   )
-  
-  wrapped_d3 <- script_wrap(script)
 
   # create widget
   htmlwidgets::createWidget(
@@ -53,16 +55,10 @@ r2d3 <- function(
     package = 'r2d3',
     dependencies = list(
       htmltools::htmlDependency(
-        name = "d3",
-        version = version,
-        src = system.file(file.path("d3", version), package = "r2d3"),
+        name = paste("d3", "-v", version, sep = ""),
+        version = version_long,
+        src = system.file(file.path("d3", version_long), package = "r2d3"),
         script = "d3.js"
-      ),
-      htmltools::htmlDependency(
-        name = "r2d3-rendering",
-        version = "1.0.0",
-        src = dirname(wrapped_d3),
-        script = basename(wrapped_d3)
       )
     )
   )

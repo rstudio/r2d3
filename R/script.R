@@ -1,9 +1,9 @@
 # Prepares a D3 script to be embedable into a widget
-script_wrap <- function(script) {
+script_wrap <- function(script, tag) {
   contents <- readLines(script)
   
   wrapped <- c(
-    paste("var d3Script = function(r2d3, data, root, width, height, options) {", sep = ""),
+    paste("var d3Script = function(r2d3, data, ", tag, ", width, height, options) {", sep = ""),
     contents,
     "};"
   )
