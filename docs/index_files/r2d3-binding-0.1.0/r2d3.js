@@ -8,10 +8,11 @@ HTMLWidgets.widget({
     return {
       renderValue: function(x) {
         if (!r2d3.root) {
-          r2d3.script(x.script);
-          r2d3.style(x.style);
+          r2d3.setVersion(x.version);
+          r2d3.addScript(x.script);
+          r2d3.addStyle(x.style);
           
-          var root = d3.select(el).append(x.tag)
+          var root = r2d3.d3().select(el).append(x.tag)
             .attr("width", width)
             .attr("height", height);
             
@@ -22,7 +23,7 @@ HTMLWidgets.widget({
         r2d3.setWidth(width);
         r2d3.setHeight(height);
         
-        d3Script(r2d3, x.data, r2d3.root, width, height, x.options);
+        d3Script(r2d3.d3(), r2d3, x.data, r2d3.root, width, height, x.options);
       },
 
       resize: function(width, height) {
