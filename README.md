@@ -20,30 +20,93 @@ devtools::install_github("rstudio/r2d3")
 Getting Started
 ---------------
 
-For simple scripts we can rely on `r2d3` injecting javascript variables for the `data`, tag which defaults to `svg` but can be changed, `width`, `height` and `options` as follows:
+To render simple D3 scripts, `R2D3` provides the following variables:
 
-    Warning in file(con, "r"): file("") only supports open = "w+" and open = "w
-    +b": using the former
+-   **data**: The R data converted to javascript.
+-   **svg**: The svg element with the right dimensions.
+-   **width/height**: The width/height of the svg.
+-   **options**: Additional options provided from R.
 
-Data can be rendered in D3 from R as follows. Notice that, for this example, we've changed the default element to `"div"` to create a `<div>` tag element instead of the default `<svg>` element:
+These variables can then be used in a D3 script as follows:
+
+    svg.selectAll('rect')
+        .data(data)
+      .enter()
+        .append('rect')
+          .attr('width', function(d) { return d * 10; })
+          .attr('height', '20px')
+          .attr('y', function(d, i) { return i * 22; })
+          .attr('fill', 'steelblue');
+
+Finally, this D3 script can be rendered from R by calling `r2d3` with the data and D3 script to be rendered:
 
 ``` r
 r2d3::r2d3(
   c(10, 30, 40, 35, 20, 10),
-  "inst/samples/barchart/barchart.js",
-  tag = "div"
+  "inst/samples/barchart/barchart.js"
 )
 ```
 
-![](tools/README/r2d3-variable.png)
+![](tools/README/barchart-1.png)
 
 Advanced Rendering
 ------------------
 
 More advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code, for instace:
 
-    Warning in file(con, "r"): file("") only supports open = "w+" and open = "w
-    +b": using the former
+    // Initialization
+    svg.attr("font-family", "sans-serif")
+      .attr("font-size", "10")
+      .attr("text-anchor", "middle");
+        
+    var pack = d3.pack()
+      .size([width, height])
+      .padding(1.5);
+        
+    var format = d3.format(",d");
+    var color = d3.scaleOrdinal(d3.schemeCategory20c);
+
+    // Rendering
+    r2d3.onRender(function(data, svg, width, height, options) {
+      var root = d3.hierarchy({children: data})
+        .sum(function(d) { return d.value; })
+        .each(function(d) {
+          if (id = d.data.id) {
+            var id, i = id.lastIndexOf(".");
+            d.id = id;
+            d.package = id.slice(0, i);
+            d.class = id.slice(i + 1);
+          }
+        });
+
+      var node = svg.selectAll(".node")
+        .data(pack(root).leaves())
+        .enter().append("g")
+          .attr("class", "node")
+          .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+      node.append("circle")
+          .attr("id", function(d) { return d.id; })
+          .attr("r", function(d) { return d.r; })
+          .style("fill", function(d) { return color(d.package); });
+
+      node.append("clipPath")
+          .attr("id", function(d) { return "clip-" + d.id; })
+        .append("use")
+          .attr("xlink:href", function(d) { return "#" + d.id; });
+
+      node.append("text")
+          .attr("clip-path", function(d) { return "url(#clip-" + d.id + ")"; })
+        .selectAll("tspan")
+        .data(function(d) { return d.class.split(/(?=[A-Z][^A-Z])/g); })
+        .enter().append("tspan")
+          .attr("x", 0)
+          .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 10; })
+          .text(function(d) { return d; });
+
+      node.append("title")
+          .text(function(d) { return d.id + "\n" + format(d.value); });
+    });
 
 ``` r
 flares <- read.csv("inst/samples/bubbles/flare.csv")
@@ -54,4 +117,4 @@ r2d3::r2d3(
 )
 ```
 
-![](tools/README/bubbles-chart-1.png)
+![](tools/README/bubbleschart-1.png)
