@@ -45,8 +45,8 @@ r2d3(
 r2d3(
   read.csv(system.file("samples/morley.csv", package = "r2d3")),
   system.file("samples/morley.js", package = "r2d3"),
-  stylesheet = system.file("samples/morley.css", package = "r2d3"),
-  version = "4.13.0",
+  version = 3,
+  tag = "div",
   dependencies = c(
     system.file("samples/morley.css", package = "r2d3"),
     system.file("samples/box.js", package = "r2d3")

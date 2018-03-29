@@ -1,6 +1,6 @@
 var margin = {top: 10, right: 50, bottom: 20, left: 50},
-    width = r2.width,
-    height = r2.height;
+    width = 120 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
 var min = Infinity,
     max = -Infinity;
@@ -10,9 +10,7 @@ var chart = d3.box()
     .width(width)
     .height(height);
 
-d3.csv("morley.csv", function(error, csv) {
-  if (error) throw error;
-
+r2d3.onRender(function(csv, div, w, h, options) {
   var data = [];
 
   csv.forEach(function(x) {
@@ -28,15 +26,15 @@ d3.csv("morley.csv", function(error, csv) {
 
   chart.domain([min, max]);
 
-  var svg = d3.select(r2.root).selectAll("svg")
-      .data(data)
-    .enter().append("svg")
-      .attr("class", "box")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.bottom + margin.top)
-    .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-      .call(chart);
+  var svg = div.selectAll("svg")
+    .data(data)
+  .enter().append("svg")
+    .attr("class", "box")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.bottom + margin.top)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    .call(chart);
 
   setInterval(function() {
     svg.datum(randomize).call(chart.duration(1000));
