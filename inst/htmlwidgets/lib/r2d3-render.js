@@ -1,6 +1,7 @@
 function R2D3() {
   var self = this;
   var x = null;
+  var version = null;
   
   self.data = null;
   self.root = null;
@@ -47,14 +48,14 @@ function R2D3() {
     self.resizer(width, height);
   };
   
-  self.script = function(script) {
+  self.addScript = function(script) {
     var el = document.createElement("script");
     el.type = "text/javascript";
     el.text = script;
     document.head.appendChild(el);
   };
   
-  self.style = function(style) {
+  self.addStyle = function(style) {
     if (!style) return;
     
     var el = document.createElement("style");
@@ -69,4 +70,18 @@ function R2D3() {
     document.head.appendChild(el);
   };
   
+  self.setVersion = function(newVersion) {
+    version = newVersion;
+  };
+  
+  self.d3 = function() {
+    switch(version) {
+      case 3:
+        return d3v3;
+      case 4:
+        return d3v4;
+      case 5:
+        return d3v5;
+    }
+  };
 }

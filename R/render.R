@@ -47,8 +47,6 @@ r2d3 <- function(
       df$names <- rownames(df)
     }
   }
-  
-  wrapped_d3 <- script_wrap(script, tag)
 
   # forward options using x
   x <- list(
@@ -56,8 +54,9 @@ r2d3 <- function(
     type = class(data)[[1]],
     tag = tag,
     options = options,
-    script = script_read(c(wrapped_d3, dependencies$js)),
-    style = script_read(dependencies$css)
+    script = script_wrap(script_read(c(dependencies$js, script)), tag),
+    style = script_read(dependencies$css),
+    version = version
   )
 
   # create widget
