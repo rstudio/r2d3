@@ -57,7 +57,7 @@ r2d3 <- function(
     tag = tag,
     options = options,
     script = script_read(c(wrapped_d3, dependencies$js)),
-    styles = script_read(dependencies$css)
+    style = script_read(dependencies$css)
   )
 
   # create widget

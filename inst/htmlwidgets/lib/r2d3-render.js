@@ -47,4 +47,26 @@ function R2D3() {
     self.resizer(width, height);
   };
   
+  self.script = function(script) {
+    var el = document.createElement("script");
+    el.type = "text/javascript";
+    el.text = script;
+    document.head.appendChild(el);
+  };
+  
+  self.style = function(style) {
+    if (!style) return;
+    
+    var el = document.createElement("style");
+            
+    el.type = "text/css";
+    if (el.styleSheet) {
+      el.styleSheet.cssText = style;
+    } else {
+      el.appendChild(document.createTextNode(style));
+    }
+    
+    document.head.appendChild(el);
+  };
+  
 }

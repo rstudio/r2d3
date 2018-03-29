@@ -8,7 +8,8 @@ HTMLWidgets.widget({
     return {
       renderValue: function(x) {
         if (!r2d3.root) {
-          eval(x.script);
+          r2d3.script(x.script);
+          r2d3.style(x.style);
           
           var root = d3.select(el).append(x.tag)
             .attr("width", width)
