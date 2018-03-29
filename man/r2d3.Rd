@@ -4,27 +4,22 @@
 \alias{r2d3}
 \title{Render Data with D3}
 \usage{
-r2d3(data = floor(runif(6, 1, 40)),
-  script = system.file("samples/barchart-variable.js", package = "r2d3"),
-  width = NULL, height = NULL, dependencies = NULL, options = NULL,
-  version = "5.0.0")
+r2d3(data, script, options = NULL, tag = "svg", version = c(4, 5),
+  dependencies = NULL)
 }
 \arguments{
-\item{data}{The data to be passed to D3.js script.}
+\item{data}{The data to be passed to D3 script.}
 
-\item{script}{Script(s) to include within the document.}
+\item{script}{The 'JavaScript' file containing the D3 script.}
 
-\item{width}{The desired width of the widget.}
+\item{options}{The options to be passed to D3 script.}
 
-\item{height}{The desired height of the widget.}
+\item{tag}{The html tag to create for the D3 script.}
 
-\item{version}{The D3 version to use.}
+\item{version}{The major D3 version to use, the latest minor version
+is automatically picked.}
 
-\item{d3}{The 'JavaScript' file containing the D3.js script.}
-
-\item{inject}{The variable name used to inject data into a D3 script.}
-
-\item{stylesheet}{Stylesheet(s) to include within the document.}
+\item{dependencies}{Additional javascript or css dependencies.}
 }
 \description{
 Renders data with D3 as an HtmlWidget using a D3.js script.

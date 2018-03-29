@@ -70,7 +70,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/rstudio/r2d3">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -83,52 +88,43 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Render Data with D3</h1>
-    
+    <small>Source: <a href='https://github.com/rstudio/r2d3/blob/master/R/render.R'><code>R/render.R</code></a></small>
     </div>
 
     
     <p>Renders data with D3 as an HtmlWidget using a D3.js script.</p>
     
 
-    <pre class="usage"><span class='fu'>r2d3</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'>floor</span>(<span class='fu'>runif</span>(<span class='fl'>6</span>, <span class='fl'>1</span>, <span class='fl'>40</span>)),
-  <span class='kw'>script</span> <span class='kw'>=</span> <span class='fu'>system.file</span>(<span class='st'>"samples/barchart-variable.js"</span>, <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"r2d3"</span>),
-  <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>version</span> <span class='kw'>=</span> <span class='st'>"5.0.0"</span>)</pre>
+    <pre class="usage"><span class='fu'>r2d3</span>(<span class='no'>data</span>, <span class='no'>script</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>tag</span> <span class='kw'>=</span> <span class='st'>"svg"</span>, <span class='kw'>version</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>4</span>, <span class='fl'>5</span>),
+  <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>The data to be passed to D3.js script.</p></td>
+      <td><p>The data to be passed to D3 script.</p></td>
     </tr>
     <tr>
       <th>script</th>
-      <td><p>Script(s) to include within the document.</p></td>
+      <td><p>The 'JavaScript' file containing the D3 script.</p></td>
     </tr>
     <tr>
-      <th>width</th>
-      <td><p>The desired width of the widget.</p></td>
+      <th>options</th>
+      <td><p>The options to be passed to D3 script.</p></td>
     </tr>
     <tr>
-      <th>height</th>
-      <td><p>The desired height of the widget.</p></td>
+      <th>tag</th>
+      <td><p>The html tag to create for the D3 script.</p></td>
     </tr>
     <tr>
       <th>version</th>
-      <td><p>The D3 version to use.</p></td>
+      <td><p>The major D3 version to use, the latest minor version
+is automatically picked.</p></td>
     </tr>
     <tr>
-      <th>d3</th>
-      <td><p>The 'JavaScript' file containing the D3.js script.</p></td>
-    </tr>
-    <tr>
-      <th>inject</th>
-      <td><p>The variable name used to inject data into a D3 script.</p></td>
-    </tr>
-    <tr>
-      <th>stylesheet</th>
-      <td><p>Stylesheet(s) to include within the document.</p></td>
+      <th>dependencies</th>
+      <td><p>Additional javascript or css dependencies.</p></td>
     </tr>
     </table>
     
