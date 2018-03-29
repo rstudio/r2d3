@@ -27,32 +27,38 @@ devtools::install_github("rstudio/r2d3")
 
 ## Getting Started
 
-For simple scripts we can rely on `r2d3` injecting javascript variables for the `data`, tag which defaults to `svg` but can be changed, `width`, `height` and `options` as follows:
+To render simple D3 scripts, `R2D3` provides the following variables:
+
+- **data**: The R data converted to javascript.
+- **svg**: The svg element with the right dimensions.
+- **width/height**: The width/height of the svg.
+- **options**: Additional options provided from R.
+
+These variables can then be used in a D3 script as follows:
 
 ```{r echo=FALSE, comment=''}
-cat(paste(readLines(system.file("samples/barchart.js", package = "r2d3")), collapse = "\n"))
+cat(paste(readLines(system.file("samples/barchart/barchart.js", package = "r2d3")), collapse = "\n"))
 ```
 
-Data can be rendered in D3 from R as follows. Notice that, for this example, we've changed the default element to `"div"` to create a `<div>` tag element instead of the default `<svg>` element:
+Finally, this D3 script can be rendered from R by calling `r2d3` with the data and D3 script to be rendered:
 
 ```{r eval=FALSE}
 r2d3::r2d3(
   c(10, 30, 40, 35, 20, 10),
-  "inst/samples/barchart/barchart.js",
-  tag = "div"
+  "inst/samples/barchart/barchart.js"
 )
 ```
-![](tools/README/r2d3-variable.png)
+![](tools/README/barchart-1.png)
 
 ## Advanced Rendering
 
 More advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code, for instace:
 
 ```{r echo=FALSE, comment=''}
-cat(paste(readLines(system.file("samples/bubbles.js", package = "r2d3")), collapse = "\n"))
+cat(paste(readLines(system.file("samples/bubbles/bubbles.js", package = "r2d3")), collapse = "\n"))
 ```
 
-```{r bubbles-chart}
+```{r bubbleschart}
 flares <- read.csv("inst/samples/bubbles/flare.csv")
 r2d3::r2d3(
   flares[!is.na(flares$value), ],

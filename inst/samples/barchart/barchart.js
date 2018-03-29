@@ -1,20 +1,8 @@
-// data, div, width, height and options are provided by r2d3
-
-var bars = root
-  .selectAll("div")
-    .data(data);
-    
-bars.enter().append("div")
-  .style("width", function(d) { return 4 + d * 10 + "px"; })
-  .style("background-color", "steelblue")
-  .style("border", "1px solid white")
-  .style("color", "white")
-  .style("padding-left", "2px")
-  .text(function(d) { return d; });
-
-bars.exit().remove();
-
-bars.transition()
-  .duration(250)
-  .style("width", function(d) { return 4 + d * 10 + "px"; })
-  .text(function(d) { return d; });
+svg.selectAll('rect')
+    .data(data)
+  .enter()
+    .append('rect')
+      .attr('width', function(d) { return d * 10; })
+      .attr('height', '20px')
+      .attr('y', function(d, i) { return i * 22; })
+      .attr('fill', 'steelblue');

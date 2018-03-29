@@ -11,8 +11,8 @@ var format = d3.format(",d");
 var color = d3.scaleOrdinal(d3.schemeCategory20c);
 
 // Rendering
-r2d3.onRender(function(classes, svg, width, height, options) {
-  var root = d3.hierarchy({children: classes})
+r2d3.onRender(function(data, svg, width, height, options) {
+  var root = d3.hierarchy({children: data})
     .sum(function(d) { return d.value; })
     .each(function(d) {
       if (id = d.data.id) {
