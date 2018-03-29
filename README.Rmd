@@ -15,7 +15,7 @@ knitr::opts_chunk$set(fig.path = "tools/README/", dev = "png")
 `R2D3` provides tools to render D3 scripts from R and integrates with `knitr`, `rmarkdown` and RStudio to provide native `d3` output chunks. Specifically, with `R2D3` you can:
 
 - Render [D3](https://d3js.org/) scripts with ease in R as [htmlwidgets](https://www.htmlwidgets.org/).
-- Use [Shiny](http://shiny.rstudio.com/) to create interactive D3 applications.
+- Use [Shiny](http://shiny.rstudio.com/) with `R2D3` to create interactive D3 applications.
 
 ## Installation
 
@@ -27,13 +27,13 @@ devtools::install_github("rstudio/r2d3")
 
 ## Getting Started
 
-For simple scripts we can rely on `r2d3` injecting javascript variables for the `root` html element, `data`, `width` and `height` as follows:
+For simple scripts we can rely on `r2d3` injecting javascript variables for the `data`, tag which defaults to `svg` but can be changed, `width`, `height` and `options` as follows:
 
 ```{r echo=FALSE, comment=''}
 cat(paste(readLines(system.file("samples/barchart.js", package = "r2d3")), collapse = "\n"))
 ```
 
-Thenn, data can be rendered in D3 from R as follows, notice that we've changed the default element to `"div"` to create a `<div>` tag element instead of the default `<svg>` element:
+Data can be rendered in D3 from R as follows. Notice that, for this example, we've changed the default element to `"div"` to create a `<div>` tag element instead of the default `<svg>` element:
 
 ```{r eval=FALSE}
 r2d3::r2d3(

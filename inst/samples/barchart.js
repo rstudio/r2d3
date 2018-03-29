@@ -1,4 +1,4 @@
-// data, root, width, height and options are provided by r2d3
+// data, div, width, height and options are provided by r2d3
 
 var bars = root
   .selectAll("div")
