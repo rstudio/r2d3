@@ -1,6 +1,6 @@
 var width = 960,
-    height = 136,
-    cellSize = 17;
+    height = 0.95 * height / 21,
+    cellSize = height / 8;
 
 var formatPercent = d3.format(".1%");
 
@@ -15,7 +15,7 @@ var svg = div
     .attr("width", width)
     .attr("height", height)
   .append("g")
-    .attr("transform", "translate(" + ((width - cellSize * 53) / 2) + "," + (height - cellSize * 7 - 1) + ")");
+    .attr("transform", "translate(" + cellSize * 3.5 + "," + (height - cellSize * 7 - 1) + ")");
 
 svg.append("text")
     .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
@@ -27,6 +27,7 @@ svg.append("text")
 var rect = svg.append("g")
     .attr("fill", "none")
     .attr("stroke", "#ccc")
+    .attr("stroke-width", "0.25")
   .selectAll("rect")
   .data(function(d) { return d3.timeDays(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
   .enter().append("rect")
@@ -39,6 +40,7 @@ var rect = svg.append("g")
 svg.append("g")
     .attr("fill", "none")
     .attr("stroke", "#000")
+    .attr("stroke-width", "0.25")
   .selectAll("path")
   .data(function(d) { return d3.timeMonths(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
   .enter().append("path")

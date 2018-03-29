@@ -53,7 +53,8 @@ r2d3::r2d3(
   dependencies = c(
     system.file("samples/bullets/bullets.css", package = "r2d3"),
     system.file("samples/bullets/helper.js", package = "r2d3")
-  )
+  ),
+  height = 300
 )
 ```
 
@@ -66,6 +67,7 @@ r2d3::r2d3(
   read.csv(system.file("samples/calendar/dji.csv", package = "r2d3")),
   system.file("samples/calendar/calendar.js", package = "r2d3"),
   version = 4,
-  tag = "div"
+  tag = "div",
+  height = 1950
 )
 ```

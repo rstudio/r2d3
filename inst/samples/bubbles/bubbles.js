@@ -1,6 +1,6 @@
 // Initialization
 svg.attr("font-family", "sans-serif")
-  .attr("font-size", "10")
+  .attr("font-size", "8")
   .attr("text-anchor", "middle");
     
 var pack = d3.pack()

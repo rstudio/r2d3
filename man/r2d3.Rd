@@ -4,22 +4,26 @@
 \alias{r2d3}
 \title{Render Data with D3}
 \usage{
-r2d3(data, script, options = NULL, tag = "svg", version = c(4, 5),
-  dependencies = NULL)
+r2d3(data, script, options = NULL, tag = "svg", version = c(5, 4, 3),
+  dependencies = NULL, width = NULL, height = NULL)
 }
 \arguments{
-\item{data}{The data to be passed to D3 script.}
+\item{data}{Data to be passed to D3 script.}
 
-\item{script}{The 'JavaScript' file containing the D3 script.}
+\item{script}{'JavaScript' file containing the D3 script.}
 
-\item{options}{The options to be passed to D3 script.}
+\item{options}{Options to be passed to D3 script.}
 
-\item{tag}{The html tag to create for the D3 script.}
+\item{tag}{HTML tag to create for the D3 script.}
 
-\item{version}{The major D3 version to use, the latest minor version
+\item{version}{Major D3 version to use, the latest minor version
 is automatically picked.}
 
 \item{dependencies}{Additional javascript or css dependencies.}
+
+\item{width}{Desired width for output widget.}
+
+\item{height}{Desired height for output widget.}
 }
 \description{
 Renders data with D3 as an HtmlWidget using a D3.js script.
