@@ -11,6 +11,7 @@
 #' @param dependencies Additional javascript or css dependencies.
 #'
 #' @import htmlwidgets
+#' @import tools
 #'
 #' @export
 r2d3 <- function(
@@ -24,6 +25,16 @@ r2d3 <- function(
 {
   if (!file.exists(script))
     stop("D3 script '", script, "' does not exist.")
+  
+  if (!is.null(dependencies)) {
+    if (any(!file.exists(dependencies)))
+      stop("Not all dependency files exist.")
+    
+    dependencies <- list(
+      js = Filter(function(e) identical(file_ext(e), "js"), dependencies),
+      css = Filter(function(e) identical(file_ext(e), "css"), dependencies)
+    )
+  }
   
   version <- version[[1]]
   version_long <- version_complete(version)
@@ -45,7 +56,8 @@ r2d3 <- function(
     type = class(data)[[1]],
     tag = tag,
     options = options,
-    script = paste(readLines(wrapped_d3), collapse = "\n")
+    script = script_read(c(wrapped_d3, dependencies$js)),
+    styles = script_read(dependencies$css)
   )
 
   # create widget

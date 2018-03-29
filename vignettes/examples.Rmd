@@ -42,13 +42,14 @@ r2d3(
 [https://bl.ocks.org/mbostock/4061502](https://bl.ocks.org/mbostock/4061502)
 
 ```{r eval=FALSE}
-render(
+r2d3(
   read.csv(system.file("samples/morley.csv", package = "r2d3")),
-  c(
-    system.file("samples/morley.css", package = "r2d3"),
-    system.file("samples/morley.js", package = "r2d3")
-  ),
+  system.file("samples/morley.js", package = "r2d3"),
   stylesheet = system.file("samples/morley.css", package = "r2d3"),
-  version = "4.13.0"
+  version = "4.13.0",
+  dependencies = c(
+    system.file("samples/morley.css", package = "r2d3"),
+    system.file("samples/box.js", package = "r2d3")
+  )
 )
 ```

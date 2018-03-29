@@ -17,3 +17,13 @@ script_wrap <- function(script, tag) {
   
   wrapped_script
 }
+
+script_read <- function(script) {
+  paste(
+    sapply(
+      script,
+      function(e) paste(readLines(e), collapse = "\n")
+    ),
+    collapse = "\n\n"
+  )
+}
