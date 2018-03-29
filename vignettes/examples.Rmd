@@ -14,10 +14,10 @@ This section shows how to use the exaples available in the [https://github.com/d
 [https://bl.ocks.org/mbostock/4063269](https://bl.ocks.org/mbostock/4063269)
 
 ```{r}
-flares <- read.csv(system.file("samples/flare.csv", package = "r2d3"))
+flares <- read.csv(system.file("samples/bubbles/flare.csv", package = "r2d3"))
 r2d3::r2d3(
   flares[!is.na(flares$value), ],
-  system.file("samples/bubbles.js", package = "r2d3"),
+  system.file("samples/bubbles/bubbles.js", package = "r2d3"),
   version = 4
 )
 ```
@@ -28,13 +28,13 @@ r2d3::r2d3(
 
 ```{r}
 r2d3::r2d3(
-  read.csv(system.file("samples/morley.csv", package = "r2d3")),
-  system.file("samples/morley.js", package = "r2d3"),
+  read.csv(system.file("samples/morley/morley.csv", package = "r2d3")),
+  system.file("samples/morley/morley.js", package = "r2d3"),
   version = 3,
   tag = "div",
   dependencies = c(
-    system.file("samples/morley.css", package = "r2d3"),
-    system.file("samples/box.js", package = "r2d3")
+    system.file("samples/morley/morley.css", package = "r2d3"),
+    system.file("samples/morley/box.js", package = "r2d3")
   )
 )
 ```

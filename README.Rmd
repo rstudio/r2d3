@@ -38,7 +38,7 @@ Data can be rendered in D3 from R as follows. Notice that, for this example, we'
 ```{r eval=FALSE}
 r2d3::r2d3(
   c(10, 30, 40, 35, 20, 10),
-  "inst/samples/barchart.js",
+  "inst/samples/barchart/barchart.js",
   tag = "div"
 )
 ```
@@ -53,10 +53,10 @@ cat(paste(readLines(system.file("samples/bubbles.js", package = "r2d3")), collap
 ```
 
 ```{r bubbles-chart}
-flares <- read.csv(system.file("samples/flare.csv", package = "r2d3"))
+flares <- read.csv("inst/samples/bubbles/flare.csv")
 r2d3::r2d3(
   flares[!is.na(flares$value), ],
-  "inst/samples/bubbles.js",
+  "inst/samples/bubbles/bubbles.js",
   version = 4
 )
 ```
