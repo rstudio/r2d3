@@ -23,15 +23,9 @@ r2d3 <- function(
   dependencies = NULL
   )
 {
-  if (!file.exists(script))
-    stop("D3 script '", script, "' does not exist.")
-  
   if (!is.null(dependencies)) {
-    if (any(!file.exists(dependencies)))
-      stop("Not all dependency files exist.")
-    
     dependencies <- list(
-      js = Filter(function(e) identical(file_ext(e), "js"), dependencies),
+      js = Filter(function(e) !identical(file_ext(e), "css"), dependencies),
       css = Filter(function(e) identical(file_ext(e), "css"), dependencies)
     )
   }

@@ -11,6 +11,9 @@ script_wrap <- function(contents, tag) {
 }
 
 script_read <- function(script) {
+  if (is.null(script) || !file.exists(script))
+    return(script)
+  
   paste(
     sapply(
       script,
