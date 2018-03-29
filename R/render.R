@@ -2,13 +2,15 @@
 #'
 #' Renders data with D3 as an HtmlWidget using a D3.js script.
 #'
-#' @param data The data to be passed to D3 script.
-#' @param script The 'JavaScript' file containing the D3 script.
-#' @param options The options to be passed to D3 script.
-#' @param tag The html tag to create for the D3 script.
-#' @param version The major D3 version to use, the latest minor version
+#' @param data Data to be passed to D3 script.
+#' @param script 'JavaScript' file containing the D3 script.
+#' @param options Options to be passed to D3 script.
+#' @param tag HTML tag to create for the D3 script.
+#' @param version Major D3 version to use, the latest minor version
 #'   is automatically picked.
 #' @param dependencies Additional javascript or css dependencies.
+#' @param width Desired width for output widget.
+#' @param height Desired height for output widget.
 #'
 #' @import htmlwidgets
 #' @import tools
@@ -20,7 +22,9 @@ r2d3 <- function(
   options = NULL,
   tag = "svg",
   version = c(5, 4, 3),
-  dependencies = NULL
+  dependencies = NULL,
+  width = NULL,
+  height = NULL
   )
 {
   if (!is.null(dependencies)) {
@@ -57,6 +61,8 @@ r2d3 <- function(
   htmlwidgets::createWidget(
     name = 'r2d3',
     x,
+    width = width,
+    height = height,
     package = 'r2d3',
     dependencies = list(
       htmltools::htmlDependency(
