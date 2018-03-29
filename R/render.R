@@ -19,7 +19,7 @@ r2d3 <- function(
   script,
   options = NULL,
   tag = "svg",
-  version = c(4, 5),
+  version = c(5, 4, 3),
   dependencies = NULL
   )
 {
