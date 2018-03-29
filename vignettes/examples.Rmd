@@ -7,11 +7,11 @@ output:
       collapsed: no
 ---
 
-This section shows how to use the exaples available in the [https://github.com/d3/d3/wiki/Gallery](https://github.com/d3/d3/wiki/Gallery) gallery.
+This section shows how to use the exaples available in the [github.com/d3/d3/wiki/Gallery](https://github.com/d3/d3/wiki/Gallery) gallery.
 
 ## Bubbles
 
-[https://bl.ocks.org/mbostock/4063269](https://bl.ocks.org/mbostock/4063269)
+[bl.ocks.org/mbostock/4063269](https://bl.ocks.org/mbostock/4063269)
 
 ```{r}
 flares <- read.csv(system.file("samples/bubbles/flare.csv", package = "r2d3"))
@@ -24,7 +24,7 @@ r2d3::r2d3(
 
 ## Morley
 
-[https://bl.ocks.org/mbostock/4061502](https://bl.ocks.org/mbostock/4061502)
+[bl.ocks.org/mbostock/4061502](https://bl.ocks.org/mbostock/4061502)
 
 ```{r}
 r2d3::r2d3(
@@ -35,6 +35,24 @@ r2d3::r2d3(
   dependencies = c(
     system.file("samples/morley/morley.css", package = "r2d3"),
     system.file("samples/morley/box.js", package = "r2d3")
+  )
+)
+```
+
+
+## Bullets
+
+[bl.ocks.org/mbostock/4061961](https://bl.ocks.org/mbostock/4061961)
+
+```{r}
+r2d3::r2d3(
+  jsonlite::read_json(system.file("samples/bullets/bullets.json", package = "r2d3")),
+  system.file("samples/bullets/bullets.js", package = "r2d3"),
+  version = 3,
+  tag = "div",
+  dependencies = c(
+    system.file("samples/bullets/bullets.css", package = "r2d3"),
+    system.file("samples/bullets/helper.js", package = "r2d3")
   )
 )
 ```
