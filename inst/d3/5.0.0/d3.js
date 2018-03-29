@@ -2,7 +2,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.d3 = global.d3 || {})));
+	(factory((global.d3v5 = global.d3v5 || {})));
 }(this, (function (exports) { 'use strict';
 
 var version = "5.0.0-rc.4";
