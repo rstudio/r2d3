@@ -1,7 +1,7 @@
 navbar:
   title: "bayesplot"
   left:
-    - text: "Examples"
-      href: articles/examples.html
+    - text: "Gallery"
+      href: articles/gallery.html
     - text: "Reference"
       href: reference/index.html
