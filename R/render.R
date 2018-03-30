@@ -34,6 +34,9 @@ r2d3 <- function(
     )
   }
   
+  if (is.null(tag)) tag = "svg"
+  if (is.null(version)) version <- 5
+  
   version <- version[[1]]
   version_long <- version_complete(version)
   
