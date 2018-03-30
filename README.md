@@ -118,3 +118,24 @@ r2d3::r2d3(
 ```
 
 ![](tools/README/bubbleschart-1.png)
+
+R Markdown
+----------
+
+For `rmarkdown` documents and Notebooks, `r2d3` adds support for `d3` code as follows:
+
+<pre><code>&#96``{r setup}
+library(r2d3)
+bars <- c(10, 20, 30)
+&#96``</code></pre>
+<pre><code>&#96``{d3 data=bars, options='orange'}
+svg.selectAll('rect')
+    .data(data)
+  .enter()
+    .append('rect')
+      .attr('width', function(d) { return d * 10; })
+      .attr('height', '20px')
+      .attr('y', function(d, i) { return i * 22; })
+      .attr('fill', options);
+&#96``</code></pre>
+![](tools/README/rmarkdown-1.png)
