@@ -1,5 +1,5 @@
 ---
-title: "Examples"
+title: "Gallery"
 output:
   html_document:
     toc: yes
