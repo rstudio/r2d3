@@ -6,6 +6,10 @@
     
     knit_engines$set(d3 = function(options) {
       
+      if (identical(.Platform$GUI, "RStudio") && is.character(options$data)) {
+        options$data <- get(options$data, envir = globalenv())
+      }
+      
       widget <- r2d3::r2d3(
         data = options$data,
         script = options$code,
@@ -17,13 +21,18 @@
         height = options$height
       )
       
-      widget_output <- knit_print(widget, options)
-      engine_output(
-        options, out = list(
-          structure(list(src = options$code), class = 'source'),
-          widget_output
+      if (identical(.Platform$GUI, "RStudio")) {
+        widget
+      }
+      else {
+        widget_output <- knit_print(widget, options = options)
+        engine_output(
+          options, out = list(
+            structure(list(src = options$code), class = 'source'),
+            widget_output
+          )
         )
-      )
+      }
     })
   }
 }
