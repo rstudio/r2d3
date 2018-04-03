@@ -17,7 +17,7 @@
 #' @export
 r2d3Output <- function(outputId, width = '100%', height = '400px')
 {
-  htmlwidgets::shinyWidgetOutput(outputId, 'r2d3', width, height, package = 'r2d3')
+  htmlwidgets::shinyWidgetOutput(outputId, 'r2d3', width, height)
 }
 
 #' @rdname d3-shiny
@@ -25,5 +25,5 @@ r2d3Output <- function(outputId, width = '100%', height = '400px')
 renderR2D3 <- function(expr, env = parent.frame(), quoted = FALSE)
 {
   if (!quoted) { expr <- substitute(expr) } # force quoted
-  htmlwidgets::shinyRenderWidget(expr, shiny_output, env, quoted = TRUE)
+  htmlwidgets::shinyRenderWidget(expr, r2d3Output, env, quoted = TRUE)
 }
