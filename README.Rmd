@@ -89,3 +89,33 @@ svg.selectAll('rect')
 &#96``</code></pre>
 
 ![](tools/README/rmarkdown-1.png)
+
+## Shiny
+
+`r2d3` provides `renderR2D3()` and `r2d3Output()` to render under Shiny. For example, we can render D3 in a Shiny document as follows:
+
+<pre><code>---
+runtime: shiny
+output: html_document
+---
+
+&#96``{r setup}
+library(r2d3)
+&#96``
+
+&#96``{r echo=FALSE}
+inputPanel(
+  sliderInput("bar_max", label = "Max:",
+    min = 10, max = 110, value = 10, step = 20)
+)
+
+renderR2D3({
+  r2d3(
+    floor(runif(5, 5, input$bar_max)),
+    system.file("samples/barchart/baranims.js", package = "r2d3")
+  )
+})
+&#96``</code></pre>
+
+<img src="tools/README/baranim-1.gif" width=550 align="left"/>
+
