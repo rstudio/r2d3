@@ -30,7 +30,8 @@ HTMLWidgets.widget({
         r2d3.root
           .attr("width", width)
           .attr("height", height);
-          
+        
+        // TODO: If has resize then resize otherwise d3Script_hash()
         r2d3.resize(width, height);
       }
     };
