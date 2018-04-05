@@ -6,16 +6,25 @@ knit_d3 <- function (options) {
     options$data <- get(options$data, envir = globalenv())
   }
   
-  widget <- r2d3(
-    data = options$data,
-    script = options$code,
-    options = options$options,
-    tag = options$tag,
-    version = options$version,
-    dependencies = options$dependencies,
-    width = options$width,
-    height = options$height
-  )
+  if ("reactive" %in% class(options$data)) {
+    widget <- renderR2D3({
+      r2d3(
+        options$data(),
+        options$code
+      )
+    })
+  } else {
+    widget <- r2d3(
+      data = options$data,
+      script = options$code,
+      options = options$options,
+      tag = options$tag,
+      version = options$version,
+      dependencies = options$dependencies,
+      width = options$width,
+      height = options$height
+    )
+  }
   
   if (identical(.Platform$GUI, "RStudio")) {
     widget
