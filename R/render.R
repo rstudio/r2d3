@@ -55,7 +55,7 @@ r2d3 <- function(
     type = class(data)[[1]],
     container = container,
     options = options,
-    script = script_wrap(script_read(c(dependencies$js, script)), container),
+    script = script_wrap(script_read(c(dependencies$js, script))),
     style = script_read(dependencies$css),
     version = version
   )
