@@ -13,10 +13,11 @@ library(r2d3)
 
 <img src="tools/README/r2d3-hex.svg" width=200 align="right"/>
 
-`R2D3` provides tools to render D3 scripts from R and integrates with `knitr`, `rmarkdown` and RStudio to provide native `d3` output chunks. Specifically, with `R2D3` you can:
+`r2d3` renders [D3](https://d3js.org/) scripts that it can be used from the R console, [R Markdown](https://rmarkdown.rstudio.com/), or [Shiny](https://shiny.rstudio.com) like any other [htmlwidget](https://www.htmlwidgets.org/). Specifically, with `r2d3` you can:
 
 - Render [D3](https://d3js.org/) scripts with ease in R as [htmlwidgets](https://www.htmlwidgets.org/).
-- Use [Shiny](http://shiny.rstudio.com/) with `R2D3` to create interactive D3 applications.
+- Use [Shiny](http://shiny.rstudio.com/) with `r2d3` to create interactive D3 applications.
+- Use D3 chunks in [R Markdown](https://rmarkdown.rstudio.com/) and [R notebooks](https://rmarkdown.rstudio.com/r_notebooks.html).
 
 ## Installation
 
