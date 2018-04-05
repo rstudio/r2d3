@@ -4,7 +4,7 @@ function R2D3() {
   var version = null;
   
   self.data = null;
-  self.root = null;
+  self.root = self.svg = self.canvas = null;
   self.width = 0;
   self.height = 0;
   self.options = null;
@@ -17,7 +17,7 @@ function R2D3() {
   };
   
   self.setRoot = function(root) {
-    self.root = root;
+    self.root = self.svg = self.canvas = root;
   };
   
   self.setWidth = function(width) {
@@ -34,7 +34,7 @@ function R2D3() {
       self.data = HTMLWidgets.dataframeToD3(self.data);
     }
     
-    renderer(self.data, self.root, self.width, self.height, self.options);
+    renderer();
     
   };
   

@@ -23,7 +23,7 @@ HTMLWidgets.widget({
         r2d3.setWidth(width);
         r2d3.setHeight(height);
         
-        d3Script(r2d3.d3(), r2d3, x.data, r2d3.root, width, height, x.options);
+        d3Script(r2d3.d3(), r2d3);
       },
 
       resize: function(width, height) {
@@ -31,7 +31,7 @@ HTMLWidgets.widget({
           .attr("width", width)
           .attr("height", height);
         
-        // TODO: If has resize then resize otherwise d3Script_hash()
+        // TODO: If has resize then resize otherwise d3Script()
         r2d3.resize(width, height);
       }
     };

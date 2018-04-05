@@ -29,8 +29,8 @@ To render simple D3 scripts, `R2D3` provides the following variables:
 
 These variables can then be used in a D3 script as follows:
 
-    svg.selectAll('rect')
-        .data(data)
+    r2d3.svg.selectAll('rect')
+        .data(r2d3.data)
       .enter()
         .append('rect')
           .attr('width', function(d) { return d * 10; })
@@ -55,20 +55,20 @@ Advanced Rendering
 More advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code, for instace:
 
     // Initialization
-    svg.attr("font-family", "sans-serif")
+    r2d3.svg.attr("font-family", "sans-serif")
       .attr("font-size", "8")
       .attr("text-anchor", "middle");
         
     var pack = d3.pack()
-      .size([width, height])
+      .size([r2d3.width, r2d3.height])
       .padding(1.5);
         
     var format = d3.format(",d");
     var color = d3.scaleOrdinal(d3.schemeCategory20c);
 
     // Rendering
-    r2d3.onRender(function(data, svg, width, height, options) {
-      var root = d3.hierarchy({children: data})
+    r2d3.onRender(function() {
+      var root = d3.hierarchy({children: r2d3.data})
         .sum(function(d) { return d.value; })
         .each(function(d) {
           if (id = d.data.id) {
@@ -79,7 +79,7 @@ More advanced scripts can rely can make use of `r2d3.onRender()` which is simila
           }
         });
 
-      var node = svg.selectAll(".node")
+      var node = r2d3.svg.selectAll(".node")
         .data(pack(root).leaves())
         .enter().append("g")
           .attr("class", "node")
@@ -124,19 +124,24 @@ R Markdown
 
 For `rmarkdown` documents and Notebooks, `r2d3` adds support for `d3` code as follows:
 
-<pre><code>&#96``{r setup}
+<pre><code>---
+output: html_document
+---
+
+&#96``{r setup}
 library(r2d3)
 bars <- c(10, 20, 30)
-&#96``</code></pre>
-<pre><code>&#96``{d3 data=bars, options='orange'}
-svg.selectAll('rect')
-    .data(data)
+&#96``
+
+&#96``{d3 data=bars, options='orange'}
+r2d3.svg.selectAll('rect')
+    .data(r2d3.data)
   .enter()
     .append('rect')
       .attr('width', function(d) { return d * 10; })
       .attr('height', '20px')
       .attr('y', function(d, i) { return i * 22; })
-      .attr('fill', options);
+      .attr('fill', r2d3.options);
 &#96``</code></pre>
 ![](tools/README/rmarkdown-1.png)
 
@@ -166,8 +171,8 @@ bars <- reactive({
 &#96``
 
 &#96``{d3 data=bars}
-var bars = svg.selectAll('rect')
-    .data(data);
+var bars = r2d3.svg.selectAll('rect')
+    .data(r2d3.data);
     
 bars.enter()
     .append('rect')
