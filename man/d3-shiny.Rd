@@ -2,13 +2,13 @@
 % Please edit documentation in R/shiny.R
 \name{d3-shiny}
 \alias{d3-shiny}
-\alias{r2d3Output}
-\alias{renderR2D3}
+\alias{d3Output}
+\alias{renderD3}
 \title{Shiny bindings for d3}
 \usage{
-r2d3Output(outputId, width = "100\%", height = "400px")
+d3Output(outputId, width = "100\%", height = "400px")
 
-renderR2D3(expr, env = parent.frame(), quoted = FALSE)
+renderD3(expr, env = parent.frame(), quoted = FALSE)
 }
 \arguments{
 \item{outputId}{output variable to read from}

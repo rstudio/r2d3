@@ -7,7 +7,7 @@ knit_d3 <- function (options) {
   }
   
   if ("reactive" %in% class(options$data)) {
-    widget <- renderR2D3({
+    widget <- renderD3({
       r2d3(
         options$data(),
         options$code
