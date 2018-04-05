@@ -5,7 +5,7 @@
 #' @param data Data to be passed to D3 script.
 #' @param script 'JavaScript' file containing the D3 script.
 #' @param options Options to be passed to D3 script.
-#' @param tag HTML tag to create for the D3 script.
+#' @param container The 'HTML' container of the D3 output.
 #' @param version Major D3 version to use, the latest minor version
 #'   is automatically picked.
 #' @param dependencies Additional javascript or css dependencies.
@@ -20,7 +20,7 @@ r2d3 <- function(
   data,
   script,
   options = NULL,
-  tag = "svg",
+  container = "svg",
   version = c(5, 4, 3),
   dependencies = NULL,
   width = NULL,
@@ -34,7 +34,7 @@ r2d3 <- function(
     )
   }
   
-  if (is.null(tag)) tag = "svg"
+  if (is.null(container)) container = "svg"
   if (is.null(version)) version <- 5
   
   version <- version[[1]]
@@ -53,9 +53,9 @@ r2d3 <- function(
   x <- list(
     data = data,
     type = class(data)[[1]],
-    tag = tag,
+    container = container,
     options = options,
-    script = script_wrap(script_read(c(dependencies$js, script)), tag),
+    script = script_wrap(script_read(c(dependencies$js, script)), container),
     style = script_read(dependencies$css),
     version = version
   )

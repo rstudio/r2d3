@@ -18,7 +18,7 @@ knit_d3 <- function (options) {
       data = options$data,
       script = options$code,
       options = options$options,
-      tag = options$tag,
+      container = options$container,
       version = options$version,
       dependencies = options$dependencies,
       width = options$width,
