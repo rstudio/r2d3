@@ -10,20 +10,20 @@ var valueById = [
 
 var path = d3.geo.path();
 
-var root = svg
+var root = r2d3.svg
   .attr("width", "100%")
 		.append("g");
 
-r2d3.onRender(function(us, svg, width, height, options) {
-  root.attr("transform", "scale(" + width / 900 + ")");
+r2d3.onRender(function() {
+  root.attr("transform", "scale(" + r2d3.width / 900 + ")");
 	    
   root.append("path")
-      .datum(topojson.feature(us, us.objects.land))
+      .datum(topojson.feature(r2d3.data, r2d3.data.objects.land))
       .attr("class", "land")
       .attr("d", path);
 
   root.selectAll(".state")
-      .data(topojson.feature(us, us.objects.states).features)
+      .data(topojson.feature(r2d3.data, r2d3.data.objects.states).features)
     .enter().append("path")
       .attr("class", "state")
       .attr("d", path)

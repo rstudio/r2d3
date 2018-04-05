@@ -10,10 +10,10 @@ var chart = d3.box()
     .width(width)
     .height(height);
 
-r2d3.onRender(function(csv, div, w, h, options) {
+r2d3.onRender(function() {
   var data = [];
 
-  csv.forEach(function(x) {
+  r2d3.data.forEach(function(x) {
     var e = Math.floor(x.Expt - 1),
         r = Math.floor(x.Run - 1),
         s = Math.floor(x.Speed),
@@ -26,7 +26,7 @@ r2d3.onRender(function(csv, div, w, h, options) {
 
   chart.domain([min, max]);
 
-  var svg = div.selectAll("svg")
+  var svg = r2d3.root.selectAll("svg")
     .data(data)
   .enter().append("svg")
     .attr("class", "box")

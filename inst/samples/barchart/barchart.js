@@ -1,5 +1,5 @@
-svg.selectAll('rect')
-    .data(data)
+r2d3.svg.selectAll('rect')
+    .data(r2d3.data)
   .enter()
     .append('rect')
       .attr('width', function(d) { return d * 10; })

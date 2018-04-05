@@ -1,18 +1,18 @@
 // Initialization
-svg.attr("font-family", "sans-serif")
+r2d3.svg.attr("font-family", "sans-serif")
   .attr("font-size", "8")
   .attr("text-anchor", "middle");
     
 var pack = d3.pack()
-  .size([width, height])
+  .size([r2d3.width, r2d3.height])
   .padding(1.5);
     
 var format = d3.format(",d");
 var color = d3.scaleOrdinal(d3.schemeCategory20c);
 
 // Rendering
-r2d3.onRender(function(data, svg, width, height, options) {
-  var root = d3.hierarchy({children: data})
+r2d3.onRender(function() {
+  var root = d3.hierarchy({children: r2d3.data})
     .sum(function(d) { return d.value; })
     .each(function(d) {
       if (id = d.data.id) {
@@ -23,7 +23,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
       }
     });
 
-  var node = svg.selectAll(".node")
+  var node = r2d3.svg.selectAll(".node")
     .data(pack(root).leaves())
     .enter().append("g")
       .attr("class", "node")

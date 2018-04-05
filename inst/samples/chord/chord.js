@@ -1,4 +1,4 @@
-var outerRadius = Math.min(width, height) * 0.5 - 40,
+var outerRadius = Math.min(r2d3.width, r2d3.height) * 0.5 - 40,
     innerRadius = outerRadius - 30;
 
 var formatValue = d3.formatPrefix(",.0", 1e3);
@@ -18,9 +18,9 @@ var color = d3.scaleOrdinal()
     .domain(d3.range(4))
     .range(["#000000", "#FFDD89", "#957244", "#F26223"]);
 
-var g = svg.append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
-    .datum(chord(data));
+var g = r2d3.svg.append("g")
+    .attr("transform", "translate(" + r2d3.width / 2 + "," + r2d3.height / 2 + ")")
+    .datum(chord(r2d3.data));
 
 var group = g.append("g")
     .attr("class", "groups")
