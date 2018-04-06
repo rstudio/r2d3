@@ -7,13 +7,24 @@ output:
       collapsed: no
 ---
 
-This section shows how to use the exaples available in the [github.com/d3/d3/wiki/Gallery](https://github.com/d3/d3/wiki/Gallery) gallery.
+This section shows how to use the examples available in the [github.com/d3/d3/wiki/Gallery](https://github.com/d3/d3/wiki/Gallery) gallery, the R examples can be found in [github.com/rstudio/r2d3/tree/master/inst/samples](https://github.com/rstudio/r2d3/tree/master/inst/samples).
 
 ## Morley
 
 [bl.ocks.org/mbostock/4061502](https://bl.ocks.org/mbostock/4061502)
 
-```{r}
+```{r eval=FALSE}
+library(r2d3)
+r2d3(
+  read.csv("morley.csv"),
+  "morley.js",
+  version = 3,
+  container = "div",
+  dependencies = c("morley.css", "box.js")
+  )
+)
+```
+```{r echo=FALSE}
 r2d3::r2d3(
   read.csv(system.file("samples/morley/morley.csv", package = "r2d3")),
   system.file("samples/morley/morley.js", package = "r2d3"),
@@ -30,7 +41,15 @@ r2d3::r2d3(
 
 [bl.ocks.org/mbostock/4063269](https://bl.ocks.org/mbostock/4063269)
 
-```{r}
+```{r eval=FALSE}
+flares <- read.csv("flare.csv")
+r2d3(
+  flares[!is.na(flares$value), ],
+  "bubbles.js",
+  version = 4
+)
+```
+```{r echo=FALSE}
 flares <- read.csv(system.file("samples/bubbles/flare.csv", package = "r2d3"))
 r2d3::r2d3(
   flares[!is.na(flares$value), ],
@@ -43,7 +62,17 @@ r2d3::r2d3(
 
 [bl.ocks.org/mbostock/4061961](https://bl.ocks.org/mbostock/4061961)
 
-```{r}
+```{r eval=FALSE}
+r2d3(
+  jsonlite::read_json("bullets.json"),
+  "bullets.js",
+  version = 3,
+  container = "div",
+  dependencies = c("bullets.css", "helper.js"),
+  height = 300
+)
+```
+```{r echo=FALSE}
 r2d3::r2d3(
   jsonlite::read_json(system.file("samples/bullets/bullets.json", package = "r2d3")),
   system.file("samples/bullets/bullets.js", package = "r2d3"),
@@ -61,7 +90,16 @@ r2d3::r2d3(
 
 [bl.ocks.org/mbostock/4063318](https://bl.ocks.org/mbostock/4063318)
 
-```{r}
+```{r eval=FALSE}
+r2d3(
+  read.csv("dji.csv"),
+  "calendar.js",
+  version = 4,
+  container = "div",
+  height = 1950
+)
+```
+```{r echo=FALSE}
 r2d3::r2d3(
   read.csv(system.file("samples/calendar/dji.csv", package = "r2d3")),
   system.file("samples/calendar/calendar.js", package = "r2d3"),
@@ -75,7 +113,16 @@ r2d3::r2d3(
 
 [bl.ocks.org/mbostock/4055908](https://bl.ocks.org/mbostock/4055908)
 
-```{r}
+```{r eval=FALSE}
+r2d3(
+  jsonlite::read_json("us.json"),
+  "cartogram.js",
+  version = 3,
+  dependencies = c("cartogram.css", "topojson.min.js",
+  height = 400
+)
+```
+```{r echo=FALSE}
 r2d3::r2d3(
   jsonlite::read_json(system.file("samples/cartogram/us.json", package = "r2d3")),
   system.file("samples/cartogram/cartogram.js", package = "r2d3"),
@@ -92,7 +139,23 @@ r2d3::r2d3(
 
 [bl.ocks.org/mbostock/4062006](https://bl.ocks.org/mbostock/4062006)
 
-```{r}
+```{r eval=FALSE}
+r2d3(
+  matrix(
+    c(
+      11975,  5871, 8916, 2868,
+      1951, 10048, 2060, 6171,
+      8010, 16145, 8090, 8045,
+      1013,   990,  940, 6907
+    ),
+    ncol = 4, nrow = 4, byrow = T
+  ),
+  "chord.js",
+  version = 4,
+  dependencies = "chord.css"
+)
+```
+```{r echo=FALSE}
 r2d3::r2d3(
   matrix(
     c(
