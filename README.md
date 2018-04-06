@@ -21,14 +21,15 @@ devtools::install_github("rstudio/r2d3")
 Getting Started
 ---------------
 
-To render simple D3 scripts, `R2D3` provides the following variables:
+To render D3 scripts, `r2d3` provides a `r2d3` JavaScript object that should be used to to retrieve rendering properties:
 
--   **data**: The R data converted to javascript.
--   **svg**: The svg element with the right dimensions.
--   **width/height**: The width/height of the svg.
--   **options**: Additional options provided from R.
+-   **r2d3.data**: The R data converted to JavaScript.
+-   **r2d3.svg**: The svg element with the right dimensions.
+-   **r2d3.width**: The width of the svg.
+-   **r2d3.height**: The height of the svg.
+-   **r2d3.options**: Additional options provided from R.
 
-These variables can then be used in a D3 script as follows:
+The `r2d3` object can then be used in a D3 script as follows:
 
     r2d3.svg.selectAll('rect')
         .data(r2d3.data)
@@ -39,12 +40,13 @@ These variables can then be used in a D3 script as follows:
           .attr('y', function(d, i) { return i * 22; })
           .attr('fill', 'steelblue');
 
-Finally, this D3 script can be rendered from R by calling `r2d3` with the data and D3 script to be rendered:
+Finally, the above `barchart.js` script can be rendered from R by calling `r2d3` with the data and D3 script to be rendered:
 
 ``` r
-r2d3::r2d3(
+library(r2d3)
+r2d3(
   c(10, 30, 40, 35, 20, 10),
-  "inst/samples/barchart/barchart.js"
+  "barchart.js"
 )
 ```
 
@@ -111,14 +113,14 @@ More advanced scripts can rely can make use of `r2d3.onRender()` which is simila
 
 ``` r
 flares <- read.csv("inst/samples/bubbles/flare.csv")
-r2d3::r2d3(
+r2d3(
   flares[!is.na(flares$value), ],
-  "inst/samples/bubbles/bubbles.js",
+  "bubbles.js",
   version = 4
 )
 ```
 
-![](tools/README/bubbleschart-1.png)
+![](tools/README/unnamed-chunk-6-1.png)
 
 R Markdown
 ----------
@@ -134,7 +136,7 @@ library(r2d3)
 
 r2d3(
   c(10, 20, 30),
-  "inst/samples/barchart/barchart.js"
+  "barchart.js"
 )
 
 &#96``</code></pre>
@@ -182,7 +184,7 @@ server <- function(input, output) {
   output$d3 <- renderD3({
     r2d3(
       floor(runif(5, 5, input$bar_max)),
-      system.file("samples/barchart/baranims.js", package = "r2d3")
+      system.file("baranims.js", package = "r2d3")
     )
   })
 }
