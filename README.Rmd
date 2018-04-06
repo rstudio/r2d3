@@ -71,7 +71,23 @@ r2d3::r2d3(
 
 ## R Markdown
 
-For `rmarkdown` documents and Notebooks, `r2d3` adds support for `d3` code as follows:
+R Markdown can be used with `r2d3` to render a D3 script as an htmlwidget as follows:
+
+<pre><code>---
+output: html_document
+---
+
+&#96``{r}
+library(r2d3)
+
+r2d3(
+  c(10, 20, 30),
+  "inst/samples/barchart/barchart.js"
+)
+
+&#96``</code></pre>
+
+For `rmarkdown` documents and Notebooks, `r2d3` also adds support for `d3` chunk that can be use to make the D3 code more readable:
 
 <pre><code>---
 output: html_document
@@ -97,7 +113,33 @@ r2d3.svg.selectAll('rect')
 
 ## Shiny
 
-`r2d3` provides `renderR2D3()` and `r2d3Output()` to render under Shiny. For example, we can render D3 in a Shiny document as follows:
+`r2d3` provides `renderD3()` and `d3Output()` to render under Shiny apps:
+
+```{r eval=FALSE}
+library(shiny)
+library(r2d3)
+
+ui <- fluidPage(
+  inputPanel(
+    sliderInput("bar_max", label = "Max:",
+      min = 10, max = 110, value = 10, step = 20)
+  ),
+  d3Output("d3")
+)
+
+server <- function(input, output) {
+  output$d3 <- renderD3({
+    r2d3(
+      floor(runif(5, 5, input$bar_max)),
+      system.file("samples/barchart/baranims.js", package = "r2d3")
+    )
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+We can also render D3 in a Shiny document as follows:
 
 <pre><code>---
 runtime: shiny
@@ -138,4 +180,3 @@ bars.transition()
 &#96``</code></pre>
 
 <img src="tools/README/baranim-1.gif" width=550 align="left"/>
-
