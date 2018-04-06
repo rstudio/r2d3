@@ -1,4 +1,4 @@
-function R2D3() {
+function R2D3(el) {
   var self = this;
   var x = null;
   var version = null;
@@ -8,7 +8,8 @@ function R2D3() {
   self.width = 0;
   self.height = 0;
   self.options = null;
-  self.resizer = function(width, height) {};
+  self.resizer = null;
+  self.renderer = null;
   
   self.setX = function(newX) {
     x = newX;
@@ -21,8 +22,25 @@ function R2D3() {
     self.options = x.options;
   };
   
+  self.setContainer = function(container) {
+    self.container = container;
+  };
+  
   self.setRoot = function(root) {
     self.root = self.svg = self.canvas = root;
+  };
+  
+  self.createRoot = function() {
+    if (self.root !== null) {
+      self.d3().select(el).select(self.container).remove();
+      self.root = null;
+    }
+    
+    var root = self.d3().select(el).append(self.container)
+      .attr("width", self.width)
+      .attr("height", self.height);
+      
+    self.setRoot(root);
   };
   
   self.setWidth = function(width) {
@@ -34,17 +52,28 @@ function R2D3() {
   };
   
   self.onRender = function(renderer) {
-    renderer();
+    self.renderer = renderer;
+    
+    if (self.resizer === null) {
+      self.resizer = function() {
+        self.createRoot();
+        self.render();
+      };
+    }
   };
   
   self.onResize = function(resizer) {
     self.resizer = resizer;
   };
   
-  self.resize = function(width, height) {
-    self.width = width;
-    self.height = height;
-    self.resizer(width, height);
+  self.render = function() {
+    if (self.renderer === null) return;
+    self.renderer();
+  };
+  
+  self.resize = function() {
+    if (self.resizer === null) return;
+    self.resizer();
   };
   
   self.addScript = function(script) {
