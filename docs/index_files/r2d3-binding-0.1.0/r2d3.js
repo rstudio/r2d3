@@ -12,7 +12,7 @@ HTMLWidgets.widget({
           r2d3.addScript(x.script);
           r2d3.addStyle(x.style);
           
-          var root = r2d3.d3().select(el).append(x.tag)
+          var root = r2d3.d3().select(el).append(x.container)
             .attr("width", width)
             .attr("height", height);
             

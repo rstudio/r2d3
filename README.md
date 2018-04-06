@@ -3,10 +3,11 @@ R to D3 rendering tools
 
 <img src="tools/README/r2d3-hex.svg" width=200 align="right"/>
 
-`R2D3` provides tools to render D3 scripts from R and integrates with `knitr`, `rmarkdown` and RStudio to provide native `d3` output chunks. Specifically, with `R2D3` you can:
+`r2d3` renders [D3](https://d3js.org/) scripts that it can be used from the R console, [R Markdown](https://rmarkdown.rstudio.com/), or [Shiny](https://shiny.rstudio.com) like any other [htmlwidget](https://www.htmlwidgets.org/). Specifically, with `r2d3` you can:
 
 -   Render [D3](https://d3js.org/) scripts with ease in R as [htmlwidgets](https://www.htmlwidgets.org/).
--   Use [Shiny](http://shiny.rstudio.com/) with `R2D3` to create interactive D3 applications.
+-   Use [Shiny](http://shiny.rstudio.com/) with `r2d3` to create interactive D3 applications.
+-   Use D3 chunks in [R Markdown](https://rmarkdown.rstudio.com/) and [R notebooks](https://rmarkdown.rstudio.com/r_notebooks.html).
 
 Installation
 ------------
@@ -122,7 +123,22 @@ r2d3::r2d3(
 R Markdown
 ----------
 
-For `rmarkdown` documents and Notebooks, `r2d3` adds support for `d3` code as follows:
+R Markdown can be used with `r2d3` to render a D3 script as an htmlwidget as follows:
+
+<pre><code>---
+output: html_document
+---
+
+&#96``{r}
+library(r2d3)
+
+r2d3(
+  c(10, 20, 30),
+  "inst/samples/barchart/barchart.js"
+)
+
+&#96``</code></pre>
+For `rmarkdown` documents and Notebooks, `r2d3` also adds support for `d3` chunk that can be use to make the D3 code more readable:
 
 <pre><code>---
 output: html_document
@@ -148,7 +164,33 @@ r2d3.svg.selectAll('rect')
 Shiny
 -----
 
-`r2d3` provides `renderR2D3()` and `r2d3Output()` to render under Shiny. For example, we can render D3 in a Shiny document as follows:
+`r2d3` provides `renderD3()` and `d3Output()` to render under Shiny apps:
+
+``` r
+library(shiny)
+library(r2d3)
+
+ui <- fluidPage(
+  inputPanel(
+    sliderInput("bar_max", label = "Max:",
+      min = 10, max = 110, value = 10, step = 20)
+  ),
+  d3Output("d3")
+)
+
+server <- function(input, output) {
+  output$d3 <- renderD3({
+    r2d3(
+      floor(runif(5, 5, input$bar_max)),
+      system.file("samples/barchart/baranims.js", package = "r2d3")
+    )
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+We can also render D3 in a Shiny document as follows:
 
 <pre><code>---
 runtime: shiny

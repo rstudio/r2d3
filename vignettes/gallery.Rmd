@@ -18,7 +18,7 @@ r2d3::r2d3(
   read.csv(system.file("samples/morley/morley.csv", package = "r2d3")),
   system.file("samples/morley/morley.js", package = "r2d3"),
   version = 3,
-  tag = "div",
+  container = "div",
   dependencies = c(
     system.file("samples/morley/morley.css", package = "r2d3"),
     system.file("samples/morley/box.js", package = "r2d3")
@@ -48,7 +48,7 @@ r2d3::r2d3(
   jsonlite::read_json(system.file("samples/bullets/bullets.json", package = "r2d3")),
   system.file("samples/bullets/bullets.js", package = "r2d3"),
   version = 3,
-  tag = "div",
+  container = "div",
   dependencies = c(
     system.file("samples/bullets/bullets.css", package = "r2d3"),
     system.file("samples/bullets/helper.js", package = "r2d3")
@@ -66,7 +66,7 @@ r2d3::r2d3(
   read.csv(system.file("samples/calendar/dji.csv", package = "r2d3")),
   system.file("samples/calendar/calendar.js", package = "r2d3"),
   version = 4,
-  tag = "div",
+  container = "div",
   height = 1950
 )
 ```

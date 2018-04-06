@@ -4,8 +4,8 @@
 \alias{r2d3}
 \title{Render Data with D3}
 \usage{
-r2d3(data, script, options = NULL, tag = "svg", version = c(5, 4, 3),
-  dependencies = NULL, width = NULL, height = NULL)
+r2d3(data, script, options = NULL, container = "svg", version = c(5, 4,
+  3), dependencies = NULL, width = NULL, height = NULL)
 }
 \arguments{
 \item{data}{Data to be passed to D3 script.}
@@ -14,7 +14,7 @@ r2d3(data, script, options = NULL, tag = "svg", version = c(5, 4, 3),
 
 \item{options}{Options to be passed to D3 script.}
 
-\item{tag}{HTML tag to create for the D3 script.}
+\item{container}{The 'HTML' container of the D3 output.}
 
 \item{version}{Major D3 version to use, the latest minor version
 is automatically picked.}
