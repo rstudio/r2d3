@@ -1,5 +1,5 @@
-var bars = svg.selectAll('rect')
-    .data(data);
+var bars = r2d3.svg.selectAll('rect')
+    .data(r2d3.data);
     
 bars.enter()
     .append('rect')
