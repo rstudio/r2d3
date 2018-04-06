@@ -53,13 +53,6 @@ function R2D3(el) {
   
   self.onRender = function(renderer) {
     self.renderer = renderer;
-    
-    if (self.resizer === null) {
-      self.resizer = function() {
-        self.createRoot();
-        self.render();
-      };
-    }
   };
   
   self.onResize = function(resizer) {

@@ -29,6 +29,14 @@ HTMLWidgets.widget({
             d3Script(r2d3.d3(), r2d3);
           });
         }
+        
+        if (r2d3.resizer === null) {
+          r2d3.resizer = function() {
+            r2d3.createRoot();
+            d3Script(r2d3.d3(), r2d3);
+            r2d3.render();
+          };
+        }
       },
 
       resize: function(width, height) {
