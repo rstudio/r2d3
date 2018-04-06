@@ -63,17 +63,15 @@ cat(paste(readLines(system.file("samples/bubbles/bubbles.js", package = "r2d3"))
 ```
 
 ```{r eval=FALSE}
-flares <- read.csv("inst/samples/bubbles/flare.csv")
 r2d3(
-  flares[!is.na(flares$value), ],
+  read.csv("flare.csv"),
   "bubbles.js",
   version = 4
 )
 ```
 ```{r echo=FALSE}
-flares <- read.csv("inst/samples/bubbles/flare.csv")
 r2d3(
-  flares[!is.na(flares$value), ],
+  read.csv("inst/samples/bubbles/flare.csv"),
   "inst/samples/bubbles/bubbles.js",
   version = 4
 )
