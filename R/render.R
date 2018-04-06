@@ -11,6 +11,7 @@
 #' @param dependencies Additional javascript or css dependencies.
 #' @param width Desired width for output widget.
 #' @param height Desired height for output widget.
+#' @param sizing The default 'HtmlWidgets' sizing policy.
 #'
 #' @import htmlwidgets
 #' @import tools
@@ -24,7 +25,8 @@ r2d3 <- function(
   version = c(5, 4, 3),
   dependencies = NULL,
   width = NULL,
-  height = NULL
+  height = NULL,
+  sizing = htmlwidgets::sizingPolicy(browser.fill = TRUE)
   )
 {
   if (!is.null(dependencies)) {
@@ -74,6 +76,7 @@ r2d3 <- function(
         src = system.file(file.path("d3", version_long), package = "r2d3"),
         script = "d3.js"
       )
-    )
+    ),
+    sizingPolicy = sizing
   )
 }
