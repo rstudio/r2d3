@@ -13,6 +13,11 @@ function R2D3() {
   self.setX = function(newX) {
     x = newX;
     self.data = x.data;
+    
+    if (x.type == "data.frame") {
+      self.data = HTMLWidgets.dataframeToD3(self.data);
+    }
+    
     self.options = x.options;
   };
   
@@ -29,13 +34,7 @@ function R2D3() {
   };
   
   self.onRender = function(renderer) {
-
-    if (x.type == "data.frame") {
-      self.data = HTMLWidgets.dataframeToD3(self.data);
-    }
-    
     renderer();
-    
   };
   
   self.onResize = function(resizer) {
