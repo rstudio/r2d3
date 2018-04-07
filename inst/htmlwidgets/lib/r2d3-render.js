@@ -1,4 +1,4 @@
-function R2D3(el) {
+function R2D3(el, width, height) {
   var self = this;
   var x = null;
   var version = null;
@@ -104,5 +104,60 @@ function R2D3(el) {
       case 5:
         return d3v5;
     }
+  };
+  
+  self.widgetRender = function(x) {
+    self.setX(x);
+    self.setWidth(width);
+    self.setHeight(height);
+    
+    if (!self.root) {
+      self.setVersion(x.version);
+      self.addScript(x.script);
+      self.d3Script = d3Script;
+      self.addStyle(x.style);
+      self.setContainer(x.container);
+      
+      self.createRoot();
+      
+      self.d3Script(self.d3(), self);
+    }
+    
+    self.render();
+    
+    if (self.renderer === null) {
+      self.onRender(function() {
+        self.d3Script(self.d3(), self);
+      });
+    }
+    
+    if (self.resizer === null) {
+      self.resizer = function() {
+        self.createRoot();
+        self.d3Script(self.d3(), self);
+        self.render();
+      };
+    }
+  };
+  
+  self.debounce = function(f, wait) {
+    var timeout = null;
+    return function() {
+      if (timeout) window.clearTimeout(timeout);
+      timeout = window.setTimeout(f, wait);
+    };
+  };
+  
+  self.resizeDebounce = self.debounce(self.resize, 100);
+  
+  self.widgetResize = function(width, height) {
+    self.root
+      .attr("width", width)
+      .attr("height", height);
+
+    self.setWidth(width);
+    self.setHeight(height);
+    
+    self.resizeDebounce();
   };
 }
