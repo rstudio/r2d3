@@ -114,27 +114,29 @@ function R2D3(el, width, height) {
     if (!self.root) {
       self.setVersion(x.version);
       self.addScript(x.script);
-      self.d3Script = d3Script;
       self.addStyle(x.style);
+      self.d3Script = d3Script;
       self.setContainer(x.container);
       
       self.createRoot();
       
-      self.d3Script(self.d3(), self);
+      d3Script(self.d3(), self);
     }
     
     self.render();
     
     if (self.renderer === null) {
       self.onRender(function() {
-        self.d3Script(self.d3(), self);
+        var d3Script = self.d3Script;
+        d3Script(self.d3(), self);
       });
     }
     
     if (self.resizer === null) {
       self.resizer = function() {
         self.createRoot();
-        self.d3Script(self.d3(), self);
+        var d3Script = self.d3Script;
+        d3Script(self.d3(), self);
         self.render();
       };
     }
