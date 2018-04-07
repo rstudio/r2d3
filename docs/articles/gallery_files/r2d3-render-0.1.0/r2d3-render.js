@@ -1,4 +1,4 @@
-function R2D3() {
+function R2D3(el, width, height) {
   var self = this;
   var x = null;
   var version = null;
@@ -8,16 +8,39 @@ function R2D3() {
   self.width = 0;
   self.height = 0;
   self.options = null;
-  self.resizer = function(width, height) {};
+  self.resizer = null;
+  self.renderer = null;
   
   self.setX = function(newX) {
     x = newX;
     self.data = x.data;
+    
+    if (x.type == "data.frame") {
+      self.data = HTMLWidgets.dataframeToD3(self.data);
+    }
+    
     self.options = x.options;
+  };
+  
+  self.setContainer = function(container) {
+    self.container = container;
   };
   
   self.setRoot = function(root) {
     self.root = self.svg = self.canvas = root;
+  };
+  
+  self.createRoot = function() {
+    if (self.root !== null) {
+      self.d3().select(el).select(self.container).remove();
+      self.root = null;
+    }
+    
+    var root = self.d3().select(el).append(self.container)
+      .attr("width", self.width)
+      .attr("height", self.height);
+      
+    self.setRoot(root);
   };
   
   self.setWidth = function(width) {
@@ -29,23 +52,21 @@ function R2D3() {
   };
   
   self.onRender = function(renderer) {
-
-    if (x.type == "data.frame") {
-      self.data = HTMLWidgets.dataframeToD3(self.data);
-    }
-    
-    renderer();
-    
+    self.renderer = renderer;
   };
   
   self.onResize = function(resizer) {
     self.resizer = resizer;
   };
   
-  self.resize = function(width, height) {
-    self.width = width;
-    self.height = height;
-    self.resizer(width, height);
+  self.render = function() {
+    if (self.renderer === null) return;
+    self.renderer();
+  };
+  
+  self.resize = function() {
+    if (self.resizer === null) return;
+    self.resizer();
   };
   
   self.addScript = function(script) {
@@ -83,5 +104,62 @@ function R2D3() {
       case 5:
         return d3v5;
     }
+  };
+  
+  self.widgetRender = function(x) {
+    self.setX(x);
+    self.setWidth(width);
+    self.setHeight(height);
+    
+    if (!self.root) {
+      self.setVersion(x.version);
+      self.addScript(x.script);
+      self.addStyle(x.style);
+      self.d3Script = d3Script;
+      self.setContainer(x.container);
+      
+      self.createRoot();
+      
+      d3Script(self.d3(), self);
+    }
+    
+    self.render();
+    
+    if (self.renderer === null) {
+      self.onRender(function() {
+        var d3Script = self.d3Script;
+        d3Script(self.d3(), self);
+      });
+    }
+    
+    if (self.resizer === null) {
+      self.resizer = function() {
+        self.createRoot();
+        var d3Script = self.d3Script;
+        d3Script(self.d3(), self);
+        self.render();
+      };
+    }
+  };
+  
+  self.debounce = function(f, wait) {
+    var timeout = null;
+    return function() {
+      if (timeout) window.clearTimeout(timeout);
+      timeout = window.setTimeout(f, wait);
+    };
+  };
+  
+  self.resizeDebounce = self.debounce(self.resize, 100);
+  
+  self.widgetResize = function(width, height) {
+    self.root
+      .attr("width", width)
+      .attr("height", height);
+
+    self.setWidth(width);
+    self.setHeight(height);
+    
+    self.resizeDebounce();
   };
 }

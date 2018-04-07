@@ -5,7 +5,8 @@
 \title{Render Data with D3}
 \usage{
 r2d3(data, script, options = NULL, container = "svg", version = c(5, 4,
-  3), dependencies = NULL, width = NULL, height = NULL)
+  3), dependencies = NULL, width = NULL, height = NULL,
+  sizing = htmlwidgets::sizingPolicy(browser.fill = TRUE))
 }
 \arguments{
 \item{data}{Data to be passed to D3 script.}
@@ -24,6 +25,8 @@ is automatically picked.}
 \item{width}{Desired width for output widget.}
 
 \item{height}{Desired height for output widget.}
+
+\item{sizing}{The default 'HtmlWidgets' sizing policy.}
 }
 \description{
 Renders data with D3 as an HtmlWidget using a D3.js script.
