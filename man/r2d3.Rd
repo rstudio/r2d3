@@ -6,7 +6,7 @@
 \usage{
 r2d3(data, script, options = NULL, container = "svg", version = c(5, 4,
   3), dependencies = NULL, width = NULL, height = NULL,
-  sizing = htmlwidgets::sizingPolicy(browser.fill = TRUE))
+  sizing = default_sizing())
 }
 \arguments{
 \item{data}{Data to be passed to D3 script.}

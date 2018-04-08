@@ -26,7 +26,7 @@ r2d3 <- function(
   dependencies = NULL,
   width = NULL,
   height = NULL,
-  sizing = htmlwidgets::sizingPolicy(browser.fill = TRUE)
+  sizing = default_sizing()
   )
 {
   if (!is.null(dependencies)) {
@@ -80,3 +80,19 @@ r2d3 <- function(
     sizingPolicy = sizing
   )
 }
+
+#' Default sizing policy for r2d3 widgets
+#' 
+#' @details Use [htmlwidgets::sizingPolicy()] to specify an
+#'   alternate policy.
+#' 
+#' @keywords internal
+#' @export
+default_sizing <- function() {
+  htmlwidgets::sizingPolicy(browser.fill = TRUE)
+}
+
+
+
+
+

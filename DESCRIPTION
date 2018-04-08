@@ -4,6 +4,7 @@ Title: R to D3 rendering tools
 Version: 0.1.0
 Authors@R: c(
     person("Javier", "Luraschi", email = "javier@rstudio.com", role = c("aut", "cre")),
+    person("JJ", "Allaire", role = c("aut")),
     person("Mike", "Bostock", role = c("aut", "cph"), comment = "d3.js library, http://d3js.org"),
     person(family = "RStudio", role = c("cph"))
     )
@@ -21,6 +22,7 @@ Suggests:
   knitr,
   rmarkdown,
   shiny
+Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 URL: https://github.com/rstudio/r2d3
 BugReports: https://github.com/rstudio/r2d3/issues
