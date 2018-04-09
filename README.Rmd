@@ -97,24 +97,20 @@ r2d3(
 
 For `rmarkdown` documents and Notebooks, `r2d3` also adds support for `d3` chunk that can be use to make the D3 code more readable:
 
-<pre><code>---
-output: html_document
----
-
-&#96``{r setup}
+<pre><code>&#96``{r setup}
 library(r2d3)
 bars <- c(10, 20, 30)
-&#96``
+&#96``</code></pre>
 
-&#96``{d3 data=bars, options='orange'}
-r2d3.svg.selectAll('rect')
-    .data(r2d3.data)
+<pre><code>&#96``{d3 data=bars, options='orange'}
+svg.selectAll('rect')
+    .data(data)
   .enter()
     .append('rect')
       .attr('width', function(d) { return d * 10; })
       .attr('height', '20px')
       .attr('y', function(d, i) { return i * 22; })
-      .attr('fill', r2d3.options);
+      .attr('fill', options);
 &#96``</code></pre>
 
 ![](tools/README/rmarkdown-1.png)
@@ -170,8 +166,8 @@ bars <- reactive({
 &#96``
 
 &#96``{d3 data=bars}
-var bars = r2d3.svg.selectAll('rect')
-    .data(r2d3.data);
+var bars = svg.selectAll('rect')
+    .data(data);
     
 bars.enter()
     .append('rect')

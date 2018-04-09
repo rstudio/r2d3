@@ -1,14 +1,14 @@
 var margin = {top: 5, right: 40, bottom: 20, left: 120},
-    width = r2d3.width - margin.left - margin.right,
+    width = width - margin.left - margin.right,
     height = 50 - margin.top - margin.bottom;
 
 var chart = d3.bullet()
     .width(width)
     .height(height);
 
-r2d3.onRender(function() {
-  var svg = r2d3.root.selectAll("svg")
-      .data(r2d3.data)
+r2d3.onRender(function(data, div, w, h, options) {
+  var svg = div.selectAll("svg")
+      .data(data)
     .enter().append("svg")
       .attr("class", "bullet")
       .attr("width", width + margin.left + margin.right)

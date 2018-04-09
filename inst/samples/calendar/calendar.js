@@ -1,5 +1,5 @@
 var width = 960,
-    height = 0.95 * r2d3.height / 21,
+    height = 0.95 * height / 21,
     cellSize = height / 8;
 
 var formatPercent = d3.format(".1%");
@@ -8,7 +8,7 @@ var color = d3.scaleQuantize()
     .domain([-0.05, 0.05])
     .range(["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850", "#006837"]);
 
-var svg = r2d3.root
+var svg = div
   .selectAll("svg")
   .data(d3.range(1990, 2011))
   .enter().append("svg")
@@ -46,11 +46,11 @@ svg.append("g")
   .enter().append("path")
     .attr("d", pathMonth);
 
-r2d3.onRender(function() {
+r2d3.onRender(function(csv, div, width, height, options) {
   var data = d3.nest()
       .key(function(d) { return d.Date; })
       .rollup(function(d) { return (d[0].Close - d[0].Open) / d[0].Open; })
-    .object(r2d3.data);
+    .object(csv);
 
   rect.filter(function(d) { return d in data; })
       .attr("fill", function(d) { return color(data[d]); })
