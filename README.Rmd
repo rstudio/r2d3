@@ -13,7 +13,7 @@ library(r2d3)
 
 <img src="tools/README/r2d3-hex.svg" width=200 align="right"/>
 
-`r2d3` renders [D3](https://d3js.org/) scripts that it can be used from the R console, [R Markdown](https://rmarkdown.rstudio.com/), or [Shiny](https://shiny.rstudio.com) like any other [htmlwidget](https://www.htmlwidgets.org/). Specifically, with `r2d3` you can:
+`r2d3` renders [D3](https://d3js.org/) scripts from the R console, [R Markdown](https://rmarkdown.rstudio.com/), or [Shiny](https://shiny.rstudio.com) like any other [htmlwidget](https://www.htmlwidgets.org/). Specifically, with `r2d3` you can:
 
 - Render [D3](https://d3js.org/) scripts with ease in R as [htmlwidgets](https://www.htmlwidgets.org/).
 - Use [Shiny](http://shiny.rstudio.com/) with `r2d3` to create interactive D3 applications.
@@ -29,15 +29,15 @@ devtools::install_github("rstudio/r2d3")
 
 ## Getting Started
 
-To render D3 scripts, `r2d3` provides a `r2d3` JavaScript object that should be used to to retrieve rendering properties:
+To render D3 scripts, `r2d3` makes available the following variables:
 
-- **r2d3.data**: The R data converted to JavaScript.
-- **r2d3.svg**: The svg element with the right dimensions.
-- **r2d3.width**: The width of the svg.
-- **r2d3.height**: The height of the svg.
-- **r2d3.options**: Additional options provided from R.
+- **data**: The R data converted to JavaScript.
+- **svg**: The svg element with the right dimensions.
+- **width**: The width of the svg.
+- **height**: The height of the svg.
+- **options**: Additional options provided from R.
 
-The `r2d3` object can then be used in a D3 script as follows:
+These variables can then be used in your D3 script as follows:
 
 ```{r echo=FALSE, comment=''}
 cat(paste(readLines(system.file("samples/barchart/barchart.js", package = "r2d3")), collapse = "\n"))
@@ -56,7 +56,9 @@ r2d3(
 
 ## Advanced Rendering
 
-More advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code, for instace:
+`r2d2` also makes available a an `r2d3` object in JavaScript, this object provides access to the varariables mentioned in the 'Getting Started' section but also providers access to additional functionality.
+
+For instance, more advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code, for instace:
 
 ```{r echo=FALSE, comment=''}
 cat(paste(readLines(system.file("samples/bubbles/bubbles.js", package = "r2d3")), collapse = "\n"))
