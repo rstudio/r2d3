@@ -61,12 +61,12 @@ function R2D3(el, width, height) {
   
   self.render = function() {
     if (self.renderer === null) return;
-    self.renderer();
+    self.renderer(self.data, self.root, self.width, self.height, self.options);
   };
   
   self.resize = function() {
     if (self.resizer === null) return;
-    self.resizer();
+    self.resizer(self.width, self.height);
   };
   
   self.addScript = function(script) {
@@ -106,6 +106,11 @@ function R2D3(el, width, height) {
     }
   };
   
+  self.callD3Script = function() {
+    var d3Script = self.d3Script;
+    d3Script(self.d3(), self, self.data, self.root, self.width, self.height, self.options);
+  };
+  
   self.widgetRender = function(x) {
     self.setX(x);
     self.setWidth(width);
@@ -120,23 +125,22 @@ function R2D3(el, width, height) {
       
       self.createRoot();
       
-      d3Script(self.d3(), self);
+      self.callD3Script();
     }
     
     self.render();
     
     if (self.renderer === null) {
-      self.onRender(function() {
-        var d3Script = self.d3Script;
-        d3Script(self.d3(), self);
+      self.onRender(function(data, container, width, height, options) {
+        self.callD3Script();
       });
     }
     
     if (self.resizer === null) {
-      self.resizer = function() {
+      self.resizer = function(width, height) {
         self.createRoot();
         var d3Script = self.d3Script;
-        d3Script(self.d3(), self);
+        self.callD3Script();
         self.render();
       };
     }

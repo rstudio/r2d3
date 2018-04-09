@@ -3,7 +3,7 @@ R to D3 rendering tools
 
 <img src="tools/README/r2d3-hex.svg" width=200 align="right"/>
 
-`r2d3` renders [D3](https://d3js.org/) scripts that it can be used from the R console, [R Markdown](https://rmarkdown.rstudio.com/), or [Shiny](https://shiny.rstudio.com) like any other [htmlwidget](https://www.htmlwidgets.org/). Specifically, with `r2d3` you can:
+`r2d3` renders [D3](https://d3js.org/) scripts from the R console, [R Markdown](https://rmarkdown.rstudio.com/), or [Shiny](https://shiny.rstudio.com) like any other [htmlwidget](https://www.htmlwidgets.org/). Specifically, with `r2d3` you can:
 
 -   Render [D3](https://d3js.org/) scripts with ease in R as [htmlwidgets](https://www.htmlwidgets.org/).
 -   Use [Shiny](http://shiny.rstudio.com/) with `r2d3` to create interactive D3 applications.
@@ -21,21 +21,21 @@ devtools::install_github("rstudio/r2d3")
 Getting Started
 ---------------
 
-To render D3 scripts, `r2d3` provides a `r2d3` JavaScript object that should be used to to retrieve rendering properties:
+To render D3 scripts, `r2d3` makes available the following variables:
 
--   **r2d3.data**: The R data converted to JavaScript.
--   **r2d3.svg**: The svg element with the right dimensions.
--   **r2d3.width**: The width of the svg.
--   **r2d3.height**: The height of the svg.
--   **r2d3.options**: Additional options provided from R.
+-   **data**: The R data converted to JavaScript.
+-   **svg**: The svg element with the right dimensions.
+-   **width**: The width of the svg.
+-   **height**: The height of the svg.
+-   **options**: Additional options provided from R.
 
-The `r2d3` object can then be used in a D3 script as follows:
+These variables can then be used in your D3 script as follows:
 
     // !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
 
     var barHeight = Math.floor(r2d3.height / r2d3.data.length);
-    r2d3.svg.selectAll('rect')
-        .data(r2d3.data)
+    svg.selectAll('rect')
+        .data(data)
       .enter()
         .append('rect')
           .attr('width', function(d) { return d * r2d3.width; })
@@ -58,23 +58,25 @@ r2d3(
 Advanced Rendering
 ------------------
 
-More advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code, for instace:
+`r2d2` also makes available a an `r2d3` object in JavaScript, this object provides access to the varariables mentioned in the 'Getting Started' section but also providers access to additional functionality.
+
+For instance, more advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code, for instace:
 
     // Initialization
-    r2d3.svg.attr("font-family", "sans-serif")
+    svg.attr("font-family", "sans-serif")
       .attr("font-size", "8")
       .attr("text-anchor", "middle");
         
     var pack = d3.pack()
-      .size([r2d3.width, r2d3.height])
+      .size([width, height])
       .padding(1.5);
         
     var format = d3.format(",d");
     var color = d3.scaleOrdinal(d3.schemeCategory20c);
 
     // Rendering
-    r2d3.onRender(function() {
-      var root = d3.hierarchy({children: r2d3.data})
+    r2d3.onRender(function(data, svg, width, height, options) {
+      var root = d3.hierarchy({children: data})
         .sum(function(d) { return d.value; })
         .each(function(d) {
           if (id = d.data.id) {
@@ -85,7 +87,7 @@ More advanced scripts can rely can make use of `r2d3.onRender()` which is simila
           }
         });
 
-      var node = r2d3.svg.selectAll(".node")
+      var node = svg.selectAll(".node")
         .data(pack(root).leaves())
         .enter().append("g")
           .attr("class", "node")
@@ -115,9 +117,8 @@ More advanced scripts can rely can make use of `r2d3.onRender()` which is simila
     });
 
 ``` r
-flares <- read.csv("inst/samples/bubbles/flare.csv")
 r2d3(
-  flares[!is.na(flares$value), ],
+  read.csv("flare.csv"),
   "bubbles.js",
   version = 4
 )
@@ -145,24 +146,19 @@ r2d3(
 &#96``</code></pre>
 For `rmarkdown` documents and Notebooks, `r2d3` also adds support for `d3` chunk that can be use to make the D3 code more readable:
 
-<pre><code>---
-output: html_document
----
-
-&#96``{r setup}
+<pre><code>&#96``{r setup}
 library(r2d3)
 bars <- c(10, 20, 30)
-&#96``
-
-&#96``{d3 data=bars, options='orange'}
-r2d3.svg.selectAll('rect')
-    .data(r2d3.data)
+&#96``</code></pre>
+<pre><code>&#96``{d3 data=bars, options='orange'}
+svg.selectAll('rect')
+    .data(data)
   .enter()
     .append('rect')
       .attr('width', function(d) { return d * 10; })
       .attr('height', '20px')
       .attr('y', function(d, i) { return i * 22; })
-      .attr('fill', r2d3.options);
+      .attr('fill', options);
 &#96``</code></pre>
 ![](tools/README/rmarkdown-1.png)
 
@@ -218,8 +214,8 @@ bars <- reactive({
 &#96``
 
 &#96``{d3 data=bars}
-var bars = r2d3.svg.selectAll('rect')
-    .data(r2d3.data);
+var bars = svg.selectAll('rect')
+    .data(data);
     
 bars.enter()
     .append('rect')
