@@ -39,8 +39,10 @@ To render D3 scripts, `r2d3` makes available the following variables:
 
 These variables can then be used in your D3 script as follows:
 
-```{r echo=FALSE, comment=''}
+```{r echo=FALSE, comment='', results='asis'}
+cat('\n```js\n')
 cat(paste(readLines(system.file("samples/barchart/barchart.js", package = "r2d3")), collapse = "\n"))
+cat('\n```\n')
 ```
 
 The above `barchart.js` script can be rendered from R by calling `r2d3` as follows:
@@ -60,8 +62,10 @@ r2d3(
 
 For instance, more advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code as follows:
 
-```{r echo=FALSE, comment=''}
+```{r echo=FALSE, comment='', results='asis'}
+cat('\n```js\n')
 cat(paste(readLines(system.file("samples/bubbles/bubbles.js", package = "r2d3")), collapse = "\n"))
+cat('\n```\n')
 ```
 
 Then, the above `bubbles.js` script can be rendered from R as follows. Notice that this script requires D3 version 4 which can be specified with the `version` parameter.
