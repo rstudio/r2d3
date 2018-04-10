@@ -48,7 +48,7 @@ Finally, the above `barchart.js` script can be rendered from R by calling `r2d3`
 ```{r eval=FALSE}
 library(r2d3)
 r2d3(
-  c(10, 30, 40, 35, 20, 10),
+  c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20),
   "barchart.js"
 )
 ```
