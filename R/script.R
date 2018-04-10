@@ -17,7 +17,7 @@ script_read <- function(script) {
   paste(
     sapply(
       script,
-      function(e) paste(readLines(e), collapse = "\n")
+      function(e) paste(readLines(e, warn = FALSE), collapse = "\n")
     ),
     collapse = "\n\n"
   )
