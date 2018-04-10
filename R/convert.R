@@ -22,10 +22,6 @@ as_d3_data <- function(x, ...) {
 #' @rdname as_d3_data
 #' @export
 as_d3_data.default <- function(x, ...) {
-  x <- as.data.frame(x)
-  if (length(row.names(x)) > 0 && !"names" %in% colnames(x)) {
-    x$names <- rownames(x)
-  }
   x
 }
 

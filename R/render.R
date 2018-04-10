@@ -43,13 +43,7 @@ r2d3 <- function(
   data <- as_d3_data(data)
   
   # determine type
-  if (is.data.frame(data)) {
-    type <- "data.frame"
-  } else if (inherits(data, "json")) {
-    type <- "json"
-  } else {
-    stop("D3 data must be either JSON or an R object convertable to a data frame.")
-  }
+  type <- class(data)[[1]]
   
   # forward options using x
   x <- list(
