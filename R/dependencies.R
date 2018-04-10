@@ -18,6 +18,8 @@
 #'  or application this dependency is included automatically so calling
 #'  this function is unnecessary.
 #' 
+#' @importFrom htmltools htmlDependency
+#' 
 #' @export
 d3_dependency <- function(version = c("5", "4", "3")) {
   
@@ -33,7 +35,7 @@ d3_dependency <- function(version = c("5", "4", "3")) {
     name <- paste0(name, "v", version)
   
   # return dependency
-  htmltools::htmlDependency(
+  htmlDependency(
     name = name,
     version = version_long,
     src = system.file(file.path("d3", version_long), package = "r2d3"),

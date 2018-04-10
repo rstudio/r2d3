@@ -39,19 +39,22 @@ r2d3 <- function(
   # resolve version
   version <- match.arg(as.character(version), choices = c("5", "4", "3"))
   
-  # convert to data frames
-  df <- data
-  if (!is.data.frame(df)) {
-    df <- as.data.frame(df)
-    if (length(row.names(df)) > 0 && !"names" %in% colnames(df)) {
-      df$names <- rownames(df)
-    }
+  # convert to d3 data
+  data <- as_d3_data(data)
+  
+  # determine type
+  if (is.data.frame(data)) {
+    type <- "data.frame"
+  } else if (inherits(data, "json")) {
+    type <- "json"
+  } else {
+    stop("D3 data must be either JSON or an R object convertable to a data frame.")
   }
-
+  
   # forward options using x
   x <- list(
     data = data,
-    type = class(data)[[1]],
+    type = type,
     container = container,
     options = options,
     script = script_wrap(
