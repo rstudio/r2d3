@@ -162,7 +162,7 @@ inputPanel(
     min = 10, max = 110, value = 10, step = 20)
 )
 
-bars <- reactive({
+bars &lt;- reactive({
    floor(runif(5, 5, input$bar_max))
 })
 &#96``
