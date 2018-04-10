@@ -98,7 +98,7 @@ function R2D3(el, width, height) {
   self.d3 = function() {
     switch(version) {
       case 3:
-        return d3v3;
+        return d3;
       case 4:
         return d3v4;
       case 5:

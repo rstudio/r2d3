@@ -33,12 +33,12 @@ These variables can then be used in your D3 script as follows:
 
     // !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
 
-    var barHeight = Math.floor(r2d3.height / r2d3.data.length);
+    var barHeight = Math.floor(height / data.length);
     svg.selectAll('rect')
         .data(data)
       .enter()
         .append('rect')
-          .attr('width', function(d) { return d * r2d3.width; })
+          .attr('width', function(d) { return d * width; })
           .attr('height', barHeight)
           .attr('y', function(d, i) { return i * barHeight; })
           .attr('fill', 'steelblue');
@@ -48,7 +48,7 @@ Finally, the above `barchart.js` script can be rendered from R by calling `r2d3`
 ``` r
 library(r2d3)
 r2d3(
-  c(10, 30, 40, 35, 20, 10),
+  c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20),
   "barchart.js"
 )
 ```
@@ -208,7 +208,7 @@ inputPanel(
     min = 10, max = 110, value = 10, step = 20)
 )
 
-bars <- reactive({
+bars &lt;- reactive({
    floor(runif(5, 5, input$bar_max))
 })
 &#96``

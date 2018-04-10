@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Shiny bindings for d3 — d3-shiny • r2d3</title>
+<title>D3 HTML dependency — d3_dependency • r2d3</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,10 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-<meta property="og:title" content="Shiny bindings for d3 — d3-shiny" />
+<meta property="og:title" content="D3 HTML dependency — d3_dependency" />
 
-<meta property="og:description" content="Output and render functions for using d3 within Shiny
-applications and interactive Rmd documents." />
+<meta property="og:description" content="Create an HTML dependency for the D3 library." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -88,46 +87,40 @@ applications and interactive Rmd documents." />
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Shiny bindings for d3</h1>
-    <small>Source: <a href='https://github.com/rstudio/r2d3/blob/master/R/shiny.R'><code>R/shiny.R</code></a></small>
+    <h1>D3 HTML dependency</h1>
+    <small>Source: <a href='https://github.com/rstudio/r2d3/blob/master/R/dependencies.R'><code>R/dependencies.R</code></a></small>
     </div>
 
     
-    <p>Output and render functions for using d3 within Shiny
-applications and interactive Rmd documents.</p>
+    <p>Create an HTML dependency for the D3 library.</p>
     
 
-    <pre class="usage"><span class='fu'>d3Output</span>(<span class='no'>outputId</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='st'>"100%"</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='st'>"400px"</span>)
-
-<span class='fu'>renderD3</span>(<span class='no'>expr</span>, <span class='kw'>env</span> <span class='kw'>=</span> <span class='fu'>parent.frame</span>(), <span class='kw'>quoted</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>d3_dependency</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"5"</span>, <span class='st'>"4"</span>, <span class='st'>"3"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>outputId</th>
-      <td><p>output variable to read from</p></td>
-    </tr>
-    <tr>
-      <th>width, height</th>
-      <td><p>Must be a valid CSS unit (like <code>'100%'</code>,
-<code>'400px'</code>, <code>'auto'</code>) or a number, which will be coerced to a
-string and have <code>'px'</code> appended.</p></td>
-    </tr>
-    <tr>
-      <th>expr</th>
-      <td><p>An expression that generates a d3</p></td>
-    </tr>
-    <tr>
-      <th>env</th>
-      <td><p>The environment in which to evaluate <code>expr</code>.</p></td>
-    </tr>
-    <tr>
-      <th>quoted</th>
-      <td><p>Is <code>expr</code> a quoted expression (with <code>quote()</code>)? This
-is useful if you want to save an expression in a variable.</p></td>
+      <th>version</th>
+      <td><p>Major version of D3</p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Create an HTML dependency for a version of D3. Each version has
+a distinct root D3 object so it's possible to combine multiple versions
+of D3 on a single page. For example, D3 v5 is accessed via <code>d3v5</code> and
+D3 v4 is accessed via <code>d3v4</code>. Note however that D3 v3 is accessed via
+simply <code>d3</code> (for compabibilty with existing htmlwidgets that use
+this form).</p>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>This function is exported for use by htmlwidgets. If you are
+using the <code><a href='r2d3.html'>r2d3()</a></code> function to include D3 code within a document
+or application this dependency is included automatically so calling
+this function is unnecessary.</p>
     
 
   </div>
@@ -135,7 +128,11 @@ is useful if you want to save an expression in a variable.</p></td>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#note">Note</a></li>
+          </ul>
 
   </div>
 </div>
