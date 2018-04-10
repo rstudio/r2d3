@@ -1,2 +1,10 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+LICENSE.md
+README.Rmd
+pkgdown
+docs
+sandbox
+vignettes/gallery.Rmd
+
+
