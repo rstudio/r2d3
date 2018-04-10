@@ -4,8 +4,8 @@
 \alias{r2d3}
 \title{Render Data with D3}
 \usage{
-r2d3(data, script, options = NULL, container = "svg", version = c(5, 4,
-  3), dependencies = NULL, width = NULL, height = NULL,
+r2d3(data, script, options = NULL, container = "svg", version = c("5",
+  "4", "3"), dependencies = NULL, width = NULL, height = NULL,
   sizing = default_sizing())
 }
 \arguments{

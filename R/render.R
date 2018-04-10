@@ -22,7 +22,7 @@ r2d3 <- function(
   script,
   options = NULL,
   container = "svg",
-  version = c(5, 4, 3),
+  version = c("5", "4", "3"),
   dependencies = NULL,
   width = NULL,
   height = NULL,
@@ -36,11 +36,8 @@ r2d3 <- function(
     )
   }
   
-  if (is.null(container)) container = "svg"
-  if (is.null(version)) version <- 5
-  
-  version <- version[[1]]
-  version_long <- version_complete(version)
+  # resolve version
+  version <- match.arg(as.character(version), choices = c("5", "4", "3"))
   
   # convert to data frames
   df <- data
@@ -62,7 +59,7 @@ r2d3 <- function(
       container
     ),
     style = script_read(dependencies$css),
-    version = version
+    version = as.integer(version)
   )
 
   # create widget
@@ -72,14 +69,7 @@ r2d3 <- function(
     width = width,
     height = height,
     package = 'r2d3',
-    dependencies = list(
-      htmltools::htmlDependency(
-        name = paste("d3", "-v", version, sep = ""),
-        version = version_long,
-        src = system.file(file.path("d3", version_long), package = "r2d3"),
-        script = "d3.js"
-      )
-    ),
+    dependencies = list(d3_dependency(version)),
     sizingPolicy = sizing
   )
 }
