@@ -13,11 +13,11 @@ library(r2d3)
 
 <img src="tools/README/r2d3-hex.svg" width=200 align="right"/>
 
-`r2d3` renders [D3](https://d3js.org/) scripts from the R console, [R Markdown](https://rmarkdown.rstudio.com/), or [Shiny](https://shiny.rstudio.com) like any other [htmlwidget](https://www.htmlwidgets.org/). Specifically, with `r2d3` you can:
+`r2d3` renders [D3](https://d3js.org/) scripts from the R console, [R Markdown](https://rmarkdown.rstudio.com/), or [Shiny](https://shiny.rstudio.com).
 
 - Render [D3](https://d3js.org/) scripts with ease in R as [htmlwidgets](https://www.htmlwidgets.org/).
-- Use [Shiny](http://shiny.rstudio.com/) with `r2d3` to create interactive D3 applications.
-- Use D3 chunks in [R Markdown](https://rmarkdown.rstudio.com/) and [R notebooks](https://rmarkdown.rstudio.com/r_notebooks.html).
+- Create interactive D3 applications with [Shiny](http://shiny.rstudio.com/) and `r2d3`.
+- Render D3 scripts in [R Markdown](https://rmarkdown.rstudio.com/) and [R Notebooks](https://rmarkdown.rstudio.com/r_notebooks.html) using D3 chunks.
 
 ## Installation
 
@@ -43,7 +43,7 @@ These variables can then be used in your D3 script as follows:
 cat(paste(readLines(system.file("samples/barchart/barchart.js", package = "r2d3")), collapse = "\n"))
 ```
 
-Finally, the above `barchart.js` script can be rendered from R by calling `r2d3` with the data and D3 script to be rendered:
+The above `barchart.js` script can be rendered from R by calling `r2d3` as follows:
 
 ```{r eval=FALSE}
 library(r2d3)
@@ -56,13 +56,15 @@ r2d3(
 
 ## Advanced Rendering
 
-`r2d2` also makes available a an `r2d3` object in JavaScript, this object provides access to the varariables mentioned in the 'Getting Started' section but also providers access to additional functionality.
+`r2d2` also makes available an `r2d3` object in JavaScript, this object provides access to the `data`, `svg`, `width`, `height` and `options` variables, but also provides access to additional functionality.
 
-For instance, more advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code, for instace:
+For instance, more advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code as follows:
 
 ```{r echo=FALSE, comment=''}
 cat(paste(readLines(system.file("samples/bubbles/bubbles.js", package = "r2d3")), collapse = "\n"))
 ```
+
+Then, the above `bubbles.js` script can be rendered from R as follows. Notice that this script requires D3 version 4 which can be specified with the `version` parameter.
 
 ```{r eval=FALSE}
 r2d3(
@@ -78,6 +80,8 @@ r2d3(
   version = 4
 )
 ```
+
+You should also consider using `r2d3.onResize()` to provide a JavaScript function with signature `function(width, height)` that performs the actual resizing operation. Otherwise, by default, `r2d3` will rerun the entire D3 script to resize the rendering.
 
 ## R Markdown
 
