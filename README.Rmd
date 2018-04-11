@@ -13,13 +13,19 @@ library(r2d3)
 
 # r2d3: R interface to D3 visualizations
 
+The **r2d3** package provides a suite of tools for using [D3 visualizations](https://d3js.org/) with R, including:
+
 <img src="tools/README/r2d3-hex.svg" width=200 align="right"/>
 
-`r2d3` renders [D3](https://d3js.org/) scripts from the R console, [R Markdown](https://rmarkdown.rstudio.com/), or [Shiny](https://shiny.rstudio.com).
+- Translating R data frames into D3 friendly data structures
 
-- Render [D3](https://d3js.org/) scripts with ease in R as [htmlwidgets](https://www.htmlwidgets.org/).
-- Create interactive D3 applications with [Shiny](http://shiny.rstudio.com/) and `r2d3`.
-- Render D3 scripts in [R Markdown](https://rmarkdown.rstudio.com/) and [R Notebooks](https://rmarkdown.rstudio.com/r_notebooks.html) using D3 chunks.
+- Rendering D3 scripts within the RStudio Viewer and [R Notebooks](https://rmarkdown.rstudio.com/r_notebooks.html)
+
+- Incorporating D3 scripts into [R Markdown](https://rmarkdown.rstudio.com/) reports, presentations, and dashboards
+
+- Creating interacive D3 applcations with [Shiny](https://shiny.rstudio.com/)
+
+- Publishing D3 based [htmlwidgets](http://www.htmlwidgets.org) in R packages.
 
 ## Installation
 

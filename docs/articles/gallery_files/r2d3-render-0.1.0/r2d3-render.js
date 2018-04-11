@@ -10,6 +10,7 @@ function R2D3(el, width, height) {
   self.options = null;
   self.resizer = null;
   self.renderer = null;
+  self.rendererDefaut = true;
   
   self.setX = function(newX) {
     x = newX;
@@ -53,6 +54,7 @@ function R2D3(el, width, height) {
   
   self.onRender = function(renderer) {
     self.renderer = renderer;
+    self.rendererDefaut = false;
   };
   
   self.onResize = function(resizer) {
@@ -139,9 +141,8 @@ function R2D3(el, width, height) {
     if (self.resizer === null) {
       self.resizer = function(width, height) {
         self.createRoot();
-        var d3Script = self.d3Script;
         self.callD3Script();
-        self.render();
+        if (!self.rendererDefaut) self.render();
       };
     }
   };
