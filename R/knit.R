@@ -6,6 +6,14 @@ knit_d3 <- function (options) {
     options$data <- get(options$data, envir = globalenv())
   }
   
+  if (is.null(options$version)) {
+    options$version <- "5"
+  }
+  
+  if (is.null(options$container)) {
+    options$container <- "svg"
+  }
+  
   if ("reactive" %in% class(options$data)) {
     widget <- renderD3({
       r2d3(
