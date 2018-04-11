@@ -13,9 +13,10 @@ library(r2d3)
 
 # r2d3: R interface to D3 visualizations
 
+
 The **r2d3** package provides a suite of tools for using [D3 visualizations](https://d3js.org/) with R, including:
 
-<img src="tools/README/r2d3-hex.svg" width=200 align="right"/>
+<img src="tools/README/r2d3-hex.svg" width=180 align="right" style="margin-right: 20px;"/>
 
 - Translating R data frames into D3 friendly data structures
 
