@@ -11,7 +11,9 @@
 #' @param dependencies Additional javascript or css dependencies.
 #' @param width Desired width for output widget.
 #' @param height Desired height for output widget.
-#' @param sizing The default 'HtmlWidgets' sizing policy.
+#' @param sizing Widget sizing policy (see [htmlwidgets::sizingPolicy]).
+#' @param viewer "internal" to use the RStudio internal viewer pane for 
+#'   output; "external" to display in an external window.
 #'
 #' @import htmlwidgets
 #' @import tools
@@ -26,7 +28,8 @@ r2d3 <- function(
   dependencies = NULL,
   width = NULL,
   height = NULL,
-  sizing = default_sizing()
+  sizing = default_sizing(),
+  viewer = c("internal", "external")
   )
 {
   if (!is.null(dependencies)) {
@@ -58,7 +61,13 @@ r2d3 <- function(
     style = script_read(dependencies$css),
     version = as.integer(version)
   )
-
+  
+  # resolve viewer if it's explicitly specified
+  if (!missing(viewer)) {
+    viewer <- match.arg(viewer)
+    sizing$viewer$suppress <- viewer == "external"
+  }
+  
   # create widget
   htmlwidgets::createWidget(
     name = 'r2d3',

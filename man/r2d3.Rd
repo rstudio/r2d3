@@ -6,7 +6,7 @@
 \usage{
 r2d3(data, script, options = NULL, container = "svg", version = c("5",
   "4", "3"), dependencies = NULL, width = NULL, height = NULL,
-  sizing = default_sizing())
+  sizing = default_sizing(), viewer = c("internal", "external"))
 }
 \arguments{
 \item{data}{Data to be passed to D3 script.}
@@ -26,7 +26,10 @@ is automatically picked.}
 
 \item{height}{Desired height for output widget.}
 
-\item{sizing}{The default 'HtmlWidgets' sizing policy.}
+\item{sizing}{Widget sizing policy (see \link[htmlwidgets:sizingPolicy]{htmlwidgets::sizingPolicy}).}
+
+\item{viewer}{"internal" to use the RStudio internal viewer pane for
+output; "external" to display in an external window.}
 }
 \description{
 Renders data with D3 as an HtmlWidget using a D3.js script.
