@@ -3,17 +3,11 @@
 \name{as_d3_data}
 \alias{as_d3_data}
 \alias{as_d3_data.default}
-\alias{as_d3_data.data.frame}
-\alias{as_d3_data.json}
 \title{Convert object to D3 data}
 \usage{
 as_d3_data(x, ...)
 
 \method{as_d3_data}{default}(x, ...)
-
-\method{as_d3_data}{data.frame}(x, ...)
-
-\method{as_d3_data}{json}(x, ...)
 }
 \arguments{
 \item{x}{data}
@@ -30,6 +24,7 @@ The value returned from \code{as_d3_data()} should be one of:
 In this case the \code{HTMLWidgets.dataframeToD3()}
 JavaScript function will be called on the client to transform
 the data into D3 friendly (row-oriented) data; or
-\item A JSON object created using \link[jsonlite:toJSON]{jsonlite::toJSON}
+\item A JSON object created using \link[jsonlite:toJSON]{jsonlite::toJSON}; or
+\item Any other R object which can be coverted to JSON using \link[jsonlite:toJSON]{jsonlite::toJSON}.
 }
 }

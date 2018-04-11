@@ -12,7 +12,9 @@
 #'     JavaScript function will be called on the client to transform
 #'     the data into D3 friendly (row-oriented) data; or
 #'     
-#'   - A JSON object created using [jsonlite::toJSON]  
+#'   - A JSON object created using [jsonlite::toJSON]; or
+#'   
+#'   - Any other R object which can be coverted to JSON using [jsonlite::toJSON].
 #' 
 #' @export
 as_d3_data <- function(x, ...) {
@@ -24,22 +26,3 @@ as_d3_data <- function(x, ...) {
 as_d3_data.default <- function(x, ...) {
   x
 }
-
-#' @rdname as_d3_data
-#' @export
-as_d3_data.data.frame <- function(x, ...) {
-  x
-}
-
-#' @rdname as_d3_data
-#' @export
-as_d3_data.json <- function(x, ...) {
-  x
-}
-
-
-
-
-
-
-
