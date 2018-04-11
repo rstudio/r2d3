@@ -1,6 +1,14 @@
+
+template:
+  params:
+    bootswatch: flatly
+
 navbar:
-  title: "bayesplot"
+  title: "r2d3"
+  type: inverse
   left:
+    - text: "Home"
+      href: index.html
     - text: "Gallery"
       href: articles/gallery.html
     - text: "Reference"

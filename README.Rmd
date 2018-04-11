@@ -11,6 +11,8 @@ knitr::opts_chunk$set(fig.path = "tools/README/", dev = "png")
 library(r2d3)
 ```
 
+# r2d3: R interface to D3 visualizations
+
 <img src="tools/README/r2d3-hex.svg" width=200 align="right"/>
 
 `r2d3` renders [D3](https://d3js.org/) scripts from the R console, [R Markdown](https://rmarkdown.rstudio.com/), or [Shiny](https://shiny.rstudio.com).
