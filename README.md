@@ -1,19 +1,27 @@
 R to D3 rendering tools
 ================
 
-<img src="tools/README/r2d3-hex.svg" width=200 align="right"/>
+# r2d3: R interface to D3 visualizations
 
-`r2d3` renders [D3](https://d3js.org/) scripts from the R console, [R
-Markdown](https://rmarkdown.rstudio.com/), or
-[Shiny](https://shiny.rstudio.com).
+<img src="tools/README/r2d3-hex.png" width=180 align="right" style="margin-right: 20px;"/>
 
-  - Render [D3](https://d3js.org/) scripts with ease in R as
-    [htmlwidgets](https://www.htmlwidgets.org/).
-  - Create interactive D3 applications with
-    [Shiny](http://shiny.rstudio.com/) and `r2d3`.
-  - Render D3 scripts in [R Markdown](https://rmarkdown.rstudio.com/)
-    and [R Notebooks](https://rmarkdown.rstudio.com/r_notebooks.html)
-    using D3 chunks.
+The **r2d3** package provides a suite of tools for using [D3
+visualizations](https://d3js.org/) with R, including:
+
+  - Translating R data frames into D3 friendly data structures
+
+  - Rendering D3 scripts within the RStudio Viewer and [R
+    Notebooks](https://rmarkdown.rstudio.com/r_notebooks.html)
+
+  - Incorporating D3 scripts into [R
+    Markdown](https://rmarkdown.rstudio.com/) reports, presentations,
+    and dashboards
+
+  - Creating interacive D3 applcations with
+    [Shiny](https://shiny.rstudio.com/)
+
+  - Publishing D3 based [htmlwidgets](http://www.htmlwidgets.org) in R
+    packages.
 
 ## Installation
 
@@ -35,15 +43,17 @@ To render D3 scripts, `r2d3` makes available the following variables:
 
 These variables can then be used in your D3 script as follows:
 
-    var barHeight = Math.floor(height / data.length);
-    svg.selectAll('rect')
-        .data(data)
-      .enter()
-        .append('rect')
-          .attr('width', function(d) { return d * width; })
-          .attr('height', barHeight)
-          .attr('y', function(d, i) { return i * barHeight; })
-          .attr('fill', 'steelblue');
+``` js
+var barHeight = Math.floor(height / data.length);
+svg.selectAll('rect')
+    .data(data)
+  .enter()
+    .append('rect')
+      .attr('width', function(d) { return d * width; })
+      .attr('height', barHeight)
+      .attr('y', function(d, i) { return i * barHeight; })
+      .attr('fill', 'steelblue');
+```
 
 The above `barchart.js` script can be rendered from R by calling `r2d3`
 as follows:
@@ -69,59 +79,61 @@ For instance, more advanced scripts can rely can make use of
 D3 data loading libraries, to trigger specific code during render and
 use the rest of the code as initialization code as follows:
 
-    // Initialization
-    svg.attr("font-family", "sans-serif")
-      .attr("font-size", "8")
-      .attr("text-anchor", "middle");
-        
-    var pack = d3.pack()
-      .size([width, height])
-      .padding(1.5);
-        
-    var format = d3.format(",d");
-    var color = d3.scaleOrdinal(d3.schemeCategory20c);
+``` js
+// Initialization
+svg.attr("font-family", "sans-serif")
+  .attr("font-size", "8")
+  .attr("text-anchor", "middle");
     
-    // Rendering
-    r2d3.onRender(function(data, svg, width, height, options) {
-      var root = d3.hierarchy({children: data})
-        .sum(function(d) { return d.value; })
-        .each(function(d) {
-          if (id = d.data.id) {
-            var id, i = id.lastIndexOf(".");
-            d.id = id;
-            d.package = id.slice(0, i);
-            d.class = id.slice(i + 1);
-          }
-        });
+var pack = d3.pack()
+  .size([width, height])
+  .padding(1.5);
     
-      var node = svg.selectAll(".node")
-        .data(pack(root).leaves())
-        .enter().append("g")
-          .attr("class", "node")
-          .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-    
-      node.append("circle")
-          .attr("id", function(d) { return d.id; })
-          .attr("r", function(d) { return d.r; })
-          .style("fill", function(d) { return color(d.package); });
-    
-      node.append("clipPath")
-          .attr("id", function(d) { return "clip-" + d.id; })
-        .append("use")
-          .attr("xlink:href", function(d) { return "#" + d.id; });
-    
-      node.append("text")
-          .attr("clip-path", function(d) { return "url(#clip-" + d.id + ")"; })
-        .selectAll("tspan")
-        .data(function(d) { return d.class.split(/(?=[A-Z][^A-Z])/g); })
-        .enter().append("tspan")
-          .attr("x", 0)
-          .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 10; })
-          .text(function(d) { return d; });
-    
-      node.append("title")
-          .text(function(d) { return d.id + "\n" + format(d.value); });
+var format = d3.format(",d");
+var color = d3.scaleOrdinal(d3.schemeCategory20c);
+
+// Rendering
+r2d3.onRender(function(data, svg, width, height, options) {
+  var root = d3.hierarchy({children: data})
+    .sum(function(d) { return d.value; })
+    .each(function(d) {
+      if (id = d.data.id) {
+        var id, i = id.lastIndexOf(".");
+        d.id = id;
+        d.package = id.slice(0, i);
+        d.class = id.slice(i + 1);
+      }
     });
+
+  var node = svg.selectAll(".node")
+    .data(pack(root).leaves())
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+  node.append("circle")
+      .attr("id", function(d) { return d.id; })
+      .attr("r", function(d) { return d.r; })
+      .style("fill", function(d) { return color(d.package); });
+
+  node.append("clipPath")
+      .attr("id", function(d) { return "clip-" + d.id; })
+    .append("use")
+      .attr("xlink:href", function(d) { return "#" + d.id; });
+
+  node.append("text")
+      .attr("clip-path", function(d) { return "url(#clip-" + d.id + ")"; })
+    .selectAll("tspan")
+    .data(function(d) { return d.class.split(/(?=[A-Z][^A-Z])/g); })
+    .enter().append("tspan")
+      .attr("x", 0)
+      .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 10; })
+      .text(function(d) { return d; });
+
+  node.append("title")
+      .text(function(d) { return d.id + "\n" + format(d.value); });
+});
+```
 
 Then, the above `bubbles.js` script can be rendered from R as follows.
 Notice that this script requires D3 version 4 which can be specified
