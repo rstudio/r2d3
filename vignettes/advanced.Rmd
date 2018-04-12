@@ -1,9 +1,9 @@
 ---
-title: "Advanced Rendering"
+title: "Advanced Usage"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Advanced Rendering}
+  %\VignetteIndexEntry{Advanced Usage}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,8 +12,11 @@ vignette: >
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
+## Rendering Options
 
-## Advanced Rendering
+
+
+## Rendering Callbacks
 
 `r2d2` also makes available an `r2d3` object in JavaScript, this object provides access to the `data`, `svg`, `width`, `height` and `options` variables, but also provides access to additional functionality.
 
@@ -43,5 +46,8 @@ r2d3(
 ```
 
 You should also consider using `r2d3.onResize()` to provide a JavaScript function with signature `function(width, height)` that performs the actual resizing operation. Otherwise, by default, `r2d3` will rerun the entire D3 script to resize the rendering.
+
+## Package Development
+
 
 

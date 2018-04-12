@@ -9,6 +9,8 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "Advanced"
+      href: articles/advanced.html
     - text: "Gallery"
       href: articles/gallery.html
     - text: "Reference"
