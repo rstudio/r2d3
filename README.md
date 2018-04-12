@@ -171,7 +171,7 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
-<img src="images/baranim-1.gif" width=550/>
+<img src="images/baranim-1.gif" class="illustration" width=550/>
 
 We can also render D3 in a Shiny document as follows:
 
@@ -213,4 +213,4 @@ bars.transition()
   .attr("width", function(d) { return d * 10; });
 &#96``</code></pre>
 
-<img src="images/baranim-1.gif" width=550/>
+<img src="images/baranim-1.gif" class="illustration" width=550/>

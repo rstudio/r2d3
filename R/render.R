@@ -13,7 +13,8 @@
 #' @param height Desired height for output widget.
 #' @param sizing Widget sizing policy (see [htmlwidgets::sizingPolicy]).
 #' @param viewer "internal" to use the RStudio internal viewer pane for 
-#'   output; "external" to display in an external window.
+#'   output; "external" to display in an external RStudio window;
+#'   "browser" to display in an external browser.
 #'
 #' @import htmlwidgets
 #' @import tools
@@ -29,7 +30,7 @@ r2d3 <- function(
   width = NULL,
   height = NULL,
   sizing = default_sizing(),
-  viewer = c("internal", "external")
+  viewer = c("internal", "external", "browser")
   )
 {
   if (!is.null(dependencies)) {
@@ -65,7 +66,10 @@ r2d3 <- function(
   # resolve viewer if it's explicitly specified
   if (!missing(viewer)) {
     viewer <- match.arg(viewer)
-    sizing$viewer$suppress <- viewer == "external"
+    if (viewer != "internal") {
+      sizing$viewer$suppress <- TRUE
+      sizing$browser$external <- viewer == "browser"
+    }
   }
   
   # create widget
