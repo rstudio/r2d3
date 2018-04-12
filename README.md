@@ -23,6 +23,12 @@ visualizations](https://d3js.org/) with R, including:
   - Publishing D3 based [htmlwidgets](http://www.htmlwidgets.org) in R
     packages.
 
+With **r2d3**, you can bind data from R to D3 visualizations like the ones found on the [D3 Gallery](https://github.com/d3/d3/wiki/Gallery), [Blocks](https://bl.ocks.org/), or [VIDA](https://vida.io/explore). The D3 visualizations you create act just like R plots within RStudio, R Markdown, and Shiny applications.
+
+
+
+
+
 ## Installation
 
 Install this package by running:

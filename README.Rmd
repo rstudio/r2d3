@@ -27,17 +27,48 @@ The **r2d3** package provides a suite of tools for using [D3 visualizations](htt
 
 - Publishing D3 based [htmlwidgets](http://www.htmlwidgets.org) in R packages.
 
+With **r2d3**, you can bind data from R to D3 visualizations like the ones found on the [D3 Gallery](https://github.com/d3/d3/wiki/Gallery), [Blocks](https://bl.ocks.org/), or [VIDA](https://vida.io/explore). D3 visualizations you create work just like R plots within RStudio, R Markdown documents, and Shiny applications.
+
 ## Installation
 
-Install this package by running:
+First, install the package from GitHub as follows:
 
 ```{r eval=FALSE}
 devtools::install_github("rstudio/r2d3")
 ```
 
-## Getting Started
+Next, install the [daily build](https://dailies.rstudio.com) of RStudio (you need this version of RStudio to take advantage of various integrated tools for authoring D3 scripts with r2d3):
 
-To render D3 scripts, `r2d3` makes available the following variables:
+[![](images/daily_build.png){.screenshot width=700}](https://dailies.rstudio.com)
+
+## D3 Scripts
+
+To use **r2d3**, write a D3 script and then pass data to it using the `rd23()` function. For example, here's a simple D3 script that draws a bar chart ("bars.js"):
+
+```js
+var barHeight = Math.floor(height / data.length);
+
+svg.selectAll('rect')
+  .data(data)
+  .enter().append('rect')
+    .attr('width', function(d) { return d * width; })
+    .attr('height', barHeight)
+    .attr('y', function(d, i) { return i * barHeight; })
+    .attr('fill', 'steelblue');
+```
+
+To render the script within R you call the `r2d3()` function:
+
+```{r, eval=FALSE}
+library(r2d3)
+r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "bars.js")
+```
+
+Which results in the following visualization:
+
+![](images/bar_chart.png){.illustration width=550}
+
+Note that we provide data for the script using the `data` argument. This data is then automatically made available to the D3 script. There are a number of other special variables available within D3 scripts, including:
 
 - **data**: The R data converted to JavaScript.
 - **svg**: The svg element with the right dimensions.
@@ -45,24 +76,23 @@ To render D3 scripts, `r2d3` makes available the following variables:
 - **height**: The height of the svg.
 - **options**: Additional options provided from R.
 
-These variables can then be used in your D3 script as follows:
+## RStudio D3 Preview
 
-```{r echo=FALSE, comment='', results='asis'}
-cat('\n```js\n')
-cat(paste(readLines(system.file("samples/barchart/barchart.js", package = "r2d3")), collapse = "\n"))
-cat('\n```\n')
+The [daily build](https://dailies.rstudio.com) of RStudio includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:
+
+![](images/new_d3_script.png){.screenshot width=550}
+
+A simple template for a D3 script (the bars.js example shown above) is provided by default. Note that the template includes a special comment at the top of the script:
+
+```js
+// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
 ```
 
-The above `barchart.js` script can be rendered from R by calling `r2d3` as follows:
+This comment includes a `data` attribute, which enables RStudio to provide a preview of the script's output when the **Preview** command (Ctrl+Shift+Center) is executed or when the document is saved:
 
-```{r eval=FALSE}
-library(r2d3)
-r2d3(
-  c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20),
-  "barchart.js"
-)
-```
-![](tools/README/barchart-1.png)
+![](images/rstudio_preview.png){.screenshot width=700}
+
+
 
 ## Advanced Rendering
 
