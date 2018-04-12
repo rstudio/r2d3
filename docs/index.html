@@ -63,7 +63,7 @@
 <!--/.navbar -->
 
       
-      </header><script src="index_files/htmlwidgets-1.0/htmlwidgets.js"></script><script src="index_files/r2d3-render-0.1.0/r2d3-render.js"></script><script src="index_files/r2d3-binding-0.1.1/r2d3.js"></script><script src="index_files/d3v4-4.13.0/d3.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9">
     
 
@@ -109,7 +109,7 @@
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"bars.js"</span>)</a></code></pre></div>
 <p>Which results in the following visualization:</p>
 <p><img src="images/bar_chart.png" class="illustration" width="550"></p>
-<p>Note that we provide data for the script using the <code>data</code> argument. This data is then automatically made available to the D3 script. There are a number of other special variables available within D3 scripts, including:</p>
+<p>Note that data is provided to the script script using the <code>data</code> argument. This data is then automatically made available to the D3 script. There are a number of other special variables available within D3 scripts, including:</p>
 <ul>
 <li>
 <strong>data</strong>: The R data converted to JavaScript.</li>
@@ -133,131 +133,62 @@
 <p>This comment includes a <code>data</code> attribute, which enables RStudio to provide a preview of the script’s output when the <strong>Preview</strong> command (Ctrl+Shift+Center) is executed or when the document is saved:</p>
 <p><img src="images/rstudio_preview.png" class="screenshot" width="700"></p>
 </div>
-<div id="advanced-rendering" class="section level2">
-<h2 class="hasAnchor">
-<a href="#advanced-rendering" class="anchor"></a>Advanced Rendering</h2>
-<p><code>r2d2</code> also makes available an <code>r2d3</code> object in JavaScript, this object provides access to the <code>data</code>, <code>svg</code>, <code>width</code>, <code>height</code> and <code>options</code> variables, but also provides access to additional functionality.</p>
-<p>For instance, more advanced scripts can rely can make use of <code>r2d3.onRender()</code> which is similar to <code>d3.csv()</code>, <code>d3.json()</code>, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">// Initialization</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="va">svg</span>.<span class="at">attr</span>(<span class="st">"font-family"</span><span class="op">,</span> <span class="st">"sans-serif"</span>)</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">  .<span class="at">attr</span>(<span class="st">"font-size"</span><span class="op">,</span> <span class="st">"8"</span>)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">  .<span class="at">attr</span>(<span class="st">"text-anchor"</span><span class="op">,</span> <span class="st">"middle"</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">    </a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="kw">var</span> pack <span class="op">=</span> <span class="va">d3</span>.<span class="at">pack</span>()</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">  .<span class="at">size</span>([width<span class="op">,</span> height])</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">  .<span class="at">padding</span>(<span class="fl">1.5</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">    </a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="kw">var</span> format <span class="op">=</span> <span class="va">d3</span>.<span class="at">format</span>(<span class="st">",d"</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="kw">var</span> color <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleOrdinal</span>(<span class="va">d3</span>.<span class="at">schemeCategory20c</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">// Rendering</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="va">r2d3</span>.<span class="at">onRender</span>(<span class="kw">function</span>(data<span class="op">,</span> svg<span class="op">,</span> width<span class="op">,</span> height<span class="op">,</span> options) <span class="op">{</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15">  <span class="kw">var</span> root <span class="op">=</span> <span class="va">d3</span>.<span class="at">hierarchy</span>(<span class="op">{</span><span class="dt">children</span><span class="op">:</span> data<span class="op">}</span>)</a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">    .<span class="at">sum</span>(<span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="va">d</span>.<span class="at">value</span><span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb5-17" data-line-number="17">    .<span class="at">each</span>(<span class="kw">function</span>(d) <span class="op">{</span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18">      <span class="cf">if</span> (id <span class="op">=</span> <span class="va">d</span>.<span class="va">data</span>.<span class="at">id</span>) <span class="op">{</span></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19">        <span class="kw">var</span> id<span class="op">,</span> i <span class="op">=</span> <span class="va">id</span>.<span class="at">lastIndexOf</span>(<span class="st">"."</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20">        <span class="va">d</span>.<span class="at">id</span> <span class="op">=</span> id<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21">        <span class="va">d</span>.<span class="at">package</span> <span class="op">=</span> <span class="va">id</span>.<span class="at">slice</span>(<span class="dv">0</span><span class="op">,</span> i)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-22" data-line-number="22">        <span class="va">d</span>.<span class="at">class</span> <span class="op">=</span> <span class="va">id</span>.<span class="at">slice</span>(i <span class="op">+</span> <span class="dv">1</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-23" data-line-number="23">      <span class="op">}</span></a>
-<a class="sourceLine" id="cb5-24" data-line-number="24">    <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb5-26" data-line-number="26">  <span class="kw">var</span> node <span class="op">=</span> <span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">".node"</span>)</a>
-<a class="sourceLine" id="cb5-27" data-line-number="27">    .<span class="at">data</span>(<span class="at">pack</span>(root).<span class="at">leaves</span>())</a>
-<a class="sourceLine" id="cb5-28" data-line-number="28">    .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"g"</span>)</a>
-<a class="sourceLine" id="cb5-29" data-line-number="29">      .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"node"</span>)</a>
-<a class="sourceLine" id="cb5-30" data-line-number="30">      .<span class="at">attr</span>(<span class="st">"transform"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="st">"translate("</span> <span class="op">+</span> <span class="va">d</span>.<span class="at">x</span> <span class="op">+</span> <span class="st">","</span> <span class="op">+</span> <span class="va">d</span>.<span class="at">y</span> <span class="op">+</span> <span class="st">")"</span><span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb5-32" data-line-number="32">  <span class="va">node</span>.<span class="at">append</span>(<span class="st">"circle"</span>)</a>
-<a class="sourceLine" id="cb5-33" data-line-number="33">      .<span class="at">attr</span>(<span class="st">"id"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="va">d</span>.<span class="at">id</span><span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb5-34" data-line-number="34">      .<span class="at">attr</span>(<span class="st">"r"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="va">d</span>.<span class="at">r</span><span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb5-35" data-line-number="35">      .<span class="at">style</span>(<span class="st">"fill"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">color</span>(<span class="va">d</span>.<span class="at">package</span>)<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-36" data-line-number="36"></a>
-<a class="sourceLine" id="cb5-37" data-line-number="37">  <span class="va">node</span>.<span class="at">append</span>(<span class="st">"clipPath"</span>)</a>
-<a class="sourceLine" id="cb5-38" data-line-number="38">      .<span class="at">attr</span>(<span class="st">"id"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="st">"clip-"</span> <span class="op">+</span> <span class="va">d</span>.<span class="at">id</span><span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb5-39" data-line-number="39">    .<span class="at">append</span>(<span class="st">"use"</span>)</a>
-<a class="sourceLine" id="cb5-40" data-line-number="40">      .<span class="at">attr</span>(<span class="st">"xlink:href"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="st">"#"</span> <span class="op">+</span> <span class="va">d</span>.<span class="at">id</span><span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-41" data-line-number="41"></a>
-<a class="sourceLine" id="cb5-42" data-line-number="42">  <span class="va">node</span>.<span class="at">append</span>(<span class="st">"text"</span>)</a>
-<a class="sourceLine" id="cb5-43" data-line-number="43">      .<span class="at">attr</span>(<span class="st">"clip-path"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="st">"url(#clip-"</span> <span class="op">+</span> <span class="va">d</span>.<span class="at">id</span> <span class="op">+</span> <span class="st">")"</span><span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb5-44" data-line-number="44">    .<span class="at">selectAll</span>(<span class="st">"tspan"</span>)</a>
-<a class="sourceLine" id="cb5-45" data-line-number="45">    .<span class="at">data</span>(<span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="va">d</span>.<span class="va">class</span>.<span class="at">split</span>(<span class="ss">/</span><span class="sc">(?</span><span class="ss">=</span><span class="sc">[A-Z][^A-Z])</span><span class="ss">/g</span>)<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb5-46" data-line-number="46">    .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"tspan"</span>)</a>
-<a class="sourceLine" id="cb5-47" data-line-number="47">      .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb5-48" data-line-number="48">      .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i<span class="op">,</span> nodes) <span class="op">{</span> <span class="cf">return</span> <span class="dv">13</span> <span class="op">+</span> (i <span class="op">-</span> <span class="va">nodes</span>.<span class="at">length</span> / <span class="dv">2</span> <span class="op">-</span> <span class="fl">0.5</span>) <span class="op">*</span> <span class="dv">10</span><span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb5-49" data-line-number="49">      .<span class="at">text</span>(<span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-50" data-line-number="50"></a>
-<a class="sourceLine" id="cb5-51" data-line-number="51">  <span class="va">node</span>.<span class="at">append</span>(<span class="st">"title"</span>)</a>
-<a class="sourceLine" id="cb5-52" data-line-number="52">      .<span class="at">text</span>(<span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="va">d</span>.<span class="at">id</span> <span class="op">+</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span> <span class="op">+</span> <span class="at">format</span>(<span class="va">d</span>.<span class="at">value</span>)<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb5-53" data-line-number="53"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
-<p>Then, the above <code>bubbles.js</code> script can be rendered from R as follows. Notice that this script requires D3 version 4 which can be specified with the <code>version</code> parameter.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/r2d3.html">r2d3</a></span>(</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="kw">read.csv</span>(<span class="st">"flare.csv"</span>),</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="st">"bubbles.js"</span>,</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">  <span class="dt">version =</span> <span class="dv">4</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">)</a></code></pre></div>
-<div id="htmlwidget-fe0fe9240235f3f05092" style="width:672px;height:480px;" class="r2d3 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-fe0fe9240235f3f05092">{"x":{"data":{"id":["flare","flare.analytics","flare.analytics.cluster","flare.analytics.cluster.AgglomerativeCluster","flare.analytics.cluster.CommunityStructure","flare.analytics.cluster.HierarchicalCluster","flare.analytics.cluster.MergeEdge","flare.analytics.graph","flare.analytics.graph.BetweennessCentrality","flare.analytics.graph.LinkDistance","flare.analytics.graph.MaxFlowMinCut","flare.analytics.graph.ShortestPaths","flare.analytics.graph.SpanningTree","flare.analytics.optimization","flare.analytics.optimization.AspectRatioBanker","flare.animate","flare.animate.Easing","flare.animate.FunctionSequence","flare.animate.interpolate","flare.animate.interpolate.ArrayInterpolator","flare.animate.interpolate.ColorInterpolator","flare.animate.interpolate.DateInterpolator","flare.animate.interpolate.Interpolator","flare.animate.interpolate.MatrixInterpolator","flare.animate.interpolate.NumberInterpolator","flare.animate.interpolate.ObjectInterpolator","flare.animate.interpolate.PointInterpolator","flare.animate.interpolate.RectangleInterpolator","flare.animate.ISchedulable","flare.animate.Parallel","flare.animate.Pause","flare.animate.Scheduler","flare.animate.Sequence","flare.animate.Transition","flare.animate.Transitioner","flare.animate.TransitionEvent","flare.animate.Tween","flare.data","flare.data.converters","flare.data.converters.Converters","flare.data.converters.DelimitedTextConverter","flare.data.converters.GraphMLConverter","flare.data.converters.IDataConverter","flare.data.converters.JSONConverter","flare.data.DataField","flare.data.DataSchema","flare.data.DataSet","flare.data.DataSource","flare.data.DataTable","flare.data.DataUtil","flare.display","flare.display.DirtySprite","flare.display.LineSprite","flare.display.RectSprite","flare.display.TextSprite","flare.flex","flare.flex.FlareVis","flare.physics","flare.physics.DragForce","flare.physics.GravityForce","flare.physics.IForce","flare.physics.NBodyForce","flare.physics.Particle","flare.physics.Simulation","flare.physics.Spring","flare.physics.SpringForce","flare.query","flare.query.AggregateExpression","flare.query.And","flare.query.Arithmetic","flare.query.Average","flare.query.BinaryExpression","flare.query.Comparison","flare.query.CompositeExpression","flare.query.Count","flare.query.DateUtil","flare.query.Distinct","flare.query.Expression","flare.query.ExpressionIterator","flare.query.Fn","flare.query.If","flare.query.IsA","flare.query.Literal","flare.query.Match","flare.query.Maximum","flare.query.methods","flare.query.methods.add","flare.query.methods.and","flare.query.methods.average","flare.query.methods.count","flare.query.methods.distinct","flare.query.methods.div","flare.query.methods.eq","flare.query.methods.fn","flare.query.methods.gt","flare.query.methods.gte","flare.query.methods.iff","flare.query.methods.isa","flare.query.methods.lt","flare.query.methods.lte","flare.query.methods.max","flare.query.methods.min","flare.query.methods.mod","flare.query.methods.mul","flare.query.methods.neq","flare.query.methods.not","flare.query.methods.or","flare.query.methods.orderby","flare.query.methods.range","flare.query.methods.select","flare.query.methods.stddev","flare.query.methods.sub","flare.query.methods.sum","flare.query.methods.update","flare.query.methods.variance","flare.query.methods.where","flare.query.methods.xor","flare.query.methods._","flare.query.Minimum","flare.query.Not","flare.query.Or","flare.query.Query","flare.query.Range","flare.query.StringUtil","flare.query.Sum","flare.query.Variable","flare.query.Variance","flare.query.Xor","flare.scale","flare.scale.IScaleMap","flare.scale.LinearScale","flare.scale.LogScale","flare.scale.OrdinalScale","flare.scale.QuantileScale","flare.scale.QuantitativeScale","flare.scale.RootScale","flare.scale.Scale","flare.scale.ScaleType","flare.scale.TimeScale","flare.util","flare.util.Arrays","flare.util.Colors","flare.util.Dates","flare.util.Displays","flare.util.Filter","flare.util.Geometry","flare.util.heap","flare.util.heap.FibonacciHeap","flare.util.heap.HeapNode","flare.util.IEvaluable","flare.util.IPredicate","flare.util.IValueProxy","flare.util.math","flare.util.math.DenseMatrix","flare.util.math.IMatrix","flare.util.math.SparseMatrix","flare.util.Maths","flare.util.Orientation","flare.util.palette","flare.util.palette.ColorPalette","flare.util.palette.Palette","flare.util.palette.ShapePalette","flare.util.palette.SizePalette","flare.util.Property","flare.util.Shapes","flare.util.Sort","flare.util.Stats","flare.util.Strings","flare.vis","flare.vis.axis","flare.vis.axis.Axes","flare.vis.axis.Axis","flare.vis.axis.AxisGridLine","flare.vis.axis.AxisLabel","flare.vis.axis.CartesianAxes","flare.vis.controls","flare.vis.controls.AnchorControl","flare.vis.controls.ClickControl","flare.vis.controls.Control","flare.vis.controls.ControlList","flare.vis.controls.DragControl","flare.vis.controls.ExpandControl","flare.vis.controls.HoverControl","flare.vis.controls.IControl","flare.vis.controls.PanZoomControl","flare.vis.controls.SelectionControl","flare.vis.controls.TooltipControl","flare.vis.data","flare.vis.data.Data","flare.vis.data.DataList","flare.vis.data.DataSprite","flare.vis.data.EdgeSprite","flare.vis.data.NodeSprite","flare.vis.data.render","flare.vis.data.render.ArrowType","flare.vis.data.render.EdgeRenderer","flare.vis.data.render.IRenderer","flare.vis.data.render.ShapeRenderer","flare.vis.data.ScaleBinding","flare.vis.data.Tree","flare.vis.data.TreeBuilder","flare.vis.events","flare.vis.events.DataEvent","flare.vis.events.SelectionEvent","flare.vis.events.TooltipEvent","flare.vis.events.VisualizationEvent","flare.vis.legend","flare.vis.legend.Legend","flare.vis.legend.LegendItem","flare.vis.legend.LegendRange","flare.vis.operator","flare.vis.operator.distortion","flare.vis.operator.distortion.BifocalDistortion","flare.vis.operator.distortion.Distortion","flare.vis.operator.distortion.FisheyeDistortion","flare.vis.operator.encoder","flare.vis.operator.encoder.ColorEncoder","flare.vis.operator.encoder.Encoder","flare.vis.operator.encoder.PropertyEncoder","flare.vis.operator.encoder.ShapeEncoder","flare.vis.operator.encoder.SizeEncoder","flare.vis.operator.filter","flare.vis.operator.filter.FisheyeTreeFilter","flare.vis.operator.filter.GraphDistanceFilter","flare.vis.operator.filter.VisibilityFilter","flare.vis.operator.IOperator","flare.vis.operator.label","flare.vis.operator.label.Labeler","flare.vis.operator.label.RadialLabeler","flare.vis.operator.label.StackedAreaLabeler","flare.vis.operator.layout","flare.vis.operator.layout.AxisLayout","flare.vis.operator.layout.BundledEdgeRouter","flare.vis.operator.layout.CircleLayout","flare.vis.operator.layout.CirclePackingLayout","flare.vis.operator.layout.DendrogramLayout","flare.vis.operator.layout.ForceDirectedLayout","flare.vis.operator.layout.IcicleTreeLayout","flare.vis.operator.layout.IndentedTreeLayout","flare.vis.operator.layout.Layout","flare.vis.operator.layout.NodeLinkTreeLayout","flare.vis.operator.layout.PieLayout","flare.vis.operator.layout.RadialTreeLayout","flare.vis.operator.layout.RandomLayout","flare.vis.operator.layout.StackedAreaLayout","flare.vis.operator.layout.TreeMapLayout","flare.vis.operator.Operator","flare.vis.operator.OperatorList","flare.vis.operator.OperatorSequence","flare.vis.operator.OperatorSwitch","flare.vis.operator.SortOperator","flare.vis.Visualization"],"value":[null,null,null,3938,3812,6714,743,null,3534,5731,7840,5914,3416,null,7074,null,17010,5842,null,1983,2047,1375,8746,2202,1382,1629,1675,2042,1041,5176,449,5593,5534,9201,19975,1116,6006,null,null,721,4294,9800,1314,2220,1759,2165,586,3331,772,3322,null,8833,1732,3623,10066,null,4116,null,1082,1336,319,10498,2822,9983,2213,1681,null,1616,1027,3891,891,2893,5103,3677,781,4141,933,5130,3617,3240,2732,2039,1214,3748,843,null,593,330,287,277,292,595,594,460,603,625,748,461,597,619,283,283,591,603,599,386,323,307,772,296,363,600,280,307,335,299,354,264,843,1554,970,13896,1594,4130,791,1124,1876,1101,null,2105,1316,3151,3770,2435,4839,1756,4268,1821,5833,null,8258,10001,8217,12555,2324,10993,null,9354,1233,335,383,874,null,3165,2815,3366,17705,1486,null,6367,1229,2059,2291,5559,19118,6887,6557,22026,null,null,1302,24593,652,636,6703,null,2138,3824,1353,4665,2649,2832,4896,763,5222,7862,8435,null,20544,19788,10349,3301,19382,null,698,5569,353,2247,11275,7147,9930,null,2313,1880,1701,1117,null,20859,4614,10530,null,null,4461,6314,3444,null,3179,4060,4138,1690,1830,null,5219,3165,3509,1286,null,9956,3899,3202,null,6725,3727,9317,12003,4853,8411,4864,3174,7881,12870,2728,12348,870,9121,9191,2490,5248,4190,2581,2023,16540]},"type":"data.frame","container":"svg","options":null,"script":"var d3Script = function(d3, r2d3, data, svg, width, height, options) {\n// Initialization\nsvg.attr(\"font-family\", \"sans-serif\")\n  .attr(\"font-size\", \"8\")\n  .attr(\"text-anchor\", \"middle\");\n    \nvar pack = d3.pack()\n  .size([width, height])\n  .padding(1.5);\n    \nvar format = d3.format(\",d\");\nvar color = d3.scaleOrdinal(d3.schemeCategory20c);\n\n// Rendering\nr2d3.onRender(function(data, svg, width, height, options) {\n  var root = d3.hierarchy({children: data})\n    .sum(function(d) { return d.value; })\n    .each(function(d) {\n      if (id = d.data.id) {\n        var id, i = id.lastIndexOf(\".\");\n        d.id = id;\n        d.package = id.slice(0, i);\n        d.class = id.slice(i + 1);\n      }\n    });\n\n  var node = svg.selectAll(\".node\")\n    .data(pack(root).leaves())\n    .enter().append(\"g\")\n      .attr(\"class\", \"node\")\n      .attr(\"transform\", function(d) { return \"translate(\" + d.x + \",\" + d.y + \")\"; });\n\n  node.append(\"circle\")\n      .attr(\"id\", function(d) { return d.id; })\n      .attr(\"r\", function(d) { return d.r; })\n      .style(\"fill\", function(d) { return color(d.package); });\n\n  node.append(\"clipPath\")\n      .attr(\"id\", function(d) { return \"clip-\" + d.id; })\n    .append(\"use\")\n      .attr(\"xlink:href\", function(d) { return \"#\" + d.id; });\n\n  node.append(\"text\")\n      .attr(\"clip-path\", function(d) { return \"url(#clip-\" + d.id + \")\"; })\n    .selectAll(\"tspan\")\n    .data(function(d) { return d.class.split(/(?=[A-Z][^A-Z])/g); })\n    .enter().append(\"tspan\")\n      .attr(\"x\", 0)\n      .attr(\"y\", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 10; })\n      .text(function(d) { return d; });\n\n  node.append(\"title\")\n      .text(function(d) { return d.id + \"\\n\" + format(d.value); });\n});\n};","style":null,"version":4},"evals":[],"jsHooks":[]}</script><p>You should also consider using <code>r2d3.onResize()</code> to provide a JavaScript function with signature <code>function(width, height)</code> that performs the actual resizing operation. Otherwise, by default, <code>r2d3</code> will rerun the entire D3 script to resize the rendering.</p>
-</div>
 <div id="r-markdown" class="section level2">
 <h2 class="hasAnchor">
 <a href="#r-markdown" class="anchor"></a>R Markdown</h2>
-<p>R Markdown can be used with <code>r2d3</code> to render a D3 script as an htmlwidget as follows:</p>
+<p>You can include D3 visualizations in an R Markdown document or R Notebook. For example:</p>
 <pre><code>---
 output: html_document
 ---
 
 ```{r}
 library(r2d3)
-
-r2d3(
-  c(10, 20, 30),
-  "barchart.js"
-)
-
+r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "bars.js")
 ```</code></pre>
-<p>For <code>rmarkdown</code> documents and Notebooks, <code>r2d3</code> also adds support for <code>d3</code> chunk that can be use to make the D3 code more readable:</p>
+<p><img src="images/bar_chart.png" class="illustration" width="550"></p>
+<p>You can also include D3 visualization code inline using the <code>d3</code> chunk type:</p>
 <pre><code>```{r setup}
 library(r2d3)
-bars </code></pre>
-<pre><code>```{d3 data=bars, options='orange'}
+bars &lt;- c(10, 20, 30)
+```</code></pre>
+<pre><code>```{d3 data=bars, options=list(color = 'orange')}
 svg.selectAll('rect')
-    .data(data)
+  .data(data)
   .enter()
     .append('rect')
       .attr('width', function(d) { return d * 10; })
       .attr('height', '20px')
       .attr('y', function(d, i) { return i * 22; })
-      .attr('fill', options);
+      .attr('fill', options.color);
 ```</code></pre>
-<p><img src="tools/README/rmarkdown-1.png"></p>
+<p><img src="images/rmarkdown-1.png"></p>
 </div>
 <div id="shiny" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shiny" class="anchor"></a>Shiny</h2>
 <p><code>r2d3</code> provides <code><a href="reference/d3-shiny.html">renderD3()</a></code> and <code><a href="reference/d3-shiny.html">d3Output()</a></code> to render under Shiny apps:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">library</span>(shiny)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">library</span>(r2d3)</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">ui &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/inputPanel">inputPanel</a></span>(</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">    <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/sliderInput">sliderInput</a></span>(<span class="st">"bar_max"</span>, <span class="dt">label =</span> <span class="st">"Max:"</span>,</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">      <span class="dt">min =</span> <span class="dv">10</span>, <span class="dt">max =</span> <span class="dv">110</span>, <span class="dt">value =</span> <span class="dv">10</span>, <span class="dt">step =</span> <span class="dv">20</span>)</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">  ),</a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">  <span class="kw"><a href="reference/d3-shiny.html">d3Output</a></span>(<span class="st">"d3"</span>)</a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">)</a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {</a>
-<a class="sourceLine" id="cb7-13" data-line-number="13">  output<span class="op">$</span>d3 &lt;-<span class="st"> </span><span class="kw"><a href="reference/d3-shiny.html">renderD3</a></span>({</a>
-<a class="sourceLine" id="cb7-14" data-line-number="14">    <span class="kw"><a href="reference/r2d3.html">r2d3</a></span>(</a>
-<a class="sourceLine" id="cb7-15" data-line-number="15">      <span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">5</span>, input<span class="op">$</span>bar_max)),</a>
-<a class="sourceLine" id="cb7-16" data-line-number="16">      <span class="kw">system.file</span>(<span class="st">"baranims.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)</a>
-<a class="sourceLine" id="cb7-17" data-line-number="17">    )</a>
-<a class="sourceLine" id="cb7-18" data-line-number="18">  })</a>
-<a class="sourceLine" id="cb7-19" data-line-number="19">}</a>
-<a class="sourceLine" id="cb7-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/shinyApp">shinyApp</a></span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">library</span>(r2d3)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">ui &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/inputPanel">inputPanel</a></span>(</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/sliderInput">sliderInput</a></span>(<span class="st">"bar_max"</span>, <span class="dt">label =</span> <span class="st">"Max:"</span>,</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">      <span class="dt">min =</span> <span class="dv">10</span>, <span class="dt">max =</span> <span class="dv">110</span>, <span class="dt">value =</span> <span class="dv">10</span>, <span class="dt">step =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">  ),</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">  <span class="kw"><a href="reference/d3-shiny.html">d3Output</a></span>(<span class="st">"d3"</span>)</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">  output<span class="op">$</span>d3 &lt;-<span class="st"> </span><span class="kw"><a href="reference/d3-shiny.html">renderD3</a></span>({</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">    <span class="kw"><a href="reference/r2d3.html">r2d3</a></span>(</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">      <span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">5</span>, input<span class="op">$</span>bar_max)),</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">      <span class="kw">system.file</span>(<span class="st">"baranims.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">    )</a>
+<a class="sourceLine" id="cb5-18" data-line-number="18">  })</a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">}</a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/shinyApp">shinyApp</a></span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</a></code></pre></div>
+<p><img src="images/baranim-1.gif" width="550/"></p>
 <p>We can also render D3 in a Shiny document as follows:</p>
 <pre><code>---
 runtime: shiny
@@ -281,14 +212,14 @@ bars &lt;- reactive({
 
 ```{d3 data=bars}
 var bars = svg.selectAll('rect')
-    .data(data);
+  .data(data);
     
 bars.enter()
-    .append('rect')
-      .attr('width', function(d) { return d * 10; })
-      .attr('height', '20px')
-      .attr('y', function(d, i) { return i * 22; })
-      .attr('fill', 'steelblue');
+  .append('rect')
+    .attr('width', function(d) { return d * 10; })
+    .attr('height', '20px')
+    .attr('y', function(d, i) { return i * 22; })
+    .attr('fill', 'steelblue');
 
 bars.exit().remove();
 
@@ -296,7 +227,7 @@ bars.transition()
   .duration(250)
   .attr("width", function(d) { return d * 10; });
 ```</code></pre>
-<p><img src="tools/README/baranim-1.gif" width="550" align="left"></p>
+<p><img src="images/baranim-1.gif" width="550/"></p>
 </div>
 </div>
 </div>

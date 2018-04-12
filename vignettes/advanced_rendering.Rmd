@@ -1,0 +1,47 @@
+---
+title: "Advanced Rendering"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Advanced Rendering}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+
+## Advanced Rendering
+
+`r2d2` also makes available an `r2d3` object in JavaScript, this object provides access to the `data`, `svg`, `width`, `height` and `options` variables, but also provides access to additional functionality.
+
+For instance, more advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code as follows:
+
+```{r echo=FALSE, comment='', results='asis'}
+cat('\n```js\n')
+cat(paste(readLines(system.file("samples/bubbles/bubbles.js", package = "r2d3")), collapse = "\n"))
+cat('\n```\n')
+```
+
+Then, the above `bubbles.js` script can be rendered from R as follows. Notice that this script requires D3 version 4 which can be specified with the `version` parameter.
+
+```{r eval=FALSE}
+r2d3(
+  read.csv("flare.csv"),
+  "bubbles.js",
+  version = 4
+)
+```
+```{r echo=FALSE}
+r2d3(
+  read.csv("inst/samples/bubbles/flare.csv"),
+  "inst/samples/bubbles/bubbles.js",
+  version = 4
+)
+```
+
+You should also consider using `r2d3.onResize()` to provide a JavaScript function with signature `function(width, height)` that performs the actual resizing operation. Otherwise, by default, `r2d3` will rerun the entire D3 script to resize the rendering.
+
+

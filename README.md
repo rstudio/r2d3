@@ -23,23 +23,59 @@ visualizations](https://d3js.org/) with R, including:
   - Publishing D3 based [htmlwidgets](http://www.htmlwidgets.org) in R
     packages.
 
-With **r2d3**, you can bind data from R to D3 visualizations like the ones found on the [D3 Gallery](https://github.com/d3/d3/wiki/Gallery), [Blocks](https://bl.ocks.org/), or [VIDA](https://vida.io/explore). The D3 visualizations you create act just like R plots within RStudio, R Markdown, and Shiny applications.
-
-
-
-
+With **r2d3**, you can bind data from R to D3 visualizations like the
+ones found on the [D3 Gallery](https://github.com/d3/d3/wiki/Gallery),
+[Blocks](https://bl.ocks.org/), or [VIDA](https://vida.io/explore). D3
+visualizations you create work just like R plots within RStudio, R
+Markdown documents, and Shiny applications.
 
 ## Installation
 
-Install this package by running:
+First, install the package from GitHub as follows:
 
 ``` r
 devtools::install_github("rstudio/r2d3")
 ```
 
-## Getting Started
+Next, install the [daily build](https://dailies.rstudio.com) of RStudio
+(you need this version of RStudio to take advantage of various
+integrated tools for authoring D3 scripts with r2d3):
 
-To render D3 scripts, `r2d3` makes available the following variables:
+[![](images/daily_build.png)](https://dailies.rstudio.com)
+
+## D3 Scripts
+
+To use **r2d3**, write a D3 script and then pass data to it using the
+`rd23()` function. For example, here’s a simple D3 script that draws a
+bar chart (“bars.js”):
+
+``` js
+var barHeight = Math.floor(height / data.length);
+
+svg.selectAll('rect')
+  .data(data)
+  .enter().append('rect')
+    .attr('width', function(d) { return d * width; })
+    .attr('height', barHeight)
+    .attr('y', function(d, i) { return i * barHeight; })
+    .attr('fill', 'steelblue');
+```
+
+To render the script within R you call the `r2d3()` function:
+
+``` r
+library(r2d3)
+r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "bars.js")
+```
+
+Which results in the following visualization:
+
+![](images/bar_chart.png)
+
+Note that data is provided to the script script using the `data`
+argument. This data is then automatically made available to the D3
+script. There are a number of other special variables available within
+D3 scripts, including:
 
   - **data**: The R data converted to JavaScript.
   - **svg**: The svg element with the right dimensions.
@@ -47,123 +83,32 @@ To render D3 scripts, `r2d3` makes available the following variables:
   - **height**: The height of the svg.
   - **options**: Additional options provided from R.
 
-These variables can then be used in your D3 script as follows:
+## RStudio D3 Preview
+
+The [daily build](https://dailies.rstudio.com) of RStudio includes
+support for previewing D3 scripts as you write them. To try this out,
+create a D3 script using the new file menu:
+
+![](images/new_d3_script.png)
+
+A simple template for a D3 script (the bars.js example shown above) is
+provided by default. Note that the template includes a special comment
+at the top of the script:
 
 ``` js
-var barHeight = Math.floor(height / data.length);
-svg.selectAll('rect')
-    .data(data)
-  .enter()
-    .append('rect')
-      .attr('width', function(d) { return d * width; })
-      .attr('height', barHeight)
-      .attr('y', function(d, i) { return i * barHeight; })
-      .attr('fill', 'steelblue');
+// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
 ```
 
-The above `barchart.js` script can be rendered from R by calling `r2d3`
-as follows:
+This comment includes a `data` attribute, which enables RStudio to
+provide a preview of the script’s output when the **Preview** command
+(Ctrl+Shift+Center) is executed or when the document is saved:
 
-``` r
-library(r2d3)
-r2d3(
-  c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20),
-  "barchart.js"
-)
-```
-
-![](tools/README/barchart-1.png)
-
-## Advanced Rendering
-
-`r2d2` also makes available an `r2d3` object in JavaScript, this object
-provides access to the `data`, `svg`, `width`, `height` and `options`
-variables, but also provides access to additional functionality.
-
-For instance, more advanced scripts can rely can make use of
-`r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other
-D3 data loading libraries, to trigger specific code during render and
-use the rest of the code as initialization code as follows:
-
-``` js
-// Initialization
-svg.attr("font-family", "sans-serif")
-  .attr("font-size", "8")
-  .attr("text-anchor", "middle");
-    
-var pack = d3.pack()
-  .size([width, height])
-  .padding(1.5);
-    
-var format = d3.format(",d");
-var color = d3.scaleOrdinal(d3.schemeCategory20c);
-
-// Rendering
-r2d3.onRender(function(data, svg, width, height, options) {
-  var root = d3.hierarchy({children: data})
-    .sum(function(d) { return d.value; })
-    .each(function(d) {
-      if (id = d.data.id) {
-        var id, i = id.lastIndexOf(".");
-        d.id = id;
-        d.package = id.slice(0, i);
-        d.class = id.slice(i + 1);
-      }
-    });
-
-  var node = svg.selectAll(".node")
-    .data(pack(root).leaves())
-    .enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-
-  node.append("circle")
-      .attr("id", function(d) { return d.id; })
-      .attr("r", function(d) { return d.r; })
-      .style("fill", function(d) { return color(d.package); });
-
-  node.append("clipPath")
-      .attr("id", function(d) { return "clip-" + d.id; })
-    .append("use")
-      .attr("xlink:href", function(d) { return "#" + d.id; });
-
-  node.append("text")
-      .attr("clip-path", function(d) { return "url(#clip-" + d.id + ")"; })
-    .selectAll("tspan")
-    .data(function(d) { return d.class.split(/(?=[A-Z][^A-Z])/g); })
-    .enter().append("tspan")
-      .attr("x", 0)
-      .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 10; })
-      .text(function(d) { return d; });
-
-  node.append("title")
-      .text(function(d) { return d.id + "\n" + format(d.value); });
-});
-```
-
-Then, the above `bubbles.js` script can be rendered from R as follows.
-Notice that this script requires D3 version 4 which can be specified
-with the `version` parameter.
-
-``` r
-r2d3(
-  read.csv("flare.csv"),
-  "bubbles.js",
-  version = 4
-)
-```
-
-![](tools/README/unnamed-chunk-6-1.png)<!-- -->
-
-You should also consider using `r2d3.onResize()` to provide a JavaScript
-function with signature `function(width, height)` that performs the
-actual resizing operation. Otherwise, by default, `r2d3` will rerun the
-entire D3 script to resize the rendering.
+![](images/rstudio_preview.png)
 
 ## R Markdown
 
-R Markdown can be used with `r2d3` to render a D3 script as an
-htmlwidget as follows:
+You can include D3 visualizations in an R Markdown document or R
+Notebook. For example:
 
 <pre><code>---
 output: html_document
@@ -171,34 +116,31 @@ output: html_document
 
 &#96``{r}
 library(r2d3)
-
-r2d3(
-  c(10, 20, 30),
-  "barchart.js"
-)
-
+r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "bars.js")
 &#96``</code></pre>
 
-For `rmarkdown` documents and Notebooks, `r2d3` also adds support for
-`d3` chunk that can be use to make the D3 code more readable:
+![](images/bar_chart.png)
+
+You can also include D3 visualization code inline using the `d3` chunk
+type:
 
 <pre><code>&#96``{r setup}
 library(r2d3)
-bars <- c(10, 20, 30)
+bars &lt;- c(10, 20, 30)
 &#96``</code></pre>
 
-<pre><code>&#96``{d3 data=bars, options='orange'}
+<pre><code>&#96``{d3 data=bars, options=list(color = 'orange')}
 svg.selectAll('rect')
-    .data(data)
+  .data(data)
   .enter()
     .append('rect')
       .attr('width', function(d) { return d * 10; })
       .attr('height', '20px')
       .attr('y', function(d, i) { return i * 22; })
-      .attr('fill', options);
+      .attr('fill', options.color);
 &#96``</code></pre>
 
-![](tools/README/rmarkdown-1.png)
+![](images/rmarkdown-1.png)
 
 ## Shiny
 
@@ -229,6 +171,8 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
+<img src="images/baranim-1.gif" width=550/>
+
 We can also render D3 in a Shiny document as follows:
 
 <pre><code>---
@@ -253,14 +197,14 @@ bars &lt;- reactive({
 
 &#96``{d3 data=bars}
 var bars = svg.selectAll('rect')
-    .data(data);
+  .data(data);
     
 bars.enter()
-    .append('rect')
-      .attr('width', function(d) { return d * 10; })
-      .attr('height', '20px')
-      .attr('y', function(d, i) { return i * 22; })
-      .attr('fill', 'steelblue');
+  .append('rect')
+    .attr('width', function(d) { return d * 10; })
+    .attr('height', '20px')
+    .attr('y', function(d, i) { return i * 22; })
+    .attr('fill', 'steelblue');
 
 bars.exit().remove();
 
@@ -269,4 +213,4 @@ bars.transition()
   .attr("width", function(d) { return d * 10; });
 &#96``</code></pre>
 
-<img src="tools/README/baranim-1.gif" width=550 align="left"/>
+<img src="images/baranim-1.gif" width=550/>

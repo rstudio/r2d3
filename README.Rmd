@@ -68,7 +68,7 @@ Which results in the following visualization:
 
 ![](images/bar_chart.png){.illustration width=550}
 
-Note that we provide data for the script using the `data` argument. This data is then automatically made available to the D3 script. There are a number of other special variables available within D3 scripts, including:
+Note that data is provided to the script script using the `data` argument. This data is then automatically made available to the D3 script. There are a number of other special variables available within D3 scripts, including:
 
 - **data**: The R data converted to JavaScript.
 - **svg**: The svg element with the right dimensions.
@@ -92,42 +92,9 @@ This comment includes a `data` attribute, which enables RStudio to provide a pre
 
 ![](images/rstudio_preview.png){.screenshot width=700}
 
-
-
-## Advanced Rendering
-
-`r2d2` also makes available an `r2d3` object in JavaScript, this object provides access to the `data`, `svg`, `width`, `height` and `options` variables, but also provides access to additional functionality.
-
-For instance, more advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code as follows:
-
-```{r echo=FALSE, comment='', results='asis'}
-cat('\n```js\n')
-cat(paste(readLines(system.file("samples/bubbles/bubbles.js", package = "r2d3")), collapse = "\n"))
-cat('\n```\n')
-```
-
-Then, the above `bubbles.js` script can be rendered from R as follows. Notice that this script requires D3 version 4 which can be specified with the `version` parameter.
-
-```{r eval=FALSE}
-r2d3(
-  read.csv("flare.csv"),
-  "bubbles.js",
-  version = 4
-)
-```
-```{r echo=FALSE}
-r2d3(
-  read.csv("inst/samples/bubbles/flare.csv"),
-  "inst/samples/bubbles/bubbles.js",
-  version = 4
-)
-```
-
-You should also consider using `r2d3.onResize()` to provide a JavaScript function with signature `function(width, height)` that performs the actual resizing operation. Otherwise, by default, `r2d3` will rerun the entire D3 script to resize the rendering.
-
 ## R Markdown
 
-R Markdown can be used with `r2d3` to render a D3 script as an htmlwidget as follows:
+You can include D3 visualizations in an R Markdown document or R Notebook. For example:
 
 <pre><code>---
 output: html_document
@@ -135,33 +102,31 @@ output: html_document
 
 &#96``{r}
 library(r2d3)
-
-r2d3(
-  c(10, 20, 30),
-  "barchart.js"
-)
-
+r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "bars.js")
 &#96``</code></pre>
 
-For `rmarkdown` documents and Notebooks, `r2d3` also adds support for `d3` chunk that can be use to make the D3 code more readable:
+![](images/bar_chart.png){.illustration width=550}
+
+You can also include D3 visualization code inline using the `d3` chunk type:
 
 <pre><code>&#96``{r setup}
 library(r2d3)
-bars <- c(10, 20, 30)
+bars &lt;- c(10, 20, 30)
 &#96``</code></pre>
 
-<pre><code>&#96``{d3 data=bars, options='orange'}
+<pre><code>&#96``{d3 data=bars, options=list(color = 'orange')}
 svg.selectAll('rect')
-    .data(data)
+  .data(data)
   .enter()
     .append('rect')
       .attr('width', function(d) { return d * 10; })
       .attr('height', '20px')
       .attr('y', function(d, i) { return i * 22; })
-      .attr('fill', options);
+      .attr('fill', options.color);
 &#96``</code></pre>
 
-![](tools/README/rmarkdown-1.png)
+![](images/rmarkdown-1.png)
+
 
 ## Shiny
 
@@ -191,6 +156,11 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
+
+
+<img src="images/baranim-1.gif" width=550/>
+
+
 We can also render D3 in a Shiny document as follows:
 
 <pre><code>---
@@ -215,14 +185,14 @@ bars &lt;- reactive({
 
 &#96``{d3 data=bars}
 var bars = svg.selectAll('rect')
-    .data(data);
+  .data(data);
     
 bars.enter()
-    .append('rect')
-      .attr('width', function(d) { return d * 10; })
-      .attr('height', '20px')
-      .attr('y', function(d, i) { return i * 22; })
-      .attr('fill', 'steelblue');
+  .append('rect')
+    .attr('width', function(d) { return d * 10; })
+    .attr('height', '20px')
+    .attr('y', function(d, i) { return i * 22; })
+    .attr('fill', 'steelblue');
 
 bars.exit().remove();
 
@@ -231,4 +201,4 @@ bars.transition()
   .attr("width", function(d) { return d * 10; });
 &#96``</code></pre>
 
-<img src="tools/README/baranim-1.gif" width=550 align="left"/>
+<img src="images/baranim-1.gif" width=550/>
