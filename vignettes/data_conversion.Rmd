@@ -12,3 +12,88 @@ vignette: >
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
+## Default conversion
+
+R objects provided as `data` for D3 visualizations are converted to JSON using the [jsonlite::toJSON()](https://www.rdocumentation.org/packages/jsonlite/versions/1.5/topics/toJSON%2C%20fromJSON) function, and use the same default serialization behavior as [Shiny](https://shiny.rstudio.com) and [htmlwidgets](http://www.htmlwidgets.org/develop_advanced.html#custom-json-serializer). 
+
+This corresponds to the following call to `jsonlite::toJSON()`:
+
+```r
+jsonlite::toJSON(
+  dataframe = "columns", null = "null", na = "null", auto_unbox = TRUE,
+  digits = getOption("shiny.json.digits", 16), use_signif = TRUE, force = TRUE,
+  POSIXt = "ISO8601", UTC = TRUE, rownames = FALSE, keep_vec_names = TRUE,
+  json_verabitm = TRUE
+)
+```
+
+#### Data frames
+
+Data frames are serialized with a columns orientation as that is a more compact over the wire representation than rows orientation. When the data frame gets to the client **r2d3** calls the [HTMLWidgets.dataframeToD3()](http://www.htmlwidgets.org/develop_advanced.html#htmlwidgets.dataframetod3) method to transform the data to a D3-friendly rows orientation.
+
+Here is an example of the JSON columns-based representation of an R data frame:
+
+```
+{
+  "Sepal.Length": [5.1, 4.9, 4.7],
+  "Sepal.Width": [3.5, 3, 3.2],
+  "Petal.Length": [1.4, 1.4, 1.3],
+  "Petal.Width": [0.2, 0.2, 0.2],
+  "Species": ["setosa", "setosa", "setosa"]
+} 
+```
+
+After we apply `HTMLWidgets.dataframeToD3()`, it will become:
+
+```
+[
+  {
+    "Sepal.Length": 5.1,
+    "Sepal.Width": 3.5,
+    "Petal.Length": 1.4,
+    "Petal.Width": 0.2,
+    "Species": "setosa"
+  },
+  {
+    "Sepal.Length": 4.9,
+    "Sepal.Width": 3,
+    "Petal.Length": 1.4,
+    "Petal.Width": 0.2,
+    "Species": "setosa"
+  },
+  {
+    "Sepal.Length": 4.7,
+    "Sepal.Width": 3.2,
+    "Petal.Length": 1.3,
+    "Petal.Width": 0.2,
+    "Species": "setosa"
+  }
+] 
+```
+
+## Custom conversion
+
+If you don't like the default JSON conversion provided for `data`, you can write your own function that uses [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html) to perform a custom conversion. For example:
+
+```{r}
+data_to_json <- function(data) {
+  jsonlite::toJSON(data, dataframe = "rows", auto_unbox = FALSE, rownames = TRUE)
+}
+
+r2d3(data = data_to_json(x), script = "barchart.js")
+```
+
+When a value returned from `jsonlite::toJSON()` is passed as the `data` argument **r2d3** won't attempt any additional conversion or transformation of the value. 
+
+
+
+## S3 conversion method
+
+You can implement the `as_d3_data()` S3 method to provide custom converters for any R class. For example, you could create an S3 method for the `igraph` class to convert data into a JSON that is optimized for rendering by a D3 network visualization:
+
+```{r}
+as_d3_data.igraph <- function(x, ...) {
+  # code to serialize igraph to D3 network friendly JSON 
+}
+```
+
