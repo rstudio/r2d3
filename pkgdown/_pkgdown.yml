@@ -12,7 +12,7 @@ navbar:
     - text: "Articles"
       menu:
         - text: Using
-        - text: "Data Conversion"
+        - text: "R to D3 Data Conversion"
           href: articles/data_conversion.html
         - text: "Visualization Options"
           href: articles/visualization_options.html

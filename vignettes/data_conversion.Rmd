@@ -1,9 +1,9 @@
 ---
-title: "Data Conversion"
+title: "R to D3 Data Conversion"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Data Conversion}
+  %\VignetteIndexEntry{R to D3 Data Conversion}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
