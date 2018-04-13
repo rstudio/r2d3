@@ -128,7 +128,7 @@ library(r2d3)
 r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
 &#96``</code></pre>
 
-![](images/bar_chart.png)
+<img src="images/bar_chart.png" class="illustration" width=600/>
 
 You can also include D3 visualization code inline using the `d3` R
 Markdown engine:
@@ -149,7 +149,7 @@ svg.selectAll('rect')
       .attr('fill', options.color);
 &#96``</code></pre>
 
-<img src="images/rmarkdown-1.png" class="illustration"/>
+<img src="images/rmarkdown-1.png" class="illustration" width=600/>
 
 Note that in order to use the `d3` engine you need to add
 `library(r2d3)` to the setup chunk (as illustrated above).
