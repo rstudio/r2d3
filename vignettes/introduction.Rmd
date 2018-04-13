@@ -1,18 +1,25 @@
 ---
 title: "r2d3: R interface to D3 visualizations"
-output:
-  github_document:
-    fig_width: 9
-    fig_height: 5
+output: 
+  rmarkdown::html_vignette:
+    readme: true
+vignette: >
+  %\VignetteIndexEntry{Introduction}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
 library(r2d3)
 ```
 
-# r2d3: R interface to D3 visualizations
+<!---
+TODO:
+  - Add gallery thumbnails at the bottom of first section
+  - Cleanup language at the bottom of the first section
+--->
 
-<img src="tools/README/r2d3-hex.png" width=180 align="right" style="margin-right: 20px;"/>
+<img src="images/r2d3-hex.png" width=180 align="right" style="margin-right: 20px;"/>
 
 The **r2d3** package provides a suite of tools for using [D3 visualizations](https://d3js.org/) with R, including:
 

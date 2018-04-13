@@ -5,14 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>R to D3 rendering tools • r2d3</title>
+<title>r2d3: R interface to D3 visualizations • r2d3</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
-<meta property="og:title" content="R to D3 rendering tools">
-<meta property="og:description" content="Render 'D3' scripts with ease in R as 'htmlwidgets', sends data from R to D3 with
-  minimal changes to the D3 source and animates R data with D3 scripts.">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<meta property="og:title" content="r2d3: R interface to D3 visualizations">
+<meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -20,7 +19,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-home">
+    <div class="container template-vignette">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -30,7 +29,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">r2d3</a>
+        <a class="navbar-link" href="../index.html">r2d3</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
       </span>
     </div>
@@ -38,7 +37,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">Home</a>
+  <a href="../index.html">Home</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -49,32 +48,32 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Using</li>
     <li>
-      <a href="articles/data_conversion.html">R to D3 Data Conversion</a>
+      <a href="../articles/data_conversion.html">R to D3 Data Conversion</a>
     </li>
     <li>
-      <a href="articles/visualization_options.html">Visualization Options</a>
+      <a href="../articles/visualization_options.html">Visualization Options</a>
     </li>
     <li>
-      <a href="articles/development_and_debugging.html">Development and Debugging</a>
+      <a href="../articles/development_and_debugging.html">Development and Debugging</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Advanced</li>
     <li>
-      <a href="articles/dependencies.html">CSS and JavaScript Dependencies </a>
+      <a href="../articles/dependencies.html">CSS and JavaScript Dependencies </a>
     </li>
     <li>
-      <a href="articles/advanced_rendering.html">Advanced Rendering with Callbacks</a>
+      <a href="../articles/advanced_rendering.html">Advanced Rendering with Callbacks</a>
     </li>
     <li>
-      <a href="articles/package_development.html">Package Development</a>
+      <a href="../articles/package_development.html">Package Development</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="articles/gallery.html">Gallery</a>
+  <a href="../articles/gallery.html">Gallery</a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -94,10 +93,18 @@
 
       
       </header><div class="row">
-  <div class="contents col-md-9">
-    <div id="r2d3-r-interface-to-d3-visualizations" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#r2d3-r-interface-to-d3-visualizations" class="anchor"></a>r2d3: R interface to D3 visualizations</h1></div>
+  <div class="col-md-9">
+    <div class="page-header toc-ignore">
+      <h1>r2d3: R interface to D3 visualizations</h1>
+            
+      
+      <small>Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/introduction.Rmd"><code>vignettes/introduction.Rmd</code></a></small>
+
+    </div>
+
+    
+    
+<div class="contents">
 <!---
 TODO:
   - Add gallery thumbnails at the bottom of first section
@@ -119,7 +126,7 @@ TODO:
 <p>First, install the package from GitHub as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"rstudio/r2d3"</span>)</a></code></pre></div>
 <p>Next, install the <a href="https://dailies.rstudio.com">daily build</a> of RStudio (you need this version of RStudio to take advantage of various integrated tools for authoring D3 scripts with r2d3):</p>
-<p><a href="https://dailies.rstudio.com"><img src="images/daily_build.png"></a></p>
+<p><a href="https://dailies.rstudio.com"><img src="images/daily_build.png" class="screenshot" width="700"></a></p>
 </div>
 <div id="d3-scripts" class="section level2">
 <h2 class="hasAnchor">
@@ -134,12 +141,12 @@ TODO:
 <a class="sourceLine" id="cb2-7" data-line-number="7">    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)</a>
 <a class="sourceLine" id="cb2-8" data-line-number="8">    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)</a>
 <a class="sourceLine" id="cb2-9" data-line-number="9">    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'steelblue'</span>)<span class="op">;</span></a></code></pre></div>
-<p>To render the script within R you call the <code><a href="reference/r2d3.html">r2d3()</a></code> function:</p>
+<p>To render the script within R you call the <code><a href="../reference/r2d3.html">r2d3()</a></code> function:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(r2d3)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a></code></pre></div>
 <p>Which results in the following visualization:</p>
-<p><img src="images/bar_chart.png"></p>
-<p>Note that data is provided to the script using the <code>data</code> argument to the <code><a href="reference/r2d3.html">r2d3()</a></code> function. This data is then automatically made available to the D3 script. There are a number of other special variables available within D3 scripts, including:</p>
+<p><img src="images/bar_chart.png" class="illustration" width="550"></p>
+<p>Note that data is provided to the script using the <code>data</code> argument to the <code><a href="../reference/r2d3.html">r2d3()</a></code> function. This data is then automatically made available to the D3 script. There are a number of other special variables available within D3 scripts, including:</p>
 <ul>
 <li>
 <code>data</code> — The R data converted to JavaScript.</li>
@@ -157,17 +164,17 @@ TODO:
 <h2 class="hasAnchor">
 <a href="#d3-preview" class="anchor"></a>D3 Preview</h2>
 <p>The <a href="https://dailies.rstudio.com">daily build</a> of RStudio includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:</p>
-<p><img src="images/new_d3_script.png"></p>
+<p><img src="images/new_d3_script.png" class="screenshot" width="550"></p>
 <p>A simple template for a D3 script (the barchart.js example shown above) is provided by default. You can use the <strong>Preview</strong> command (Ctrl+Shift+Center) to render the visualization:</p>
-<p><img src="images/rstudio_preview.png"></p>
+<p><img src="images/rstudio_preview.png" class="screenshot" width="700"></p>
 <p>You might wonder where the data comes from for the preview. Note that there is a special comment at the top of the D3 script:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></a></code></pre></div>
-<p>This comment enables you to specify the data (along with any other arguments to the <code><a href="reference/r2d3.html">r2d3()</a></code> function) to use for the preview.</p>
+<p>This comment enables you to specify the data (along with any other arguments to the <code><a href="../reference/r2d3.html">r2d3()</a></code> function) to use for the preview.</p>
 </div>
 <div id="r-markdown" class="section level2">
 <h2 class="hasAnchor">
 <a href="#r-markdown" class="anchor"></a>R Markdown</h2>
-<p>You can include D3 visualizations in an R Markdown document or R Notebook. You can do this by calling the <code><a href="reference/r2d3.html">r2d3()</a></code> function from within an R code chunk:</p>
+<p>You can include D3 visualizations in an R Markdown document or R Notebook. You can do this by calling the <code><a href="../reference/r2d3.html">r2d3()</a></code> function from within an R code chunk:</p>
 <pre><code>---
 output: html_document
 ---
@@ -176,7 +183,7 @@ output: html_document
 library(r2d3)
 r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
 ```</code></pre>
-<p><img src="images/bar_chart.png"></p>
+<p><img src="images/bar_chart.png" class="illustration" width="550"></p>
 <p>You can also include D3 visualization code inline using the <code>d3</code> chunk type:</p>
 <pre><code>```{r setup}
 library(r2d3)
@@ -197,7 +204,7 @@ svg.selectAll('rect')
 <div id="shiny" class="section level2">
 <h2 class="hasAnchor">
 <a href="#shiny" class="anchor"></a>Shiny</h2>
-<p>The <code><a href="reference/d3-shiny.html">renderD3()</a></code> and <code><a href="reference/d3-shiny.html">d3Output()</a></code> functions enable you to include D3 visualizations within Shiny applications:</p>
+<p>The <code><a href="../reference/d3-shiny.html">renderD3()</a></code> and <code><a href="../reference/d3-shiny.html">d3Output()</a></code> functions enable you to include D3 visualizations within Shiny applications:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(shiny)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">library</span>(r2d3)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"></a>
@@ -206,12 +213,12 @@ svg.selectAll('rect')
 <a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/sliderInput">sliderInput</a></span>(<span class="st">"bar_max"</span>, <span class="dt">label =</span> <span class="st">"Max:"</span>,</a>
 <a class="sourceLine" id="cb5-7" data-line-number="7">      <span class="dt">min =</span> <span class="dv">10</span>, <span class="dt">max =</span> <span class="dv">110</span>, <span class="dt">value =</span> <span class="dv">10</span>, <span class="dt">step =</span> <span class="dv">20</span>)</a>
 <a class="sourceLine" id="cb5-8" data-line-number="8">  ),</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">  <span class="kw"><a href="reference/d3-shiny.html">d3Output</a></span>(<span class="st">"d3"</span>)</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">  <span class="kw"><a href="../reference/d3-shiny.html">d3Output</a></span>(<span class="st">"d3"</span>)</a>
 <a class="sourceLine" id="cb5-10" data-line-number="10">)</a>
 <a class="sourceLine" id="cb5-11" data-line-number="11"></a>
 <a class="sourceLine" id="cb5-12" data-line-number="12">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {</a>
-<a class="sourceLine" id="cb5-13" data-line-number="13">  output<span class="op">$</span>d3 &lt;-<span class="st"> </span><span class="kw"><a href="reference/d3-shiny.html">renderD3</a></span>({</a>
-<a class="sourceLine" id="cb5-14" data-line-number="14">    <span class="kw"><a href="reference/r2d3.html">r2d3</a></span>(</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">  output<span class="op">$</span>d3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/d3-shiny.html">renderD3</a></span>({</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">    <span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(</a>
 <a class="sourceLine" id="cb5-15" data-line-number="15">      <span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">5</span>, input<span class="op">$</span>bar_max)),</a>
 <a class="sourceLine" id="cb5-16" data-line-number="16">      <span class="kw">system.file</span>(<span class="st">"baranims.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)</a>
 <a class="sourceLine" id="cb5-17" data-line-number="17">    )</a>
@@ -237,33 +244,21 @@ svg.selectAll('rect')
 </div>
   </div>
 
-  <div class="col-md-3" id="sidebar">
-    <div class="links">
-<h2>Links</h2>
-<ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/rstudio/r2d3">https://​github.com/​rstudio/​r2d3</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/rstudio/r2d3/issues">https://​github.com/​rstudio/​r2d3/​issues</a>
-</li>
-</ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#getting-started">Getting Started</a></li>
+      <li><a href="#d3-scripts">D3 Scripts</a></li>
+      <li><a href="#d3-preview">D3 Preview</a></li>
+      <li><a href="#r-markdown">R Markdown</a></li>
+      <li><a href="#shiny">Shiny</a></li>
+      <li><a href="#learning-more">Learning More</a></li>
+      </ul>
 </div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/BSD-3-Clause">BSD_3_clause</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Javier Luraschi <br><small class="roles"> Author, maintainer </small>  </li>
-<li>JJ Allaire <br><small class="roles"> Author </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
-</ul>
-</div>
+      </div>
 
-  </div>
 </div>
 
 
