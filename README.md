@@ -130,8 +130,8 @@ r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
 
 ![](images/bar_chart.png)
 
-You can also include D3 visualization code inline using the `d3` chunk
-type:
+You can also include D3 visualization code inline using the `d3` R
+Markdown engine:
 
 <pre><code>&#96``{r setup}
 library(r2d3)
@@ -150,6 +150,9 @@ svg.selectAll('rect')
 &#96``</code></pre>
 
 <img src="images/rmarkdown-1.png" class="illustration"/>
+
+Note that in order to use the `d3` engine you need to add
+`library(r2d3)` to the setup chunk (as illustrated above).
 
 ## Shiny
 
