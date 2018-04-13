@@ -37,9 +37,7 @@ ones found on [D3 Gallery](https://github.com/d3/d3/wiki/Gallery),
 
 <div style="margin-top: 20px; margin-bottom: 10px;">
 
-<a href="https://rstudio.github.io/r2d3/articles/gallery.html#chord"><kbd><img src="images/gallery_chord.png" width=204 class="illustration gallery-thumbnail"/></kbd></a>
-<a href="https://rstudio.github.io/r2d3/articles/gallery.html#bubbles"><kbd><img src="images/gallery_bubbles.png" width=193 class="illustration gallery-thumbnail"/></kbd></a>
-<a href="https://rstudio.github.io/r2d3/articles/gallery.html#calendar"><kbd><img src="images/gallery_calendar.png" width=211 class="illustration gallery-thumbnail"/></kbd></a>
+<a href="https://rstudio.github.io/r2d3/articles/gallery.html#chord"><kbd><img src="images/gallery_chord.png" width=204 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery.html#bubbles"><kbd><img src="images/gallery_bubbles.png" width=193 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery.html#calendar"><kbd><img src="images/gallery_calendar.png" width=211 class="illustration gallery-thumbnail"/></kbd></a>
 
 </div>
 
