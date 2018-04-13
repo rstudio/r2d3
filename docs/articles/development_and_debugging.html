@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Advanced Rendering with Callbacks • r2d3</title>
+<title>Development and Debugging • r2d3</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="Advanced Rendering with Callbacks">
+<meta property="og:title" content="Development and Debugging">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
@@ -95,26 +95,18 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>Advanced Rendering with Callbacks</h1>
+      <h1>Development and Debugging</h1>
             
             <h4 class="date">2018-04-13</h4>
       
-      <small>Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/advanced_rendering.Rmd"><code>vignettes/advanced_rendering.Rmd</code></a></small>
+      <small>Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/development_and_debugging.Rmd"><code>vignettes/development_and_debugging.Rmd</code></a></small>
 
     </div>
 
     
     
 <div class="contents">
-<p><code>r2d2</code> also makes available an <code>r2d3</code> object in JavaScript, this object provides access to the <code>data</code>, <code>svg</code>, <code>width</code>, <code>height</code> and <code>options</code> variables, but also provides access to additional functionality.</p>
-<p>For instance, more advanced scripts can rely can make use of <code>r2d3.onRender()</code> which is similar to <code>d3.csv()</code>, <code>d3.json()</code>, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code as follows:</p>
-<p>Then, the above <code>bubbles.js</code> script can be rendered from R as follows. Notice that this script requires D3 version 4 which can be specified with the <code>version</code> parameter.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="kw">read.csv</span>(<span class="st">"flare.csv"</span>),</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="st">"bubbles.js"</span>,</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="dt">version =</span> <span class="dv">4</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">)</a></code></pre></div>
-<p>You should also consider using <code>r2d3.onResize()</code> to provide a JavaScript function with signature <code>function(width, height)</code> that performs the actual resizing operation. Otherwise, by default, <code>r2d3</code> will rerun the entire D3 script to resize the rendering.</p>
+
 </div>
   </div>
 

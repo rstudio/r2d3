@@ -206,11 +206,17 @@ bars.transition()
 
 - Check out the [Gallery](https://rstudio.github.io/r2d3/articles/gallery.html) of examples to learn more about what's possible with D3 visualizations.
 
-- Explore the various [rendering options](https://rstudio.github.io/r2d3/articles/advanced.html#rendering-options) which control versions of D3, including CSS styles, and providing custom sizing behavior.
+- The [Data Conversion](https://rstudio.github.io/r2d3/articles/data_conversion.html) article covers customizing the conversion of R objects to D3-friendly JSON.
 
-- If your widget has advanced rendering requirements (e.g. distinguishing initialization from data reloading or custom resizing logic) then see the section on [rendering callbacks](https://rstudio.github.io/r2d3/articles/advanced.html#rendering-callbacks) for an alternate way to organize D3 scripts.
+- [Visualization Options](https://rstudio.github.io/r2d3/articles/visualization_options.html) covers customization of various aspects of rendering as well as how to expose user-level options for your D3 script. 
 
-- You can make your D3 visualizations re-usable by including them in an R package. Read about how to do this in the section on [package development](https://rstudio.github.io/r2d3/articles/advanced.html#package-development).
+- [Development and Debugging](https://rstudio.github.io/r2d3/articles/development_and_debugging.html) describes the recommended workflow for developing D3 visualizations with **r2d3**.
+
+- You can incorporate external CSS styles and JavaScript libraries into your visualizations. See the article on  [CSS and JavaScript Dependencies](https://rstudio.github.io/r2d3/articles/dependencies.html) for details.
+
+- If your widget has advanced rendering requirements (e.g. distinguishing initialization from data reloading or custom resizing logic) then see the article on [Advanced Rendering with Callbacks](https://rstudio.github.io/r2d3/articles/advanced_rendering.html) for an alternate way to organize D3 scripts.
+
+- You can make your D3 visualizations re-usable by including them in an R package. Read about how to do this in the article on [Package Development](https://rstudio.github.io/r2d3/articles/package_development.html).
 
 
 

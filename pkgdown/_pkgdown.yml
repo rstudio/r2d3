@@ -9,8 +9,23 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Advanced"
-      href: articles/advanced.html
+    - text: "Articles"
+      menu:
+        - text: Using
+        - text: "Data Conversion"
+          href: articles/data_conversion.html
+        - text: "Visualization Options"
+          href: articles/visualization_options.html
+        - text: "Development and Debugging"
+          href: articles/development_and_debugging.html
+        - text: "---"
+        - text: Advanced
+        - text: "CSS and JavaScript Dependencies "
+          href: articles/dependencies.html
+        - text: "Advanced Rendering with Callbacks"
+          href: articles/advanced_rendering.html
+        - text: "Package Development"
+          href: articles/package_development.html
     - text: "Gallery"
       href: articles/gallery.html
     - text: "Reference"

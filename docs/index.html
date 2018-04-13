@@ -40,8 +40,36 @@
 <li>
   <a href="index.html">Home</a>
 </li>
-<li>
-  <a href="articles/advanced.html">Advanced</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li class="dropdown-header">Using</li>
+    <li>
+      <a href="articles/data_conversion.html">Data Conversion</a>
+    </li>
+    <li>
+      <a href="articles/visualization_options.html">Visualization Options</a>
+    </li>
+    <li>
+      <a href="articles/development_and_debugging.html">Development and Debugging</a>
+    </li>
+    <li class="divider">
+    </li>
+<li class="dropdown-header">Advanced</li>
+    <li>
+      <a href="articles/dependencies.html">CSS and JavaScript Dependencies </a>
+    </li>
+    <li>
+      <a href="articles/advanced_rendering.html">Advanced Rendering with Callbacks</a>
+    </li>
+    <li>
+      <a href="articles/package_development.html">Package Development</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="articles/gallery.html">Gallery</a>
@@ -237,9 +265,12 @@ bars.transition()
 <a href="#learning-more" class="anchor"></a>Learning More</h2>
 <ul>
 <li><p>Check out the <a href="https://rstudio.github.io/r2d3/articles/gallery.html">Gallery</a> of examples to learn more about what’s possible with D3 visualizations.</p></li>
-<li><p>Explore the various <a href="https://rstudio.github.io/r2d3/articles/advanced.html#rendering-options">rendering options</a> which control versions of D3, including CSS styles, and providing custom sizing behavior.</p></li>
-<li><p>If your widget has advanced rendering requirements (e.g. distinguishing initialization from data reloading or custom resizing logic) then see the section on <a href="https://rstudio.github.io/r2d3/articles/advanced.html#rendering-callbacks">rendering callbacks</a> for an alternate way to organize D3 scripts.</p></li>
-<li><p>You can make your D3 visualizations re-usable by including them in an R package. Read about how to do this in the section on <a href="https://rstudio.github.io/r2d3/articles/advanced.html#package-development">package development</a>.</p></li>
+<li><p>The <a href="https://rstudio.github.io/r2d3/articles/data_conversion.html">Data Conversion</a> article covers customizing the conversion of R objects to D3-friendly JSON.</p></li>
+<li><p><a href="https://rstudio.github.io/r2d3/articles/visualization_options.html">Visualization Options</a> covers customization of various aspects of rendering as well as how to expose user-level options for your D3 script.</p></li>
+<li><p><a href="https://rstudio.github.io/r2d3/articles/development_and_debugging.html">Development and Debugging</a> describes the recommended workflow for developing D3 visualizations with <strong>r2d3</strong>.</p></li>
+<li><p>You can incorporate external CSS styles and JavaScript libraries into your visualizations. See the article on <a href="https://rstudio.github.io/r2d3/articles/dependencies.html">CSS and JavaScript Dependencies</a> for details.</p></li>
+<li><p>If your widget has advanced rendering requirements (e.g. distinguishing initialization from data reloading or custom resizing logic) then see the article on <a href="https://rstudio.github.io/r2d3/articles/advanced_rendering.html">Advanced Rendering with Callbacks</a> for an alternate way to organize D3 scripts.</p></li>
+<li><p>You can make your D3 visualizations re-usable by including them in an R package. Read about how to do this in the article on <a href="https://rstudio.github.io/r2d3/articles/advanced.html#package-development">Package Development</a>.</p></li>
 </ul>
 </div>
 </div>
