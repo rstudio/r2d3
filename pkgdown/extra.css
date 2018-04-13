@@ -65,6 +65,10 @@ blockquote {
   border: solid 1px #cccccc;
 }
 
+.gallery-thumbnail {
+  margin-right: 25px;
+  display: inline;
+}
 
 .source-ref {
   margin-bottom: 20px;

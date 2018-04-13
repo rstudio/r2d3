@@ -12,7 +12,7 @@ TODO:
 The **r2d3** package provides a suite of tools for using [D3
 visualizations](https://d3js.org/) with R, including:
 
-  - Translating R data frames into D3 friendly data structures
+  - Translating R objects into D3 friendly data structures
 
   - Rendering D3 scripts within the [RStudio
     Viewer](https://support.rstudio.com/hc/en-us/articles/202133558-Extending-RStudio-with-the-Viewer-Pane)
@@ -28,11 +28,23 @@ visualizations](https://d3js.org/) with R, including:
   - Publishing D3 based [htmlwidgets](http://www.htmlwidgets.org) in R
     packages
 
+<br/>
+
 With **r2d3**, you can bind data from R to D3 visualizations like the
-ones found on the [D3 Gallery](https://github.com/d3/d3/wiki/Gallery),
-[Blocks](https://bl.ocks.org/), or [VIDA](https://vida.io/explore). D3
-visualizations you create work just like R plots within RStudio, R
-Markdown documents, and Shiny applications.
+ones found on [D3 Gallery](https://github.com/d3/d3/wiki/Gallery),
+[Blocks](https://bl.ocks.org/), and
+[VIDA](https://vida.io/explore):
+
+<div style="margin-top: 20px; margin-bottom: 10px;">
+
+<a href="https://rstudio.github.io/r2d3/articles/gallery.html#chord"><kbd><img src="images/gallery_chord.png" width=204 class="illustration gallery-thumbnail"/></kbd></a>
+<a href="https://rstudio.github.io/r2d3/articles/gallery.html#bubbles"><kbd><img src="images/gallery_bubbles.png" width=193 class="illustration gallery-thumbnail"/></kbd></a>
+<a href="https://rstudio.github.io/r2d3/articles/gallery.html#calendar"><kbd><img src="images/gallery_calendar.png" width=211 class="illustration gallery-thumbnail"/></kbd></a>
+
+</div>
+
+D3 visualizations created with **r2d3** work just like R plots within
+RStudio, R Markdown documents, and Shiny applications.
 
 ## Getting Started
 
