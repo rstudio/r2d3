@@ -47,7 +47,7 @@ r2d3 <- function(
   data <- as_d3_data(data)
   
   # determine type
-  type <- class(data)[[1]]
+  type <- if (inherits(data, "data.frame")) "data.frame" else class(data)[[1]]
   
   # forward options using x
   x <- list(
