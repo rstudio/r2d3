@@ -13,12 +13,6 @@ vignette: >
 library(r2d3)
 ```
  
-<!---
-TODO:
-  - Add gallery thumbnails at the bottom of first section
-  - Cleanup language at the bottom of the first section
---->
-
 <img src="images/r2d3-hex.png" width=180 align="right" style="border: none; margin-right: 10px;"/>
 
 The **r2d3** package provides a suite of tools for using [D3 visualizations](https://d3js.org/) with R, including:
