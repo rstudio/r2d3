@@ -1,6 +1,5 @@
 ---
 title: "Package Development"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Package Development}

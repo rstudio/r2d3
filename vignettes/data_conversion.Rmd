@@ -1,6 +1,5 @@
 ---
 title: "R to D3 Data Conversion"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{R to D3 Data Conversion}

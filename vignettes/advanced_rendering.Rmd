@@ -1,6 +1,5 @@
 ---
 title: "Advanced Rendering with Callbacks"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Advanced Rendering with Callbacks}

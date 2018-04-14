@@ -1,6 +1,5 @@
 ---
 title: "Development and Debugging"
-date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Development and Debugging}
