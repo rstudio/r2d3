@@ -10,7 +10,6 @@ vignette: >
 ---
 
 <!-- TODO
-- consider transpiling vars { } = r2d3
 - show error messages / call stacks for rendering errors
 - provide separate styles or css argument
 - support true html dependencies from dependencies
@@ -65,6 +64,8 @@ Next, install the [daily build](https://dailies.rstudio.com) of RStudio (you nee
 To use **r2d3**, write a D3 script and then pass R data to it using the `rd23()` function. For example, here's a simple D3 script that draws a bar chart ("barchart.js"):
 
 ```js
+// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
+
 var barHeight = Math.floor(height / data.length);
 
 svg.selectAll('rect')

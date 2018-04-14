@@ -97,7 +97,7 @@
     <div class="page-header toc-ignore">
       <h1>Visualization Options</h1>
             
-            <h4 class="date">2018-04-13</h4>
+            <h4 class="date">2018-04-14</h4>
       
       <small>Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/visualization_options.Rmd"><code>vignettes/visualization_options.Rmd</code></a></small>
 
@@ -106,17 +106,81 @@
     
     
 <div class="contents">
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>This article covers various options you can specify for D3 visualizations, including:</p>
+<ol style="list-style-type: decimal">
+<li><p>Specifying the version of the D3 library to use</p></li>
+<li><p>Specifying the type of HTML container to render content withing (e.g. “svg”, “canvas”, “div”, etc.)</p></li>
+<li><p>Enabling users of your visualization to provide options that affect it’s behavior</p></li>
+<li><p>Customizing the sizing behavior of D3 visualizations</p></li>
+</ol>
+</div>
 <div id="d3-version" class="section level2">
 <h2 class="hasAnchor">
 <a href="#d3-version" class="anchor"></a>D3 Version</h2>
+<p>You can create D3 visualizations based on various versions of the D3 JavaScript library (currently versions 3, 4, and 5 are supported). The default version is 5 (the most recent release) however you can specify a a different version using the <code>version</code> parameter. For example, to use version 3 you would do this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(data, <span class="dt">script =</span> <span class="st">"barchart.js"</span>, <span class="dt">version =</span> <span class="st">"3"</span>)</a></code></pre></div>
+<p>Note that multiple versions of D3 can co-exist within a single R Markdown document or Shiny application (<strong>r2d3</strong> automatically handles ensuring that their namespaces don’t clash).</p>
 </div>
-<div id="container" class="section level2">
+<div id="d3-container" class="section level2">
 <h2 class="hasAnchor">
-<a href="#container" class="anchor"></a>Container</h2>
+<a href="#d3-container" class="anchor"></a>D3 Container</h2>
+<p>By default <strong>r2d3</strong> provides an SVG container for your visualization and make it automatically available to your D3 script in the <code>svg</code> variable. You can specify an alternate container via the <code>container</code> parameter. For example, to use a <code>div</code> element instead:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(data, <span class="dt">script =</span> <span class="st">"barchart.js"</span>, <span class="dt">container =</span> <span class="st">"div"</span>)</a></code></pre></div>
+<p>In this case, a <code>div</code> rather than an <code>svg</code> variable is automatically provided to your D3 script:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(10, 30, 40, 35, 20, 10), container="div"</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">var</span> bars <span class="op">=</span> div</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  .<span class="at">selectAll</span>(<span class="st">"div"</span>)</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  .<span class="at">data</span>(data)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    </a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="va">bars</span>.<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"div"</span>)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  .<span class="at">style</span>(<span class="st">"width"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="dv">4</span> <span class="op">+</span> d <span class="op">*</span> <span class="dv">10</span> <span class="op">+</span> <span class="st">"px"</span><span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  .<span class="at">style</span>(<span class="st">"background-color"</span><span class="op">,</span> <span class="st">"steelblue"</span>)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">  .<span class="at">style</span>(<span class="st">"border"</span><span class="op">,</span> <span class="st">"1px solid white"</span>)</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">  .<span class="at">style</span>(<span class="st">"color"</span><span class="op">,</span> <span class="st">"white"</span>)</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">  .<span class="at">style</span>(<span class="st">"padding-left"</span><span class="op">,</span> <span class="st">"2px"</span>)</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">  .<span class="at">text</span>(<span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<p>Note that when specifying the <code>!preview</code> comment at the top of the script you should also be sure to add <code>container = "div"</code>.</p>
+</div>
+<div id="user-options" class="section level2">
+<h2 class="hasAnchor">
+<a href="#user-options" class="anchor"></a>User Options</h2>
+<p>You can access user-level options (e.g. choice of colors) via the <code>options</code> object provided to your script. User options are in turn provided a named list (<code>options</code>) passed to <code><a href="../reference/r2d3.html">r2d3()</a></code>. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), </a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="dt">script =</span> <span class="st">"barchart.js"</span>, </a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="dt">options =</span> <span class="kw">list</span>(<span class="dt">color =</span> <span class="st">"orange"</span>)</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">)</a></code></pre></div>
+<p>The <code>options</code> object is then used in the expression <code>.attr('fill', options.color)</code> to make the fill color dynamic:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), options = list(color = "orange")</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  .<span class="at">data</span>(data)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d <span class="op">*</span> width<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11">    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="va">options</span>.<span class="at">color</span>)<span class="op">;</span></a></code></pre></div>
 </div>
 <div id="sizing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#sizing" class="anchor"></a>Sizing</h2>
+<p>When you render a D3 visualization, <strong>r2d3</strong> creates an R <a href="http://www.htmlwidgets.org">htmlwidget</a> to host the visualization. This means that D3 visualizations inherit the default sizing behavior for htmlwidgets, including:</p>
+<ol style="list-style-type: decimal">
+<li><p>Automatically filling available space in the RStudio Viewer and in standalone web browsers.</p></li>
+<li><p>Conforming to the currently active <code>fig.width</code> and <code>fig.height</code> chunk options within <a href="https://rmarkdown.rstudio.com">R Markdown</a> documents.</p></li>
+<li><p>Filling available space when used in a <a href="https://shiny.rstudio.com">Shiny application</a> or a <a href="https://rmarkdown.rstudio.com/flexdashboard">flexdashboard</a>.</p></li>
+</ol>
+<p>You can override this default sizing behavior in two ways:</p>
+<ol style="list-style-type: decimal">
+<li><p>Providing explicit <code>width</code> and/or <code>height</code> parameters when calling <code><a href="../reference/r2d3.html">r2d3()</a></code>.</p></li>
+<li><p>Providing an alternate <a href="http://www.htmlwidgets.org/develop_sizing.html">htmlwidgets sizing policy</a> via the <code>sizing</code> argument to <code><a href="../reference/r2d3.html">r2d3()</a></code>.</p></li>
+</ol>
 </div>
 </div>
   </div>
@@ -126,8 +190,10 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#d3-version">D3 Version</a></li>
-      <li><a href="#container">Container</a></li>
+<li><a href="#overview">Overview</a></li>
+      <li><a href="#d3-version">D3 Version</a></li>
+      <li><a href="#d3-container">D3 Container</a></li>
+      <li><a href="#user-options">User Options</a></li>
       <li><a href="#sizing">Sizing</a></li>
       </ul>
 </div>
