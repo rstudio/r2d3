@@ -29,7 +29,7 @@ r2d3 <- function(
   dependencies = NULL,
   width = NULL,
   height = NULL,
-  sizing = default_sizing(),
+  sizing = default_sizing(width, height),
   viewer = c("internal", "external", "browser")
   )
 {
@@ -86,13 +86,21 @@ r2d3 <- function(
 
 #' Default sizing policy for r2d3 widgets
 #' 
+#' @param width Desired width for output widget.
+#' @param height Desired height for output widget.
+#' 
 #' @details Use [htmlwidgets::sizingPolicy()] to specify an
 #'   alternate policy.
 #' 
 #' @keywords internal
 #' @export
-default_sizing <- function() {
-  htmlwidgets::sizingPolicy(browser.fill = TRUE)
+default_sizing <- function(width = NULL, height = NULL) {
+  htmlwidgets::sizingPolicy(
+    browser.fill = TRUE,
+    defaultWidth = if (is.null(width)) NULL else "auto",
+    defaultHeight = if (is.null(height)) NULL else "auto",
+    knitr.figure = if (!is.null(width) || !is.null(height)) FALSE else TRUE
+  )
 }
 
 
