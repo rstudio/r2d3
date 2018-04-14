@@ -9,6 +9,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+<!-- TODO
+- consider transpiling vars { } = r2d3
+- show error messages / call stacks for rendering errors
+- provide separate styles or css argument
+- support true html dependencies from dependencies
+- complete vignettes
+- complete gallery
+-->
+
 ```{r setup, include=FALSE}
 library(r2d3)
 ```
