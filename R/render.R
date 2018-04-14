@@ -3,12 +3,18 @@
 #' Renders data with D3 as an HtmlWidget using a D3.js script.
 #'
 #' @param data Data to be passed to D3 script.
-#' @param script 'JavaScript' file containing the D3 script.
+#' @param script JavaScript file containing the D3 script.
+#' @param css CSS file containing styles. The default value "auto" will use
+#'   any CSS file located alongside the script file with the same stem 
+#'   (e.g. "barplot.css" would be used for "barplot.js") as well as any
+#'   CSS file with the name "styles.css".
 #' @param options Options to be passed to D3 script.
 #' @param container The 'HTML' container of the D3 output.
-#' @param version Major D3 version to use, the latest minor version
+#' @param d3_version Major D3 version to use, the latest minor version
 #'   is automatically picked.
-#' @param dependencies Additional javascript or css dependencies.
+#' @param dependencies Additional HTML dependencies. These can take the 
+#'   form of paths to JavaScript or CSS files, or alternatively can be
+#'   fully specified dependencies created with [htmltools::htmlDependency].
 #' @param width Desired width for output widget.
 #' @param height Desired height for output widget.
 #' @param sizing Widget sizing policy (see [htmlwidgets::sizingPolicy]).
@@ -23,26 +29,45 @@
 r2d3 <- function(
   data,
   script,
-  options = NULL,
-  container = "svg",
-  version = c("5", "4", "3"),
+  css = "auto",
   dependencies = NULL,
+  options = NULL,
+  d3_version = c("5", "4", "3"),
+  container = "svg",
   width = NULL,
   height = NULL,
   sizing = default_sizing(),
   viewer = c("internal", "external", "browser")
   )
 {
-  if (!is.null(dependencies)) {
-    dependencies <- list(
-      js = Filter(function(e) !identical(file_ext(e), "css"), dependencies),
-      css = Filter(function(e) identical(file_ext(e), "css"), dependencies)
-    )
+  # resolve version
+  version <- match.arg(as.character(d3_version), choices = c("5", "4", "3"))
+  
+  # auto-detect css styles
+  if (identical(css, "auto")) {
+    # auto-detect based on js filename and "styles.css"
+    css_paths <- c(paste0(tools::file_path_sans_ext(script), ".css"),
+                   file.path(dirname(script), "styles.css"))
+    css <- css_paths[file.exists(css_paths)]
+    if (length(css) == 0)
+      css <- NULL
   }
   
-  # resolve version
-  version <- match.arg(as.character(version), choices = c("5", "4", "3"))
+  # resolve inline dependencies
+  inline_dependencies <- NULL
+  if (!is.null(dependencies) || !is.null(css)) {
+    inline_dependencies <- list(
+      js = Filter(function(e) is.character(e) && !identical(file_ext(e), "css"), dependencies),
+      css = Filter(function(e) is.character(e) && identical(file_ext(e), "css"), dependencies)
+    )
+    inline_dependencies$js <- as.character(inline_dependencies$js)
+    inline_dependencies$css <- as.character(c(inline_dependencies$css, css))
+  }
   
+  # resolve html dependencies
+  html_dependencies <- Filter(function(e) inherits(e, "html_dependency"), dependencies)
+  html_dependencies <- append(html_dependencies, list(d3_dependency(version)))
+
   # convert to d3 data
   data <- as_d3_data(data)
   
@@ -56,10 +81,10 @@ r2d3 <- function(
     container = container,
     options = options,
     script = script_wrap(
-      script_read(c(dependencies$js, script)),
+      script_read(c(inline_dependencies$js, script)),
       container
     ),
-    style = script_read(dependencies$css),
+    style = script_read(inline_dependencies$css),
     version = as.integer(version)
   )
   
@@ -79,7 +104,7 @@ r2d3 <- function(
     width = width,
     height = height,
     package = 'r2d3',
-    dependencies = list(d3_dependency(version)),
+    dependencies = html_dependencies,
     sizingPolicy = sizing
   )
 }

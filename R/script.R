@@ -11,7 +11,7 @@ script_wrap <- function(contents, container) {
 }
 
 script_read <- function(script) {
-  if (is.null(script) || !file.exists(script))
+  if (is.null(script) || length(script) == 0 || !file.exists(script))
     return(script)
   
   paste(

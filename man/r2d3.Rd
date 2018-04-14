@@ -4,23 +4,31 @@
 \alias{r2d3}
 \title{Render Data with D3}
 \usage{
-r2d3(data, script, options = NULL, container = "svg", version = c("5",
-  "4", "3"), dependencies = NULL, width = NULL, height = NULL,
-  sizing = default_sizing(), viewer = c("internal", "external"))
+r2d3(data, script, css = "auto", dependencies = NULL, options = NULL,
+  d3_version = c("5", "4", "3"), container = "svg", width = NULL,
+  height = NULL, sizing = default_sizing(), viewer = c("internal",
+  "external", "browser"))
 }
 \arguments{
 \item{data}{Data to be passed to D3 script.}
 
-\item{script}{'JavaScript' file containing the D3 script.}
+\item{script}{JavaScript file containing the D3 script.}
+
+\item{css}{CSS file containing styles. The default value "auto" will use
+any CSS file located alongside the script file with the same stem
+(e.g. "barplot.css" would be used for "barplot.js") as well as any
+CSS file with the name "styles.css".}
+
+\item{dependencies}{Additional HTML dependencies. These can take the
+form of paths to JavaScript or CSS files, or alternatively can be
+fully specified dependencies created with \link[htmltools:htmlDependency]{htmltools::htmlDependency}.}
 
 \item{options}{Options to be passed to D3 script.}
 
-\item{container}{The 'HTML' container of the D3 output.}
-
-\item{version}{Major D3 version to use, the latest minor version
+\item{d3_version}{Major D3 version to use, the latest minor version
 is automatically picked.}
 
-\item{dependencies}{Additional javascript or css dependencies.}
+\item{container}{The 'HTML' container of the D3 output.}
 
 \item{width}{Desired width for output widget.}
 
@@ -29,7 +37,8 @@ is automatically picked.}
 \item{sizing}{Widget sizing policy (see \link[htmlwidgets:sizingPolicy]{htmlwidgets::sizingPolicy}).}
 
 \item{viewer}{"internal" to use the RStudio internal viewer pane for
-output; "external" to display in an external window.}
+output; "external" to display in an external RStudio window;
+"browser" to display in an external browser.}
 }
 \description{
 Renders data with D3 as an HtmlWidget using a D3.js script.
