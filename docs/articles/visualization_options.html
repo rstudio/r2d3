@@ -176,11 +176,27 @@
 <li><p>Conforming to the currently active <code>fig.width</code> and <code>fig.height</code> chunk options within <a href="https://rmarkdown.rstudio.com">R Markdown</a> documents.</p></li>
 <li><p>Filling available space when used in a <a href="https://shiny.rstudio.com">Shiny application</a> or a <a href="https://rmarkdown.rstudio.com/flexdashboard">flexdashboard</a>.</p></li>
 </ol>
+<p>In order to take advantage of this dynamic sizing behavior, your should ensure that your D3 visualization uses the <code>width</code> and <code>height</code> variables that are provided automatically. Note the use of <code>height</code> in the computation of <code>barHeight</code> and <code>width</code> in the call to <code>.attr()</code> in this example:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">  .<span class="at">data</span>(data)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d <span class="op">*</span> width<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'steelblue'</span>)<span class="op">;</span></a></code></pre></div>
+<p>Whenever the size of the parent element displaying the visualization changes (e.g. when the user resizes the RStudio Viewer) your D3 script will be re-executed to render at the new size. Note that it’s also possible to handle resizing at a more granular level if you use <a href="advanced_rendering.html">advanced rendering</a> callbacks.</p>
+<div id="custom-sizing" class="section level3">
+<h3 class="hasAnchor">
+<a href="#custom-sizing" class="anchor"></a>Custom Sizing</h3>
 <p>You can override this default sizing behavior in two ways:</p>
 <ol style="list-style-type: decimal">
 <li><p>Providing explicit <code>width</code> and/or <code>height</code> parameters when calling <code><a href="../reference/r2d3.html">r2d3()</a></code>.</p></li>
 <li><p>Providing an alternate <a href="http://www.htmlwidgets.org/develop_sizing.html">htmlwidgets sizing policy</a> via the <code>sizing</code> argument to <code><a href="../reference/r2d3.html">r2d3()</a></code>.</p></li>
 </ol>
+<p>As mentioned above, you can also provide more fine grained resizing behavior (i.e. only resize rather than fully re-render) by using <a href="advanced_rendering.html">advanced rendering</a> callbacks.</p>
+</div>
 </div>
 </div>
   </div>

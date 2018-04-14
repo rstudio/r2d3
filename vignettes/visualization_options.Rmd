@@ -100,11 +100,31 @@ When you render a D3 visualization, **r2d3** creates an R [htmlwidget](http://ww
 
 3) Filling available space when used in a [Shiny application](https://shiny.rstudio.com) or a [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard).
 
+In order to take advantage of this dynamic sizing behavior, your should ensure that your D3 visualization uses the `width` and `height` variables that are provided automatically. Note the use of `height` in the computation of `barHeight` and `width` in the call to `.attr()` in this example:
+
+```{js}
+var barHeight = Math.floor(height / data.length);
+
+svg.selectAll('rect')
+  .data(data)
+  .enter().append('rect')
+    .attr('width', function(d) { return d * width; })
+    .attr('height', barHeight)
+    .attr('y', function(d, i) { return i * barHeight; })
+    .attr('fill', 'steelblue');
+```
+
+Whenever the size of the parent element displaying the visualization changes (e.g. when the user resizes the RStudio Viewer) your D3 script will be re-executed to render at the new size. Note that it's also possible to handle resizing at a more granular level if you use [advanced rendering](advanced_rendering.html) callbacks.
+
+### Custom Sizing
+
 You can override this default sizing behavior in two ways:
 
 1) Providing explicit `width` and/or `height` parameters when calling `r2d3()`.
 
 2) Providing an alternate [htmlwidgets sizing policy](http://www.htmlwidgets.org/develop_sizing.html) via the `sizing` argument to `r2d3()`.
+
+As mentioned above, you can also provide more fine grained resizing behavior (i.e. only resize rather than fully re-render) by using [advanced rendering](advanced_rendering.html) callbacks.
 
 
 
