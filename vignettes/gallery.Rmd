@@ -18,7 +18,7 @@ library(r2d3)
 r2d3(
   read.csv("morley.csv"),
   "morley.js",
-  version = 3,
+  d3_version = 3,
   container = "div",
   dependencies = c("morley.css", "box.js")
   )
@@ -28,7 +28,7 @@ r2d3(
 r2d3::r2d3(
   read.csv(system.file("samples/morley/morley.csv", package = "r2d3")),
   system.file("samples/morley/morley.js", package = "r2d3"),
-  version = 3,
+  d3_version = 3,
   container = "div",
   dependencies = c(
     system.file("samples/morley/morley.css", package = "r2d3"),
@@ -46,7 +46,7 @@ flares <- read.csv("flare.csv")
 r2d3(
   flares[!is.na(flares$value), ],
   "bubbles.js",
-  version = 4
+  d3_version = 4
 )
 ```
 ```{r echo=FALSE}
@@ -54,7 +54,7 @@ flares <- read.csv(system.file("samples/bubbles/flare.csv", package = "r2d3"))
 r2d3::r2d3(
   flares[!is.na(flares$value), ],
   system.file("samples/bubbles/bubbles.js", package = "r2d3"),
-  version = 4
+  d3_version = 4
 )
 ```
 
@@ -66,7 +66,7 @@ r2d3::r2d3(
 r2d3(
   jsonlite::read_json("bullets.json"),
   "bullets.js",
-  version = 3,
+  d3_version = 3,
   container = "div",
   dependencies = c("bullets.css", "helper.js"),
   height = 300
@@ -76,7 +76,7 @@ r2d3(
 r2d3::r2d3(
   jsonlite::read_json(system.file("samples/bullets/bullets.json", package = "r2d3")),
   system.file("samples/bullets/bullets.js", package = "r2d3"),
-  version = 3,
+  d3_version = 3,
   container = "div",
   dependencies = c(
     system.file("samples/bullets/bullets.css", package = "r2d3"),
@@ -94,7 +94,7 @@ r2d3::r2d3(
 r2d3(
   read.csv("dji.csv"),
   "calendar.js",
-  version = 4,
+  d3_version = 4,
   container = "div",
   height = 1950
 )
@@ -103,7 +103,7 @@ r2d3(
 r2d3::r2d3(
   read.csv(system.file("samples/calendar/dji.csv", package = "r2d3")),
   system.file("samples/calendar/calendar.js", package = "r2d3"),
-  version = 4,
+  d3_version = 4,
   container = "div",
   height = 1950
 )
@@ -117,7 +117,7 @@ r2d3::r2d3(
 r2d3(
   jsonlite::read_json("us.json"),
   "cartogram.js",
-  version = 3,
+  d3_version = 3,
   dependencies = c("cartogram.css", "topojson.min.js",
   height = 400
 )
@@ -126,7 +126,7 @@ r2d3(
 r2d3::r2d3(
   jsonlite::read_json(system.file("samples/cartogram/us.json", package = "r2d3")),
   system.file("samples/cartogram/cartogram.js", package = "r2d3"),
-  version = 3,
+  d3_version = 3,
   dependencies = c(
     system.file("samples/cartogram/cartogram.css", package = "r2d3"),
     system.file("samples/cartogram/topojson.min.js", package = "r2d3")
@@ -151,7 +151,7 @@ r2d3(
     ncol = 4, nrow = 4, byrow = T
   ),
   "chord.js",
-  version = 4,
+  d3_version = 4,
   dependencies = "chord.css"
 )
 ```
@@ -167,7 +167,7 @@ r2d3::r2d3(
     ncol = 4, nrow = 4, byrow = T
   ),
   system.file("samples/chord/chord.js", package = "r2d3"),
-  version = 4,
+  d3_version = 4,
   dependencies = system.file("samples/chord/chord.css", package = "r2d3")
 )
 ```

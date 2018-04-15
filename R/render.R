@@ -56,6 +56,11 @@ r2d3 <- function(
   # resolve inline dependencies
   inline_dependencies <- NULL
   if (!is.null(dependencies) || !is.null(css)) {
+    
+    # force dependencies to list if necessary
+    if (inherits(dependencies, "html_dependency"))
+      dependencies <- list(dependencies)
+    
     inline_dependencies <- list(
       js = Filter(function(e) is.character(e) && !identical(file_ext(e), "css"), dependencies),
       css = Filter(function(e) is.character(e) && identical(file_ext(e), "css"), dependencies)

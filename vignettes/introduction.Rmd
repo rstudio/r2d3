@@ -11,10 +11,9 @@ vignette: >
 
 <!-- TODO
 - show error messages / call stacks for rendering errors
-- provide separate styles or css argument
-- support true html dependencies from dependencies
 - complete vignettes
 - complete gallery
+- learn tab on site
 -->
 
 ```{r setup, include=FALSE}

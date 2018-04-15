@@ -105,11 +105,59 @@
     
     
 <div class="contents">
-
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>Often times a D3 visualization will require additional components such as CSS styles, JavaScript helper functions, or even entire JavaScript libraries. This article describes how to include these dependencies along with your visualization.</p>
+</div>
+<div id="css-styles" class="section level2">
+<h2 class="hasAnchor">
+<a href="#css-styles" class="anchor"></a>CSS Styles</h2>
+<p>It’s common to require a few CSS styles when creating a visualization. By convention, if you include a CSS file with the same base filename as your D3 script file it will automatically be included. For example, consider a D3 script “barchart.js” within a sub-directory:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ex">barchart.js</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="ex">barchart.css</span></a></code></pre></div>
+<p>If you render the “barchart.js” script like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a></code></pre></div>
+<p>Then the “barchart.css” file will be automatically included.</p>
+<p>You can also name a CSS file “styles.css” (useful if you want multiple visualizations to share styles) and it will also be automatically included:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="ex">barchart.js</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="ex">styles.css</span></a></code></pre></div>
+<p>Finally, you can explicitly include a CSS file of any name via the <code>css</code> parameter of <code><a href="../reference/r2d3.html">r2d3()</a></code>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>, <span class="dt">css =</span> <span class="st">"theme.css"</span>)</a></code></pre></div>
+</div>
+<div id="javascript" class="section level2">
+<h2 class="hasAnchor">
+<a href="#javascript" class="anchor"></a>JavaScript</h2>
+<p>If your visualization depends on additional JavaScript files (e.g. some common code that you want to re-use) you can specify this using the <code>dependencies</code> parameter of <code><a href="../reference/r2d3.html">r2d3()</a></code>. For example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), </a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="dt">script =</span> <span class="st">"barchart.js"</span>, <span class="dt">dependencies =</span> <span class="st">"utils.js"</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">)</a></code></pre></div>
+</div>
+<div id="external-libraries" class="section level2">
+<h2 class="hasAnchor">
+<a href="#external-libraries" class="anchor"></a>External Libraries</h2>
+<p>You can include entire external libraries as dependencies by passing an “html_dependency” object created using the <code><a href="http://www.rdocumentation.org/packages/htmltools/topics/htmlDependency">htmltools::htmlDependency()</a></code> function. For example, here’s how you would include the version of jQuery bundled with the <strong>rmarkdown</strong> package:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), </a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="dt">script =</span> <span class="st">"barchart.js"</span>, <span class="dt">dependencies =</span> rmarkdown<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/rmarkdown/topics/html-dependencies">html_dependency_jquery</a></span>()</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">)</a></code></pre></div>
+<p>Note that you can pass a list of multiple dependencies (either paths to JavaScript files or “html_dependencies” objects) via the <code>dependencies</code> argument.</p>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#overview">Overview</a></li>
+      <li><a href="#css-styles">CSS Styles</a></li>
+      <li><a href="#javascript">JavaScript</a></li>
+      <li><a href="#external-libraries">External Libraries</a></li>
+      </ul>
+</div>
       </div>
 
 </div>

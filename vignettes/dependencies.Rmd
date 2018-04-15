@@ -10,3 +10,66 @@ vignette: >
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
 ```
+
+## Overview
+
+Often times a D3 visualization will require additional components such as CSS styles,  JavaScript helper functions, or even entire JavaScript libraries. This article describes how to include these dependencies along with your visualization.
+
+## CSS Styles
+
+It's common to require a few CSS styles when creating a visualization. By convention, if you include a CSS file with the same base filename as your D3 script file it will automatically be included. For example, consider a D3 script "barchart.js" within a sub-directory:
+
+```bash
+barchart.js
+barchart.css
+```
+
+If you render the "barchart.js" script like this:
+
+```{r}
+r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
+```
+
+Then the "barchart.css" file will be automatically included.
+
+You can also name a CSS file "styles.css" (useful if you want multiple visualizations to share styles) and it will also be automatically included:
+
+```bash
+barchart.js
+styles.css
+```
+
+Finally, you can explicitly include a CSS file of any name via the `css` parameter of `r2d3()`:
+
+```{r}
+r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js", css = "theme.css")
+```
+
+## JavaScript
+
+If your visualization depends on additional JavaScript files (e.g. some common code that you want to re-use) you can specify this using the `dependencies` parameter of `r2d3()`. For example:
+
+```{r}
+r2d3(
+  data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), 
+  script = "barchart.js", dependencies = "utils.js"
+)
+```
+
+## External Libraries
+
+You can include entire external libraries as dependencies by passing an "html_dependency" object created using the `htmltools::htmlDependency()` function. For example, here's how you would include the version of jQuery bundled with the **rmarkdown** package:
+
+```{r}
+r2d3(
+  data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), 
+  script = "barchart.js", dependencies = rmarkdown::html_dependency_jquery()
+)
+```
+
+Note that you can pass a list of multiple dependencies (either paths to JavaScript files or "html_dependencies" objects) via the `dependencies` argument.
+
+
+
+
+
