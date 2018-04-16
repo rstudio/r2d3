@@ -69,7 +69,7 @@ function R2D3(el, width, height) {
       self.renderer(self.data, self.root, self.width, self.height, self.options);
     }
     catch (err) {
-      self.showError(err.message, err.stack);
+      self.showError(err.message, err.stack, null, null);
     }
   };
   
@@ -79,7 +79,7 @@ function R2D3(el, width, height) {
       self.resizer(self.width, self.height);
     }
     catch (err) {
-      self.showError(err.message, err.stack);
+      self.showError(err.message, err.stack, null, null);
     }
   };
   
@@ -89,19 +89,7 @@ function R2D3(el, width, height) {
     el.text = script;
     
     self.captureErrors = function(msg, url, lineNo, columnNo, error) {
-      var lines = script.split("\n");
-      var header = "// R2D3 Source File: ";
-      
-      for (var maybe = lineNo; maybe >= 0; maybe--) {
-        if (lines[maybe].includes(header)) {
-          var data = lines[maybe].split(header)[1];
-          var source = data.split(":")[0].trim();
-          var offset = data.split(":")[1];
-          msg = msg + " in " + source + "#" + (lineNo - (maybe + 1) + parseInt(offset)) + ":" + columnNo + ".";
-        }
-      }
-      
-      self.showError(msg, null);
+      self.showError(msg, null, lineNo, columnNo);
     };
 
     document.head.appendChild(el);
@@ -145,7 +133,7 @@ function R2D3(el, width, height) {
       d3Script(self.d3(), self, self.data, self.root, self.width, self.height, self.options);
     }
     catch (err) {
-      self.showError(err.message, err.stack);
+      self.showError(err.message, err.stack, null, null);
     }
   };
   
@@ -204,8 +192,33 @@ function R2D3(el, width, height) {
     self.resizeDebounce();
   };
   
-  self.showError = function(message, callstack) {
+  self.showError = function(message, callstack, line, column) {
     el.innerHTML = "";
+    
+    if (line === null || column === null) {
+      var reg = new RegExp("at d3Script \\(<anonymous>:([0-9]+):([0-9]+)\\)");
+      var matches = reg.exec(callstack);
+      if (matches.length === 3) {
+        line = parseInt(matches[1]);
+        column = parseInt(matches[2]);
+      }
+    }
+    
+    var location = null;
+    var lines = x.script.split("\n");
+    var header = "// R2D3 Source File: ";
+    for (var maybe = line; maybe >= 0; maybe--) {
+      if (lines[maybe].includes(header)) {
+        var data = lines[maybe].split(header)[1];
+        var source = data.split(":")[0].trim();
+        var offset = data.split(":")[1];
+        location = source + "#" + (line - (maybe + 1) + parseInt(offset)) + ":" + column + ".";
+      }
+    }
+    
+    if (location) {
+      message = message + " in " + location;
+    }
     
     var container = document.createElement("div");
     container.innerHTML = message;
