@@ -11,6 +11,7 @@ function R2D3(el, width, height) {
   self.resizer = null;
   self.renderer = null;
   self.rendererDefaut = true;
+  self.captureErrors = null;
   
   self.setX = function(newX) {
     x = newX;
@@ -86,7 +87,25 @@ function R2D3(el, width, height) {
     var el = document.createElement("script");
     el.type = "text/javascript";
     el.text = script;
+    
+    self.captureErrors = function(msg, url, lineNo, columnNo, error) {
+      var lines = script.split("\n");
+      var header = "// R2D3 Source File: ";
+      
+      for (var maybe = lineNo; maybe >= 0; maybe--) {
+        if (lines[maybe].includes(header)) {
+          var data = lines[maybe].split(header)[1];
+          var source = data.split(":")[0];
+          var offset = data.split(":")[1];
+          msg = msg + " in " + source + " line " + (lineNo - (maybe + 1) + parseInt(offset)) + " column " + columnNo + ".";
+        }
+      }
+      
+      self.showError(msg, null);
+    };
+
     document.head.appendChild(el);
+    self.captureErrors = null;
   };
   
   self.addStyle = function(style) {
@@ -196,5 +215,13 @@ function R2D3(el, width, height) {
     stack.innerHTML = callstack;
     stack.style.display = "none";
     container.appendChild(stack);
+  };
+  
+  window.onerror = function (msg, url, lineNo, columnNo, error) {
+    if (self.captureErrors) {
+      self.captureErrors(msg, url, lineNo, columnNo, error);
+    }
+    
+    return false;
   };
 }
