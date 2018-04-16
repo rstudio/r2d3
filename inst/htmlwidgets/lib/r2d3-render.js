@@ -95,9 +95,9 @@ function R2D3(el, width, height) {
       for (var maybe = lineNo; maybe >= 0; maybe--) {
         if (lines[maybe].includes(header)) {
           var data = lines[maybe].split(header)[1];
-          var source = data.split(":")[0];
+          var source = data.split(":")[0].trim();
           var offset = data.split(":")[1];
-          msg = msg + " in " + source + " line " + (lineNo - (maybe + 1) + parseInt(offset)) + " column " + columnNo + ".";
+          msg = msg + " in " + source + "#" + (lineNo - (maybe + 1) + parseInt(offset)) + ":" + columnNo + ".";
         }
       }
       
@@ -209,6 +209,14 @@ function R2D3(el, width, height) {
     
     var container = document.createElement("div");
     container.innerHTML = message;
+    container.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
+    container.style.fontSize = "9pt";
+    container.style.border = "solid 1px #777";
+    container.style.padding = "5px";
+    container.style.margin = "10px";
+    container.style.background = "#fdfdfd";
+    container.style.color = "#444";
+    
     el.appendChild(container);
     
     var stack = document.createElement("div");
