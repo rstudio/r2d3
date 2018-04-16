@@ -192,6 +192,18 @@ function R2D3(el, width, height) {
     self.resizeDebounce();
   };
   
+  var openSource = function(filename, line, column) {
+    if (window.parent.postMessage) {
+      window.parent.postMessage({
+        message: "openfile",
+        source: "r2d3",
+        file: filename,
+        line: line,
+        column: column
+      }, window.location.origin);
+    }
+  };
+  
   self.showError = function(message, callstack, line, column) {
     el.innerHTML = "";
     
@@ -206,29 +218,41 @@ function R2D3(el, width, height) {
     
     var location = null;
     var lines = x.script.split("\n");
+    var fileLine = null;
     var header = "// R2D3 Source File: ";
     for (var maybe = line; maybe >= 0; maybe--) {
       if (lines[maybe].includes(header)) {
         var data = lines[maybe].split(header)[1];
         var source = data.split(":")[0].trim();
         var offset = data.split(":")[1];
-        location = source + "#" + (line - (maybe + 1) + parseInt(offset)) + ":" + column + ".";
+        fileLine = (line - (maybe + 1) + parseInt(offset));
+        location = source;
       }
     }
     
     if (location) {
-      message = message + " in " + location;
+      message = message + " in ";
     }
     
     var container = document.createElement("div");
     container.innerHTML = message;
     container.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
     container.style.fontSize = "9pt";
-    container.style.border = "solid 1px #777";
+    container.style.border = "solid 1px #CCCCCC";
     container.style.padding = "5px";
     container.style.margin = "10px";
-    container.style.background = "#fdfdfd";
+    container.style.background = "#FEFEFE";
     container.style.color = "#444";
+    
+    if (location) {
+      var linkEl = document.createElement("a");
+      linkEl.innerHTML = location + "#" + fileLine + ":" + column;
+      linkEl.href = "#";
+      linkEl.onclick = function() {
+        openSource(location, fileLine, column);
+      };
+      container.appendChild(linkEl);
+    }
     
     el.appendChild(container);
     
