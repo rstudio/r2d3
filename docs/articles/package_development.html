@@ -105,11 +105,42 @@
     
     
 <div class="contents">
-
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>You can redistribute your D3 visualizations as reusable components if you bundle them within an R package. There are two ways to accomplish this:</p>
+<ol style="list-style-type: decimal">
+<li><p>Create a wrapper function for the requisite call to <code><a href="../reference/r2d3.html">r2d3()</a></code> and include that in a package; or</p></li>
+<li><p>Use your D3 script as the basis for the creation of an <a href="http://www.htmlwidgets.org">htmlwidget</a>.</p></li>
+</ol>
+<p>This article covers both of these techniques, and also describes how to use the <code>html_dependency_d3()</code> function to include multiple distinct versions of D3 within a document or application.</p>
+</div>
+<div id="r3d3-wrapper-function" class="section level2">
+<h2 class="hasAnchor">
+<a href="#r3d3-wrapper-function" class="anchor"></a>R3D3 wrapper function</h2>
+</div>
+<div id="creating-an-htmlwidget" class="section level2">
+<h2 class="hasAnchor">
+<a href="#creating-an-htmlwidget" class="anchor"></a>Creating an htmlwidget</h2>
+</div>
+<div id="using-multiple-versions-of-d3" class="section level2">
+<h2 class="hasAnchor">
+<a href="#using-multiple-versions-of-d3" class="anchor"></a>Using multiple versions of D3</h2>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#overview">Overview</a></li>
+      <li><a href="#r3d3-wrapper-function">R3D3 wrapper function</a></li>
+      <li><a href="#creating-an-htmlwidget">Creating an htmlwidget</a></li>
+      <li><a href="#using-multiple-versions-of-d3">Using multiple versions of D3</a></li>
+      </ul>
+</div>
       </div>
 
 </div>

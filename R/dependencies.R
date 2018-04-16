@@ -21,7 +21,7 @@
 #' @importFrom htmltools htmlDependency
 #' 
 #' @export
-d3_dependency <- function(version = c("5", "4", "3")) {
+html_dependency_d3 <- function(version = c("5", "4", "3")) {
   
   # validate version and determine full version number
   version <- match.arg(version)

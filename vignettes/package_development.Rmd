@@ -10,3 +10,31 @@ vignette: >
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(eval = FALSE)
 ```
+
+## Overview
+
+You can redistribute your D3 visualizations as reusable components if you bundle them within an R package. There are two ways to accomplish this:
+
+1) Create a wrapper function for the requisite call to `r2d3()` and include that in a package; or
+
+2) Use your D3 script as the basis for the creation of an [htmlwidget](http://www.htmlwidgets.org).
+
+This article covers both of these techniques, and also describes how to use the `html_dependency_d3()` function to include multiple distinct versions of D3 within a document or application.
+
+## R3D3 wrapper function
+
+
+
+
+## Creating an htmlwidget
+
+
+## Using multiple versions of D3
+
+
+
+
+
+
+
+

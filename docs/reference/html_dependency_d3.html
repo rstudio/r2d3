@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • r2d3</title>
+<title>D3 HTML dependency — html_dependency_d3 • r2d3</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,7 +27,10 @@
 <script src="../pkgdown.js"></script>
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="D3 HTML dependency — html_dependency_d3" />
+
+<meta property="og:description" content="Create an HTML dependency for the D3 library." />
+<meta name="twitter:card" content="summary" />
 
 
 <!-- mathjax -->
@@ -44,7 +47,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -120,61 +123,55 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>D3 HTML dependency</h1>
+    <small>Source: <a href='https://github.com/rstudio/r2d3/blob/master/R/dependencies.R'><code>R/dependencies.R</code></a></small>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    
+    <p>Create an HTML dependency for the D3 library.</p>
+    
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <pre class="usage"><span class='fu'>html_dependency_d3</span>(<span class='kw'>version</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"5"</span>, <span class='st'>"4"</span>, <span class='st'>"3"</span>))</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>version</th>
+      <td><p>Major version of D3</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="as_d3_data.html">as_d3_data()</a></code> </p>
-          </td>
-          <td><p>Convert object to D3 data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="d3-shiny.html">d3Output()</a></code> <code><a href="d3-shiny.html">renderD3()</a></code> </p>
-          </td>
-          <td><p>Shiny bindings for d3</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="html_dependency_d3.html">html_dependency_d3()</a></code> </p>
-          </td>
-          <td><p>D3 HTML dependency</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="r2d3.html">r2d3()</a></code> </p>
-          </td>
-          <td><p>Render Data with D3</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <p>Create an HTML dependency for a version of D3. Each version has
+a distinct root D3 object so it's possible to combine multiple versions
+of D3 on a single page. For example, D3 v5 is accessed via <code>d3v5</code> and
+D3 v4 is accessed via <code>d3v4</code>. Note however that D3 v3 is accessed via
+simply <code>d3</code> (for compabibilty with existing htmlwidgets that use
+this form).</p>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    <p>This function is exported for use by htmlwidgets. If you are
+using the <code><a href='r2d3.html'>r2d3()</a></code> function to include D3 code within a document
+or application this dependency is included automatically so calling
+this function is unnecessary.</p>
+    
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#note">Note</a></li>
+          </ul>
+
   </div>
 </div>
 

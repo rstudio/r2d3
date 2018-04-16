@@ -71,7 +71,7 @@ r2d3 <- function(
   
   # resolve html dependencies
   html_dependencies <- Filter(function(e) inherits(e, "html_dependency"), dependencies)
-  html_dependencies <- append(html_dependencies, list(d3_dependency(version)))
+  html_dependencies <- append(html_dependencies, list(html_dependency_d3(version)))
 
   # convert to d3 data
   data <- as_d3_data(data)
