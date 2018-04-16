@@ -63,12 +63,23 @@ function R2D3(el, width, height) {
   
   self.render = function() {
     if (self.renderer === null) return;
-    self.renderer(self.data, self.root, self.width, self.height, self.options);
+    
+    try {
+      self.renderer(self.data, self.root, self.width, self.height, self.options);
+    }
+    catch (err) {
+      self.showError(err.message, err.stack);
+    }
   };
   
   self.resize = function() {
     if (self.resizer === null) return;
-    self.resizer(self.width, self.height);
+    try {
+      self.resizer(self.width, self.height);
+    }
+    catch (err) {
+      self.showError(err.message, err.stack);
+    }
   };
   
   self.addScript = function(script) {
@@ -110,7 +121,13 @@ function R2D3(el, width, height) {
   
   self.callD3Script = function() {
     var d3Script = self.d3Script;
-    d3Script(self.d3(), self, self.data, self.root, self.width, self.height, self.options);
+    
+    try {
+      d3Script(self.d3(), self, self.data, self.root, self.width, self.height, self.options);
+    }
+    catch (err) {
+      self.showError(err.message, err.stack);
+    }
   };
   
   self.widgetRender = function(x) {
@@ -166,5 +183,18 @@ function R2D3(el, width, height) {
     self.setHeight(height);
     
     self.resizeDebounce();
+  };
+  
+  self.showError = function(message, callstack) {
+    el.innerHTML = "";
+    
+    var container = document.createElement("div");
+    container.innerHTML = message;
+    el.appendChild(container);
+    
+    var stack = document.createElement("div");
+    stack.innerHTML = callstack;
+    stack.style.display = "none";
+    container.appendChild(stack);
   };
 }
