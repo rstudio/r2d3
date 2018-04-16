@@ -12,6 +12,7 @@ function R2D3(el, width, height) {
   self.renderer = null;
   self.rendererDefaut = true;
   self.captureErrors = null;
+  self.theme = {};
   
   self.setX = function(newX) {
     x = newX;
@@ -19,6 +20,10 @@ function R2D3(el, width, height) {
     
     if (x.type == "data.frame") {
       self.data = HTMLWidgets.dataframeToD3(self.data);
+    }
+    
+    if (x.theme) {
+      self.theme = x.theme;
     }
     
     self.options = x.options;
@@ -41,6 +46,9 @@ function R2D3(el, width, height) {
     var root = self.d3().select(el).append(self.container)
       .attr("width", self.width)
       .attr("height", self.height);
+      
+    if (self.theme.background) root.style("background", self.theme.background);
+    if (self.theme.foreground) root.style("fill", self.theme.foreground);
       
     self.setRoot(root);
   };
@@ -130,7 +138,7 @@ function R2D3(el, width, height) {
     var d3Script = self.d3Script;
     
     try {
-      d3Script(self.d3(), self, self.data, self.root, self.width, self.height, self.options);
+      d3Script(self.d3(), self, self.data, self.root, self.width, self.height, self.options, self.theme);
     }
     catch (err) {
       self.showError(err.message, err.stack, null, null);
@@ -205,8 +213,6 @@ function R2D3(el, width, height) {
   };
   
   self.showError = function(message, callstack, line, column) {
-    el.innerHTML = "";
-    
     if (line === null || column === null) {
       var reg = new RegExp("at d3Script \\(<anonymous>:([0-9]+):([0-9]+)\\)");
       var matches = reg.exec(callstack);
@@ -234,7 +240,11 @@ function R2D3(el, width, height) {
       message = message + " in ";
     }
     
-    var container = document.createElement("div");
+    var container = document.getElementById("r2d3-error-container");
+    if (!container)
+      container = document.createElement("div");
+    
+    container.id = "r2d3-error-container";
     container.innerHTML = message;
     container.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
     container.style.fontSize = "9pt";
