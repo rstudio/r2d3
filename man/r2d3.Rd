@@ -2,7 +2,7 @@
 % Please edit documentation in R/render.R
 \name{r2d3}
 \alias{r2d3}
-\title{Render Data with D3}
+\title{D3 visualization}
 \usage{
 r2d3(data, script, css = "auto", dependencies = NULL, options = NULL,
   d3_version = c("5", "4", "3"), container = "svg", width = NULL,
@@ -41,5 +41,5 @@ output; "external" to display in an external RStudio window;
 "browser" to display in an external browser.}
 }
 \description{
-Renders data with D3 as an HtmlWidget using a D3.js script.
+Visualize data using a custom D3 visualization script
 }

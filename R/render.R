@@ -1,6 +1,6 @@
-#' Render Data with D3
+#' D3 visualization
 #'
-#' Renders data with D3 as an HtmlWidget using a D3.js script.
+#' Visualize data using a custom D3 visualization script
 #'
 #' @param data Data to be passed to D3 script.
 #' @param script JavaScript file containing the D3 script.

@@ -23,15 +23,109 @@ This article covers both of these techniques, and also describes how to use the 
 
 ## R3D3 wrapper function
 
+The simplest way to include a D3 visualization you have created with **r2d3** in an R package is to create a wrapper function. There are a few things to keep in mind when creating a wrapper function:
 
+1) You should use `system.file()` for references to the D3 script or any other files (e.g. CSS stylesheets).
 
+2) You should expose any [user level options](visualization_options.html#user-options) as arguments to your wrapper function.
+
+3) You should include `width` and `height` parameters to enable callers of the function to explicitly override your [sizing policy](visualization_options.html#custom-sizing).
+
+Here's an example wrapper function which illustrates:
+
+```{r}
+d3_barchart <- function(data, color = "orange", width = NULL, height = NULL) {
+  r2d3::r2d3(
+    data = data,
+    script = system.file("d3/barchart/barchart.js", package = "d3barchart"),
+    width = width,
+    height = height
+  )
+}
+```
 
 ## Creating an htmlwidget
 
+The `r2d3()` function provides a generic mechanism for turning a standalone D3 visualization script into an [htmlwidget](http://www.htmlwidgets.org). Depending on your requirements, you may find it more convenient to convert your D3 script into a full blown htmlwidget. 
+
+The [htmlwidgets interface](http://www.htmlwidgets.org/develop_intro.html) provides more granular mechanisms for rendering visualizations, including distinguishing between code for one-time initialization, re-rendering based on new data, and resizing.
+
+If you plan on creating an htmlwidget and wish to use version 4 or 5 of D3, please see the section below on [using multiple versions of d3] to ensure that you don't break other widgets that might be relying on an older version of D3.
+
+Not that the **r2d3** package also supports an [advanced rendering](advanced_rendering.html) interface that more closely approximates the htmlwidgets API. Converting your visualization to use to the advanced rendering interface is therefore a good first step towards creating an htmlwidget.
 
 ## Using multiple versions of D3
 
+Many existing [htmlwidgets](http://www.htmlwidgets.org) use version 3 of the D3 library, which has the potential to cause problems when mixed with D3 visualizations that make use of version 4 or 5 of D3. This is because major versions of D3 are incompatible, so using version 4 or 5 with code written for version 3 will result in errors.
 
+The **r2d3** package includes an `html_dependency_d3()` function which enables you to use multiple incompatible versions of D3 within a single document or application. This is accomplished by renaming the global D3 object with a version suffix. So when using `html_dependency_d3()` the following are the correct references to D3:
+
+| Version  | Object |
+|---------------------|---------------------|
+| 3  | `d3` |
+| 4  | `d3v4` |
+| 5  | `d3v5` |
+
+For example, if you are using version 4 of D3 then your code might look like this:
+
+```js
+var outerRadius = Math.min(width, height) * 0.5 - 40,
+    innerRadius = outerRadius - 30;
+
+var formatValue = d3v4.formatPrefix(",.0", 1e3);
+
+var chord = d3v4.chord()
+    .padAngle(0.05)
+    .sortSubgroups(d3v4.descending);
+
+var arc = d3v4.arc()
+    .innerRadius(innerRadius)
+    .outerRadius(outerRadius);
+
+var ribbon = d3v4.ribbon()
+    .radius(innerRadius);
+```
+
+Note that all references to the D3 library use `d3v4`.
+
+Alternatively you could also create a local `d3` alias like this:
+
+```js
+var d3 = d3v4;
+
+var outerRadius = Math.min(width, height) * 0.5 - 40,
+    innerRadius = outerRadius - 30;
+
+var formatValue = d3.formatPrefix(",.0", 1e3);
+
+var chord = d3.chord()
+    .padAngle(0.05)
+    .sortSubgroups(d3.descending);
+
+var arc = d3.arc()
+    .innerRadius(innerRadius)
+    .outerRadius(outerRadius);
+
+var ribbon = d3.ribbon()
+    .radius(innerRadius);
+```
+
+This local alias technique is in fact what `r3d3()` does when executing D3 visualization scripts so you can always use `d3` to reference the D3 library and know you are getting the correct version. 
+
+However, if you are [creating an htmlwidget] you will need to be sure to reference the correct version of D3 (i.e. `d3`, `d3v4`, or `d3v4`) explicitly.
+
+To incorporate the renamed, multiple-version friendly D3 libraries provided by **r2d3** into an [htmlwidget](http://www.htmlwidgets.org) you can use the `dependencies` argument of the `htmlwidgets::createWidget()` function. For example:
+
+```{r}
+htmlwidgets::createWidget(
+  "mywidget",
+  x,
+  width = width,
+  height = height,
+  package = "mypackage",
+  dependencies = r2d3::html_dependency_d3(version = "4")
+)
+```
 
 
 
