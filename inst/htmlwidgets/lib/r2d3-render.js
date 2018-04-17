@@ -77,7 +77,7 @@ function R2D3(el, width, height) {
       self.renderer(self.data, self.root, self.width, self.height, self.options);
     }
     catch (err) {
-      self.showError(err.message, err.stack, null, null);
+      self.showError(err, null, null);
     }
   };
   
@@ -87,7 +87,7 @@ function R2D3(el, width, height) {
       self.resizer(self.width, self.height);
     }
     catch (err) {
-      self.showError(err.message, err.stack, null, null);
+      self.showError(err, null, null);
     }
   };
   
@@ -97,7 +97,10 @@ function R2D3(el, width, height) {
     el.text = script;
     
     self.captureErrors = function(msg, url, lineNo, columnNo, error) {
-      self.showError(msg, null, lineNo, columnNo);
+      self.showError({
+          message: msg,
+          stack: null
+        }, lineNo, columnNo);
     };
 
     document.head.appendChild(el);
@@ -141,7 +144,7 @@ function R2D3(el, width, height) {
       d3Script(self.d3(), self, self.data, self.root, self.width, self.height, self.options, self.theme);
     }
     catch (err) {
-      self.showError(err.message, err.stack, null, null);
+      self.showError(err, null, null);
     }
   };
   
@@ -212,11 +215,16 @@ function R2D3(el, width, height) {
     }
   };
   
-  self.showError = function(message, callstack, line, column) {
+  self.showError = function(error, line, column) {
+    var message = error, callstack = "";
+    
+    if (error.message) message = error.error;
+    if (error.stack) callstack = error.stack;
+    
     if (line === null || column === null) {
-      var reg = new RegExp("at d3Script \\(<anonymous>:([0-9]+):([0-9]+)\\)");
+      var reg = new RegExp("at [^\\n]+ \\(<anonymous>:([0-9]+):([0-9]+)\\)");
       var matches = reg.exec(callstack);
-      if (matches.length === 3) {
+      if (matches && matches.length === 3) {
         line = parseInt(matches[1]);
         column = parseInt(matches[2]);
       }
@@ -226,7 +234,7 @@ function R2D3(el, width, height) {
     var lines = x.script.split("\n");
     var fileLine = null;
     var header = "// R2D3 Source File: ";
-    for (var maybe = line; maybe >= 0; maybe--) {
+    for (var maybe = line; line && maybe >= 0; maybe--) {
       if (lines[maybe].includes(header)) {
         var data = lines[maybe].split(header)[1];
         var source = data.split(":")[0].trim();
@@ -241,11 +249,13 @@ function R2D3(el, width, height) {
     }
     
     var container = document.getElementById("r2d3-error-container");
-    if (!container)
+    if (!container) {
       container = document.createElement("div");
+      el.appendChild(container);
+    }
     
     container.id = "r2d3-error-container";
-    container.innerHTML = message;
+    container.innerHTML = "Error: " + message;
     container.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
     container.style.fontSize = "9pt";
     container.style.border = "solid 1px #CCCCCC";
@@ -253,6 +263,10 @@ function R2D3(el, width, height) {
     container.style.margin = "10px";
     container.style.background = "#FEFEFE";
     container.style.color = "#444";
+    container.style.position = "absolute";
+    container.style.top = "0";
+    container.style.left = "0";
+    container.style.right = "0";
     
     if (location) {
       var linkEl = document.createElement("a");
@@ -264,12 +278,12 @@ function R2D3(el, width, height) {
       container.appendChild(linkEl);
     }
     
-    el.appendChild(container);
-    
-    var stack = document.createElement("div");
-    stack.innerHTML = callstack;
-    stack.style.display = "none";
-    container.appendChild(stack);
+    if (stack) {
+      var stack = document.createElement("div");
+      stack.innerHTML = callstack;
+      stack.style.display = "none";
+      container.appendChild(stack);
+    }
   };
   
   window.onerror = function (msg, url, lineNo, columnNo, error) {
