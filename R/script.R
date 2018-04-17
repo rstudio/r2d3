@@ -2,7 +2,7 @@
 script_wrap <- function(contents, container) {
   paste(
     c(
-      paste("var d3Script = function(d3, r2d3, data, ", container, ", width, height, options) {", sep = ""),
+      paste("var d3Script = function(d3, r2d3, data, ", container, ", width, height, options, theme) {", sep = ""),
       contents,
       "};"
     ),
@@ -17,7 +17,12 @@ script_read <- function(script) {
   paste(
     sapply(
       script,
-      function(e) paste(readLines(e, warn = FALSE), collapse = "\n")
+      function(e) paste(
+        c(
+          paste("// R2D3 Source File: ", e, ":", 0),
+          readLines(e, warn = FALSE)
+        ), collapse = "\n"
+      )
     ),
     collapse = "\n\n"
   )

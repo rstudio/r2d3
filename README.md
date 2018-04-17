@@ -94,10 +94,11 @@ the D3 script. There are a number of other special variables available
 within D3 scripts, including:
 
   - `data` — The R data converted to JavaScript.
-  - `svg` — The svg container for the visualization
-  - `width` — The current width of the container
-  - `height` — The current height of the container
-  - `options` — Additional options provided by the user
+  - `svg` — The svg container for the visualization.
+  - `width` — The current width of the container.
+  - `height` — The current height of the container.
+  - `options` — Additional options provided by the user.
+  - `theme` — The theme colors in use by the runtime.
 
 ## D3 Preview
 
@@ -185,7 +186,7 @@ server <- function(input, output) {
   output$d3 <- renderD3({
     r2d3(
       floor(runif(5, 5, input$bar_max)),
-      system.file("baranims.js", package = "r2d3")
+      "baranims.js"
     )
   })
 }

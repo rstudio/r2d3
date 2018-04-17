@@ -90,7 +90,8 @@ r2d3 <- function(
       container
     ),
     style = script_read(inline_dependencies$css),
-    version = as.integer(version)
+    version = as.integer(version),
+    theme = default_theme()
   )
   
   # resolve viewer if it's explicitly specified
@@ -122,10 +123,19 @@ r2d3 <- function(
 #' @keywords internal
 #' @export
 default_sizing <- function() {
-  htmlwidgets::sizingPolicy(browser.fill = TRUE)
+  htmlwidgets::sizingPolicy(
+    browser.fill = TRUE,
+    padding = 0
+  )
 }
 
+default_theme <- function() {
+  getOption("r2d3.theme", rstudio_theme())
+}
 
-
-
-
+rstudio_theme <- function() {
+  if (exists(".rs.api.getThemeInfo"))
+    get(".rs.api.getThemeInfo")()
+  else
+    NULL
+}
