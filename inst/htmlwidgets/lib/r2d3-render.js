@@ -215,6 +215,8 @@ function R2D3(el, width, height) {
     }
   };
   
+  var stackExpanded = false;
+  
   self.showError = function(error, line, column) {
     var message = error, callstack = "";
     
@@ -278,11 +280,24 @@ function R2D3(el, width, height) {
       container.appendChild(linkEl);
     }
     
-    if (stack) {
-      var stack = document.createElement("div");
+    if (callstack) {
+      var expand = document.createElement("a");
+      expand.innerHTML = "stack";
+      expand.href = "#";
+      expand.style.float = "right";
+      if (!stackExpanded) container.appendChild(expand);
+      
+      var stack = document.createElement("code");
       stack.innerHTML = callstack;
-      stack.style.display = "none";
+      stack.style.marginTop = "10px";
+      stack.style.display = stackExpanded ? "block" : "none";
       container.appendChild(stack);
+      
+      expand.onclick = function() {
+        stack.style.display = "block";
+        expand.style.display = "none";
+        stackExpanded = true;
+      };
     }
   };
   
