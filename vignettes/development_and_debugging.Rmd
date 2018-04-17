@@ -13,3 +13,67 @@ knitr::opts_chunk$set(eval = FALSE)
 
 ## Overview
 
+This article describes recommend workflow for developing D3 visualizations, including:
+
+1) Using integrated tools for **r2d3** within RStudio to preview visualizations; and
+
+2) Using browser debugging tools to pinpoint errors in your code.
+
+Note that the development tools described above are only fully supported within the [daily build](https://dailies.rstudio.com) of RStudio (as opposed to the current stable release) so you should download the daily build before trying these features out.
+
+## RStudio Preview
+
+The [daily build](https://dailies.rstudio.com) of RStudio includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:
+
+<img src="images/new_d3_script.png" class="screenshot" width=600/>
+
+A simple template for a D3 script (the barchart.js example shown above) is provided by default. You can use the **Preview** command (Ctrl+Shift+Center) to render the visualization:
+
+<img src="images/rstudio_preview.png" class="screenshot" width=600/>
+
+You might wonder where the data comes from for the preview. Note that there is a special comment at the top of the D3 script:
+
+```js
+// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
+```
+
+This comment enables you to specify the data (along with any other arguments to the `r2d3()` function) to use for the preview.
+
+### Viewer
+
+The `viewer` argument to the `r2d3()` function enables you to customize how D3 visualizations are viewed when printed from within the RStudio console. The following options are available:
+
+| Option  | Description |
+|---------------------|---------------------|
+| `viewer = "internal"`  | (Default). Display within the RStudio Viewer pane. |
+| `viewer = "external"`  | Display within an external RStudio Viewer window. |
+| `viewer = "browser"`  | Display within an external web browser (e.g. Chrome). |
+
+The "external" option is useful if your visualization requires more space than an RStudio pane affords. The "browser" option is useful if you need access to browser debugging tools during development.
+
+Here's an example of adding the `viewer` argument to the preview comment at the top of a D3 script:
+
+```js
+// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), viewer="external"
+```
+
+## Debugging
+
+If you need to debug errors or other unexpected behavior in your D3 script, you can use the *Show in new window* window command within the RStudio Viewer to show the visualization in an external web browser:
+
+<img src="images/show_in_new_window.png" class="illustration" width=600/>
+
+It's also possible to add the `viewer="browser"` option to your `!preview` comment at the top of the file to skip the RStudio Viewer and route the visualization directly to an external browser:
+
+```js
+// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), viewer="browser"
+```
+
+Once you've opened the visualization you can use your browser **Developer Tools** to do additional debugging (typically you'll need to reload the page after you've opened the developer tools pane in order to reproduce the error):
+
+<img src="images/browser_developer_tools.png" class="screenshot" width=600/>
+
+
+
+
+

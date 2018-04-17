@@ -108,6 +108,61 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
+<p>This article describes recommend workflow for developing D3 visualizations, including:</p>
+<ol style="list-style-type: decimal">
+<li><p>Using integrated tools for <strong>r2d3</strong> within RStudio to preview visualizations; and</p></li>
+<li><p>Using browser debugging tools to pinpoint errors in your code.</p></li>
+</ol>
+<p>Note that the development tools described above are only fully supported within the <a href="https://dailies.rstudio.com">daily build</a> of RStudio (as opposed to the current stable release) so you should download the daily build before trying these features out.</p>
+</div>
+<div id="rstudio-preview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#rstudio-preview" class="anchor"></a>RStudio Preview</h2>
+<p>The <a href="https://dailies.rstudio.com">daily build</a> of RStudio includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:</p>
+<p><img src="images/new_d3_script.png" class="screenshot" width="600/"></p>
+<p>A simple template for a D3 script (the barchart.js example shown above) is provided by default. You can use the <strong>Preview</strong> command (Ctrl+Shift+Center) to render the visualization:</p>
+<p><img src="images/rstudio_preview.png" class="screenshot" width="600/"></p>
+<p>You might wonder where the data comes from for the preview. Note that there is a special comment at the top of the D3 script:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></a></code></pre></div>
+<p>This comment enables you to specify the data (along with any other arguments to the <code><a href="../reference/r2d3.html">r2d3()</a></code> function) to use for the preview.</p>
+<div id="viewer" class="section level3">
+<h3 class="hasAnchor">
+<a href="#viewer" class="anchor"></a>Viewer</h3>
+<p>The <code>viewer</code> argument to the <code><a href="../reference/r2d3.html">r2d3()</a></code> function enables you to customize how D3 visualizations are viewed when printed from within the RStudio console. The following options are available:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Option</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>viewer = "internal"</code></td>
+<td>(Default). Display within the RStudio Viewer pane.</td>
+</tr>
+<tr class="even">
+<td><code>viewer = "external"</code></td>
+<td>Display within an external RStudio Viewer window.</td>
+</tr>
+<tr class="odd">
+<td><code>viewer = "browser"</code></td>
+<td>Display within an external web browser (e.g. Chrome).</td>
+</tr>
+</tbody>
+</table>
+<p>The “external” option is useful if your visualization requires more space than an RStudio pane affords. The “browser” option is useful if you need access to browser debugging tools during development.</p>
+<p>Here’s an example of adding the <code>viewer</code> argument to the preview comment at the top of a D3 script:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), viewer="external"</span></a></code></pre></div>
+</div>
+</div>
+<div id="debugging" class="section level2">
+<h2 class="hasAnchor">
+<a href="#debugging" class="anchor"></a>Debugging</h2>
+<p>If you need to debug errors or other unexpected behavior in your D3 script, you can use the <em>Show in new window</em> window command within the RStudio Viewer to show the visualization in an external web browser:</p>
+<p><img src="images/show_in_new_window.png" class="illustration" width="600/"></p>
+<p>It’s also possible to add the <code>viewer="browser"</code> option to your <code>!preview</code> comment at the top of the file to skip the RStudio Viewer and route the visualization directly to an external browser:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), viewer="browser"</span></a></code></pre></div>
+<p>Once you’ve opened the visualization you can use your browser <strong>Developer Tools</strong> to do additional debugging (typically you’ll need to reload the page after you’ve opened the developer tools pane in order to reproduce the error):</p>
+<p><img src="images/browser_developer_tools.png" class="screenshot" width="600/"></p>
 </div>
 </div>
   </div>
@@ -118,6 +173,8 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#overview">Overview</a></li>
+      <li><a href="#rstudio-preview">RStudio Preview</a></li>
+      <li><a href="#debugging">Debugging</a></li>
       </ul>
 </div>
       </div>
