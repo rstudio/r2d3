@@ -97,7 +97,7 @@
     <div class="page-header toc-ignore">
       <h1>Visualization Options</h1>
             
-            <h4 class="date">2018-04-16</h4>
+            <h4 class="date">2018-04-17</h4>
       
       <small>Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/visualization_options.Rmd"><code>vignettes/visualization_options.Rmd</code></a></small>
 
@@ -198,6 +198,33 @@
 <p>As mentioned above, you can also provide more fine grained resizing behavior (i.e. only resize rather than fully re-render) by using <a href="advanced_rendering.html">advanced rendering</a> callbacks.</p>
 </div>
 </div>
+<div id="viewer" class="section level2">
+<h2 class="hasAnchor">
+<a href="#viewer" class="anchor"></a>Viewer</h2>
+<p>The <code>viewer</code> argument to the <code><a href="../reference/r2d3.html">r2d3()</a></code> function enables you to customize how D3 visualizations are viewed when printed from within the RStudio console. The following options are available:</p>
+<table class="table">
+<thead><tr class="header">
+<th>Option</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>viewer = "internal"</code></td>
+<td>(Default). Display within the RStudio Viewer pane.</td>
+</tr>
+<tr class="even">
+<td><code>viewer = "external"</code></td>
+<td>Display within an external RStudio Viewer window.</td>
+</tr>
+<tr class="odd">
+<td><code>viewer = "browser"</code></td>
+<td>Display within an external web browser (e.g. Chrome).</td>
+</tr>
+</tbody>
+</table>
+<p>The “external” option is useful if your visualization requires more space than an RStudio pane affords. The “browser” option is useful if you need access to browser debugging tools during development.</p>
+<p>Note that the <code>viewer</code> options described above are only fully supported within the <a href="https://dailies.rstudio.com">daily build</a> of RStudio (as opposed to the current stable release).</p>
+</div>
 </div>
   </div>
 
@@ -211,6 +238,7 @@
       <li><a href="#d3-container">D3 Container</a></li>
       <li><a href="#user-options">User Options</a></li>
       <li><a href="#sizing">Sizing</a></li>
+      <li><a href="#viewer">Viewer</a></li>
       </ul>
 </div>
       </div>

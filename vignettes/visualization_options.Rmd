@@ -127,6 +127,19 @@ You can override this default sizing behavior in two ways:
 As mentioned above, you can also provide more fine grained resizing behavior (i.e. only resize rather than fully re-render) by using [advanced rendering](advanced_rendering.html) callbacks.
 
 
+## Viewer
+
+The `viewer` argument to the `r2d3()` function enables you to customize how D3 visualizations are viewed when printed from within the RStudio console. The following options are available:
+
+| Option  | Description |
+|---------------------|---------------------|
+| `viewer = "internal"`  | (Default). Display within the RStudio Viewer pane. |
+| `viewer = "external"`  | Display within an external RStudio Viewer window. |
+| `viewer = "browser"`  | Display within an external web browser (e.g. Chrome). |
+
+The "external" option is useful if your visualization requires more space than an RStudio pane affords. The "browser" option is useful if you need access to browser debugging tools during development.
+
+Note that the `viewer` options described above are only fully supported within the [daily build](https://dailies.rstudio.com) of RStudio (as opposed to the current stable release).
 
 
 

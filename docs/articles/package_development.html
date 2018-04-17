@@ -113,7 +113,7 @@
 <li><p>Create a wrapper function for the requisite call to <code><a href="../reference/r2d3.html">r2d3()</a></code> and include that in a package; or</p></li>
 <li><p>Use your D3 script as the basis for the creation of an <a href="http://www.htmlwidgets.org">htmlwidget</a>.</p></li>
 </ol>
-<p>This article covers both of these techniques, and also describes how to use the <code>html_dependency_d3()</code> function to include multiple distinct versions of D3 within a document or application.</p>
+<p>This article covers both of these techniques, and also describes how to use the <code><a href="../reference/html_dependency_d3.html">html_dependency_d3()</a></code> function to include multiple distinct versions of D3 within a document or application.</p>
 </div>
 <div id="r3d3-wrapper-function" class="section level2">
 <h2 class="hasAnchor">
@@ -146,7 +146,7 @@
 <h2 class="hasAnchor">
 <a href="#using-multiple-versions-of-d3" class="anchor"></a>Using multiple versions of D3</h2>
 <p>Many existing <a href="http://www.htmlwidgets.org">htmlwidgets</a> use version 3 of the D3 library, which has the potential to cause problems when mixed with D3 visualizations that make use of version 4 or 5 of D3. This is because major versions of D3 are incompatible, so using version 4 or 5 with code written for version 3 will result in errors.</p>
-<p>The <strong>r2d3</strong> package includes an <code>html_dependency_d3()</code> function which enables you to use multiple incompatible versions of D3 within a single document or application. This is accomplished by renaming the global D3 object with a version suffix. So when using <code>html_dependency_d3()</code> the following are the correct references to D3:</p>
+<p>The <strong>r2d3</strong> package includes an <code><a href="../reference/html_dependency_d3.html">html_dependency_d3()</a></code> function which enables you to use multiple incompatible versions of D3 within a single document or application. This is accomplished by renaming the global D3 object with a version suffix. So when using <code><a href="../reference/html_dependency_d3.html">html_dependency_d3()</a></code> the following are the correct references to D3:</p>
 <table class="table">
 <thead><tr class="header">
 <th>Version</th>
@@ -211,7 +211,7 @@
 <a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="dt">width =</span> width,</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="dt">height =</span> height,</a>
 <a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="dt">package =</span> <span class="st">"mypackage"</span>,</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="dt">dependencies =</span> r2d3<span class="op">::</span><span class="kw">html_dependency_d3</span>(<span class="dt">version =</span> <span class="st">"4"</span>)</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="dt">dependencies =</span> r2d3<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/r2d3/topics/html_dependency_d3">html_dependency_d3</a></span>(<span class="dt">version =</span> <span class="st">"4"</span>)</a>
 <a class="sourceLine" id="cb4-8" data-line-number="8">)</a></code></pre></div>
 </div>
 </div>
