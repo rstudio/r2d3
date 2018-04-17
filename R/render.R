@@ -124,8 +124,7 @@ r2d3 <- function(
 #' @export
 default_sizing <- function() {
   htmlwidgets::sizingPolicy(
-    browser.fill = TRUE,
-    padding = 0
+    browser.fill = TRUE
   )
 }
 
