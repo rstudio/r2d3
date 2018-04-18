@@ -268,7 +268,9 @@ function R2D3(el, width, height) {
   
   var cleanStackTrace = function(stack) {
     var cleaned = stack.substr(0, stack.indexOf("at d3Script"));
-
+    cleaned = cleaned.replace(new RegExp("\\(.*/session/view[^/]*/lib/[^/]+/", "g"), "(");
+    cleaned = cleaned.replace(new RegExp("\\(.*/session/view[^/]*/", "g"), "(");
+    
     return cleaned;
   };
   
@@ -363,8 +365,8 @@ function R2D3(el, width, height) {
     header.style.marginTop = "8px";
     header.style.background = "rgb(244, 248, 249)";
     header.style.border = "1px solid #d6dadc";
-    header.style.borderBottom = "0";
-    header.style.padding = "12px 15px 12px 15px";
+    header.style.padding = "8px 15px 8px 15px";
+    header.style.lineHeight = "24px";
     container.appendChild(header);
     
     if (errorFile) {
@@ -389,6 +391,7 @@ function R2D3(el, width, height) {
       stack.style.border = "1px solid #d6dadc";
       stack.style.padding = "12px 15px 12px 15px";
       stack.style.background = "#FFFFFF";
+      stack.style.borderTop = "0";
       
       var entries = cleanStack.split("\n");
       for (var idxEntry in entries) {
@@ -396,7 +399,10 @@ function R2D3(el, width, height) {
         var stackEl = document.createElement("div");
         
         var stackRes = parseCallstackRef(entry);
-        if (hostDomain && stackRes) {
+        if (idxEntry === "0") {
+          header.appendChild(document.createElement("br"));
+          header.appendChild(document.createTextNode(entry));
+        } else if (hostDomain && stackRes) {
           stackEl.innerText = entry.substr(0, entry.indexOf("(<anony"));
           var stackLinkEl = createSourceLink(stackRes.file, stackRes.line, stackRes.column, hostDomain);
           stackEl.appendChild(stackLinkEl);
