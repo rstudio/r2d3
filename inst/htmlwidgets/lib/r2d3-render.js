@@ -203,14 +203,15 @@ function R2D3(el, width, height) {
     self.resizeDebounce();
   };
   
-  var openSource = function(filename, line, column, domain) {
+  var openSource = function(filename, line, column, domain, highlight) {
     if (window.parent.postMessage) {
       window.parent.postMessage({
         message: "openfile",
         source: "r2d3",
         file: filename,
         line: line,
-        column: column
+        column: column,
+        highlight: highlight
       }, domain);
     }
   };
@@ -219,6 +220,7 @@ function R2D3(el, width, height) {
   var errorLine = null;
   var errorColumn = null;
   var errorFile = null;
+  var errorHighlightOnce = false;
   var hostDomain = null;
   
   var registerOpenSource = function(event) {
@@ -286,7 +288,7 @@ function R2D3(el, width, height) {
     linkEl.style.display = "inline-block";
     linkEl.style.textDecoration = "none";
     linkEl.onclick = function() {
-      openSource(error, line, column, domain);
+      openSource(error, line, column, domain, false);
     };
     
     return linkEl;
@@ -342,6 +344,11 @@ function R2D3(el, width, height) {
     
     if (errorFile) {
       if (hostDomain) {
+        if (!errorHighlightOnce) {
+          openSource(errorFile, errorLine, errorColumn, hostDomain, true);
+          errorHighlightOnce = true;
+        }
+        
         var linkEl = createSourceLink(errorFile, errorLine, errorColumn, hostDomain);
         header.appendChild(linkEl);
       }
