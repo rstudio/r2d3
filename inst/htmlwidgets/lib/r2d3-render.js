@@ -203,7 +203,7 @@ function R2D3(el, width, height) {
     self.resizeDebounce();
   };
   
-  var openSource = function(filename, line, column) {
+  var openSource = function(filename, line, column, domain) {
     if (window.parent.postMessage) {
       window.parent.postMessage({
         message: "openfile",
@@ -211,14 +211,46 @@ function R2D3(el, width, height) {
         file: filename,
         line: line,
         column: column
-      }, window.location.origin);
+      }, domain);
     }
   };
   
-  var stackExpanded = false;
+  var linkContainerEl = null;
+  var errorLine = null;
+  var errorColumn = null;
+  var errorFile = null;
+  
+  var registerOpenSource = function(event) {
+    if (typeof event.data != 'object')
+      return;
+    if (event.data.message != "canopenfile")
+      return;
+    if (event.data.source != "rstudio")
+      return;
+    
+    var domain = event.data.domain;
+    var linkEl = document.createElement("a");
+    linkEl.innerHTML = errorFile + "#" + errorLine + ":" + errorColumn;
+    linkEl.href = "#";
+    linkEl.style.display = "inline-block";
+    linkEl.onclick = function() {
+      openSource(errorFile, errorLine, errorColumn, domain);
+    };
+    
+    linkContainerEl.innerHTML = "";
+    linkContainerEl.appendChild(linkEl);
+  };
+  
+  window.addEventListener("message", registerOpenSource, false);
+  
+  self.cleanStackTrace = function(stack) {
+    stack;
+  };
   
   self.showError = function(error, line, column) {
     var message = error, callstack = "";
+    errorLine = line;
+    errorColumn = column;
     
     if (error.message) message = error.error;
     if (error.stack) callstack = error.stack;
@@ -227,26 +259,24 @@ function R2D3(el, width, height) {
       var reg = new RegExp("at [^\\n]+ \\(<anonymous>:([0-9]+):([0-9]+)\\)");
       var matches = reg.exec(callstack);
       if (matches && matches.length === 3) {
-        line = parseInt(matches[1]);
-        column = parseInt(matches[2]);
+        errorLine = parseInt(matches[1]);
+        errorColumn = parseInt(matches[2]);
       }
     }
     
-    var location = null;
     var lines = x.script.split("\n");
-    var fileLine = null;
     var header = "// R2D3 Source File: ";
-    for (var maybe = line; line && maybe >= 0; maybe--) {
+    for (var maybe = errorLine; errorLine && maybe >= 0; maybe--) {
       if (lines[maybe].includes(header)) {
         var data = lines[maybe].split(header)[1];
         var source = data.split(":")[0].trim();
         var offset = data.split(":")[1];
-        fileLine = (line - (maybe + 1) + parseInt(offset));
-        location = source;
+        errorLine = (errorLine - (maybe + 1) + parseInt(offset));
+        errorFile = source;
       }
     }
     
-    if (location) {
+    if (errorFile) {
       message = message + " in ";
     }
     
@@ -270,34 +300,19 @@ function R2D3(el, width, height) {
     container.style.left = "0";
     container.style.right = "0";
     
-    if (location) {
-      var linkEl = document.createElement("a");
-      linkEl.innerHTML = location + "#" + fileLine + ":" + column;
-      linkEl.href = "#";
-      linkEl.onclick = function() {
-        openSource(location, fileLine, column);
-      };
-      container.appendChild(linkEl);
+    linkContainerEl = document.createElement("div");
+    linkContainerEl.style.display = "inline-block";
+    container.appendChild(linkContainerEl);
+    if (errorFile) {
+      linkContainerEl.innerHTML = errorFile + "#" + errorLine + ":" + errorColumn;
     }
     
     if (callstack) {
-      var expand = document.createElement("a");
-      expand.innerHTML = "stack";
-      expand.href = "#";
-      expand.style.float = "right";
-      if (!stackExpanded) container.appendChild(expand);
-      
       var stack = document.createElement("code");
-      stack.innerHTML = callstack;
+      stack.innerHTML = cleanStackTrace(callstack);
       stack.style.marginTop = "10px";
       stack.style.display = stackExpanded ? "block" : "none";
       container.appendChild(stack);
-      
-      expand.onclick = function() {
-        stack.style.display = "block";
-        expand.style.display = "none";
-        stackExpanded = true;
-      };
     }
   };
   
