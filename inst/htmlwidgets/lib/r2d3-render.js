@@ -326,14 +326,14 @@ function R2D3(el, width, height) {
     container.style.color = "#444";
     container.style.position = "absolute";
     container.style.top = "0";
-    container.style.left = "0";
-    container.style.right = "0";
+    container.style.left = "8px";
+    container.style.right = "8px";
     container.style.overflow = "scroll";
     container.style.lineHeight = "16px";
     
     var header = document.createElement("div");
     header.innerText = "Error: " + message.replace("\n", "");
-    header.style.marginTop = "10px";
+    header.style.marginTop = "8px";
     header.style.background = "rgb(244, 248, 249)";
     header.style.border = "1px solid #d6dadc";
     header.style.borderBottom = "0";
