@@ -241,6 +241,51 @@ function R2D3(el, width, height) {
     return cleaned;
   };
   
+  var parseCallstackRef = function(callstack) {
+    var reg = new RegExp("at [^\\n]+ \\(<anonymous>:([0-9]+):([0-9]+)\\)");
+    var matches = reg.exec(callstack);
+    if (matches && matches.length === 3) {
+      
+      var line = parseInt(matches[1]);
+      var column = parseInt(matches[2]);
+      var file = null;
+      
+      var lines = x.script.split("\n");
+      var header = "// R2D3 Source File: ";
+      for (var maybe = line; line && maybe >= 0; maybe--) {
+        if (lines[maybe].includes(header)) {
+          var data = lines[maybe].split(header)[1];
+          var source = data.split(":")[0].trim();
+          var offset = data.split(":")[1];
+          
+          line = (line - (maybe + 1) + parseInt(offset));
+          file = source;
+        }
+      }
+      
+      return {
+        file: file,
+        line: line,
+        column: column
+      };
+    }
+    else {
+      return null;
+    }
+  };
+  
+  var createSourceLink = function(error, line, column, domain) {
+    var linkEl = document.createElement("a");
+    linkEl.innerText = error + "#" + line + ":" + column;
+    linkEl.href = "#";
+    linkEl.style.display = "inline-block";
+    linkEl.onclick = function() {
+      openSource(error, line, column, domain);
+    };
+    
+    return linkEl;
+  };
+  
   var showErrorImpl = function() {
     var message = errorObject, callstack = "";
     
@@ -248,23 +293,11 @@ function R2D3(el, width, height) {
     if (errorObject.stack) callstack = errorObject.stack;
     
     if (errorLine === null || errorColumn === null) {
-      var reg = new RegExp("at [^\\n]+ \\(<anonymous>:([0-9]+):([0-9]+)\\)");
-      var matches = reg.exec(callstack);
-      if (matches && matches.length === 3) {
-        errorLine = parseInt(matches[1]);
-        errorColumn = parseInt(matches[2]);
-      }
-    }
-    
-    var lines = x.script.split("\n");
-    var header = "// R2D3 Source File: ";
-    for (var maybe = errorLine; errorLine && maybe >= 0; maybe--) {
-      if (lines[maybe].includes(header)) {
-        var data = lines[maybe].split(header)[1];
-        var source = data.split(":")[0].trim();
-        var offset = data.split(":")[1];
-        errorLine = (errorLine - (maybe + 1) + parseInt(offset));
-        errorFile = source;
+      var parseResult = parseCallstackRef(callstack);
+      if (parseResult) {
+        errorFile = parseResult.file;
+        errorLine = parseResult.line;
+        errorColumn = parseResult.column;
       }
     }
     
@@ -295,14 +328,7 @@ function R2D3(el, width, height) {
     
     if (errorFile) {
       if (hostDomain) {
-        var linkEl = document.createElement("a");
-        linkEl.innerText = errorFile + "#" + errorLine + ":" + errorColumn;
-        linkEl.href = "#";
-        linkEl.style.display = "inline-block";
-        linkEl.onclick = function() {
-          openSource(errorFile, errorLine, errorColumn, hostDomain);
-        };
-        
+        var linkEl = createSourceLink(errorFile, errorLine, errorColumn, hostDomain);
         container.appendChild(linkEl);
       }
       else {
@@ -312,9 +338,30 @@ function R2D3(el, width, height) {
     
     if (callstack) {
       var stack = document.createElement("div");
-      stack.innerText = cleanStackTrace(callstack);
+      var cleanStack = cleanStackTrace(callstack);
       stack.style.marginTop = "10px";
       stack.style.display = "block";
+      
+      var entries = cleanStack.split("\n");
+      for (var idxEntry in entries) {
+        var entry = entries[idxEntry];
+        var stackEl = document.createElement("div");
+        
+        var stackRes = parseCallstackRef(entry);
+        if (stackRes) {
+          stackEl.innerText = entry.substr(0, entry.indexOf("(<anony")) + "(";
+          var stackLinkEl = createSourceLink(stackRes.file, stackRes.line, stackRes.column, hostDomain);
+          stackEl.appendChild(stackLinkEl);
+          stackEl.appendChild(
+            document.createTextNode(")")
+          );
+        }
+        else {
+          stackEl.innerText = entry;
+        }
+        stack.appendChild(stackEl);
+      }
+      
       container.appendChild(stack);
     }
   };
