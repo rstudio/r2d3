@@ -230,7 +230,7 @@ function R2D3(el, width, height) {
     
     var domain = event.data.domain;
     var linkEl = document.createElement("a");
-    linkEl.innerHTML = errorFile + "#" + errorLine + ":" + errorColumn;
+    linkEl.innerText = errorFile + "#" + errorLine + ":" + errorColumn;
     linkEl.href = "#";
     linkEl.style.display = "inline-block";
     linkEl.onclick = function() {
@@ -243,8 +243,10 @@ function R2D3(el, width, height) {
   
   window.addEventListener("message", registerOpenSource, false);
   
-  self.cleanStackTrace = function(stack) {
-    stack;
+  var cleanStackTrace = function(stack) {
+    var cleaned = stack.substr(0, stack.indexOf("at d3Script"));
+
+    return cleaned;
   };
   
   self.showError = function(error, line, column) {
@@ -287,7 +289,7 @@ function R2D3(el, width, height) {
     }
     
     container.id = "r2d3-error-container";
-    container.innerHTML = "Error: " + message;
+    container.innerText = "Error: " + message;
     container.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
     container.style.fontSize = "9pt";
     container.style.border = "solid 1px #CCCCCC";
@@ -299,19 +301,20 @@ function R2D3(el, width, height) {
     container.style.top = "0";
     container.style.left = "0";
     container.style.right = "0";
+    container.style.overflow = "scroll";
     
     linkContainerEl = document.createElement("div");
     linkContainerEl.style.display = "inline-block";
     container.appendChild(linkContainerEl);
     if (errorFile) {
-      linkContainerEl.innerHTML = errorFile + "#" + errorLine + ":" + errorColumn;
+      linkContainerEl.innerText = errorFile + "#" + errorLine + ":" + errorColumn;
     }
     
     if (callstack) {
-      var stack = document.createElement("code");
-      stack.innerHTML = cleanStackTrace(callstack);
+      var stack = document.createElement("div");
+      stack.innerText = cleanStackTrace(callstack);
       stack.style.marginTop = "10px";
-      stack.style.display = stackExpanded ? "block" : "none";
+      stack.style.display = "block";
       container.appendChild(stack);
     }
   };
