@@ -222,18 +222,22 @@ function R2D3(el, width, height) {
   var hostDomain = null;
   
   var registerOpenSource = function(event) {
-    if (typeof event.data != 'object')
-      return;
-    if (event.data.message != "canopenfile")
-      return;
-    if (event.data.source != "rstudio")
-      return;
+    var query = window.location.search.substring(1);
+    var entries = query.split('&');
+    var capable = false;
+    
+    for (var idxEntry = 0; idxEntry < entries.length; idxEntry++) {
+        var params = entries[idxEntry].split('=');
+        if (decodeURIComponent(params[0]) == "host") {
+            hostDomain = decodeURIComponent(params[1]);
+        }
+        if (decodeURIComponent(params[0]) == "capabilities") {
+            capable = decodeURIComponent(params[1]) == "1";
+        }
+    }
       
-    hostDomain = event.data.domain;
-    showErrorImpl();
+    if (!capable) hostDomain = null;
   };
-  
-  window.addEventListener("message", registerOpenSource, false);
   
   var cleanStackTrace = function(stack) {
     var cleaned = stack.substr(0, stack.indexOf("at d3Script"));
@@ -381,4 +385,6 @@ function R2D3(el, width, height) {
     
     return false;
   };
+  
+  registerOpenSource();
 }
