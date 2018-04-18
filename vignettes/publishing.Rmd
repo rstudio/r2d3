@@ -13,3 +13,32 @@ knitr::opts_chunk$set(eval = FALSE)
 
 ## Overview
 
+
+## Standalone Visualizations
+
+- Save As HTML
+
+- Save As Image / Webshot
+
+- Copy to Clipboard
+
+- Publish to the Web
+
+## R Markdown Documents
+
+- Standard formats
+
+- flexdashboard
+
+- Distill
+
+## Shiny Applications
+
+
+
+
+
+
+
+
+
