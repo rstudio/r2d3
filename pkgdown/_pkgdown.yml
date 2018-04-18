@@ -14,10 +14,12 @@ navbar:
         - text: Using
         - text: "R to D3 Data Conversion"
           href: articles/data_conversion.html
-        - text: "Visualization Options"
+        - text: "D3 Visualization Options"
           href: articles/visualization_options.html
         - text: "Development and Debugging"
           href: articles/development_and_debugging.html
+        - text: "Publishing D3 Visualizations"
+          href: articles/publishing.html
         - text: "---"
         - text: Advanced
         - text: "CSS and JavaScript Dependencies "

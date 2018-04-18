@@ -1,9 +1,9 @@
 ---
-title: "Visualization Options"
+title: "D3 Visualization Options"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Visualization Options}
+  %\VignetteIndexEntry{D3 Visualization Options}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

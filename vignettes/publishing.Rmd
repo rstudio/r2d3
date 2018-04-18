@@ -1,0 +1,15 @@
+---
+title: "Publishing D3 Visualizations"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Publishing D3 Visualizations}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+## Overview
+
