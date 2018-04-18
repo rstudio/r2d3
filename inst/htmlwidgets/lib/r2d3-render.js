@@ -215,10 +215,11 @@ function R2D3(el, width, height) {
     }
   };
   
-  var linkContainerEl = null;
+  var errorObject = null;
   var errorLine = null;
   var errorColumn = null;
   var errorFile = null;
+  var hostDomain = null;
   
   var registerOpenSource = function(event) {
     if (typeof event.data != 'object')
@@ -227,18 +228,9 @@ function R2D3(el, width, height) {
       return;
     if (event.data.source != "rstudio")
       return;
-    
-    var domain = event.data.domain;
-    var linkEl = document.createElement("a");
-    linkEl.innerText = errorFile + "#" + errorLine + ":" + errorColumn;
-    linkEl.href = "#";
-    linkEl.style.display = "inline-block";
-    linkEl.onclick = function() {
-      openSource(errorFile, errorLine, errorColumn, domain);
-    };
-    
-    linkContainerEl.innerHTML = "";
-    linkContainerEl.appendChild(linkEl);
+      
+    hostDomain = event.data.domain;
+    showErrorImpl();
   };
   
   window.addEventListener("message", registerOpenSource, false);
@@ -249,15 +241,13 @@ function R2D3(el, width, height) {
     return cleaned;
   };
   
-  self.showError = function(error, line, column) {
-    var message = error, callstack = "";
-    errorLine = line;
-    errorColumn = column;
+  var showErrorImpl = function() {
+    var message = errorObject, callstack = "";
     
-    if (error.message) message = error.error;
-    if (error.stack) callstack = error.stack;
+    if (errorObject.message) message = errorObject.error;
+    if (errorObject.stack) callstack = errorObject.stack;
     
-    if (line === null || column === null) {
+    if (errorLine === null || errorColumn === null) {
       var reg = new RegExp("at [^\\n]+ \\(<anonymous>:([0-9]+):([0-9]+)\\)");
       var matches = reg.exec(callstack);
       if (matches && matches.length === 3) {
@@ -303,11 +293,21 @@ function R2D3(el, width, height) {
     container.style.right = "0";
     container.style.overflow = "scroll";
     
-    linkContainerEl = document.createElement("div");
-    linkContainerEl.style.display = "inline-block";
-    container.appendChild(linkContainerEl);
     if (errorFile) {
-      linkContainerEl.innerText = errorFile + "#" + errorLine + ":" + errorColumn;
+      if (hostDomain) {
+        var linkEl = document.createElement("a");
+        linkEl.innerText = errorFile + "#" + errorLine + ":" + errorColumn;
+        linkEl.href = "#";
+        linkEl.style.display = "inline-block";
+        linkEl.onclick = function() {
+          openSource(errorFile, errorLine, errorColumn, hostDomain);
+        };
+        
+        container.appendChild(linkEl);
+      }
+      else {
+        container.innerText = container.innerText + errorFile + "#" + errorLine + ":" + errorColumn;
+      }
     }
     
     if (callstack) {
@@ -317,6 +317,14 @@ function R2D3(el, width, height) {
       stack.style.display = "block";
       container.appendChild(stack);
     }
+  };
+  
+  self.showError = function(error, line, column) {
+    errorObject = error;
+    errorLine = line;
+    errorColumn = column;
+    
+    showErrorImpl();
   };
   
   window.onerror = function (msg, url, lineNo, columnNo, error) {
