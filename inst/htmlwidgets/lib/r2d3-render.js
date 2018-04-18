@@ -22,10 +22,6 @@ function R2D3(el, width, height) {
       self.data = HTMLWidgets.dataframeToD3(self.data);
     }
     
-    if (x.theme) {
-      self.theme = x.theme;
-    }
-    
     self.options = x.options;
   };
   
@@ -216,6 +212,30 @@ function R2D3(el, width, height) {
     }
   };
   
+  var registerTheme = function(domain) {
+    if (window.parent.postMessage) {
+      window.addEventListener('message', function(event) {
+        if (typeof event.data != 'object')
+          return;
+      	if (event.origin !== domain)
+      	  return;
+    	  if (event.data.message !== "ontheme")
+          return;
+          
+        document.body.style.background = event.data.background;
+        
+        self.theme.background = event.data.background;
+        self.theme.foreground = event.data.foreground;
+      	
+      }, false);
+      
+      window.parent.postMessage({
+        message: "ontheme",
+        source: "r2d3"
+      }, domain);
+    }
+  };
+  
   var errorObject = null;
   var errorLine = null;
   var errorColumn = null;
@@ -223,7 +243,7 @@ function R2D3(el, width, height) {
   var errorHighlightOnce = false;
   var hostDomain = null;
   
-  var registerOpenSource = function(event) {
+  var registerMessageListeners = function(event) {
     var query = window.location.search.substring(1);
     var entries = query.split('&');
     var capable = false;
@@ -238,7 +258,12 @@ function R2D3(el, width, height) {
         }
     }
       
-    if (!capable) hostDomain = null;
+    if (!capable) {
+      hostDomain = null;
+    } else {
+      registerTheme(hostDomain);
+    }
+    
   };
   
   var cleanStackTrace = function(stack) {
@@ -402,5 +427,5 @@ function R2D3(el, width, height) {
     return false;
   };
   
-  registerOpenSource();
+  registerMessageListeners();
 }
