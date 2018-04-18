@@ -11,9 +11,8 @@ vignette: >
 
 <!-- TODO
 - show error messages / call stacks for rendering errors
-- complete vignettes
-- publishing vignette
 - themes / docs for themes
+- publishing vignette
 - consider svg/png export: 
     http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
     rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
