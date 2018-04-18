@@ -274,6 +274,27 @@ function R2D3(el, width, height) {
     return cleaned;
   };
   
+  var parseLineFileRef = function(line) {
+    var lines = x.script.split("\n");
+    var header = "// R2D3 Source File: ";
+    var file = null;
+    for (var maybe = line; line && maybe >= 0; maybe--) {
+      if (lines[maybe].includes(header)) {
+        var data = lines[maybe].split(header)[1];
+        var source = data.split(":")[0].trim();
+        var offset = data.split(":")[1];
+        
+        line = (line - (maybe + 1) + parseInt(offset));
+        file = source;
+      }
+    }
+      
+    return {
+      file: file,
+      line: line
+    };
+  };
+  
   var parseCallstackRef = function(callstack) {
     var reg = new RegExp("at [^\\n]+ \\(<anonymous>:([0-9]+):([0-9]+)\\)");
     var matches = reg.exec(callstack);
@@ -282,18 +303,10 @@ function R2D3(el, width, height) {
       var line = parseInt(matches[1]);
       var column = parseInt(matches[2]);
       var file = null;
-      
-      var lines = x.script.split("\n");
-      var header = "// R2D3 Source File: ";
-      for (var maybe = line; line && maybe >= 0; maybe--) {
-        if (lines[maybe].includes(header)) {
-          var data = lines[maybe].split(header)[1];
-          var source = data.split(":")[0].trim();
-          var offset = data.split(":")[1];
-          
-          line = (line - (maybe + 1) + parseInt(offset));
-          file = source;
-        }
+      var lineRef = parseLineFileRef(line);
+      if (lineRef) {
+        file = lineRef.file;
+        line = lineRef.line;
       }
       
       return {
@@ -324,7 +337,7 @@ function R2D3(el, width, height) {
   var showErrorImpl = function() {
     var message = errorObject, callstack = "";
     
-    if (errorObject.message) message = errorObject.error;
+    if (errorObject.message) message = errorObject.message;
     if (errorObject.stack) callstack = errorObject.stack;
     
     if (errorLine === null || errorColumn === null) {
@@ -333,6 +346,13 @@ function R2D3(el, width, height) {
         errorFile = parseResult.file;
         errorLine = parseResult.line;
         errorColumn = parseResult.column;
+      }
+    }
+    else {
+      var parseLineResult = parseLineFileRef(errorLine);
+      if (parseLineResult) {
+        errorFile = parseLineResult.file;
+        errorLine = parseLineResult.line;
       }
     }
     
