@@ -11,35 +11,91 @@ vignette: >
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
+## Overview
 
-`r2d2` also makes available an `r2d3` object in JavaScript, this object provides access to the `data`, `svg`, `width`, `height` and `options` variables, but also provides access to additional functionality.
+By default, D3 visualizations created with **r2d3** are monolithic scripts that do all of their work as a single computation (the body of the script). While this makes scripts straightforward to author by default, not all visualizations will confirm to this simple model. Rather, some visualizations will want to distinguish between the following activities:
 
-For instance, more advanced scripts can rely can make use of `r2d3.onRender()` which is similar to `d3.csv()`, `d3.json()`, and other D3 data loading libraries, to trigger specific code during render and use the rest of the code as initialization code as follows:
+1) Code that performs one-time initialization for the visualization (e.g. creation of a D3 layout).
 
-```{r echo=FALSE, comment='', results='asis'}
-cat('\n```js\n')
-cat(paste(readLines(system.file("samples/bubbles/bubbles.js", package = "r2d3")), collapse = "\n"))
-cat('\n```\n')
+2) Code that runs whenever the data underlying the visualization is changed.
+
+3) Code that runs whenever the visualizations container element is resized.
+
+This article describes how you can use the **r2d3** advanced rendering API to organize your visualization code to run in this more granular fashion.
+
+## onRender Callback
+
+To distinguish between code that runs at initialization-time only and code that runs when data changes, organize your code so that the code which responds to data changes is contained within the `r2d3.onRender()` callback. For example:
+
+```js
+// Initialization
+svg
+ .attr("font-family", "sans-serif")
+ .attr("font-size", "8")
+ .attr("text-anchor", "middle");
+    
+var pack = d3.pack()
+  .size([width, height])
+  .padding(1.5);
+    
+var format = d3.format(",d");
+var color = d3.scaleOrdinal(d3.schemeCategory20c);
+
+// Rendering
+r2d3.onRender(function(data, svg, width, height, options) {
+  var root = d3.hierarchy({children: data})
+    .sum(function(d) { return d.value; })
+    .each(function(d) {
+      if (id = d.data.id) {
+        var id, i = id.lastIndexOf(".");
+        d.id = id;
+        d.package = id.slice(0, i);
+        d.class = id.slice(i + 1);
+      }
+    });
+
+  var node = svg.selectAll(".node")
+    .data(pack(root).leaves())
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+  node.append("circle")
+      .attr("id", function(d) { return d.id; })
+      .attr("r", function(d) { return d.r; })
+      .style("fill", function(d) { return color(d.package); });
+
+  node.append("clipPath")
+      .attr("id", function(d) { return "clip-" + d.id; })
+    .append("use")
+      .attr("xlink:href", function(d) { return "#" + d.id; });
+
+  node.append("text")
+      .attr("clip-path", function(d) { return "url(#clip-" + d.id + ")"; })
+    .selectAll("tspan")
+    .data(function(d) { return d.class.split(/(?=[A-Z][^A-Z])/g); })
+    .enter().append("tspan")
+      .attr("x", 0)
+      .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 10; })
+      .text(function(d) { return d; });
+
+  node.append("title")
+      .text(function(d) { return d.id + "\n" + format(d.value); });
+});
 ```
 
-Then, the above `bubbles.js` script can be rendered from R as follows. Notice that this script requires D3 version 4 which can be specified with the `version` parameter.
+## onResize Callback
 
-```{r eval=FALSE}
-r2d3(
-  read.csv("flare.csv"),
-  "bubbles.js",
-  version = 4
-)
-```
-```{r echo=FALSE}
-r2d3(
-  read.csv("inst/samples/bubbles/flare.csv"),
-  "inst/samples/bubbles/bubbles.js",
-  version = 4
-)
-```
+By default, when the element which contains your visualization is resized, **r2d3** will call back your script to re-render the visualization from scratch using the new size. In some cases this might be acceptable, but in other cases it makes sense to have code which explicitly handles the resize in a more efficient fashion.
 
-You should also consider using `r2d3.onResize()` to provide a JavaScript function with signature `function(width, height)` that performs the actual resizing operation. Otherwise, by default, `r2d3` will rerun the entire D3 script to resize the rendering.
+You can provide an explicit resize handler by implementing the `r2d3.onResize()` callback. For example, in a force directed D3 layout you might do this in the `onResize()` callback:
+
+```js
+r2d3.onResize(width, height) {
+  force.force("center", d3.forceCenter(width / 2, height / 2))
+    .restart();
+}
+```
 
 
 
