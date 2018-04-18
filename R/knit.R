@@ -6,8 +6,8 @@ knit_d3 <- function (options) {
     options$data <- get(options$data, envir = globalenv())
   }
   
-  if (is.null(options$version)) {
-    options$version <- "5"
+  if (is.null(options$d3_version)) {
+    options$d3_version <- "5"
   }
   
   if (is.null(options$container)) {
@@ -27,7 +27,7 @@ knit_d3 <- function (options) {
       script = options$code,
       options = options$options,
       container = options$container,
-      version = options$version,
+      d3_version = options$d3_version,
       dependencies = options$dependencies,
       width = options$width,
       height = options$height
