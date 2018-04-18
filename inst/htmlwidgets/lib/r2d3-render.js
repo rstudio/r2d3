@@ -212,6 +212,7 @@ function R2D3(el, width, height) {
     }
   };
   
+  var themesLoaded = false;
   var registerTheme = function(domain) {
     if (window.parent.postMessage) {
       window.addEventListener('message', function(event) {
@@ -227,6 +228,9 @@ function R2D3(el, width, height) {
         self.theme.background = event.data.background;
         self.theme.foreground = event.data.foreground;
       	
+      	// resize to give script change to pick new theme
+      	if (themesLoaded) self.resize();
+      	themesLoaded = true;
       }, false);
       
       window.parent.postMessage({
