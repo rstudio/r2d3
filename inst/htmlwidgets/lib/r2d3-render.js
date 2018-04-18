@@ -280,9 +280,11 @@ function R2D3(el, width, height) {
   
   var createSourceLink = function(error, line, column, domain) {
     var linkEl = document.createElement("a");
-    linkEl.innerText = error + "#" + line + ":" + column;
+    linkEl.innerText = "(" + error + "#" + line + ":" + column + ")";
     linkEl.href = "#";
+    linkEl.color = "#4531d6";
     linkEl.style.display = "inline-block";
+    linkEl.style.textDecoration = "none";
     linkEl.onclick = function() {
       openSource(error, line, column, domain);
     };
@@ -314,37 +316,47 @@ function R2D3(el, width, height) {
       container = document.createElement("div");
       el.appendChild(container);
     }
+    else {
+      container.innerHTML = "";
+    }
     
     container.id = "r2d3-error-container";
-    container.innerText = "Error: " + message;
     container.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
     container.style.fontSize = "9pt";
-    container.style.border = "solid 1px #CCCCCC";
-    container.style.padding = "5px";
-    container.style.margin = "10px";
-    container.style.background = "#FEFEFE";
     container.style.color = "#444";
     container.style.position = "absolute";
     container.style.top = "0";
     container.style.left = "0";
     container.style.right = "0";
     container.style.overflow = "scroll";
+    container.style.lineHeight = "16px";
+    
+    var header = document.createElement("div");
+    header.innerText = "Error: " + message.replace("\n", "");
+    header.style.marginTop = "10px";
+    header.style.background = "rgb(244, 248, 249)";
+    header.style.border = "1px solid #d6dadc";
+    header.style.borderBottom = "0";
+    header.style.padding = "12px 15px 12px 15px";
+    container.appendChild(header);
     
     if (errorFile) {
       if (hostDomain) {
         var linkEl = createSourceLink(errorFile, errorLine, errorColumn, hostDomain);
-        container.appendChild(linkEl);
+        header.appendChild(linkEl);
       }
       else {
-        container.innerText = container.innerText + " " + errorFile + "#" + errorLine + ":" + errorColumn;
+        header.innerText = "Error: " + message.replace("\n", "") + " " + errorFile + "#" + errorLine + ":" + errorColumn;
       }
     }
     
     if (callstack) {
       var stack = document.createElement("div");
       var cleanStack = cleanStackTrace(callstack);
-      stack.style.marginTop = "10px";
       stack.style.display = "block";
+      stack.style.border = "1px solid #d6dadc";
+      stack.style.padding = "12px 15px 12px 15px";
+      stack.style.background = "#FFFFFF";
       
       var entries = cleanStack.split("\n");
       for (var idxEntry in entries) {
@@ -353,12 +365,9 @@ function R2D3(el, width, height) {
         
         var stackRes = parseCallstackRef(entry);
         if (hostDomain && stackRes) {
-          stackEl.innerText = entry.substr(0, entry.indexOf("(<anony")) + "(";
+          stackEl.innerText = entry.substr(0, entry.indexOf("(<anony"));
           var stackLinkEl = createSourceLink(stackRes.file, stackRes.line, stackRes.column, hostDomain);
           stackEl.appendChild(stackLinkEl);
-          stackEl.appendChild(
-            document.createTextNode(")")
-          );
         }
         else {
           stackEl.innerText = entry;
