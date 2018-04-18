@@ -332,7 +332,7 @@ function R2D3(el, width, height) {
         container.appendChild(linkEl);
       }
       else {
-        container.innerText = container.innerText + errorFile + "#" + errorLine + ":" + errorColumn;
+        container.innerText = container.innerText + " " + errorFile + "#" + errorLine + ":" + errorColumn;
       }
     }
     
@@ -348,7 +348,7 @@ function R2D3(el, width, height) {
         var stackEl = document.createElement("div");
         
         var stackRes = parseCallstackRef(entry);
-        if (stackRes) {
+        if (hostDomain && stackRes) {
           stackEl.innerText = entry.substr(0, entry.indexOf("(<anony")) + "(";
           var stackLinkEl = createSourceLink(stackRes.file, stackRes.line, stackRes.column, hostDomain);
           stackEl.appendChild(stackLinkEl);
