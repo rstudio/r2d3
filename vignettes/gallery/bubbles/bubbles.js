@@ -1,3 +1,7 @@
+// !preview r2d3 data=read.csv("flare.csv"), d3_version=4
+
+// Based on https://bl.ocks.org/mbostock/4063269
+
 // Initialization
 svg.attr("font-family", "sans-serif")
   .attr("font-size", "8")

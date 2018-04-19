@@ -1,3 +1,7 @@
+// !preview r2d3 data=jsonlite::read_json("us.json"), d3_version = 3, dependencies = "topojson.min.js"
+
+// Based on https://bl.ocks.org/mbostock/4055908
+
 // Ratio of Obese (BMI >= 30) in U.S. Adults, CDC 2008
 var valueById = [
    NaN, .187, .198,  NaN, .133, .175, .151,  NaN, .100, .125,

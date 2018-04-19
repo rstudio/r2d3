@@ -37,27 +37,6 @@ r2d3::r2d3(
 )
 ```
 
-## Bubbles
-
-[bl.ocks.org/mbostock/4063269](https://bl.ocks.org/mbostock/4063269)
-
-```{r eval=FALSE}
-flares <- read.csv("flare.csv")
-r2d3(
-  flares[!is.na(flares$value), ],
-  "bubbles.js",
-  d3_version = 4
-)
-```
-```{r echo=FALSE}
-flares <- read.csv(system.file("samples/bubbles/flare.csv", package = "r2d3"))
-r2d3::r2d3(
-  flares[!is.na(flares$value), ],
-  system.file("samples/bubbles/bubbles.js", package = "r2d3"),
-  d3_version = 4
-)
-```
-
 ## Bullets
 
 [bl.ocks.org/mbostock/4061961](https://bl.ocks.org/mbostock/4061961)
@@ -109,65 +88,3 @@ r2d3::r2d3(
 )
 ```
 
-## Cartogram
-
-[bl.ocks.org/mbostock/4055908](https://bl.ocks.org/mbostock/4055908)
-
-```{r eval=FALSE}
-r2d3(
-  jsonlite::read_json("us.json"),
-  "cartogram.js",
-  d3_version = 3,
-  dependencies = c("cartogram.css", "topojson.min.js",
-  height = 400
-)
-```
-```{r echo=FALSE}
-r2d3::r2d3(
-  jsonlite::read_json(system.file("samples/cartogram/us.json", package = "r2d3")),
-  system.file("samples/cartogram/cartogram.js", package = "r2d3"),
-  d3_version = 3,
-  dependencies = c(
-    system.file("samples/cartogram/cartogram.css", package = "r2d3"),
-    system.file("samples/cartogram/topojson.min.js", package = "r2d3")
-  ),
-  height = 400
-)
-```
-
-## Chord
-
-[bl.ocks.org/mbostock/4062006](https://bl.ocks.org/mbostock/4062006)
-
-```{r eval=FALSE}
-r2d3(
-  matrix(
-    c(
-      11975,  5871, 8916, 2868,
-      1951, 10048, 2060, 6171,
-      8010, 16145, 8090, 8045,
-      1013,   990,  940, 6907
-    ),
-    ncol = 4, nrow = 4, byrow = T
-  ),
-  "chord.js",
-  d3_version = 4,
-  dependencies = "chord.css"
-)
-```
-```{r echo=FALSE}
-r2d3::r2d3(
-  matrix(
-    c(
-      11975,  5871, 8916, 2868,
-      1951, 10048, 2060, 6171,
-      8010, 16145, 8090, 8045,
-      1013,   990,  940, 6907
-    ),
-    ncol = 4, nrow = 4, byrow = T
-  ),
-  system.file("samples/chord/chord.js", package = "r2d3"),
-  d3_version = 4,
-  dependencies = system.file("samples/chord/chord.css", package = "r2d3")
-)
-```
