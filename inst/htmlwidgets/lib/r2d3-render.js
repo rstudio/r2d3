@@ -501,6 +501,7 @@ function R2D3(el, width, height) {
       stack.style.background = "#FFFFFF";
       stack.style.borderTop = "0";
       
+      var allEmpty = true;
       var entries = cleanStack.split("\n");
       for (var idxEntry in entries) {
         var entry = entries[idxEntry];
@@ -518,10 +519,12 @@ function R2D3(el, width, height) {
         else {
           stackEl.innerText = entry;
         }
-        stack.appendChild(stackEl);
+        
+        if (stackEl.innerHTML.trim().length > 0)  stack.appendChild(stackEl);
       }
       
-      container.appendChild(stack);
+      if (stack.childElementCount > 0)
+        container.appendChild(stack);
     }
   };
   
