@@ -133,11 +133,51 @@ function R2D3(el, width, height) {
     }
   };
   
+  var consoleTimeout = null;
+  self.console = {
+    log: function(data) {
+      var entry = document.getElementById("r2d3-console-entry");
+      if (!entry) {
+        entry = document.createElement("div");
+        entry.id = "r2d3-console-entry";
+        entry.style.bottom = "0";
+        entry.style.left = "0";
+        entry.style.right = "0";
+        entry.style.background = "rgb(244, 248, 249)";
+        entry.style.border = "1px solid #d6dadc";
+        entry.style.padding = "8px 15px 8px 15px";
+        entry.style.position = "absolute";
+        el.appendChild(entry);
+        
+        entry.style.transform = "translateY(40px)";
+        entry.style.opacity = "0";
+        entry.style.transition = "all 0.25s";
+        
+        setTimeout(function() {
+          entry.style.transform = "translateY(0)";
+          entry.style.opacity = "1";
+          entry.style.transition = "all 0.5s";
+        }, 50);
+      }
+      
+      entry.innerText = data;
+      
+      clearTimeout(consoleTimeout);
+      consoleTimeout = setTimeout(function() {
+        entry.style.transform = "translateY(-60px)";
+        entry.style.opacity = "0";
+        entry.addEventListener("transitionend", function(event) {
+          el.removeChild(entry);
+        });
+      }, 3000);
+    }
+  };
+  
   self.callD3Script = function() {
     var d3Script = self.d3Script;
     
     try {
-      d3Script(self.d3(), self, self.data, self.root, self.width, self.height, self.options, self.theme);
+      d3Script(self.d3(), self, self.data, self.root, self.width, self.height, self.options, self.theme, self.console);
     }
     catch (err) {
       self.showError(err, null, null);
