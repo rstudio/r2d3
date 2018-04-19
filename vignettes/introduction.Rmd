@@ -16,6 +16,7 @@ vignette: >
     http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
     rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
 - learn tab on site
+- update screenshots 
 -->
 
 ```{r setup, include=FALSE}
