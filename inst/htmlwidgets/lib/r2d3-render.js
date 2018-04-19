@@ -22,6 +22,10 @@ function R2D3(el, width, height) {
       self.data = HTMLWidgets.dataframeToD3(self.data);
     }
     
+    if (x.theme) {
+      self.theme = x.theme;
+    }
+    
     self.options = x.options;
   };
   
