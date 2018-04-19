@@ -128,9 +128,16 @@
 <p>You might wonder where the data comes from for the preview. Note that there is a special comment at the top of the D3 script:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></a></code></pre></div>
 <p>This comment enables you to specify the data (along with any other arguments to the <code><a href="../reference/r2d3.html">r2d3()</a></code> function) to use for the preview.</p>
-<div id="viewer" class="section level3">
+<div id="error-navigation" class="section level3">
 <h3 class="hasAnchor">
-<a href="#viewer" class="anchor"></a>Viewer</h3>
+<a href="#error-navigation" class="anchor"></a>Error Navigation</h3>
+<p>If an error occurs while rendering a D3 visualization using preview mode then the error will be displayed in the Viewer pane (overwriting any previous visualization output):</p>
+<p><img src="images/error_debugging.png" class="screenshot" width="600/"></p>
+<p>The source pane will also be navigated to the location in your script where the error occurred.</p>
+</div>
+<div id="viewer-options" class="section level3">
+<h3 class="hasAnchor">
+<a href="#viewer-options" class="anchor"></a>Viewer Options</h3>
 <p>The <code>viewer</code> argument to the <code><a href="../reference/r2d3.html">r2d3()</a></code> function enables you to customize how D3 visualizations are viewed when printed from within the RStudio console. The following options are available:</p>
 <table class="table">
 <thead><tr class="header">

@@ -39,7 +39,15 @@ You might wonder where the data comes from for the preview. Note that there is a
 
 This comment enables you to specify the data (along with any other arguments to the `r2d3()` function) to use for the preview.
 
-### Viewer
+### Error Navigation
+
+If an error occurs while rendering a D3 visualization using preview mode then the error will be displayed in the Viewer pane (overwriting any previous visualization output):
+
+<img src="images/error_debugging.png" class="screenshot" width=600/>
+
+The source pane will also be navigated to the location in your script where the error occurred.
+
+### Viewer Options
 
 The `viewer` argument to the `r2d3()` function enables you to customize how D3 visualizations are viewed when printed from within the RStudio console. The following options are available:
 

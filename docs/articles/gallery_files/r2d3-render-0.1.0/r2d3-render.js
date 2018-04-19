@@ -22,10 +22,6 @@ function R2D3(el, width, height) {
       self.data = HTMLWidgets.dataframeToD3(self.data);
     }
     
-    if (x.theme) {
-      self.theme = x.theme;
-    }
-    
     self.options = x.options;
   };
   
@@ -203,50 +199,168 @@ function R2D3(el, width, height) {
     self.resizeDebounce();
   };
   
-  var openSource = function(filename, line, column) {
+  var openSource = function(filename, line, column, domain, highlight) {
     if (window.parent.postMessage) {
       window.parent.postMessage({
         message: "openfile",
         source: "r2d3",
         file: filename,
         line: line,
-        column: column
-      }, window.location.origin);
+        column: column,
+        highlight: highlight
+      }, domain);
     }
   };
   
-  var stackExpanded = false;
+  var themesLoaded = false;
+  var registerTheme = function(domain) {
+    if (window.parent.postMessage) {
+      window.addEventListener('message', function(event) {
+        if (typeof event.data != 'object')
+          return;
+      	if (event.origin !== domain)
+      	  return;
+    	  if (event.data.message !== "ontheme")
+          return;
+          
+        document.body.style.background = event.data.background;
+        
+        self.theme.background = event.data.background;
+        self.theme.foreground = event.data.foreground;
+      	
+      	// resize to give script change to pick new theme
+      	if (themesLoaded) self.resize();
+      	themesLoaded = true;
+      }, false);
+      
+      window.parent.postMessage({
+        message: "ontheme",
+        source: "r2d3"
+      }, domain);
+    }
+  };
   
-  self.showError = function(error, line, column) {
-    var message = error, callstack = "";
+  var errorObject = null;
+  var errorLine = null;
+  var errorColumn = null;
+  var errorFile = null;
+  var errorHighlightOnce = false;
+  var hostDomain = null;
+  
+  var registerMessageListeners = function(event) {
+    var query = window.location.search.substring(1);
+    var entries = query.split('&');
+    var capable = false;
     
-    if (error.message) message = error.error;
-    if (error.stack) callstack = error.stack;
-    
-    if (line === null || column === null) {
-      var reg = new RegExp("at [^\\n]+ \\(<anonymous>:([0-9]+):([0-9]+)\\)");
-      var matches = reg.exec(callstack);
-      if (matches && matches.length === 3) {
-        line = parseInt(matches[1]);
-        column = parseInt(matches[2]);
-      }
+    for (var idxEntry = 0; idxEntry < entries.length; idxEntry++) {
+        var params = entries[idxEntry].split('=');
+        if (decodeURIComponent(params[0]) == "host") {
+            hostDomain = decodeURIComponent(params[1]);
+        }
+        if (decodeURIComponent(params[0]) == "capabilities") {
+            capable = decodeURIComponent(params[1]) == "1";
+        }
+    }
+      
+    if (!capable) {
+      hostDomain = null;
+    } else {
+      registerTheme(hostDomain);
     }
     
-    var location = null;
+  };
+  
+  var cleanStackTrace = function(stack) {
+    var cleaned = stack.substr(0, stack.indexOf("at d3Script"));
+    cleaned = cleaned.replace(new RegExp("\\(.*/session/view[^/]*/lib/[^/]+/", "g"), "(");
+    cleaned = cleaned.replace(new RegExp("\\(.*/session/view[^/]*/", "g"), "(");
+    
+    return cleaned;
+  };
+  
+  var parseLineFileRef = function(line) {
     var lines = x.script.split("\n");
-    var fileLine = null;
     var header = "// R2D3 Source File: ";
+    var file = null;
     for (var maybe = line; line && maybe >= 0; maybe--) {
       if (lines[maybe].includes(header)) {
         var data = lines[maybe].split(header)[1];
         var source = data.split(":")[0].trim();
         var offset = data.split(":")[1];
-        fileLine = (line - (maybe + 1) + parseInt(offset));
-        location = source;
+        
+        line = (line - (maybe + 1) + parseInt(offset));
+        file = source;
+      }
+    }
+      
+    return {
+      file: file,
+      line: line
+    };
+  };
+  
+  var parseCallstackRef = function(callstack) {
+    var reg = new RegExp("at [^\\n]+ \\(<anonymous>:([0-9]+):([0-9]+)\\)");
+    var matches = reg.exec(callstack);
+    if (matches && matches.length === 3) {
+      
+      var line = parseInt(matches[1]);
+      var column = parseInt(matches[2]);
+      var file = null;
+      var lineRef = parseLineFileRef(line);
+      if (lineRef) {
+        file = lineRef.file;
+        line = lineRef.line;
+      }
+      
+      return {
+        file: file,
+        line: line,
+        column: column
+      };
+    }
+    else {
+      return null;
+    }
+  };
+  
+  var createSourceLink = function(error, line, column, domain) {
+    var linkEl = document.createElement("a");
+    linkEl.innerText = "(" + error + "#" + line + ":" + column + ")";
+    linkEl.href = "#";
+    linkEl.color = "#4531d6";
+    linkEl.style.display = "inline-block";
+    linkEl.style.textDecoration = "none";
+    linkEl.onclick = function() {
+      openSource(error, line, column, domain, false);
+    };
+    
+    return linkEl;
+  };
+  
+  var showErrorImpl = function() {
+    var message = errorObject, callstack = "";
+    
+    if (errorObject.message) message = errorObject.message;
+    if (errorObject.stack) callstack = errorObject.stack;
+    
+    if (errorLine === null || errorColumn === null) {
+      var parseResult = parseCallstackRef(callstack);
+      if (parseResult) {
+        errorFile = parseResult.file;
+        errorLine = parseResult.line;
+        errorColumn = parseResult.column;
+      }
+    }
+    else {
+      var parseLineResult = parseLineFileRef(errorLine);
+      if (parseLineResult) {
+        errorFile = parseLineResult.file;
+        errorLine = parseLineResult.line;
       }
     }
     
-    if (location) {
+    if (errorFile) {
       message = message + " in ";
     }
     
@@ -255,50 +369,84 @@ function R2D3(el, width, height) {
       container = document.createElement("div");
       el.appendChild(container);
     }
+    else {
+      container.innerHTML = "";
+    }
     
     container.id = "r2d3-error-container";
-    container.innerHTML = "Error: " + message;
     container.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
     container.style.fontSize = "9pt";
-    container.style.border = "solid 1px #CCCCCC";
-    container.style.padding = "5px";
-    container.style.margin = "10px";
-    container.style.background = "#FEFEFE";
     container.style.color = "#444";
     container.style.position = "absolute";
     container.style.top = "0";
-    container.style.left = "0";
-    container.style.right = "0";
+    container.style.left = "8px";
+    container.style.right = "8px";
+    container.style.overflow = "scroll";
+    container.style.lineHeight = "16px";
     
-    if (location) {
-      var linkEl = document.createElement("a");
-      linkEl.innerHTML = location + "#" + fileLine + ":" + column;
-      linkEl.href = "#";
-      linkEl.onclick = function() {
-        openSource(location, fileLine, column);
-      };
-      container.appendChild(linkEl);
+    var header = document.createElement("div");
+    header.innerText = "Error: " + message.replace("\n", "");
+    header.style.marginTop = "8px";
+    header.style.background = "rgb(244, 248, 249)";
+    header.style.border = "1px solid #d6dadc";
+    header.style.padding = "8px 15px 8px 15px";
+    header.style.lineHeight = "24px";
+    container.appendChild(header);
+    
+    if (errorFile) {
+      if (hostDomain) {
+        if (!errorHighlightOnce) {
+          openSource(errorFile, errorLine, errorColumn, hostDomain, true);
+          errorHighlightOnce = true;
+        }
+        
+        var linkEl = createSourceLink(errorFile, errorLine, errorColumn, hostDomain);
+        header.appendChild(linkEl);
+      }
+      else {
+        header.innerText = "Error: " + message.replace("\n", "") + " " + errorFile + "#" + errorLine + ":" + errorColumn;
+      }
     }
     
     if (callstack) {
-      var expand = document.createElement("a");
-      expand.innerHTML = "stack";
-      expand.href = "#";
-      expand.style.float = "right";
-      if (!stackExpanded) container.appendChild(expand);
+      var stack = document.createElement("div");
+      var cleanStack = cleanStackTrace(callstack);
+      stack.style.display = "block";
+      stack.style.border = "1px solid #d6dadc";
+      stack.style.padding = "12px 15px 12px 15px";
+      stack.style.background = "#FFFFFF";
+      stack.style.borderTop = "0";
       
-      var stack = document.createElement("code");
-      stack.innerHTML = callstack;
-      stack.style.marginTop = "10px";
-      stack.style.display = stackExpanded ? "block" : "none";
+      var entries = cleanStack.split("\n");
+      for (var idxEntry in entries) {
+        var entry = entries[idxEntry];
+        var stackEl = document.createElement("div");
+        
+        var stackRes = parseCallstackRef(entry);
+        if (idxEntry === "0") {
+          header.appendChild(document.createElement("br"));
+          header.appendChild(document.createTextNode(entry));
+        } else if (hostDomain && stackRes) {
+          stackEl.innerText = entry.substr(0, entry.indexOf("(<anony"));
+          var stackLinkEl = createSourceLink(stackRes.file, stackRes.line, stackRes.column, hostDomain);
+          stackEl.appendChild(stackLinkEl);
+        }
+        else {
+          stackEl.innerText = entry;
+        }
+        stack.appendChild(stackEl);
+      }
+      
       container.appendChild(stack);
-      
-      expand.onclick = function() {
-        stack.style.display = "block";
-        expand.style.display = "none";
-        stackExpanded = true;
-      };
     }
+  };
+  
+  self.showError = function(error, line, column) {
+    errorObject = error;
+    errorLine = line;
+    errorColumn = column;
+    
+    showErrorImpl();
   };
   
   window.onerror = function (msg, url, lineNo, columnNo, error) {
@@ -308,4 +456,6 @@ function R2D3(el, width, height) {
     
     return false;
   };
+  
+  registerMessageListeners();
 }
