@@ -17,7 +17,7 @@ LazyData: TRUE
 Depends:
   R (>= 3.1.2)
 Imports:
-  htmlwidgets, htmltools
+  htmlwidgets (>= 1.2), htmltools
 Suggests:
   knitr,
   rmarkdown,

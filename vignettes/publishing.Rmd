@@ -13,26 +13,136 @@ knitr::opts_chunk$set(eval = FALSE)
 
 ## Overview
 
+There are a variety of ways to publish D3 visualizations, including:
 
-## Standalone Visualizations
+1) Saving as a standalone HTML file
 
-- Save As HTML
+2) Publishing to a service like [RPubs](https://rpubs.com)
 
-- Save As Image / Webshot
+3) Exporting to a static PNG version of the visualization
 
-- Copy to Clipboard
+4) Copying to the clipboard and pasting into another application
 
-- Publish to the Web
+5) Including within an [R Markdown](https://rmarkdown.rstudio.com) document or dashboard
 
-## R Markdown Documents
+6) Including within a [Shiny](https://shiny.rstudio.com) application
 
-- Standard formats
+This article describes each of these techniques for publishing visualizations
 
-- flexdashboard
+## Publishing HTML
 
-- Distill
+### Save as HTML
 
-## Shiny Applications
+You can use the `save_d3_html()` function to save a D3 visualization as an HTML file. For example:
+
+```{r}
+library(r2d3)
+viz <- r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
+save_d3_html(viz, filename = "viz.html")
+```
+
+By default, the HTML file will be self-contained (all CSS and JavaScript dependencies will be embedded with the file) so that it's easy to share. If you want the dependencies written to a separate directory you can set `selfcontained = FALSE`. For example:
+
+```{r}
+library(r2d3)
+viz <- r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
+save_d3_html(viz, filename = "viz.html", selfcontained = FALSE)
+```
+
+Setting `selfcontained = FALSE` is useful if you want to embed your D3 visualization within another HTML page since it separates the visualization itself from various link and script dependencies that need to be placed in the HTML head.
+
+### RPubs / RStudio Connect
+
+You can also publish visualizations to [RPubs](https://rpubs.com) or [RStudio Connect](https://www.rstudio.com/products/connect/). To do this, click the **Publish** button located in the top right of the RStudio Viewer pane:
+
+<img src="images/publish.png" class="screenshot" width=600/>
+
+
+## Static Images
+
+The RStudio Viewer pane has an **Export** menu that enables you to export D3 visualizations as PNG files as well as copy visualizations to the clipboard:
+
+<img src="images/export_menu.png" class="screenshot" width=600/>
+
+The export dialog enables you to customize the size of the exported or copied image:
+
+<img src="images/export_dialog.png" class="screenshot" width=600/>
+
+## R Markdown
+
+You can include D3 visualizations in an R Markdown document or R Notebook. You can do this by calling the `r2d3()` function from within an R code chunk:
+
+<pre><code>---
+output: html_document
+---
+
+&#96``{r}
+library(r2d3)
+r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
+&#96``</code></pre>
+
+<img src="images/bar_chart.png" class="illustration" width=600/>
+
+You can also include D3 visualization code inline using the `d3` R Markdown engine:
+
+<pre><code>&#96``{r setup}
+library(r2d3)
+bars &lt;- c(10, 20, 30)
+&#96``</code></pre>
+
+<pre><code>&#96``{d3 data=bars, options=list(color = 'orange')}
+svg.selectAll('rect')
+  .data(data)
+  .enter()
+    .append('rect')
+      .attr('width', function(d) { return d * 10; })
+      .attr('height', '20px')
+      .attr('y', function(d, i) { return i * 22; })
+      .attr('fill', options.color);
+&#96``</code></pre>
+
+<img src="images/rmarkdown-1.png" class="illustration" width=600/>
+
+Note that in order to use the `d3` engine you need to add `library(r2d3)` to the setup chunk (as illustrated above).
+
+### flexdashboard
+
+The [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard) R Markdown format is a great way to publish a set of related D3 visualizations. You can use flexdashbaord to combine D3 visualizations with narrative, data tables, other [htmlwidgets](http://www.htmlwidgets.org), and static R plots:
+
+<img src="images/flexdashboard.png" class="illustration" width=600/>
+
+Check out the [flexdashboard online documentation](https://rmarkdown.rstudio.com/flexdashboard) for additional details.
+
+
+## Shiny applications
+
+The `renderD3()` and `d3Output()` functions enable you to include D3 visualizations within [Shiny](https://shiny.rstudio.com) applications:
+
+```{r eval=FALSE}
+library(shiny)
+library(r2d3)
+
+ui <- fluidPage(
+  inputPanel(
+    sliderInput("bar_max", label = "Max:",
+      min = 10, max = 110, value = 10, step = 20)
+  ),
+  d3Output("d3")
+)
+
+server <- function(input, output) {
+  output$d3 <- renderD3({
+    r2d3(
+      floor(runif(5, 5, input$bar_max)),
+      system.file("baranims.js", package = "r2d3")
+    )
+  })
+}
+
+shinyApp(ui = ui, server = server)
+```
+
+<img src="images/baranim-1.gif" class="illustration" width=600/>
 
 
 

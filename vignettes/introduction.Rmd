@@ -17,6 +17,7 @@ vignette: >
     rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
 - complete gallery
 - learn tab on site
+- cross reference vignettes
 -->
 
 ```{r setup, include=FALSE}
