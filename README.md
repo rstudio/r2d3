@@ -1,11 +1,15 @@
 r2d3: R interface to D3 visualizations
 ================
 
-<!---
-TODO:
-  - Add gallery thumbnails at the bottom of first section
-  - Cleanup language at the bottom of the first section
---->
+<!-- TODO
+- themes / docs for themes
+- consider svg/png export: 
+    http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
+    rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
+- complete gallery
+- learn tab on site
+- cross reference vignettes
+-->
 
 <img src="images/r2d3-hex.png" width=180 align="right" style="border: none; margin-right: 10px;"/>
 
@@ -66,6 +70,8 @@ To use **r2d3**, write a D3 script and then pass R data to it using the
 bar chart (“barchart.js”):
 
 ``` js
+// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
+
 var barHeight = Math.floor(height / data.length);
 
 svg.selectAll('rect')
@@ -94,11 +100,10 @@ the D3 script. There are a number of other special variables available
 within D3 scripts, including:
 
   - `data` — The R data converted to JavaScript.
-  - `svg` — The svg container for the visualization.
-  - `width` — The current width of the container.
-  - `height` — The current height of the container.
-  - `options` — Additional options provided by the user.
-  - `theme` — The theme colors in use by the runtime.
+  - `svg` — The svg container for the visualization
+  - `width` — The current width of the container
+  - `height` — The current height of the container
+  - `options` — Additional options provided by the user
 
 ## D3 Preview
 
@@ -186,7 +191,7 @@ server <- function(input, output) {
   output$d3 <- renderD3({
     r2d3(
       floor(runif(5, 5, input$bar_max)),
-      "baranims.js"
+      system.file("baranims.js", package = "r2d3")
     )
   })
 }
@@ -206,7 +211,7 @@ shinyApp(ui = ui, server = server)
     Conversion](https://rstudio.github.io/r2d3/articles/data_conversion.html)
     — Customize the conversion of R objects to D3-friendly JSON.
 
-  - [Visualization
+  - [D3 Visualization
     Options](https://rstudio.github.io/r2d3/articles/visualization_options.html)
     — Control various aspects of D3 rendering and expose user-level
     options for your D3 script.
@@ -214,6 +219,11 @@ shinyApp(ui = ui, server = server)
   - [Development and
     Debugging](https://rstudio.github.io/r2d3/articles/development_and_debugging.html)
     — Recommended tools and workflow for developing D3 visualizations.
+
+  - [Publishing D3
+    Visualizations](https://rstudio.github.io/r2d3/articles/publishing.html)
+    — Publish D3 visualizations as HTML, a static PNG image, or within R
+    Markdown documents and Shiny applications.
 
   - [CSS and JavaScript
     Dependencies](https://rstudio.github.io/r2d3/articles/dependencies.html)

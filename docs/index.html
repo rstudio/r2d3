@@ -101,11 +101,15 @@
     <div id="r2d3-r-interface-to-d3-visualizations" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#r2d3-r-interface-to-d3-visualizations" class="anchor"></a>r2d3: R interface to D3 visualizations</h1></div>
-<!---
-TODO:
-  - Add gallery thumbnails at the bottom of first section
-  - Cleanup language at the bottom of the first section
---->
+<!-- TODO
+- themes / docs for themes
+- consider svg/png export: 
+    http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
+    rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
+- complete gallery
+- learn tab on site
+- cross reference vignettes
+-->
 <p><img src="images/r2d3-hex.png" width="180" align="right" style="border: none; margin-right: 10px;"></p>
 <p>The <strong>r2d3</strong> package provides a suite of tools for using <a href="https://d3js.org/">D3 visualizations</a> with R, including:</p>
 <ul>
@@ -135,15 +139,17 @@ TODO:
 <h2 class="hasAnchor">
 <a href="#d3-scripts" class="anchor"></a>D3 Scripts</h2>
 <p>To use <strong>r2d3</strong>, write a D3 script and then pass R data to it using the <code>rd23()</code> function. For example, here’s a simple D3 script that draws a bar chart (“barchart.js”):</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span></a>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  .<span class="at">data</span>(data)</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d <span class="op">*</span> width<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'steelblue'</span>)<span class="op">;</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  .<span class="at">data</span>(data)</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d <span class="op">*</span> width<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'steelblue'</span>)<span class="op">;</span></a></code></pre></div>
 <p>To render the script within R you call the <code><a href="reference/r2d3.html">r2d3()</a></code> function:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(r2d3)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a></code></pre></div>
@@ -154,15 +160,13 @@ TODO:
 <li>
 <code>data</code> — The R data converted to JavaScript.</li>
 <li>
-<code>svg</code> — The svg container for the visualization.</li>
+<code>svg</code> — The svg container for the visualization</li>
 <li>
-<code>width</code> — The current width of the container.</li>
+<code>width</code> — The current width of the container</li>
 <li>
-<code>height</code> — The current height of the container.</li>
+<code>height</code> — The current height of the container</li>
 <li>
-<code>options</code> — Additional options provided by the user.</li>
-<li>
-<code>theme</code> — The theme colors in use by the runtime.</li>
+<code>options</code> — Additional options provided by the user</li>
 </ul>
 </div>
 <div id="d3-preview" class="section level2">
@@ -226,7 +230,7 @@ svg.selectAll('rect')
 <a class="sourceLine" id="cb5-13" data-line-number="13">  output<span class="op">$</span>d3 &lt;-<span class="st"> </span><span class="kw"><a href="reference/d3-shiny.html">renderD3</a></span>({</a>
 <a class="sourceLine" id="cb5-14" data-line-number="14">    <span class="kw"><a href="reference/r2d3.html">r2d3</a></span>(</a>
 <a class="sourceLine" id="cb5-15" data-line-number="15">      <span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">5</span>, input<span class="op">$</span>bar_max)),</a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">      <span class="st">"baranims.js"</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">      <span class="kw">system.file</span>(<span class="st">"baranims.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)</a>
 <a class="sourceLine" id="cb5-17" data-line-number="17">    )</a>
 <a class="sourceLine" id="cb5-18" data-line-number="18">  })</a>
 <a class="sourceLine" id="cb5-19" data-line-number="19">}</a>
@@ -240,8 +244,9 @@ svg.selectAll('rect')
 <ul>
 <li><p><a href="https://rstudio.github.io/r2d3/articles/gallery.html">Gallery of Examples</a> — Learn from a wide variety of example D3 visualizations.</p></li>
 <li><p><a href="https://rstudio.github.io/r2d3/articles/data_conversion.html">R to D3 Data Conversion</a> — Customize the conversion of R objects to D3-friendly JSON.</p></li>
-<li><p><a href="https://rstudio.github.io/r2d3/articles/visualization_options.html">Visualization Options</a> — Control various aspects of D3 rendering and expose user-level options for your D3 script.</p></li>
+<li><p><a href="https://rstudio.github.io/r2d3/articles/visualization_options.html">D3 Visualization Options</a> — Control various aspects of D3 rendering and expose user-level options for your D3 script.</p></li>
 <li><p><a href="https://rstudio.github.io/r2d3/articles/development_and_debugging.html">Development and Debugging</a> — Recommended tools and workflow for developing D3 visualizations.</p></li>
+<li><p><a href="https://rstudio.github.io/r2d3/articles/publishing.html">Publishing D3 Visualizations</a> — Publish D3 visualizations as HTML, a static PNG image, or within R Markdown documents and Shiny applications.</p></li>
 <li><p><a href="https://rstudio.github.io/r2d3/articles/dependencies.html">CSS and JavaScript Dependencies</a> — Incorporating external CSS styles and JavaScript libraries into your visualizations.</p></li>
 <li><p><a href="https://rstudio.github.io/r2d3/articles/advanced_rendering.html">Advanced Rendering with Callbacks</a> — An alternate way to organize D3 scripts that enables you to distinguish between initialization and re-rendering based on new data, as well as handle resizing more dynamically.</p></li>
 <li><p><a href="https://rstudio.github.io/r2d3/articles/package_development.html">Package Development</a> – Create re-usable D3 visualizations by including them in an R package.</p></li>

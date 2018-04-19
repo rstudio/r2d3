@@ -111,29 +111,112 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
+<p>There are a variety of ways to publish D3 visualizations, including:</p>
+<ol style="list-style-type: decimal">
+<li><p>Saving as a standalone HTML file</p></li>
+<li><p>Publishing to a service like <a href="https://rpubs.com">RPubs</a></p></li>
+<li><p>Exporting to a static PNG version of the visualization</p></li>
+<li><p>Copying to the clipboard and pasting into another application</p></li>
+<li><p>Including within an <a href="https://rmarkdown.rstudio.com">R Markdown</a> document or dashboard</p></li>
+<li><p>Including within a <a href="https://shiny.rstudio.com">Shiny</a> application</p></li>
+</ol>
+<p>This article describes each of these techniques for publishing visualizations</p>
 </div>
-<div id="standalone-visualizations" class="section level2">
+<div id="publishing-html" class="section level2">
 <h2 class="hasAnchor">
-<a href="#standalone-visualizations" class="anchor"></a>Standalone Visualizations</h2>
-<ul>
-<li><p>Save As HTML</p></li>
-<li><p>Save As Image / Webshot</p></li>
-<li><p>Copy to Clipboard</p></li>
-<li><p>Publish to the Web</p></li>
-</ul>
+<a href="#publishing-html" class="anchor"></a>Publishing HTML</h2>
+<div id="save-as-html" class="section level3">
+<h3 class="hasAnchor">
+<a href="#save-as-html" class="anchor"></a>Save as HTML</h3>
+<p>You can use the <code><a href="../reference/save_d3_html.html">save_d3_html()</a></code> function to save a D3 visualization as an HTML file. For example:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(r2d3)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">viz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="../reference/save_d3_html.html">save_d3_html</a></span>(viz, <span class="dt">filename =</span> <span class="st">"viz.html"</span>)</a></code></pre></div>
+<p>By default, the HTML file will be self-contained (all CSS and JavaScript dependencies will be embedded with the file) so that it’s easy to share. If you want the dependencies written to a separate directory you can set <code>selfcontained = FALSE</code>. For example:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(r2d3)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">viz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="../reference/save_d3_html.html">save_d3_html</a></span>(viz, <span class="dt">filename =</span> <span class="st">"viz.html"</span>, <span class="dt">selfcontained =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>Setting <code>selfcontained = FALSE</code> is useful if you want to embed your D3 visualization within another HTML page since it separates the visualization itself from various link and script dependencies that need to be placed in the HTML head.</p>
 </div>
-<div id="r-markdown-documents" class="section level2">
+<div id="rpubs-rstudio-connect" class="section level3">
+<h3 class="hasAnchor">
+<a href="#rpubs-rstudio-connect" class="anchor"></a>RPubs / RStudio Connect</h3>
+<p>You can also publish visualizations to <a href="https://rpubs.com">RPubs</a> or <a href="https://www.rstudio.com/products/connect/">RStudio Connect</a>. To do this, click the <strong>Publish</strong> button located in the top right of the RStudio Viewer pane:</p>
+<p><img src="images/publish.png" class="screenshot" width="600/"></p>
+</div>
+</div>
+<div id="static-images" class="section level2">
 <h2 class="hasAnchor">
-<a href="#r-markdown-documents" class="anchor"></a>R Markdown Documents</h2>
-<ul>
-<li><p>Standard formats</p></li>
-<li><p>flexdashboard</p></li>
-<li><p>Distill</p></li>
-</ul>
+<a href="#static-images" class="anchor"></a>Static Images</h2>
+<p>The RStudio Viewer pane has an <strong>Export</strong> menu that enables you to export D3 visualizations as PNG files as well as copy visualizations to the clipboard:</p>
+<p><img src="images/export_menu.png" class="screenshot" width="600/"></p>
+<p>The export dialog enables you to customize the size of the exported or copied image:</p>
+<p><img src="images/export_dialog.png" class="screenshot" width="600/"></p>
+</div>
+<div id="r-markdown" class="section level2">
+<h2 class="hasAnchor">
+<a href="#r-markdown" class="anchor"></a>R Markdown</h2>
+<p>You can include D3 visualizations in an R Markdown document or R Notebook. You can do this by calling the <code><a href="../reference/r2d3.html">r2d3()</a></code> function from within an R code chunk:</p>
+<pre><code>---
+output: html_document
+---
+
+```{r}
+library(r2d3)
+r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
+```</code></pre>
+<p><img src="images/bar_chart.png" class="illustration" width="600/"></p>
+<p>You can also include D3 visualization code inline using the <code>d3</code> R Markdown engine:</p>
+<pre><code>```{r setup}
+library(r2d3)
+bars &lt;- c(10, 20, 30)
+```</code></pre>
+<pre><code>```{d3 data=bars, options=list(color = 'orange')}
+svg.selectAll('rect')
+  .data(data)
+  .enter()
+    .append('rect')
+      .attr('width', function(d) { return d * 10; })
+      .attr('height', '20px')
+      .attr('y', function(d, i) { return i * 22; })
+      .attr('fill', options.color);
+```</code></pre>
+<p><img src="images/rmarkdown-1.png" class="illustration" width="600/"></p>
+<p>Note that in order to use the <code>d3</code> engine you need to add <code>library(r2d3)</code> to the setup chunk (as illustrated above).</p>
+<div id="flexdashboard" class="section level3">
+<h3 class="hasAnchor">
+<a href="#flexdashboard" class="anchor"></a>flexdashboard</h3>
+<p>The <a href="https://rmarkdown.rstudio.com/flexdashboard">flexdashboard</a> R Markdown format is a great way to publish a set of related D3 visualizations. You can use flexdashbaord to combine D3 visualizations with narrative, data tables, other <a href="http://www.htmlwidgets.org">htmlwidgets</a>, and static R plots:</p>
+<p><img src="images/flexdashboard.png" class="illustration" width="600/"></p>
+<p>Check out the <a href="https://rmarkdown.rstudio.com/flexdashboard">flexdashboard online documentation</a> for additional details.</p>
+</div>
 </div>
 <div id="shiny-applications" class="section level2">
 <h2 class="hasAnchor">
-<a href="#shiny-applications" class="anchor"></a>Shiny Applications</h2>
+<a href="#shiny-applications" class="anchor"></a>Shiny applications</h2>
+<p>The <code><a href="../reference/d3-shiny.html">renderD3()</a></code> and <code><a href="../reference/d3-shiny.html">d3Output()</a></code> functions enable you to include D3 visualizations within <a href="https://shiny.rstudio.com">Shiny</a> applications:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(r2d3)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">ui &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/inputPanel">inputPanel</a></span>(</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">    <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/sliderInput">sliderInput</a></span>(<span class="st">"bar_max"</span>, <span class="dt">label =</span> <span class="st">"Max:"</span>,</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">      <span class="dt">min =</span> <span class="dv">10</span>, <span class="dt">max =</span> <span class="dv">110</span>, <span class="dt">value =</span> <span class="dv">10</span>, <span class="dt">step =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  ),</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  <span class="kw"><a href="../reference/d3-shiny.html">d3Output</a></span>(<span class="st">"d3"</span>)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">)</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">  output<span class="op">$</span>d3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/d3-shiny.html">renderD3</a></span>({</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">    <span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">      <span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">5</span>, input<span class="op">$</span>bar_max)),</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">      <span class="kw">system.file</span>(<span class="st">"baranims.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">    )</a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">  })</a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">}</a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/shinyApp">shinyApp</a></span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</a></code></pre></div>
+<p><img src="images/baranim-1.gif" class="illustration" width="600/"></p>
 </div>
 </div>
   </div>
@@ -144,9 +227,10 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#overview">Overview</a></li>
-      <li><a href="#standalone-visualizations">Standalone Visualizations</a></li>
-      <li><a href="#r-markdown-documents">R Markdown Documents</a></li>
-      <li><a href="#shiny-applications">Shiny Applications</a></li>
+      <li><a href="#publishing-html">Publishing HTML</a></li>
+      <li><a href="#static-images">Static Images</a></li>
+      <li><a href="#r-markdown">R Markdown</a></li>
+      <li><a href="#shiny-applications">Shiny applications</a></li>
       </ul>
 </div>
       </div>

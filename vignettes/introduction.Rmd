@@ -193,9 +193,11 @@ shinyApp(ui = ui, server = server)
 
 - [R to D3 Data Conversion](https://rstudio.github.io/r2d3/articles/data_conversion.html) --- Customize the conversion of R objects to D3-friendly JSON.
 
-- [Visualization Options](https://rstudio.github.io/r2d3/articles/visualization_options.html) --- Control various aspects of D3 rendering and expose user-level options for your D3 script. 
+- [D3 Visualization Options](https://rstudio.github.io/r2d3/articles/visualization_options.html) --- Control various aspects of D3 rendering and expose user-level options for your D3 script. 
 
 - [Development and Debugging](https://rstudio.github.io/r2d3/articles/development_and_debugging.html) --- Recommended tools and workflow for developing D3 visualizations.
+
+- [Publishing D3 Visualizations](https://rstudio.github.io/r2d3/articles/publishing.html) --- Publish D3 visualizations as HTML, a static PNG image, or within R Markdown documents and Shiny applications.
 
 - [CSS and JavaScript Dependencies](https://rstudio.github.io/r2d3/articles/dependencies.html) --- Incorporating external CSS styles and JavaScript libraries into your visualizations.
 
