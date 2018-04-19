@@ -66,7 +66,7 @@ r2d3):
 ## D3 Scripts
 
 To use **r2d3**, write a D3 script and then pass R data to it using the
-`rd23()` function. For example, here’s a simple D3 script that draws a
+`r2d3()` function. For example, here’s a simple D3 script that draws a
 bar chart (“barchart.js”):
 
 ``` js
