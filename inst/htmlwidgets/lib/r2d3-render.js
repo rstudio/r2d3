@@ -134,6 +134,7 @@ function R2D3(el, width, height) {
   };
   
   var consoleTimeout = null;
+  var consoleHovering = false;
   self.console = {
     log: function(data) {
       var entry = document.getElementById("r2d3-console-entry");
@@ -147,11 +148,21 @@ function R2D3(el, width, height) {
         entry.style.border = "1px solid #d6dadc";
         entry.style.padding = "8px 15px 8px 15px";
         entry.style.position = "absolute";
+        entry.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
+        entry.style.fontSize = "9pt";
         el.appendChild(entry);
         
         entry.style.transform = "translateY(40px)";
         entry.style.opacity = "0";
         entry.style.transition = "all 0.25s";
+        
+        entry.onmouseenter = function() {
+          consoleHovering = true;
+        };
+        
+        entry.onmouseleave = function() {
+          consoleHovering = false;
+        };
         
         setTimeout(function() {
           entry.style.transform = "translateY(0)";
@@ -164,11 +175,21 @@ function R2D3(el, width, height) {
       
       clearTimeout(consoleTimeout);
       consoleTimeout = setTimeout(function() {
-        entry.style.transform = "translateY(-60px)";
-        entry.style.opacity = "0";
-        entry.addEventListener("transitionend", function(event) {
-          el.removeChild(entry);
-        });
+        var hideConsole = function() {
+          entry.style.transform = "translateY(-60px)";
+          entry.style.opacity = "0";
+          entry.addEventListener("transitionend", function(event) {
+            el.removeChild(entry);
+            consoleHovering = false;
+          });
+        };
+        
+        if (consoleHovering) {
+          entry.onmouseleave = hideConsole;
+        }
+        else {
+          hideConsole();
+        }
       }, 3000);
     }
   };
