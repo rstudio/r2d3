@@ -26,10 +26,10 @@ This article covers various options you can specify for D3 visualizations, inclu
 
 ## D3 Version
 
-You can create D3 visualizations based on various versions of the D3 JavaScript library (currently versions 3, 4, and 5 are supported). The default version is 5 (the most recent release) however you can specify a a different version using the `version` parameter. For example, to use version 3 you would do this:
+You can create D3 visualizations based on various versions of the D3 JavaScript library (currently versions 3, 4, and 5 are supported). The default version is 5 (the most recent release) however you can specify a a different version using the `d3_version` parameter. For example, to use version 3 you would do this:
 
 ```{r}
-r2d3(data, script = "barchart.js", version = "3")
+r2d3(data, script = "barchart.js", d3_version = "3")
 ```
 
 Note that multiple versions of D3 can co-exist within a single R Markdown document or Shiny application (**r2d3** automatically handles ensuring that their namespaces don't clash).
@@ -142,4 +142,24 @@ The "external" option is useful if your visualization requires more space than a
 Note that the `viewer` options described above are only fully supported within the [daily build](https://dailies.rstudio.com) of RStudio (as opposed to the current stable release).
 
 
+## Themes
 
+To match themes provided by RStudio and other runtime environments, **r2d3** provides a `theme` JavaScript object that contains colors for `background` and `foreground` that you can optionally use to make your visualization match your runtime.
+
+For instance, to match the fill color of `rect` elements with the background we write a D3 script as follows:
+
+```{js}
+// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
+
+var barHeight = Math.floor(height / data.length);
+svg.selectAll('rect')
+  .data(data)
+  .enter().append('rect')
+    .attr("y", function(d, i) { return i * barHeight; })
+    .attr('width', function(d) { return d * width; })
+    .attr('height', barHeight)
+    .attr('stroke', theme.foreground)
+    .attr('fill', theme.background);
+```
+
+Notice that **r2d3** assigns **background** to the `background` style and **foreground** to the `fill` and `color` styles. Other environments hosting **r2d3** can set the `r2d3.theme` option to customize the value of the `theme` object.

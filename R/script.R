@@ -2,7 +2,7 @@
 script_wrap <- function(contents, container) {
   paste(
     c(
-      paste("var d3Script = function(d3, r2d3, data, ", container, ", width, height, options, theme) {", sep = ""),
+      paste("var d3Script = function(d3, r2d3, data, ", container, ", width, height, options, theme, console) {", sep = ""),
       contents,
       "};"
     ),

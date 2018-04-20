@@ -63,7 +63,7 @@ Next, install the [daily build](https://dailies.rstudio.com) of RStudio (you nee
 
 ## D3 Scripts
 
-To use **r2d3**, write a D3 script and then pass R data to it using the `rd23()` function. For example, here's a simple D3 script that draws a bar chart ("barchart.js"):
+To use **r2d3**, write a D3 script and then pass R data to it using the `r2d3()` function. For example, here's a simple D3 script that draws a bar chart ("barchart.js"):
 
 ```js
 // !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
