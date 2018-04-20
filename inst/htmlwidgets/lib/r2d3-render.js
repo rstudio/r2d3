@@ -385,6 +385,8 @@ function R2D3(el, width, height) {
         
         line = line - (maybe + 1);
         file = source;
+        
+        break;
       }
     }
       
