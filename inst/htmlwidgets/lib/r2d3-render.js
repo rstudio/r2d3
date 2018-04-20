@@ -376,15 +376,14 @@ function R2D3(el, width, height) {
   
   var parseLineFileRef = function(line) {
     var lines = x.script.split("\n");
-    var header = "// R2D3 Source File: ";
+    var header = "/* R2D3 Source File: ";
     var file = null;
     for (var maybe = line; line && maybe >= 0; maybe--) {
       if (lines[maybe].includes(header)) {
         var data = lines[maybe].split(header)[1];
-        var source = data.split(":")[0].trim();
-        var offset = data.split(":")[1];
+        var source = data.trim();
         
-        line = (line - (maybe + 1) + parseInt(offset));
+        line = line - (maybe + 1);
         file = source;
       }
     }

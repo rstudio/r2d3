@@ -19,7 +19,7 @@ script_read <- function(script) {
       script,
       function(e) paste(
         c(
-          paste("// R2D3 Source File: ", e, ":", 0),
+          paste("/* R2D3 Source File: ", e, "*/"),
           readLines(e, warn = FALSE)
         ), collapse = "\n"
       )
