@@ -1,6 +1,6 @@
 var margin = {top: 10, right: 50, bottom: 20, left: 50},
-    width = 120 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = width / 5 - margin.left - margin.right,
+    height = height - margin.top - margin.bottom;
 
 var min = Infinity,
     max = -Infinity;
