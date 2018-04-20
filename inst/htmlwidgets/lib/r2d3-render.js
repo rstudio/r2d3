@@ -50,7 +50,6 @@ function R2D3(el, width, height) {
     if (self.theme.background) root.style("background", self.theme.background);
     if (self.theme.foreground) {
       root.style("fill", self.theme.foreground);
-      root.style("stroke", self.theme.foreground);
       root.style("color", self.theme.foreground);
     }
       

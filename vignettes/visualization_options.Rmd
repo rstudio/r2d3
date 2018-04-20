@@ -158,7 +158,8 @@ svg.selectAll('rect')
     .attr("y", function(d, i) { return i * barHeight; })
     .attr('width', function(d) { return d * width; })
     .attr('height', barHeight)
+    .attr('stroke', theme.foreground)
     .attr('fill', theme.background);
 ```
 
-Notice that **r2d3** assigns **background** to the `background` style and **foreground** to the `fill`, `stroke` and `color` styles. Other environments hosting **r2d3** can set the `r2d3.theme` option to customize the value of the `theme` object.
+Notice that **r2d3** assigns **background** to the `background` style and **foreground** to the `fill` and `color` styles. Other environments hosting **r2d3** can set the `r2d3.theme` option to customize the value of the `theme` object.
