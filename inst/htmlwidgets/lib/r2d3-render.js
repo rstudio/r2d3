@@ -381,7 +381,7 @@ function R2D3(el, width, height) {
     for (var maybe = line; line && maybe >= 0; maybe--) {
       if (lines[maybe].includes(header)) {
         var data = lines[maybe].split(header)[1];
-        var source = data.trim();
+        var source = data.split("*/")[0].trim();
         
         line = line - (maybe + 1);
         file = source;
