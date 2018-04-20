@@ -65,11 +65,11 @@ Here's an example of adding the `viewer` argument to the preview comment at the 
 // !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), viewer="external"
 ```
 
-## Troubleshooting
+## Console Logging
 
-One way of troubleshooting D3 visualizations that is also common while troubleshooting JavaScript is by printing data to the JavaScript console. This is usually accomplished by calling `console.log()` with a message that can  help you troubleshoot the problem at hand.
+When troubleshooting a visualization it is also often useful to print diagnostics to the JavaScript console. This is usually accomplished by calling `console.log()` with a message that can help you troubleshoot the problem at hand.
 
-For instance, the following script does not trigger any runtime errors but also does not render anything at all.
+For instance, the following script does not trigger any runtime errors but also does not render anything at all:
 
 ```{js}
 // !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
@@ -85,7 +85,8 @@ svg.selectAll('rect')
     .attr('fill', 'steelblue');
 ```
 
-We can change the script above into to print meaningful information to the console, in this case, we think the problem might be in the `width` so we print this value to the console as follows:
+
+In this case, we think the problem might be with the `width` so we print this value to the console as follows:
 
 ```{js}
 // !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
@@ -104,7 +105,7 @@ svg.selectAll('rect')
     .attr('fill', 'steelblue');
 ```
 
-**r2d3** renders renders the JavaScript console output directly into the visualization to help you troubleshoot with ease. For this example, this will show that the `width` is `0.2` which is too small to be visible:
+**r2d3** renders renders the JavaScript console output directly into the visualization. For this example, this will show that the `width` is `0.2`, which is too small to be visible:
 
 <img src="images/console_logging.png" class="illustration" width=600/>
 
