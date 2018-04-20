@@ -306,6 +306,7 @@ function R2D3(el, width, height) {
   
   var themesLoaded = false;
   var registerTheme = function(domain) {
+    domain = domain ? domain : window.location.origin;
     if (window.parent.postMessage) {
       window.addEventListener('message', function(event) {
         if (typeof event.data != 'object')
@@ -320,7 +321,7 @@ function R2D3(el, width, height) {
         self.theme.background = event.data.background;
         self.theme.foreground = event.data.foreground;
       	
-      	// resize to give script change to pick new theme
+      	// resize to give script chance to pick new theme
       	if (themesLoaded) self.resize();
       	themesLoaded = true;
       }, false);
