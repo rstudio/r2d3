@@ -3,12 +3,27 @@ svg.attr("font-family", "sans-serif")
   .attr("font-size", "8")
   .attr("text-anchor", "middle");
     
+var svgSize = 600;
 var pack = d3.pack()
-  .size([width, height])
+  .size([svgSize, svgSize])
   .padding(1.5);
     
 var format = d3.format(",d");
 var color = d3.scaleOrdinal(d3.schemeCategory20c);
+
+var group = svg.append("g");
+
+// Resize
+r2d3.onResize(function(width, height) {
+  var minSize = Math.min(width, height);
+  var scale = minSize / svgSize;
+  
+  group.attr("transform", function(d) {
+    return "" +
+      "translate(" + (width - minSize) / 2 + "," + (height - minSize) / 2 + ")," +
+      "scale(" + scale + "," + scale + ")";
+  });
+});
 
 // Rendering
 r2d3.onRender(function(data, svg, width, height, options) {
@@ -23,7 +38,7 @@ r2d3.onRender(function(data, svg, width, height, options) {
       }
     });
 
-  var node = svg.selectAll(".node")
+  var node = group.selectAll(".node")
     .data(pack(root).leaves())
     .enter().append("g")
       .attr("class", "node")
@@ -50,4 +65,6 @@ r2d3.onRender(function(data, svg, width, height, options) {
 
   node.append("title")
       .text(function(d) { return d.id + "\n" + format(d.value); });
+  
+  r2d3.resize(width, height);
 });
