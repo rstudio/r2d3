@@ -41,7 +41,7 @@ This comment enables you to specify the data (along with any other arguments to 
 
 ### Error Navigation
 
-If an error occurs while rendering a D3 visualization using preview mode then the error will be displayed in the Viewer pane (overwriting any previous visualization output):
+If an error occurs while rendering a D3 visualization using preview mode then the error will be displayed in the Viewer pane:
 
 <img src="images/error_debugging.png" class="screenshot" width=600/>
 
@@ -125,7 +125,8 @@ Once you've opened the visualization you can use your browser **Developer Tools*
 
 <img src="images/browser_developer_tools.png" class="screenshot" width=600/>
 
+Your original D3 script and dependencies are available as a `r2d3-script-###` script which can be used to set breakpoints or inspect errors in detail:
 
-
+<img src="images/browser_debugging_entry.png" class="illustration" width=380/>
 
 
