@@ -100,7 +100,7 @@
     <div class="page-header toc-ignore">
       <h1>D3 Visualization Options</h1>
             
-            <h4 class="date">2018-04-19</h4>
+            <h4 class="date">2018-04-20</h4>
       
       <small>Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/visualization_options.Rmd"><code>vignettes/visualization_options.Rmd</code></a></small>
 
@@ -123,8 +123,8 @@
 <div id="d3-version" class="section level2">
 <h2 class="hasAnchor">
 <a href="#d3-version" class="anchor"></a>D3 Version</h2>
-<p>You can create D3 visualizations based on various versions of the D3 JavaScript library (currently versions 3, 4, and 5 are supported). The default version is 5 (the most recent release) however you can specify a a different version using the <code>version</code> parameter. For example, to use version 3 you would do this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(data, <span class="dt">script =</span> <span class="st">"barchart.js"</span>, <span class="dt">version =</span> <span class="st">"3"</span>)</a></code></pre></div>
+<p>You can create D3 visualizations based on various versions of the D3 JavaScript library (currently versions 3, 4, and 5 are supported). The default version is 5 (the most recent release) however you can specify a a different version using the <code>d3_version</code> parameter. For example, to use version 3 you would do this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(data, <span class="dt">script =</span> <span class="st">"barchart.js"</span>, <span class="dt">d3_version =</span> <span class="st">"3"</span>)</a></code></pre></div>
 <p>Note that multiple versions of D3 can co-exist within a single R Markdown document or Shiny application (<strong>r2d3</strong> automatically handles ensuring that their namespaces don’t clash).</p>
 </div>
 <div id="d3-container" class="section level2">
@@ -201,6 +201,28 @@
 <p>As mentioned above, you can also provide more fine grained resizing behavior (i.e. only resize rather than fully re-render) by using <a href="advanced_rendering.html">advanced rendering</a> callbacks.</p>
 </div>
 </div>
+<div id="themes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#themes" class="anchor"></a>Themes</h2>
+<p>To match themes provided by RStudio and other environments, <strong>r2d3</strong> provides a <code>theme</code> object that contains <code>background</code> and <code>foreground</code> values that you can use to make your visualization match the environment which it is rendered within.</p>
+<p>For example, to match the fill color of <code>rect</code> elements with the background, we use the <code>theme.foreground</code> for the stroke and <code>theme.background</code> for the fill:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">  .<span class="at">data</span>(data)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">    .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d <span class="op">*</span> width<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">    .<span class="at">attr</span>(<span class="st">'stroke'</span><span class="op">,</span> <span class="va">theme</span>.<span class="at">foreground</span>)</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="va">theme</span>.<span class="at">background</span>)<span class="op">;</span></a></code></pre></div>
+<p>You can also explicitly set the theme using the <code>r2d3.theme</code> R option. For example:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">options</span>(<span class="dt">r2d3.theme =</span> <span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">  <span class="dt">background =</span> <span class="st">"#FFFFFF"</span>,</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="dt">foreground =</span> <span class="st">"#000000"</span>)</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">)</a></code></pre></div>
+</div>
 <div id="viewer" class="section level2">
 <h2 class="hasAnchor">
 <a href="#viewer" class="anchor"></a>Viewer</h2>
@@ -241,6 +263,7 @@
       <li><a href="#d3-container">D3 Container</a></li>
       <li><a href="#user-options">User Options</a></li>
       <li><a href="#sizing">Sizing</a></li>
+      <li><a href="#themes">Themes</a></li>
       <li><a href="#viewer">Viewer</a></li>
       </ul>
 </div>

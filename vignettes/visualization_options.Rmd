@@ -126,27 +126,11 @@ You can override this default sizing behavior in two ways:
 
 As mentioned above, you can also provide more fine grained resizing behavior (i.e. only resize rather than fully re-render) by using [advanced rendering](advanced_rendering.html) callbacks.
 
-
-## Viewer
-
-The `viewer` argument to the `r2d3()` function enables you to customize how D3 visualizations are viewed when printed from within the RStudio console. The following options are available:
-
-| Option  | Description |
-|---------------------|---------------------|
-| `viewer = "internal"`  | (Default). Display within the RStudio Viewer pane. |
-| `viewer = "external"`  | Display within an external RStudio Viewer window. |
-| `viewer = "browser"`  | Display within an external web browser (e.g. Chrome). |
-
-The "external" option is useful if your visualization requires more space than an RStudio pane affords. The "browser" option is useful if you need access to browser debugging tools during development.
-
-Note that the `viewer` options described above are only fully supported within the [daily build](https://dailies.rstudio.com) of RStudio (as opposed to the current stable release).
-
-
 ## Themes
 
-To match themes provided by RStudio and other runtime environments, **r2d3** provides a `theme` JavaScript object that contains colors for `background` and `foreground` that you can optionally use to make your visualization match your runtime.
+To match themes provided by RStudio and other environments, **r2d3** provides a `theme` object that contains `background` and `foreground` values that you can use to make your visualization match the environment which it is rendered within.
 
-For instance, to match the fill color of `rect` elements with the background we write a D3 script as follows:
+For example, to match the fill color of `rect` elements with the background, we use the `theme.foreground` for the stroke and `theme.background` for the fill:
 
 ```{js}
 // !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
@@ -162,4 +146,26 @@ svg.selectAll('rect')
     .attr('fill', theme.background);
 ```
 
-Notice that **r2d3** assigns **background** to the `background` style and **foreground** to the `fill` and `color` styles. Other environments hosting **r2d3** can set the `r2d3.theme` option to customize the value of the `theme` object.
+You can also explicitly set the theme using the `r2d3.theme` R option. For example:
+
+```{r}
+options(r2d3.theme = list(
+  background = "#FFFFFF",
+  foreground = "#000000")
+)
+```
+
+## Viewer
+
+The `viewer` argument to the `r2d3()` function enables you to customize how D3 visualizations are viewed when printed from within the RStudio console. The following options are available:
+
+| Option  | Description |
+|---------------------|---------------------|
+| `viewer = "internal"`  | (Default). Display within the RStudio Viewer pane. |
+| `viewer = "external"`  | Display within an external RStudio Viewer window. |
+| `viewer = "browser"`  | Display within an external web browser (e.g. Chrome). |
+
+The "external" option is useful if your visualization requires more space than an RStudio pane affords. The "browser" option is useful if you need access to browser debugging tools during development.
+
+Note that the `viewer` options described above are only fully supported within the [daily build](https://dailies.rstudio.com) of RStudio (as opposed to the current stable release).
+
