@@ -35,6 +35,10 @@ r2d3.onRender(function(csv, div, w, h, options) {
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     .call(chart);
+    
+  svg.selectAll(".box line, .box rect, .box circle ")
+    .attr("fill", theme.background)
+    .attr("stroke", theme.foreground);
 
   setInterval(function() {
     svg.datum(randomize).call(chart.duration(1000));
