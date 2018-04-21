@@ -1,5 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.Rprofile$
 LICENSE.md
 README.Rmd
 pkgdown

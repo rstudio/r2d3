@@ -121,4 +121,8 @@ pre code {
   display: none;
 }
 
+a.sourceLine:hover {
+  color: #375f84;  
+}
+
 
