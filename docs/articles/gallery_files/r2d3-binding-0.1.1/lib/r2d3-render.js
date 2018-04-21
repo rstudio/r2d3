@@ -22,6 +22,10 @@ function R2D3(el, width, height) {
       self.data = HTMLWidgets.dataframeToD3(self.data);
     }
     
+    if (x.theme) {
+      self.theme = themeCapable() ? x.theme.runtime : x.theme.default;
+    }
+    
     self.options = x.options;
   };
   
@@ -44,7 +48,10 @@ function R2D3(el, width, height) {
       .attr("height", self.height);
       
     if (self.theme.background) root.style("background", self.theme.background);
-    if (self.theme.foreground) root.style("fill", self.theme.foreground);
+    if (self.theme.foreground) {
+      root.style("fill", self.theme.foreground);
+      root.style("color", self.theme.foreground);
+    }
       
     self.setRoot(root);
   };
@@ -133,11 +140,95 @@ function R2D3(el, width, height) {
     }
   };
   
+  var consoleLog = function(data) {
+    console.log(data);
+    
+    var entry = document.getElementById("r2d3-console-entry");
+    if (!entry) {
+      entry = document.createElement("div");
+      entry.id = "r2d3-console-entry";
+      entry.style.bottom = "0";
+      entry.style.left = "0";
+      entry.style.right = "0";
+      entry.style.background = "rgb(244, 248, 249)";
+      entry.style.border = "1px solid #d6dadc";
+      entry.style.padding = "8px 15px 8px 15px";
+      entry.style.position = "absolute";
+      entry.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
+      entry.style.fontSize = "9pt";
+      el.appendChild(entry);
+      
+      entry.style.transform = "translateY(40px)";
+      entry.style.opacity = "0";
+      entry.style.transition = "all 0.25s";
+      
+      entry.onmouseenter = function() {
+        consoleHovering = true;
+      };
+      
+      entry.onmouseleave = function() {
+        consoleHovering = false;
+      };
+      
+      setTimeout(function() {
+        entry.style.transform = "translateY(0)";
+        entry.style.opacity = "1";
+        entry.style.transition = "all 0.5s";
+      }, 50);
+    }
+    
+    entry.innerText = data;
+    
+    clearTimeout(consoleTimeout);
+    consoleTimeout = setTimeout(function() {
+      var hideConsole = function() {
+        entry.style.transform = "translateY(-60px)";
+        entry.style.opacity = "0";
+        entry.addEventListener("transitionend", function(event) {
+          entry = document.getElementById("r2d3-console-entry");
+          if (entry) el.removeChild(entry);
+          consoleHovering = false;
+        });
+      };
+      
+      if (consoleHovering) {
+        entry.onmouseleave = hideConsole;
+      }
+      else {
+        hideConsole();
+      }
+    }, 3000);
+  };
+  var consoleTimeout = null;
+  var consoleHovering = false;
+  var createConsoleOverride = function(type) {
+    return function(data) {
+      consoleLog(type + data);
+    };
+  };
+  
+  self.console = {
+    assert: console.assert,
+    clear: console.clear,
+    count: console.count,
+    error: createConsoleOverride("Error: "),
+    group: console.group,
+    groupCollapsed: console.groupCollapsed,
+    groupEnd: console.groupEnd,
+    info: createConsoleOverride("Info: "),
+    log: createConsoleOverride(""),
+    table: console.table,
+    time: console.time,
+    timeEnd: console.timeEnd,
+    trace: console.trace,
+    warn: console.warn
+  };
+  
   self.callD3Script = function() {
     var d3Script = self.d3Script;
     
     try {
-      d3Script(self.d3(), self, self.data, self.root, self.width, self.height, self.options, self.theme);
+      d3Script(self.d3(), self, self.data, self.root, self.width, self.height, self.options, self.theme, self.console);
     }
     catch (err) {
       self.showError(err, null, null);
@@ -214,6 +305,7 @@ function R2D3(el, width, height) {
   
   var themesLoaded = false;
   var registerTheme = function(domain) {
+    domain = domain ? domain : window.location.origin;
     if (window.parent.postMessage) {
       window.addEventListener('message', function(event) {
         if (typeof event.data != 'object')
@@ -228,7 +320,7 @@ function R2D3(el, width, height) {
         self.theme.background = event.data.background;
         self.theme.foreground = event.data.foreground;
       	
-      	// resize to give script change to pick new theme
+      	// resize to give script chance to pick new theme
       	if (themesLoaded) self.resize();
       	themesLoaded = true;
       }, false);
@@ -247,27 +339,31 @@ function R2D3(el, width, height) {
   var errorHighlightOnce = false;
   var hostDomain = null;
   
-  var registerMessageListeners = function(event) {
+  var queryParameter = function(param) {
     var query = window.location.search.substring(1);
     var entries = query.split('&');
-    var capable = false;
     
     for (var idxEntry = 0; idxEntry < entries.length; idxEntry++) {
         var params = entries[idxEntry].split('=');
-        if (decodeURIComponent(params[0]) == "host") {
-            hostDomain = decodeURIComponent(params[1]);
+        if (decodeURIComponent(params[0]) == param) {
+            return decodeURIComponent(params[1]);
         }
-        if (decodeURIComponent(params[0]) == "capabilities") {
-            capable = decodeURIComponent(params[1]) == "1";
-        }
-    }
-      
-    if (!capable) {
-      hostDomain = null;
-    } else {
-      registerTheme(hostDomain);
     }
     
+    return null;
+  };
+  
+  var themeCapable = function() {
+    return queryParameter("capabilities") === "1";
+  };
+  
+  var registerMessageListeners = function(event) {
+    if (!themeCapable()) {
+      hostDomain = null;
+    } else {
+      hostDomain = queryParameter("host");
+      registerTheme(hostDomain);
+    }
   };
   
   var cleanStackTrace = function(stack) {
@@ -417,6 +513,7 @@ function R2D3(el, width, height) {
       stack.style.background = "#FFFFFF";
       stack.style.borderTop = "0";
       
+      var allEmpty = true;
       var entries = cleanStack.split("\n");
       for (var idxEntry in entries) {
         var entry = entries[idxEntry];
@@ -434,10 +531,12 @@ function R2D3(el, width, height) {
         else {
           stackEl.innerText = entry;
         }
-        stack.appendChild(stackEl);
+        
+        if (stackEl.innerHTML.trim().length > 0)  stack.appendChild(stackEl);
       }
       
-      container.appendChild(stack);
+      if (stack.childElementCount > 0)
+        container.appendChild(stack);
     }
   };
   
