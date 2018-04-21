@@ -7,20 +7,6 @@ library(r2d3)
 knitr::opts_chunk$set(echo=FALSE, comment=NA)
 ```
 
-```{css}
-.page-header>small {
-  display: none;
-}
-
-.r2d3.html-widget > svg {
-  border: 1px solid #eee;
-}
-
-pre code {
-  word-wrap: break-word;
-  white-space: pre-wrap;
-}
-```
 
 <div class="row">
 

@@ -1,4 +1,4 @@
-// !preview r2d3 data=read.csv("flare.csv"), d3_version=4
+// !preview r2d3 data = read.csv("flare.csv"), d3_version = 4
 
 // Based on https://bl.ocks.org/mbostock/4063269
 
@@ -6,10 +6,7 @@
 svg.attr("font-family", "sans-serif")
   .attr("font-size", "8")
   .attr("text-anchor", "middle");
-  
-    
-    
-    
+
 var pack = d3.pack()
   .size([width, height])
   .padding(1.5);

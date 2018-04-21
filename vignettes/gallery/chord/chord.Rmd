@@ -7,6 +7,7 @@ library(r2d3)
 knitr::opts_chunk$set(echo=FALSE, comment=NA)
 ```
 
+
 <div class="row">
 
 <div class="col-sm-3">
@@ -20,11 +21,11 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 <div class="col-sm-9">
 
 ```{r, echo=TRUE, eval=FALSE}
-r2d3(matrix(c(11975,5871,8916,2868,1951,10048,2060,6171,8010,16145,8090,8045,1013,990,940,6907), ncol = 4, nrow = 4, byrow = TRUE), script = "chord.js")
+r2d3(matrix(data = c(11975,5871,8916,2868,1951,10048,2060,6171,8010,16145,8090,8045,1013,990,940,6907), ncol = 4, nrow = 4, byrow = TRUE), script = "chord.js")
 ```
 
 ```{r, echo=FALSE}
-r2d3(matrix(c(11975,5871,8916,2868,1951,10048,2060,6171,8010,16145,8090,8045,1013,990,940,6907), ncol = 4, nrow = 4, byrow = TRUE), script = "chord.js", width="100%")
+r2d3(matrix(data = c(11975,5871,8916,2868,1951,10048,2060,6171,8010,16145,8090,8045,1013,990,940,6907), ncol = 4, nrow = 4, byrow = TRUE), script = "chord.js", width="100%")
 ```
 
 
@@ -56,17 +57,4 @@ $('a.list-group-item[href="../chord/chord.html"]').addClass('active')
 $('a[href="../../../articles/gallery.html"]').parent().addClass('active');
 ```
 
-```{css}
-.page-header>small {
-  display: none;
-}
 
-.r2d3.html-widget > svg {
-  border: 1px solid #eee;
-}
-
-pre code {
-  word-wrap: break-word;
-  white-space: pre-wrap;
-}
-```

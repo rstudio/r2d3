@@ -5,6 +5,7 @@ whisker_template <- readLines("tools/gallery-template.Rmd")
 code_partial <- readLines("tools/code-partial.Rmd")
 
 gallery_dirs <- list.dirs("vignettes/gallery", recursive = FALSE)
+gallery_dirs_list <- iteratelist(basename(gallery_dirs), value="dir")
 
 for (dir in gallery_dirs) {
   
@@ -17,21 +18,21 @@ for (dir in gallery_dirs) {
   preview_args <- strsplit(script_preview, "!preview\\s+r2d3\\s+")[[1]][[2]]
   
   # code files
-  list_files <- function(lang) {
+  list_files <- function(lang, mask = NULL) {
     files <- list.files(dir, pattern = glob2rx(paste0("*.", lang)))
+    if (!is.null(mask))
+      files <- files[!grepl(mask, files)]
     lapply(files, function(file) list(lang = lang, file = file))
   }
   code_files <- c(
-    list_files("js"),
+    list_files("js", mask = glob2rx("*.min.js")),
     list_files("css")
   )
-  
-  dirs <- iteratelist(basename(gallery_dirs), value="dir")
   
   # prime data
   data <- list(
     name = name,
-    dirs = dirs,
+    dirs = gallery_dirs_list,
     preview_args = preview_args,
     code_files = code_files
   )

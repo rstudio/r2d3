@@ -100,3 +100,21 @@ blockquote {
   display: none;
 }
 
+.page-header>small {
+  display: none;
+}
+
+.r2d3.html-widget > svg {
+  border: 1px solid #eee;
+}
+
+.r2d3.html-widget {
+  margin-bottom: 20px;
+}
+
+pre code {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+

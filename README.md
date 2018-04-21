@@ -2,7 +2,6 @@ r2d3: R interface to D3 visualizations
 ================
 
 <!-- TODO
-- themes / docs for themes
 - consider svg/png export: 
     http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
     rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html

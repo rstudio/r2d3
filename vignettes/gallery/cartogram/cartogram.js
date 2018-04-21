@@ -1,4 +1,4 @@
-// !preview r2d3 data=jsonlite::read_json("us.json"), d3_version = 3, dependencies = "topojson.min.js"
+// !preview r2d3 data = jsonlite::read_json("us.json"), d3_version = 3, dependencies = "topojson.min.js"
 
 // Based on https://bl.ocks.org/mbostock/4055908
 
