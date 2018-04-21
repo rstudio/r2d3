@@ -22,6 +22,9 @@ for (dir in gallery_dirs) {
     files <- list.files(dir, pattern = glob2rx(paste0("*.", lang)))
     if (!is.null(mask))
       files <- files[!grepl(mask, files)]
+    main_js <- paste0(name, ".js")
+    if (main_js %in% files)
+      files <- unique(c(main_js, files))
     lapply(files, function(file) list(lang = lang, file = file))
   }
   code_files <- c(

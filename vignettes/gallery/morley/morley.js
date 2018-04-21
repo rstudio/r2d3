@@ -1,6 +1,10 @@
+// !preview r2d3 data = read.csv("morley.csv"), d3_version = 3, container = "div", dependencies = c("box.js")
+
+// Based on: https://bl.ocks.org/mbostock/4061502
+
 var margin = {top: 10, right: 50, bottom: 20, left: 50},
-    width = 120 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = (width/4) - 10 - margin.left - margin.right,
+    height = height - margin.top - margin.bottom;
 
 var min = Infinity,
     max = -Infinity;
@@ -35,6 +39,10 @@ r2d3.onRender(function(csv, div, w, h, options) {
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     .call(chart);
+    
+  svg.selectAll(".box line, .box rect, .box circle ")
+    .attr("fill", theme.background)
+    .attr("stroke", theme.foreground);
 
   setInterval(function() {
     svg.datum(randomize).call(chart.duration(1000));

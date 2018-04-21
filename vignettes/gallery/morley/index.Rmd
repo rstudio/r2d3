@@ -1,5 +1,5 @@
 ---
-title: "Gallery: bubbles"
+title: "Gallery: morley"
 ---
 
 ```{r setup, include=FALSE}
@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 ```
 
 <div id="source-link">
-<https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/bubbles>
+<https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/morley>
 </div>
 
 <div class="row">
@@ -25,19 +25,35 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 <div class="col-sm-9">
 
 ```{r, echo=TRUE, eval=FALSE}
-r2d3(data = read.csv("flare.csv"), d3_version = 4, script = "bubbles.js")
+r2d3(data = read.csv("morley.csv"), d3_version = 3, container = "div", dependencies = c("box.js"), script = "morley.js")
 ```
 
 ```{r, echo=FALSE}
-r2d3(data = read.csv("flare.csv"), d3_version = 4, script = "bubbles.js", width="100%")
+r2d3(data = read.csv("morley.csv"), d3_version = 3, container = "div", dependencies = c("box.js"), script = "morley.js", width="100%")
 ```
 
 
-#### bubbles.js
+#### morley.js
 
 ```{r, results='asis'}
 cat("```js\n")
-writeLines(readLines("bubbles.js"))
+writeLines(readLines("morley.js"))
+cat("```\n")
+```
+
+#### box.js
+
+```{r, results='asis'}
+cat("```js\n")
+writeLines(readLines("box.js"))
+cat("```\n")
+```
+
+#### morley.css
+
+```{r, results='asis'}
+cat("```css\n")
+writeLines(readLines("morley.css"))
 cat("```\n")
 ```
 
@@ -50,7 +66,7 @@ cat("```\n")
 ```{js}
 $('#source-link').appendTo($('.page-header')).css('display', 'block');
 $('.template-vignette>.row>.col-md-9').attr('class', 'col-md-12');
-$('a.list-group-item[href="../bubbles/"]').addClass('active');
+$('a.list-group-item[href="../morley/"]').addClass('active');
 $('a[href="../../../articles/gallery.html"]').parent().addClass('active');
 ```
 

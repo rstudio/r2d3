@@ -9,33 +9,6 @@ output:
 
 This section shows how to use the examples available in the [github.com/d3/d3/wiki/Gallery](https://github.com/d3/d3/wiki/Gallery) gallery, the R examples can be found in [github.com/rstudio/r2d3/tree/master/inst/samples](https://github.com/rstudio/r2d3/tree/master/inst/samples).
 
-## Morley
-
-[bl.ocks.org/mbostock/4061502](https://bl.ocks.org/mbostock/4061502)
-
-```{r eval=FALSE}
-library(r2d3)
-r2d3(
-  read.csv("morley.csv"),
-  "morley.js",
-  d3_version = 3,
-  container = "div",
-  dependencies = c("morley.css", "box.js")
-  )
-)
-```
-```{r echo=FALSE}
-r2d3::r2d3(
-  read.csv(system.file("samples/morley/morley.csv", package = "r2d3")),
-  system.file("samples/morley/morley.js", package = "r2d3"),
-  d3_version = 3,
-  container = "div",
-  dependencies = c(
-    system.file("samples/morley/morley.css", package = "r2d3"),
-    system.file("samples/morley/box.js", package = "r2d3")
-  )
-)
-```
 
 ## Bullets
 
