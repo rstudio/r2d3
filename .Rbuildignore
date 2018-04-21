@@ -5,6 +5,7 @@ LICENSE.md
 README.Rmd
 pkgdown
 docs
+tools
 sandbox
 vignettes/gallery.Rmd
 
