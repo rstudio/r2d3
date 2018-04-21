@@ -32,3 +32,22 @@ navbar:
       href: articles/gallery.html
     - text: "Reference"
       href: reference/index.html
+      
+reference:
+
+  - title: "Rendering"
+    contents:
+      - r2d3
+      - as_d3_data
+      - default_sizing
+      - save_d3_html
+      
+  - title: "Shiny"
+    contents:
+      - d3Output
+      - renderD3
+      
+  - title: "Miscellaneous"
+    contents:
+      - html_dependency_d3
+

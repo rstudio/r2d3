@@ -20,8 +20,7 @@ Generic method to transform R objects into D3 friendly data.
 \details{
 The value returned from \code{as_d3_data()} should be one of:
 \itemize{
-\item An R data frame or an R object which is convertable to a data frame.
-In this case the \code{HTMLWidgets.dataframeToD3()}
+\item An R data frame. In this case the \code{HTMLWidgets.dataframeToD3()}
 JavaScript function will be called on the client to transform
 the data into D3 friendly (row-oriented) data; or
 \item A JSON object created using \link[jsonlite:toJSON]{jsonlite::toJSON}; or
