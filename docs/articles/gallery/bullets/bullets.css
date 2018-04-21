@@ -1,16 +1,3 @@
-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  margin: auto;
-  padding-top: 40px;
-  position: relative;
-  width: 960px;
-}
-
-button {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-}
 
 .bullet { font: 10px sans-serif; }
 .bullet .marker { stroke: #000; stroke-width: 2px; }
