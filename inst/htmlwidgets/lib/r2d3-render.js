@@ -397,7 +397,7 @@ function R2D3(el, width, height) {
         var data = lines[maybe].split(header)[1];
         var source = data.split("*/")[0].trim();
         
-        line = line - (maybe + 1);
+        line = line - (maybe + 2);
         file = source;
         
         break;
