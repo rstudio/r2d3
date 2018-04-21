@@ -9,6 +9,7 @@ r2d3: R interface to D3 visualizations
     http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
     rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
 - learn tab on site
+- cross-ref articles
 - update screenshots 
 -->
 
@@ -42,13 +43,13 @@ visualizations](https://d3js.org/) with R, including:
 <br/>
 
 With **r2d3**, you can bind data from R to D3 visualizations like the
-ones found on [D3 Gallery](https://github.com/d3/d3/wiki/Gallery),
-[Blocks](https://bl.ocks.org/), and
-[VIDA](https://vida.io/explore):
+ones found on <https://github.com/d3/d3/wiki/Gallery>,
+<https://bl.ocks.org/>, and
+<https://vida.io/explore>:
 
 <div style="margin-top: 20px; margin-bottom: 10px;">
 
-<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><kbd><img src="images/chord_thumbnail.png" width=211 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><kbd><img src="images/bubbles_thumbnail.png" width=211 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><kbd><img src="images/cartogram_thumbnail.png" width=213 class="illustration gallery-thumbnail"/></kbd></a>
+<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><kbd><img src="images/chord_thumbnail.png" width=205 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><kbd><img src="images/bubbles_thumbnail.png" width=205 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><kbd><img src="images/cartogram_thumbnail.png" width=207 class="illustration gallery-thumbnail"/></kbd></a>
 
 </div>
 
