@@ -1,12 +1,14 @@
-var margin = {top: 5, right: 40, bottom: 20, left: 120},
-    width = width - margin.left - margin.right,
-    height = 50 - margin.top - margin.bottom;
-
-var chart = d3.bullet()
-    .width(width)
-    .height(height);
+//!preview r2d3 jsonlite::read_json("inst/samples/bullets/bullets.json"), d3_version=3, container="div", dependencies=c("inst/samples/bullets/bullets.css", "inst/samples/bullets/helper.js")
 
 r2d3.onRender(function(data, div, w, h, options) {
+  var margin = {top: 5, right: 40, bottom: 20, left: 120};
+  var width = w - margin.left - margin.right;
+  var height = Math.floor(h / data.length) - margin.top - margin.bottom;
+  
+  var chart = d3.bullet()
+    .width(width)
+    .height(height);
+    
   var svg = div.selectAll("svg")
       .data(data)
     .enter().append("svg")
