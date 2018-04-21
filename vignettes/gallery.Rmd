@@ -1,0 +1,15 @@
+---
+title: "Gallery"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("utils.R")
+```
+
+The gallery includes several examples adapted for use with **r2d3** from <https://github.com/d3/d3/wiki/Gallery>. Other good sources of D3 examples are <https://bl.ocks.org/> and <https://vida.io/explore>.
+
+```{r, echo=FALSE}
+examples()
+```
+

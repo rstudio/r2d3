@@ -29,6 +29,6 @@ navbar:
         - text: "Package Development"
           href: articles/package_development.html
     - text: "Gallery"
-      href: articles/gallery/bubbles/
+      href: articles/gallery.html
     - text: "Reference"
       href: reference/index.html

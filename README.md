@@ -23,15 +23,21 @@ visualizations](https://d3js.org/) with R, including:
     Viewer](https://support.rstudio.com/hc/en-us/articles/202133558-Extending-RStudio-with-the-Viewer-Pane)
     and [R Notebooks](https://rmarkdown.rstudio.com/r_notebooks.html)
 
+  - Publishing D3 visualizations to the web
+
   - Incorporating D3 scripts into [R
     Markdown](https://rmarkdown.rstudio.com/) reports, presentations,
     and dashboards
 
-  - Creating interacive D3 applcations with
+  - Creating interacive D3 applications with
     [Shiny](https://shiny.rstudio.com/)
 
-  - Publishing D3 based [htmlwidgets](http://www.htmlwidgets.org) in R
+  - Distributing D3 based [htmlwidgets](http://www.htmlwidgets.org) in R
     packages
+
+<div style="clear: both">
+
+</div>
 
 <br/>
 
@@ -42,7 +48,7 @@ ones found on [D3 Gallery](https://github.com/d3/d3/wiki/Gallery),
 
 <div style="margin-top: 20px; margin-bottom: 10px;">
 
-<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><kbd><img src="images/gallery_chord.png" width=204 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><kbd><img src="images/gallery_bubbles.png" width=193 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/calendar/"><kbd><img src="images/gallery_calendar.png" width=211 class="illustration gallery-thumbnail"/></kbd></a>
+<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><kbd><img src="images/chord_thumbnail.png" width=211 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><kbd><img src="images/bubbles_thumbnail.png" width=211 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><kbd><img src="images/cartogram_thumbnail.png" width=213 class="illustration gallery-thumbnail"/></kbd></a>
 
 </div>
 

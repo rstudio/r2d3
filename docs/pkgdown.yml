@@ -12,6 +12,7 @@ articles:
   index: gallery/cartogram/index.html
   index: gallery/chord/index.html
   index: gallery/morley/index.html
+  gallery: gallery.html
   introduction: introduction.html
   package_development: package_development.html
   publishing: publishing.html
