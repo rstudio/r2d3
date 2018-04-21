@@ -38,7 +38,7 @@ for (dir in gallery_dirs) {
   )
   
   # render template
-  gallery_rmd <- file.path(dir, paste0(name, ".Rmd"))
+  gallery_rmd <- file.path(dir, "index.Rmd")
   output <- whisker.render(whisker_template, data = data, partials = list(
     code_partial = code_partial
   ))  

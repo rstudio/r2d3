@@ -16,7 +16,7 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 <div class="col-sm-3">
 <div class="list-group">
   {{#dirs}}
-  <a href="../{{dir}}/{{dir}}.html" class="list-group-item">{{dir}}</a>
+  <a href="../{{dir}}/" class="list-group-item">{{dir}}</a>
   {{/dirs}}
 </div>
 </div>
@@ -43,7 +43,7 @@ r2d3({{{preview_args}}}, script = "{{name}}.js", width="100%")
 ```{js}
 $('#source-link').appendTo($('.page-header')).css('display', 'block');
 $('.template-vignette>.row>.col-md-9').attr('class', 'col-md-12');
-$('a.list-group-item[href="../{{name}}/{{name}}.html"]').addClass('active')
+$('a.list-group-item[href="../{{name}}/"]').addClass('active');
 $('a[href="../../../articles/gallery.html"]').parent().addClass('active');
 ```
 

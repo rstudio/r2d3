@@ -15,9 +15,9 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 
 <div class="col-sm-3">
 <div class="list-group">
-  <a href="../bubbles/bubbles.html" class="list-group-item">bubbles</a>
-  <a href="../cartogram/cartogram.html" class="list-group-item">cartogram</a>
-  <a href="../chord/chord.html" class="list-group-item">chord</a>
+  <a href="../bubbles/" class="list-group-item">bubbles</a>
+  <a href="../cartogram/" class="list-group-item">cartogram</a>
+  <a href="../chord/" class="list-group-item">chord</a>
 </div>
 </div>
 
@@ -49,7 +49,7 @@ cat("```\n")
 ```{js}
 $('#source-link').appendTo($('.page-header')).css('display', 'block');
 $('.template-vignette>.row>.col-md-9').attr('class', 'col-md-12');
-$('a.list-group-item[href="../bubbles/bubbles.html"]').addClass('active')
+$('a.list-group-item[href="../bubbles/"]').addClass('active');
 $('a[href="../../../articles/gallery.html"]').parent().addClass('active');
 ```
 

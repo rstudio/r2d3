@@ -6,9 +6,9 @@ articles:
   data_conversion: data_conversion.html
   dependencies: dependencies.html
   development_and_debugging: development_and_debugging.html
-  bubbles: gallery/bubbles/bubbles.html
-  cartogram: gallery/cartogram/cartogram.html
-  chord: gallery/chord/chord.html
+  index: gallery/bubbles/index.html
+  index: gallery/cartogram/index.html
+  index: gallery/chord/index.html
   gallery: gallery.html
   introduction: introduction.html
   package_development: package_development.html
