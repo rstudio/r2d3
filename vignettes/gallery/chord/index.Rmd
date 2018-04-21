@@ -25,11 +25,11 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 <div class="col-sm-9">
 
 ```{r, echo=TRUE, eval=FALSE}
-r2d3(matrix(data = c(11975,5871,8916,2868,1951,10048,2060,6171,8010,16145,8090,8045,1013,990,940,6907), ncol = 4, nrow = 4, byrow = TRUE), script = "chord.js")
+r2d3(data = matrix(round(runif(16, 1, 10000)), ncol = 4, nrow = 4), script = "chord.js")
 ```
 
 ```{r, echo=FALSE}
-r2d3(matrix(data = c(11975,5871,8916,2868,1951,10048,2060,6171,8010,16145,8090,8045,1013,990,940,6907), ncol = 4, nrow = 4, byrow = TRUE), script = "chord.js", width="100%")
+r2d3(data = matrix(round(runif(16, 1, 10000)), ncol = 4, nrow = 4), script = "chord.js", width="100%")
 ```
 
 
