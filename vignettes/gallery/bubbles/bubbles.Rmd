@@ -7,6 +7,9 @@ library(r2d3)
 knitr::opts_chunk$set(echo=FALSE, comment=NA)
 ```
 
+<div id="source-link">
+<https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/bubbles>
+</div>
 
 <div class="row">
 
@@ -44,6 +47,7 @@ cat("```\n")
 
 
 ```{js}
+$('#source-link').appendTo($('.page-header')).css('display', 'block');
 $('.template-vignette>.row>.col-md-9').attr('class', 'col-md-12');
 $('a.list-group-item[href="../bubbles/bubbles.html"]').addClass('active')
 $('a[href="../../../articles/gallery.html"]').parent().addClass('active');
