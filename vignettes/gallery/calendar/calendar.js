@@ -1,5 +1,8 @@
-var width = 960,
-    height = 0.95 * height / 21,
+// !preview r2d3 data = read.csv("dji.csv"), d3_version = 4, container = "div"
+
+// Based on https://bl.ocks.org/mbostock/4063318
+
+var height = 0.95 * height / 21,
     cellSize = height / 8;
 
 var formatPercent = d3.format(".1%");

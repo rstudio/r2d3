@@ -2,12 +2,14 @@ r2d3: R interface to D3 visualizations
 ================
 
 <!-- TODO
+- complete gallery
+   - morley resizing (wide)
+   - calendar resizing
 - consider svg/png export: 
     http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
     rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
-- complete gallery
 - learn tab on site
-- cross reference vignettes
+- update screenshots 
 -->
 
 <img src="images/r2d3-hex.png" width=180 align="right" style="border: none; margin-right: 10px;"/>
@@ -40,7 +42,7 @@ ones found on [D3 Gallery](https://github.com/d3/d3/wiki/Gallery),
 
 <div style="margin-top: 20px; margin-bottom: 10px;">
 
-<a href="https://rstudio.github.io/r2d3/articles/gallery.html#chord"><kbd><img src="images/gallery_chord.png" width=204 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery.html#bubbles"><kbd><img src="images/gallery_bubbles.png" width=193 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery.html#calendar"><kbd><img src="images/gallery_calendar.png" width=211 class="illustration gallery-thumbnail"/></kbd></a>
+<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><kbd><img src="images/gallery_chord.png" width=204 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><kbd><img src="images/gallery_bubbles.png" width=193 class="illustration gallery-thumbnail"/></kbd></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/calendar/"><kbd><img src="images/gallery_calendar.png" width=211 class="illustration gallery-thumbnail"/></kbd></a>
 
 </div>
 

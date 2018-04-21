@@ -1,5 +1,5 @@
 ---
-title: "Gallery: chord"
+title: "Gallery: calendar"
 ---
 
 ```{r setup, include=FALSE}
@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 ```
 
 <div id="source-link">
-<https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/chord>
+<https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/calendar>
 </div>
 
 <div class="row">
@@ -27,27 +27,19 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 <div class="col-sm-9">
 
 ```{r, echo=TRUE, eval=FALSE}
-r2d3(data = matrix(round(runif(16, 1, 10000)), ncol = 4, nrow = 4), script = "chord.js")
+r2d3(data = read.csv("dji.csv"), d3_version = 4, container = "div", script = "calendar.js")
 ```
 
 ```{r, echo=FALSE}
-r2d3(data = matrix(round(runif(16, 1, 10000)), ncol = 4, nrow = 4), script = "chord.js", width="100%")
+r2d3(data = read.csv("dji.csv"), d3_version = 4, container = "div", script = "calendar.js", width="100%")
 ```
 
 
-#### chord.js
+#### calendar.js
 
 ```{r, results='asis'}
 cat("```js\n")
-writeLines(readLines("chord.js"))
-cat("```\n")
-```
-
-#### chord.css
-
-```{r, results='asis'}
-cat("```css\n")
-writeLines(readLines("chord.css"))
+writeLines(readLines("calendar.js"))
 cat("```\n")
 ```
 
@@ -60,7 +52,7 @@ cat("```\n")
 ```{js}
 $('#source-link').appendTo($('.page-header')).css('display', 'block');
 $('.template-vignette>.row>.col-md-9').attr('class', 'col-md-12');
-$('a.list-group-item[href="../chord/"]').addClass('active');
+$('a.list-group-item[href="../calendar/"]').addClass('active');
 $('a[href="../../../articles/gallery.html"]').parent().addClass('active');
 ```
 

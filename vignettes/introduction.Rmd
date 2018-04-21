@@ -10,8 +10,9 @@ vignette: >
 ---
 
 <!-- TODO
-- themes / docs for themes
 - complete gallery
+   - morley resizing (wide)
+   - calendar resizing
 - consider svg/png export: 
     http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
     rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
@@ -42,7 +43,7 @@ The **r2d3** package provides a suite of tools for using [D3 visualizations](htt
 With **r2d3**, you can bind data from R to D3 visualizations like the ones found on [D3 Gallery](https://github.com/d3/d3/wiki/Gallery), [Blocks](https://bl.ocks.org/), and [VIDA](https://vida.io/explore): 
 
 <div style="margin-top: 20px; margin-bottom: 10px;">
-<a href="https://rstudio.github.io/r2d3/articles/gallery.html#chord"><kbd><img src="images/gallery_chord.png" width=204 class="illustration gallery-thumbnail"/></kbd></a>&nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery.html#bubbles"><kbd><img src="images/gallery_bubbles.png" width=193 class="illustration gallery-thumbnail"/></kbd></a>&nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery.html#calendar"><kbd><img src="images/gallery_calendar.png" width=211 class="illustration gallery-thumbnail"/></kbd></a>
+<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><kbd><img src="images/gallery_chord.png" width=204 class="illustration gallery-thumbnail"/></kbd></a>&nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><kbd><img src="images/gallery_bubbles.png" width=193 class="illustration gallery-thumbnail"/></kbd></a>&nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery/calendar/"><kbd><img src="images/gallery_calendar.png" width=211 class="illustration gallery-thumbnail"/></kbd></a>
 </div>
 
 D3 visualizations created with **r2d3** work just like R plots within RStudio, R Markdown documents, and Shiny applications.
