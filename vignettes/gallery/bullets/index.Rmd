@@ -1,5 +1,5 @@
 ---
-title: "Gallery: cartogram"
+title: "Gallery: bullets"
 ---
 
 ```{r setup, include=FALSE}
@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 ```
 
 <div id="source-link">
-<https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/cartogram>
+<https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/bullets>
 </div>
 
 <div class="row">
@@ -26,27 +26,35 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 <div class="col-sm-9">
 
 ```{r, echo=TRUE, eval=FALSE}
-r2d3(data = jsonlite::read_json("us.json"), d3_version = 3, dependencies = "topojson.min.js", script = "cartogram.js")
+r2d3(data = jsonlite::read_json("bullets.json"), d3_version = 3, container = "div", dependencies = c("d3_bullet.js"), script = "bullets.js")
 ```
 
 ```{r, echo=FALSE}
-r2d3(data = jsonlite::read_json("us.json"), d3_version = 3, dependencies = "topojson.min.js", script = "cartogram.js", width="100%")
+r2d3(data = jsonlite::read_json("bullets.json"), d3_version = 3, container = "div", dependencies = c("d3_bullet.js"), script = "bullets.js", width="100%")
 ```
 
 
-#### cartogram.js
+#### bullets.js
 
 ```{r, results='asis'}
 cat("```js\n")
-writeLines(readLines("cartogram.js"))
+writeLines(readLines("bullets.js"))
 cat("```\n")
 ```
 
-#### cartogram.css
+#### d3_bullet.js
+
+```{r, results='asis'}
+cat("```js\n")
+writeLines(readLines("d3_bullet.js"))
+cat("```\n")
+```
+
+#### bullets.css
 
 ```{r, results='asis'}
 cat("```css\n")
-writeLines(readLines("cartogram.css"))
+writeLines(readLines("bullets.css"))
 cat("```\n")
 ```
 
@@ -59,7 +67,7 @@ cat("```\n")
 ```{js}
 $('#source-link').appendTo($('.page-header')).css('display', 'block');
 $('.template-vignette>.row>.col-md-9').attr('class', 'col-md-12');
-$('a.list-group-item[href="../cartogram/"]').addClass('active');
+$('a.list-group-item[href="../bullets/"]').addClass('active');
 $('a[href="../../../articles/gallery.html"]').parent().addClass('active');
 ```
 

@@ -94,10 +94,24 @@ function R2D3(el, width, height) {
     }
   };
   
+  var simpleHash = function(data) {
+    var step = Math.max(1, Math.floor(data.length / 1000));
+
+    var hash = 0;
+    for (var idx = 0; idx < data.length; idx += step) {
+		  hash = ((hash << 5) - hash) + data.charCodeAt(idx);
+		  hash = hash & hash;
+    }
+    
+    return Math.abs(hash) % 1000;
+  };
+  
   self.addScript = function(script) {
     var el = document.createElement("script");
     el.type = "text/javascript";
-    el.text = script;
+    
+    var debugHeader = "//# sourceURL=r2d3-script-" + simpleHash(script) + "\n";
+    el.text = debugHeader + script;
     
     self.captureErrors = function(msg, url, lineNo, columnNo, error) {
       self.showError({
@@ -376,16 +390,17 @@ function R2D3(el, width, height) {
   
   var parseLineFileRef = function(line) {
     var lines = x.script.split("\n");
-    var header = "// R2D3 Source File: ";
+    var header = "/* R2D3 Source File: ";
     var file = null;
     for (var maybe = line; line && maybe >= 0; maybe--) {
       if (lines[maybe].includes(header)) {
         var data = lines[maybe].split(header)[1];
-        var source = data.split(":")[0].trim();
-        var offset = data.split(":")[1];
+        var source = data.split("*/")[0].trim();
         
-        line = (line - (maybe + 1) + parseInt(offset));
+        line = line - (maybe + 2);
         file = source;
+        
+        break;
       }
     }
       

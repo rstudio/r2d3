@@ -131,7 +131,7 @@
 <div id="error-navigation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#error-navigation" class="anchor"></a>Error Navigation</h3>
-<p>If an error occurs while rendering a D3 visualization using preview mode then the error will be displayed in the Viewer pane (overwriting any previous visualization output):</p>
+<p>If an error occurs while rendering a D3 visualization using preview mode then the error will be displayed in the Viewer pane:</p>
 <p><img src="images/error_debugging.png" class="screenshot" width="600/"></p>
 <p>The source pane will also be navigated to the location in your script where the error occurred.</p>
 </div>
@@ -207,6 +207,8 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), viewer="browser"</span></a></code></pre></div>
 <p>Once you’ve opened the visualization you can use your browser <strong>Developer Tools</strong> to do additional debugging (typically you’ll need to reload the page after you’ve opened the developer tools pane in order to reproduce the error):</p>
 <p><img src="images/browser_developer_tools.png" class="screenshot" width="600/"></p>
+<p>Your original D3 script and dependencies are available as a <code>r2d3-script-###</code> script which can be used to set breakpoints or inspect errors in detail:</p>
+<p><img src="images/browser_debugging_entry.png" class="illustration" width="380/"></p>
 </div>
 </div>
   </div>

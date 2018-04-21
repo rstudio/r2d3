@@ -16,6 +16,7 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 <div class="col-sm-3">
 <div class="list-group">
   <a href="../bubbles/" class="list-group-item">bubbles</a>
+  <a href="../bullets/" class="list-group-item">bullets</a>
   <a href="../cartogram/" class="list-group-item">cartogram</a>
   <a href="../chord/" class="list-group-item">chord</a>
   <a href="../morley/" class="list-group-item">morley</a>
