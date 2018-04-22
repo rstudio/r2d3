@@ -202,9 +202,13 @@ shinyApp(ui = ui, server = server)
 
 ## Learning More
 
+To learn the basics of D3 and see some examples that might inspire your own work, check out:
+
 - [Learning D3](https://rstudio.github.io/r2d3/articles/learning_d3.html) --- Suggested resources for learning how to create D3 visualizations.
 
 - [Gallery of Examples](https://rstudio.github.io/r2d3/articles/gallery.html) --- Learn from a wide variety of example D3 visualizations.
+
+For next steps on learning on how to use **r2d3**, see these articles:
 
 - [R to D3 Data Conversion](https://rstudio.github.io/r2d3/articles/data_conversion.html) --- Customize the conversion of R objects to D3-friendly JSON.
 
@@ -213,6 +217,8 @@ shinyApp(ui = ui, server = server)
 - [Development and Debugging](https://rstudio.github.io/r2d3/articles/development_and_debugging.html) --- Recommended tools and workflow for developing D3 visualizations.
 
 - [Publishing D3 Visualizations](https://rstudio.github.io/r2d3/articles/publishing.html) --- Publish D3 visualizations as HTML, a static PNG image, or within R Markdown documents and Shiny applications.
+
+Once you are familar with the basics, check out these articles on more advanced topics:
 
 - [CSS and JavaScript Dependencies](https://rstudio.github.io/r2d3/articles/dependencies.html) --- Incorporating external CSS styles and JavaScript libraries into your visualizations.
 

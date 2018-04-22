@@ -8,8 +8,6 @@ r2d3: R interface to D3 visualizations
 - consider svg/png export: 
     http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
     rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
-- learn tab on site
-- more clear about auto-variables as difference
 - cross-ref articles
 -->
 
@@ -124,6 +122,7 @@ within D3 scripts, including:
   - `width` — The current width of the container
   - `height` — The current height of the container
   - `options` — Additional options provided by the user
+  - `theme` — Colors for the current theme
 
 When you are learning D3 or translating D3 examples for use with R it’s
 important to keep in mind that D3 examples will generally include code
@@ -239,6 +238,9 @@ shinyApp(ui = ui, server = server)
 
 ## Learning More
 
+To learn the basics of D3 and see some examples that might inspire your
+own work, check out:
+
   - [Learning
     D3](https://rstudio.github.io/r2d3/articles/learning_d3.html) —
     Suggested resources for learning how to create D3 visualizations.
@@ -246,6 +248,8 @@ shinyApp(ui = ui, server = server)
   - [Gallery of
     Examples](https://rstudio.github.io/r2d3/articles/gallery.html) —
     Learn from a wide variety of example D3 visualizations.
+
+For next steps on learning on how to use **r2d3**, see these articles:
 
   - [R to D3 Data
     Conversion](https://rstudio.github.io/r2d3/articles/data_conversion.html)
@@ -264,6 +268,9 @@ shinyApp(ui = ui, server = server)
     Visualizations](https://rstudio.github.io/r2d3/articles/publishing.html)
     — Publish D3 visualizations as HTML, a static PNG image, or within R
     Markdown documents and Shiny applications.
+
+Once you are familar with the basics, check out these articles on more
+advanced topics:
 
   - [CSS and JavaScript
     Dependencies](https://rstudio.github.io/r2d3/articles/dependencies.html)
