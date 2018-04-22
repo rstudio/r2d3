@@ -44,9 +44,7 @@ There are also a number of websites that aggregate examples of D3 visualizations
 
 ## Coding D3 for r2d3
 
-When you are learning D3 or translating D3 examples for use with R it's important to keep in mind that D3 examples will generally include code to load data, create an SVG or other root element, and establish a width and height for the visualization. 
-
-On the other hand with **r2d3**, these variables are *provided automatically* so do not need to be created. Here is some code you'll typically see in D3 examples:
+When you are learning D3 or translating D3 examples for use with R it's important to keep in mind that D3 examples will generally include code to load data, create an SVG or other root element, and establish a width and height for the visualization. On the other hand with **r2d3**, these variables are *provided automatically* so do not need to be created. Here is some code you'll typically see in D3 examples:
 
 Creating an SVG element to contain the visualization:
 

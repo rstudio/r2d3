@@ -12,6 +12,8 @@ navbar:
     - text: "Articles"
       menu:
         - text: Using
+        - text: "Introduction to r2d3"
+          href: articles/introduction.html
         - text: "R to D3 Data Conversion"
           href: articles/data_conversion.html
         - text: "D3 Visualization Options"

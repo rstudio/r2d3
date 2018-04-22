@@ -48,6 +48,9 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Using</li>
     <li>
+      <a href="../articles/introduction.html">Introduction to r2d3</a>
+    </li>
+    <li>
       <a href="../articles/data_conversion.html">R to D3 Data Conversion</a>
     </li>
     <li>
@@ -142,8 +145,7 @@
 <div id="coding-d3-for-r2d3" class="section level2">
 <h2 class="hasAnchor">
 <a href="#coding-d3-for-r2d3" class="anchor"></a>Coding D3 for r2d3</h2>
-<p>When you are learning D3 or translating D3 examples for use with R it’s important to keep in mind that D3 examples will generally include code to load data, create an SVG or other root element, and establish a width and height for the visualization.</p>
-<p>On the other hand with <strong>r2d3</strong>, these variables are <em>provided automatically</em> so do not need to be created. Here is some code you’ll typically see in D3 examples:</p>
+<p>When you are learning D3 or translating D3 examples for use with R it’s important to keep in mind that D3 examples will generally include code to load data, create an SVG or other root element, and establish a width and height for the visualization. On the other hand with <strong>r2d3</strong>, these variables are <em>provided automatically</em> so do not need to be created. Here is some code you’ll typically see in D3 examples:</p>
 <p>Creating an SVG element to contain the visualization:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">var</span> svg <span class="op">=</span> <span class="va">d3</span>.<span class="at">select</span>(<span class="st">"body"</span>).<span class="at">append</span>(<span class="st">"svg"</span>)<span class="op">;</span></a></code></pre></div>
 <p>Hard-coding margins, width, and height for the visualization:</p>

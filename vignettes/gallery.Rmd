@@ -9,6 +9,8 @@ source("utils.R")
 
 The gallery includes several examples adapted for use with **r2d3** from <https://github.com/d3/d3/wiki/Gallery>. Other good sources of D3 examples are <https://bl.ocks.org/mbostock> and <https://vida.io/explore>.
 
+To learn more about how to code your own D3 visualizations, check out the article on [Learning D3](learning_d3.html). 
+
 ```{r}
 examples()
 ```
