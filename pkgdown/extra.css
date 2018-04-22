@@ -104,7 +104,8 @@ blockquote {
   display: none;
 }
 
-.r2d3.html-widget > svg {
+.r2d3.html-widget > svg,
+.r2d3.html-widget > div {
   border: 1px solid #eee;
 }
 
