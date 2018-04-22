@@ -2,9 +2,9 @@
 
 // Based on https://bl.ocks.org/mbostock/4063318
 
-var height = 0.95 * height / 21,
+var height = height / 21,
     cellSize = height / 8;
-
+    
 var formatPercent = d3.format(".1%");
 
 var color = d3.scaleQuantize()
@@ -12,6 +12,7 @@ var color = d3.scaleQuantize()
     .range(["#a50026", "#d73027", "#f46d43", "#fdae61", "#fee08b", "#ffffbf", "#d9ef8b", "#a6d96a", "#66bd63", "#1a9850", "#006837"]);
 
 var svg = div
+  .style("line-height", "0")
   .selectAll("svg")
   .data(d3.range(1990, 2011))
   .enter().append("svg")
@@ -23,7 +24,7 @@ var svg = div
 svg.append("text")
     .attr("transform", "translate(-6," + cellSize * 3.5 + ")rotate(-90)")
     .attr("font-family", "sans-serif")
-    .attr("font-size", 10)
+    .attr("font-size", 7 + 3 * height / 136)
     .attr("text-anchor", "middle")
     .text(function(d) { return d; });
 
