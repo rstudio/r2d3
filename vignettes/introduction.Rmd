@@ -17,6 +17,7 @@ vignette: >
     http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
     rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
 - learn tab on site
+- more clear about auto-variables as difference
 - cross-ref articles
 -->
 
@@ -51,8 +52,6 @@ With **r2d3**, you can bind data from R to D3 visualizations like the ones found
 
 D3 visualizations created with **r2d3** work just like R plots within RStudio, R Markdown documents, and Shiny applications.
 
-
-
 ## Getting Started
 
 First, install the package from GitHub as follows:
@@ -64,6 +63,10 @@ devtools::install_github("rstudio/r2d3")
 Next, install the [daily build](https://dailies.rstudio.com) of RStudio (you need this version of RStudio to take advantage of various integrated tools for authoring D3 scripts with r2d3):
 
 <a href="https://dailies.rstudio.com"><img src="images/daily_build.png" class="screenshot" width=600/></a>
+
+Once you've installed the package and the RStudio daily build you have the tools required to work with **r2d3**. Below, we'll describe basic workflow within RStudio and techniques for including visualizations in R Markdown and Shiny applications. 
+
+If you are completely new to D3, you may also want to check out the article on [Learning D3](https://rstudio.github.io/r2d3/articles/learning_d3.html) before proceeding further.
 
 ## D3 Scripts
 
@@ -94,6 +97,8 @@ Which results in the following visualization:
 
 <img src="images/bar_chart.png" class="illustration" width=600/>
 
+### D3 Variables
+
 Note that data is provided to the script using the `data` argument to the `r2d3()` function. This data is then automatically made available to the D3 script. There are a number of other special variables available within D3 scripts, including:
 
 - `data` --- The R data converted to JavaScript.
@@ -102,6 +107,13 @@ Note that data is provided to the script using the `data` argument to the `r2d3(
 - `height` --- The current height of the container
 - `options` --- Additional options provided by the user
 
+When you are learning D3 or translating D3 examples for use with R it's important to keep in mind that D3 examples will generally include code to load data, create an SVG or other root element, and establish a width and height for the visualization. 
+
+On the other hand with **r2d3**, these variables are *provided automatically* so do not need to be created. The reasons these variables are provided automatically are:
+
+1) So that you can dynamically bind data from R to visualizations; and
+
+2) So that **r2d3** can automatically handle dynamic resizing for your visualization. Most D3 examples have a static size. This if fine for an example but not very robust for including the visualization within a report, dashboard, or application.
 
 ## D3 Preview
 
@@ -192,6 +204,8 @@ shinyApp(ui = ui, server = server)
 
 
 ## Learning More
+
+- [Learning D3](https://rstudio.github.io/r2d3/articles/learning_d3.html) --- Suggested resources for learning how to create D3 visualizations.
 
 - [Gallery of Examples](https://rstudio.github.io/r2d3/articles/gallery.html) --- Learn from a wide variety of example D3 visualizations.
 

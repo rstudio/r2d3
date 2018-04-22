@@ -14,6 +14,7 @@ articles:
   index: gallery/morley/index.html
   gallery: gallery.html
   introduction: introduction.html
+  learning_d3: learning_d3.html
   package_development: package_development.html
   publishing: publishing.html
   visualization_options: visualization_options.html

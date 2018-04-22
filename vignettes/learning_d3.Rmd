@@ -1,0 +1,23 @@
+---
+title: "Learning D3"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Learning D3}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+## Overview
+
+Learning D3
+
+https://www.amazon.com/Interactive-Data-Visualization-Web-Introduction/dp/1491921285/
+
+
+
+https://blog.datazar.com/the-best-resources-when-learning-d3-js-7da4ba0a783e
+
