@@ -28,10 +28,10 @@ navbar:
           href: articles/advanced_rendering.html
         - text: "Package Development"
           href: articles/package_development.html
-    - text: "Gallery"
-      href: articles/gallery.html
     - text: "Learning D3"
       href: articles/learning_d3.html
+    - text: "Gallery"
+      href: articles/gallery.html
     - text: "Reference"
       href: reference/index.html
       

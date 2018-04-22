@@ -74,10 +74,10 @@
   </ul>
 </li>
 <li>
-  <a href="articles/gallery.html">Gallery</a>
+  <a href="articles/learning_d3.html">Learning D3</a>
 </li>
 <li>
-  <a href="articles/learning_d3.html">Learning D3</a>
+  <a href="articles/gallery.html">Gallery</a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
@@ -112,8 +112,8 @@
     http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
     rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
 - learn tab on site
+- more clear about auto-variables as difference
 - cross-ref articles
-- update screenshots 
 -->
 <p><img src="images/r2d3-hex.png" width="180" align="right" style="border: none; margin-right: 10px;"></p>
 <p>The <strong>r2d3</strong> package provides a suite of tools for using <a href="https://d3js.org/">D3 visualizations</a> with R, including:</p>
@@ -143,6 +143,8 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"rstudio/r2d3"</span>)</a></code></pre></div>
 <p>Next, install the <a href="https://dailies.rstudio.com">daily build</a> of RStudio (you need this version of RStudio to take advantage of various integrated tools for authoring D3 scripts with r2d3):</p>
 <p><a href="https://dailies.rstudio.com"><img src="images/daily_build.png" class="screenshot" width="600/"></a></p>
+<p>Once you’ve installed the package and the RStudio daily build you have the tools required to work with <strong>r2d3</strong>. Below, we’ll describe basic workflow within RStudio and techniques for including visualizations in R Markdown and Shiny applications.</p>
+<p>If you are completely new to D3, you may also want to check out the article on <a href="https://rstudio.github.io/r2d3/articles/learning_d3.html">Learning D3</a> before proceeding further.</p>
 </div>
 <div id="d3-scripts" class="section level2">
 <h2 class="hasAnchor">
@@ -164,6 +166,9 @@
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a></code></pre></div>
 <p>Which results in the following visualization:</p>
 <p><img src="images/bar_chart.png" class="illustration" width="600/"></p>
+<div id="d3-variables" class="section level3">
+<h3 class="hasAnchor">
+<a href="#d3-variables" class="anchor"></a>D3 Variables</h3>
 <p>Note that data is provided to the script using the <code>data</code> argument to the <code><a href="reference/r2d3.html">r2d3()</a></code> function. This data is then automatically made available to the D3 script. There are a number of other special variables available within D3 scripts, including:</p>
 <ul>
 <li>
@@ -177,6 +182,11 @@
 <li>
 <code>options</code> — Additional options provided by the user</li>
 </ul>
+<p>When you are learning D3 or translating D3 examples for use with R it’s important to keep in mind that D3 examples will generally include code to load data, create an SVG or other root element, and establish a width and height for the visualization.</p>
+<p>On the other hand with <strong>r2d3</strong>, these variables are <em>provided automatically</em> so do not need to be created. The reasons these variables are provided automatically are:</p>
+<p>1) So that you can dynamically bind data from R to visualizations; and</p>
+<p>2) So that <strong>r2d3</strong> can automatically handle dynamic resizing for your visualization. Most D3 examples have a static size. This if fine for an example but not very robust for including the visualization within a report, dashboard, or application.</p>
+</div>
 </div>
 <div id="d3-preview" class="section level2">
 <h2 class="hasAnchor">
@@ -251,6 +261,7 @@ svg.selectAll('rect')
 <h2 class="hasAnchor">
 <a href="#learning-more" class="anchor"></a>Learning More</h2>
 <ul>
+<li><p><a href="https://rstudio.github.io/r2d3/articles/learning_d3.html">Learning D3</a> — Suggested resources for learning how to create D3 visualizations.</p></li>
 <li><p><a href="https://rstudio.github.io/r2d3/articles/gallery.html">Gallery of Examples</a> — Learn from a wide variety of example D3 visualizations.</p></li>
 <li><p><a href="https://rstudio.github.io/r2d3/articles/data_conversion.html">R to D3 Data Conversion</a> — Customize the conversion of R objects to D3-friendly JSON.</p></li>
 <li><p><a href="https://rstudio.github.io/r2d3/articles/visualization_options.html">D3 Visualization Options</a> — Control various aspects of D3 rendering and expose user-level options for your D3 script.</p></li>

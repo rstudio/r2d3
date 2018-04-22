@@ -16,8 +16,6 @@ vignette: >
 - consider svg/png export: 
     http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
     rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
-- learn tab on site
-- more clear about auto-variables as difference
 - cross-ref articles
 -->
 
@@ -106,6 +104,7 @@ Note that data is provided to the script using the `data` argument to the `r2d3(
 - `width` --- The current width of the container
 - `height` --- The current height of the container
 - `options` --- Additional options provided by the user
+- `theme` --- Colors for the current theme
 
 When you are learning D3 or translating D3 examples for use with R it's important to keep in mind that D3 examples will generally include code to load data, create an SVG or other root element, and establish a width and height for the visualization. 
 
@@ -200,8 +199,6 @@ shinyApp(ui = ui, server = server)
 ```
 
 <img src="images/baranim-1.gif" class="illustration" width=600/>
-
-
 
 ## Learning More
 
