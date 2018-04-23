@@ -20,6 +20,8 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
   <a href="../calendar/" class="list-group-item">calendar</a>
   <a href="../cartogram/" class="list-group-item">cartogram</a>
   <a href="../chord/" class="list-group-item">chord</a>
+  <a href="../dendogram/" class="list-group-item">dendogram</a>
+  <a href="../forcegraph/" class="list-group-item">forcegraph</a>
   <a href="../morley/" class="list-group-item">morley</a>
 </div>
 </div>
