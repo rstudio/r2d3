@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • r2d3</title>
+<title>Save a D3 visualization as a PNG image — save_d3_png • r2d3</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,7 +27,10 @@
 <script src="../pkgdown.js"></script>
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Save a D3 visualization as a PNG image — save_d3_png" />
+
+<meta property="og:description" content="Save a D3 visualization to PNG (e.g. for including in another document)." />
+<meta name="twitter:card" content="summary" />
 
 
 <!-- mathjax -->
@@ -44,7 +47,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
@@ -129,106 +132,85 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Save a D3 visualization as a PNG image</h1>
+    <small>Source: <a href='https://github.com/rstudio/r2d3/blob/master/R/publish.R'><code>R/publish.R</code></a></small>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    
+    <p>Save a D3 visualization to PNG (e.g. for including in another document).</p>
+    
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <pre class="usage"><span class='fu'>save_d3_png</span>(<span class='no'>d3</span>, <span class='no'>file</span>, <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>992</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>744</span>,
+  <span class='kw'>delay</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>zoom</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>d3</th>
+      <td><p>D3 visualization to save</p></td>
+    </tr>
+    <tr>
+      <th>file</th>
+      <td><p>File to save HTML into</p></td>
+    </tr>
+    <tr>
+      <th>background</th>
+      <td><p>Text string giving the html background color of the widget.
+Defaults to white.</p></td>
+    </tr>
+    <tr>
+      <th>width</th>
+      <td><p>Image width</p></td>
+    </tr>
+    <tr>
+      <th>height</th>
+      <td><p>Image height</p></td>
+    </tr>
+    <tr>
+      <th>delay</th>
+      <td><p>Time to wait before taking screenshot, in seconds. Sometimes a
+longer delay is needed for all assets to display properly.</p></td>
+    </tr>
+    <tr>
+      <th>zoom</th>
+      <td><p>A number specifying the zoom factor. A zoom factor of 2 will
+result in twice as many pixels vertically and horizontally. Note that
+using 2 is not exactly the same as taking a screenshot on a HiDPI (Retina)
+device: it is like increasing the zoom to 200 doubling the height and
+width of the browser window. This differs from using a HiDPI device
+because some web pages load different, higher-resolution images when they
+know they will be displayed on a HiDPI device (but using zoom will not
+report that there is a HiDPI device).</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-rendering" class="hasAnchor"><a href="#section-rendering" class="anchor"></a>Rendering</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="r2d3.html">r2d3()</a></code> </p>
-          </td>
-          <td><p>D3 visualization</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="as_d3_data.html">as_d3_data()</a></code> </p>
-          </td>
-          <td><p>Convert object to D3 data</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="default_sizing.html">default_sizing()</a></code> </p>
-          </td>
-          <td><p>Default sizing policy for r2d3 widgets</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-publishing" class="hasAnchor"><a href="#section-publishing" class="anchor"></a>Publishing</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="save_d3_html.html">save_d3_html()</a></code> </p>
-          </td>
-          <td><p>Save a D3 visualization as HTML</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="save_d3_png.html">save_d3_png()</a></code> </p>
-          </td>
-          <td><p>Save a D3 visualization as a PNG image</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-shiny" class="hasAnchor"><a href="#section-shiny" class="anchor"></a>Shiny</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="d3-shiny.html">d3Output()</a></code> <code><a href="d3-shiny.html">renderD3()</a></code> </p>
-          </td>
-          <td><p>Shiny bindings for d3</p></td>
-        </tr>
-      </tbody><tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-miscellaneous" class="hasAnchor"><a href="#section-miscellaneous" class="anchor"></a>Miscellaneous</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="html_dependency_d3.html">html_dependency_d3()</a></code> </p>
-          </td>
-          <td><p>D3 HTML dependency</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <p>PNG versions of D3 visualizations are created by displaying them in
+an offscreen web browser and taking a screenshot of the rendered web page.</p>
+<p>Using the <code>save_d3_png()</code> function requires that you install the
+<span class="pkg">webshot</span> package, as well as the phantom.js headless browser (which
+you can install using the function <code><a href='http://www.rdocumentation.org/packages/webshot/topics/install_phantomjs'>webshot::install_phantomjs()</a></code>).</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><code><a href='save_d3_html.html'>save_d3_html()</a></code></p>
+    
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-rendering">Rendering</a></li>
-      <li><a href="#section-publishing">Publishing</a></li>
-      <li><a href="#section-shiny">Shiny</a></li>
-      <li><a href="#section-miscellaneous">Miscellaneous</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+          </ul>
+
   </div>
 </div>
 

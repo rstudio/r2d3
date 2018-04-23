@@ -65,6 +65,12 @@ blockquote {
   border: solid 1px #cccccc;
 }
 
+.thumbnail {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #cccccc;
+}
+
 .gallery-thumbnail {
   margin-right: 10px;
   display: inline;

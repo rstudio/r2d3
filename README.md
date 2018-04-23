@@ -1,12 +1,6 @@
 r2d3: R interface to D3 visualizations
 ================
 
-<!-- TODO
-- more gallery examples
-- consider svg/png export: 
-    http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
--->
-
 <img src="images/r2d3-hex.png" width=180 align="right" style="border: none; margin-right: 10px;"/>
 
 The **r2d3** package provides a suite of tools for using [D3

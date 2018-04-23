@@ -9,10 +9,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-<!-- TODO
-- more gallery examples
--->
-
 ```{r setup, include=FALSE}
 library(r2d3)
 ```

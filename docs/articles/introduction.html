@@ -114,13 +114,6 @@
     
     
 <div class="contents">
-<!-- TODO
-- more gallery examples
-- consider svg/png export: 
-    http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
-    rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
-- cross-ref articles
--->
 <p><img src="images/r2d3-hex.png" width="180" align="right" style="border: none; margin-right: 10px;"></p>
 <p>The <strong>r2d3</strong> package provides a suite of tools for using <a href="https://d3js.org/">D3 visualizations</a> with R, including:</p>
 <ul>
@@ -200,7 +193,7 @@
 <h2 class="hasAnchor">
 <a href="#d3-preview" class="anchor"></a>D3 Preview</h2>
 <p>The <a href="https://dailies.rstudio.com">daily build</a> of RStudio includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:</p>
-<p><img src="images/new_d3_script.png" class="screenshot" width="600/"></p>
+<p><img src="images/new_script.png" class="screenshot" width="600/"></p>
 <p>A simple template for a D3 script (the barchart.js example shown above) is provided by default. You can use the <strong>Preview</strong> command (Ctrl+Shift+Center) to render the visualization:</p>
 <p><img src="images/rstudio_preview.png" class="screenshot" width="600/"></p>
 <p>You might wonder where the data comes from for the preview. Note that there is a special comment at the top of the D3 script:</p>
@@ -257,7 +250,7 @@ svg.selectAll('rect')
 <a class="sourceLine" id="cb5-13" data-line-number="13">  output<span class="op">$</span>d3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/d3-shiny.html">renderD3</a></span>({</a>
 <a class="sourceLine" id="cb5-14" data-line-number="14">    <span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(</a>
 <a class="sourceLine" id="cb5-15" data-line-number="15">      <span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">5</span>, input<span class="op">$</span>bar_max)),</a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">      <span class="kw">system.file</span>(<span class="st">"baranims.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">      <span class="dt">script =</span> <span class="st">"baranims.js"</span></a>
 <a class="sourceLine" id="cb5-17" data-line-number="17">    )</a>
 <a class="sourceLine" id="cb5-18" data-line-number="18">  })</a>
 <a class="sourceLine" id="cb5-19" data-line-number="19">}</a>

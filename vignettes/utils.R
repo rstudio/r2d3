@@ -1,9 +1,9 @@
 
 library(htmltools)
 
-# Generate HTML for a 4-wide bootstrap thumbnail
+# Generate HTML for a 3-wide bootstrap thumbnail
 thumbnail <- function(title, img, href, caption = TRUE) {
-  div(class = "col-sm-4",
+  div(class = "col-sm-3",
       a(class = "thumbnail", title = title, href = href,
         img(src = img),
         div(class = ifelse(caption, "caption", ""),
@@ -18,7 +18,7 @@ thumbnails <- function(thumbs) {
   
   # capture arguments and setup rows to return
   numThumbs <- length(thumbs)
-  fullRows <- numThumbs / 3
+  fullRows <- numThumbs / 4
   rows <- tagList()
   
   # add a row of thumbnails
@@ -28,13 +28,13 @@ thumbnails <- function(thumbs) {
   
   # handle full rows
   for (i in 1:fullRows) {
-    last <- i * 3
-    first <- last-2
+    last <- i * 4
+    first <- last-3
     addRow(first, last)
   }
   
   # check for leftovers
-  leftover <- numThumbs %% 3
+  leftover <- numThumbs %% 4
   if (leftover > 0) {
     last <- numThumbs
     first <- last - leftover + 1
