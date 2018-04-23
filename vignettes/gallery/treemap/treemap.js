@@ -38,6 +38,7 @@ r2d3.onRender(function(data, svg, w, h, options) {
 
   cell.append("text")
       .attr("clip-path", function(d) { return "url(#clip-" + d.data.id + ")"; })
+      .style("font-size", Math.min(width, height) / 50)
     .selectAll("tspan")
       .data(function(d) { return d.data.name.split(/(?=[A-Z][^A-Z])/g); })
     .enter().append("tspan")
