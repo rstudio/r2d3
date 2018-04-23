@@ -42,8 +42,12 @@ reference:
   - title: "Rendering"
     contents:
       - r2d3
-      - as_d3_data
       - default_sizing
+  
+  - title: "Data"
+    contents:
+      - as_d3_data
+      - read_json
   
   - title: "Publishing"
     contents:

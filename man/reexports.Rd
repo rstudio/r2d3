@@ -4,6 +4,8 @@
 \name{reexports}
 \alias{reexports}
 \alias{sizingPolicy}
+\alias{reexports}
+\alias{read_json}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -12,5 +14,7 @@ below to see their documentation.
 
 \describe{
   \item{htmlwidgets}{\code{\link[htmlwidgets]{sizingPolicy}}}
+
+  \item{jsonlite}{\code{\link[jsonlite]{read_json}}}
 }}
 

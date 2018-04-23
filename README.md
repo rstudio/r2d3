@@ -64,6 +64,16 @@ the tools required to work with **r2d3**. Below, we’ll describe basic
 workflow within RStudio and techniques for including visualizations in R
 Markdown and Shiny applications.
 
+## About D3
+
+Creating data visualizations with **r2d3** requires lots of custom SVG
+graphics programming (similar to creating custom grid graphics in R).
+It’s therefore a good fit when you need highly custom visualizations
+that aren’t covered by existing libraries. If on the other hand you are
+looking for pre-fabricated D3 / JavaScript visualizations, check out the
+packages created using [htmlwidgets](http://www.htmlwidgets.org), which
+provide a much higher level interface.
+
 If you are completely new to D3, you may also want to check out the
 article on [Learning
 D3](https://rstudio.github.io/r2d3/articles/learning_d3.html) before

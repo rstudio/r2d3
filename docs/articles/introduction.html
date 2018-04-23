@@ -141,6 +141,11 @@
 <p>Next, install the <a href="https://dailies.rstudio.com">daily build</a> of RStudio (you need this version of RStudio to take advantage of various integrated tools for authoring D3 scripts with r2d3):</p>
 <p><a href="https://dailies.rstudio.com"><img src="images/daily_build.png" class="screenshot" width="600/"></a></p>
 <p>Once you’ve installed the package and the RStudio daily build you have the tools required to work with <strong>r2d3</strong>. Below, we’ll describe basic workflow within RStudio and techniques for including visualizations in R Markdown and Shiny applications.</p>
+</div>
+<div id="about-d3" class="section level2">
+<h2 class="hasAnchor">
+<a href="#about-d3" class="anchor"></a>About D3</h2>
+<p>Creating data visualizations with <strong>r2d3</strong> requires lots of custom SVG graphics programming (similar to creating custom grid graphics in R). It’s therefore a good fit when you need highly custom visualizations that aren’t covered by existing libraries. If on the other hand you are looking for pre-fabricated D3 / JavaScript visualizations, check out the packages created using <a href="http://www.htmlwidgets.org">htmlwidgets</a>, which provide a much higher level interface.</p>
 <p>If you are completely new to D3, you may also want to check out the article on <a href="https://rstudio.github.io/r2d3/articles/learning_d3.html">Learning D3</a> before proceeding further.</p>
 </div>
 <div id="d3-scripts" class="section level2">
@@ -289,6 +294,7 @@ svg.selectAll('rect')
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#getting-started">Getting Started</a></li>
+      <li><a href="#about-d3">About D3</a></li>
       <li><a href="#d3-scripts">D3 Scripts</a></li>
       <li><a href="#d3-preview">D3 Preview</a></li>
       <li><a href="#r-markdown">R Markdown</a></li>
