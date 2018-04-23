@@ -2,9 +2,7 @@
 
 // Based on: https://bl.ocks.org/mbostock/4063570
 
-var width = +svg.attr("width"),
-    height = +svg.attr("height"),
-    g = svg.append("g").attr("transform", "translate(40,0)");
+var g = svg.append("g").attr("transform", "translate(40,0)");
 
 var tree = d3.cluster()
     .size([height, width - 160]);
@@ -40,6 +38,7 @@ r2d3.onRender(function(data, svg, w, h, options) {
 
   node.append("text")
       .attr("dy", 3)
+      .attr("font-size", 2 + 4 * height / 1000)
       .attr("x", function(d) { return d.children ? -8 : 8; })
       .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
       .text(function(d) { return d.id.substring(d.id.lastIndexOf(".") + 1); });

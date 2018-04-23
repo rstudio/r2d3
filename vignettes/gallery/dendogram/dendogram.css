@@ -3,7 +3,7 @@
 }
 
 .node text {
-  font: 10px sans-serif;
+  font-family: sans-serif;
 }
 
 .node--internal circle {
