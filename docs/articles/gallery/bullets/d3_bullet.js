@@ -3,7 +3,7 @@
 // Chart design based on the recommendations of Stephen Few. Implementation
 // based on the work of Clint Ivy, Jamie Love, and Jason Davies.
 // http://projects.instantcognition.com/protovis/bulletchart/
-d3.bullet = function() {
+d3.bullet = function(ticksHeight) {
   var orient = "left", // TODO top & bottom
       reverse = false,
       duration = 0,
@@ -120,12 +120,12 @@ d3.bullet = function() {
 
       tickEnter.append("line")
           .attr("y1", height)
-          .attr("y2", height * 7 / 6);
+          .attr("y2", height + ticksHeight / 4);
 
       tickEnter.append("text")
           .attr("text-anchor", "middle")
-          .attr("dy", "1em")
-          .attr("y", height * 7 / 6)
+          .attr("dy", "0.5em")
+          .attr("y", height + ticksHeight / 2)
           .text(format);
 
       // Transition the entering ticks to the new scale, x1.
@@ -142,10 +142,10 @@ d3.bullet = function() {
 
       tickUpdate.select("line")
           .attr("y1", height)
-          .attr("y2", height * 7 / 6);
+          .attr("y2", height + ticksHeight / 4);
 
       tickUpdate.select("text")
-          .attr("y", height * 7 / 6);
+          .attr("y", height + ticksHeight / 2);
 
       // Transition the exiting ticks to the new scale, x1.
       tick.exit().transition()

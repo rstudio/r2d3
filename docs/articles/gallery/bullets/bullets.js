@@ -6,7 +6,9 @@ var margin = {top: 10, right: 40, bottom: 40, left: 130};
 var width = width - margin.left - margin.right;
 var height = Math.floor(height / data.length) - margin.top - margin.bottom;
 
-var chart = d3.bullet()
+div.attr("class", "bullets");
+
+var chart = d3.bullet(margin.bottom)
   .width(width)
   .height(height);
   
