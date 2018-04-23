@@ -29,6 +29,14 @@ Defaults to white.}
 \description{
 Save a D3 visualization to an HTML file (e.g. for sharing with others).
 }
+\examples{
+\dontrun{
+library(r2d3)
+viz <- r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
+save_d3_html(viz, file = "viz.html")
+}
+
+}
 \seealso{
 \code{\link[=save_d3_png]{save_d3_png()}}
 }

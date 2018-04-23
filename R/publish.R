@@ -18,6 +18,12 @@
 #' 
 #' @importFrom htmlwidgets saveWidget
 #' 
+#' @examples \dontrun{
+#' library(r2d3)
+#' viz <- r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
+#' save_d3_html(viz, file = "viz.html")
+#' }
+#' 
 #' @seealso [save_d3_png()]
 #' 
 #' @export
@@ -62,6 +68,12 @@ save_d3_html <- function(d3, file, selfcontained = TRUE, libdir = NULL,
 #'   report that there is a HiDPI device).
 #'   
 #' @seealso [save_d3_html()]
+#'   
+#' @examples \dontrun{
+#' library(r2d3)
+#' viz <- r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
+#' save_d3_png(viz, file = "viz.png")
+#' }
 #'   
 #' @export
 save_d3_png <- function(d3, file, background = "white", width = 992, height = 744, delay = 0.2, zoom = 1) {

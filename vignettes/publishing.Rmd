@@ -38,7 +38,7 @@ You can use the `save_d3_html()` function to save a D3 visualization as an HTML 
 ```{r}
 library(r2d3)
 viz <- r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
-save_d3_html(viz, filename = "viz.html")
+save_d3_html(viz, file = "viz.html")
 ```
 
 By default, the HTML file will be self-contained (all CSS and JavaScript dependencies will be embedded with the file) so that it's easy to share. If you want the dependencies written to a separate directory you can set `selfcontained = FALSE`. For example:
@@ -46,7 +46,7 @@ By default, the HTML file will be self-contained (all CSS and JavaScript depende
 ```{r}
 library(r2d3)
 viz <- r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
-save_d3_html(viz, filename = "viz.html", selfcontained = FALSE)
+save_d3_html(viz, file = "viz.html", selfcontained = FALSE)
 ```
 
 Setting `selfcontained = FALSE` is useful if you want to embed your D3 visualization within another HTML page since it separates the visualization itself from various link and script dependencies that need to be placed in the HTML head.
@@ -67,7 +67,7 @@ You can use the `save_d3_png()` function to save a D3 visualization as a PNG ima
 ```{r}
 library(r2d3)
 viz <- r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
-save_d3_png(viz, filename = "viz.png")
+save_d3_png(viz, file = "viz.png")
 ```
 
 Using the `save_d3_png()` function requires that you install the [webshot](https://cran.r-project.org/package=webshot) package, as well as the phantom.js headless browser (which you can install using the function `webshot::install_phantomjs()`).
