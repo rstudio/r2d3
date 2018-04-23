@@ -11,8 +11,6 @@ vignette: >
 
 <!-- TODO
 - more gallery examples
-- consider svg/png export: 
-    http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
 -->
 
 ```{r setup, include=FALSE}
