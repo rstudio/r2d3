@@ -9,8 +9,7 @@ Authors@R: c(
     person(family = "RStudio", role = c("cph"))
     )
 Maintainer: Javier Luraschi <javier@rstudio.com>
-Description: Render 'D3' scripts with ease in R as 'htmlwidgets', sends data from R to D3 with
-  minimal changes to the D3 source and animates R data with D3 scripts.
+Description: Suite of tools for using 'D3' visualizations with R.
 License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
 LazyData: TRUE
