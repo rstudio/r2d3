@@ -22,9 +22,9 @@ var svg = div
     .attr("transform", "translate(" + cellSize * 3.5 + "," + (height - cellSize * 7 - 1) + ")");
 
 svg.append("text")
-    .attr("transform", "translate(-" + (3 + 3 * height / 136) + "," + cellSize * 3.5 + ")rotate(-90)")
+    .attr("transform", "translate(-" + (6 * height / 60) + "," + cellSize * 3.5 + ")rotate(-90)")
     .attr("font-family", "sans-serif")
-    .attr("font-size", 7 + 3 * height / 136)
+    .attr("font-size", 2 + 8 * height / 60)
     .attr("text-anchor", "middle")
     .text(function(d) { return d; });
 
