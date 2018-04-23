@@ -9,7 +9,6 @@ README.Rmd
 ^scratch.*$
 ^tools.*$
 ^sandbox.*$
-vignettes/gallery
-vignettes/gallery.Rmd
+^vignettes.*$
 
 
