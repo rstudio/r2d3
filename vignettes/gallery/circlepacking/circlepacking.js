@@ -2,8 +2,10 @@
 
 // Based on: https://bl.ocks.org/mbostock/4063530
 
-var diameter = +svg.attr("width"),
-    g = svg.append("g").attr("transform", "translate(2,2)"),
+var diameter = Math.min(width, height),
+    g = svg.append("g").attr(
+      "transform",
+      "translate(" + (width - diameter) / 2 + "," + (height - diameter) / 2 + ")"),
     format = d3.format(",d");
 
 var pack = d3.pack()
@@ -28,5 +30,6 @@ r2d3.onRender(function(root, svg, width, height, options) {
 
   node.filter(function(d) { return !d.children; }).append("text")
       .attr("dy", "0.3em")
+      .attr("font-size", Math.max(width, height) / 100)
       .text(function(d) { return d.data.name.substring(0, d.r / 3); });
 });
