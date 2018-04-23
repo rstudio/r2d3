@@ -1,8 +1,8 @@
-// !preview r2d3 data = read.csv("dji.csv"), d3_version = 4, container = "div", height = 1300
+// !preview r2d3 data = read.csv("dji-latest.csv"), d3_version = 4, container = "div", options = list(start = 2006, end = 2011)
 
 // Based on https://bl.ocks.org/mbostock/4063318
 
-var height = height / 21,
+var height = height / (options.end - options.start),
     cellSize = height / 8;
     
 var formatPercent = d3.format(".1%");
@@ -14,7 +14,7 @@ var color = d3.scaleQuantize()
 var svg = div
   .style("line-height", "0")
   .selectAll("svg")
-  .data(d3.range(1990, 2011))
+  .data(d3.range(options.start, options.end))
   .enter().append("svg")
     .attr("width", width)
     .attr("height", height)
