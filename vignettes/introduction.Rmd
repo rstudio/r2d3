@@ -35,7 +35,7 @@ The **r2d3** package provides a suite of tools for using [D3 visualizations](htt
 With **r2d3**, you can bind data from R to D3 visualizations like the ones found on <https://github.com/d3/d3/wiki/Gallery>, <https://bl.ocks.org/>, and <https://vida.io/explore>: 
 
 <div style="margin-top: 20px; margin-bottom: 10px;">
-<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><kbd><img src="images/chord_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></kbd></a>&nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><kbd><img src="images/bubbles_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></kbd></a>&nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><kbd><img src="images/cartogram_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></kbd></a>
+<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><img src="images/chord_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>&nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><img src="images/bubbles_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>&nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><img src="images/cartogram_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>
 </div>
 
 D3 visualizations created with **r2d3** work just like R plots within RStudio, R Markdown documents, and Shiny applications.
