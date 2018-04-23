@@ -27,11 +27,11 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 <div class="col-sm-9">
 
 ```{r, echo=TRUE, eval=FALSE}
-r2d3(data = read.csv("dji.csv"), d3_version = 4, container = "div", script = "calendar.js")
+r2d3(data = read.csv("dji.csv"), d3_version = 4, container = "div", height = 1300, script = "calendar.js")
 ```
 
 ```{r, echo=FALSE}
-r2d3(data = read.csv("dji.csv"), d3_version = 4, container = "div", script = "calendar.js", width="100%")
+r2d3(data = read.csv("dji.csv"), d3_version = 4, container = "div", height = 1300, script = "calendar.js", width="100%")
 ```
 
 

@@ -1,4 +1,4 @@
-// !preview r2d3 data = read.csv("dji.csv"), d3_version = 4, container = "div"
+// !preview r2d3 data = read.csv("dji.csv"), d3_version = 4, container = "div", height = 1300
 
 // Based on https://bl.ocks.org/mbostock/4063318
 
