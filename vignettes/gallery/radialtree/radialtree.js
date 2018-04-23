@@ -2,7 +2,11 @@
 
 // Based on: https://bl.ocks.org/mbostock/4063550
 
-var g = svg.append("g").attr("transform", "translate(" + (width / 2 + 40) + "," + (height / 2 + 90) + ")");
+var minSize = Math.min(width, height);
+var g = svg.append("g")
+  .attr("transform",
+        "translate(" + (width / 2) + "," + (height / 2) + ")," +
+        "scale(" + minSize / 1200 + "," + minSize / 1200 + ")");
 
 var stratify = d3.stratify()
     .parentId(function(d) { return d.id.substring(0, d.id.lastIndexOf(".")); });
