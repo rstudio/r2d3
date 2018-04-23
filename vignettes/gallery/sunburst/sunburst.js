@@ -2,13 +2,11 @@
 
 // Based on: https://bl.ocks.org/mbostock/4063423
 
-var width = 960,
-    height = 700,
-    radius = Math.min(width, height) / 2,
+var radius = Math.min(width, height) / 2,
     color = d3.scale.category20c();
 
-svg.append("g")
-    .attr("transform", "translate(" + width / 2 + "," + height * .52 + ")");
+var group = svg.append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 var partition = d3.layout.partition()
     .sort(null)
@@ -21,8 +19,8 @@ var arc = d3.svg.arc()
     .innerRadius(function(d) { return Math.sqrt(d.y); })
     .outerRadius(function(d) { return Math.sqrt(d.y + d.dy); });
 
-r2d3.onRender(function(root, svg, width, height, options) {
-  var path = svg.datum(root).selectAll("path")
+r2d3.onRender(function(root, svg, w, h, options) {
+  var path = group.datum(root).selectAll("path")
       .data(partition.nodes)
     .enter().append("path")
       .attr("display", function(d) { return d.depth ? null : "none"; }) // hide inner ring
@@ -61,5 +59,3 @@ function arcTween(a) {
     return arc(b);
   };
 }
-
-d3.select(self.frameElement).style("height", height + "px");
