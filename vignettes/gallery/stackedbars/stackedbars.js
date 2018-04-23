@@ -54,6 +54,7 @@ rect.transition()
 g.append("g")
     .attr("class", "axis axis--x")
     .attr("transform", "translate(0," + height + ")")
+    .style("font-size", Math.min(width, height * 2) / 90)
     .call(d3.axisBottom(x)
         .tickSize(0)
         .tickPadding(6));
