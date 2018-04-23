@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">r2d3</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2</span>
       </span>
     </div>
 
@@ -137,11 +137,11 @@
 <p>You can use the <code><a href="../reference/save_d3_html.html">save_d3_html()</a></code> function to save a D3 visualization as an HTML file. For example:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(r2d3)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">viz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="../reference/save_d3_html.html">save_d3_html</a></span>(viz, <span class="dt">filename =</span> <span class="st">"viz.html"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="../reference/save_d3_html.html">save_d3_html</a></span>(viz, <span class="dt">file =</span> <span class="st">"viz.html"</span>)</a></code></pre></div>
 <p>By default, the HTML file will be self-contained (all CSS and JavaScript dependencies will be embedded with the file) so that it’s easy to share. If you want the dependencies written to a separate directory you can set <code>selfcontained = FALSE</code>. For example:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(r2d3)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">viz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="../reference/save_d3_html.html">save_d3_html</a></span>(viz, <span class="dt">filename =</span> <span class="st">"viz.html"</span>, <span class="dt">selfcontained =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="../reference/save_d3_html.html">save_d3_html</a></span>(viz, <span class="dt">file =</span> <span class="st">"viz.html"</span>, <span class="dt">selfcontained =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Setting <code>selfcontained = FALSE</code> is useful if you want to embed your D3 visualization within another HTML page since it separates the visualization itself from various link and script dependencies that need to be placed in the HTML head.</p>
 </div>
 <div id="rpubs-rstudio-connect" class="section level3">
@@ -160,7 +160,7 @@
 <p>You can use the <code><a href="../reference/save_d3_png.html">save_d3_png()</a></code> function to save a D3 visualization as a PNG image. For example:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(r2d3)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">viz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="../reference/save_d3_png.html">save_d3_png</a></span>(viz, <span class="dt">filename =</span> <span class="st">"viz.png"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="../reference/save_d3_png.html">save_d3_png</a></span>(viz, <span class="dt">file =</span> <span class="st">"viz.png"</span>)</a></code></pre></div>
 <p>Using the <code><a href="../reference/save_d3_png.html">save_d3_png()</a></code> function requires that you install the <a href="https://cran.r-project.org/package=webshot">webshot</a> package, as well as the phantom.js headless browser (which you can install using the function <code><a href="http://www.rdocumentation.org/packages/webshot/topics/install_phantomjs">webshot::install_phantomjs()</a></code>).</p>
 </div>
 <div id="rstudio-viewer" class="section level3">
