@@ -29,3 +29,6 @@ Defaults to white.}
 \description{
 Save a D3 visualization to an HTML file (e.g. for sharing with others).
 }
+\seealso{
+\code{\link[=save_d3_png]{save_d3_png()}}
+}

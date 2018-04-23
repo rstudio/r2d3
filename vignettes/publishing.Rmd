@@ -60,6 +60,20 @@ You can also publish visualizations to [RPubs](https://rpubs.com) or [RStudio Co
 
 ## Static Images
 
+### save_d3_png()
+
+You can use the `save_d3_png()` function to save a D3 visualization as a PNG image. For example:
+
+```{r}
+library(r2d3)
+viz <- r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
+save_d3_png(viz, filename = "viz.png")
+```
+
+Using the `save_d3_png()` function requires that you install the [webshot](https://cran.r-project.org/package=webshot) package, as well as the phantom.js headless browser (which you can install using the function `webshot::install_phantomjs()`).
+
+### RStudio Viewer
+
 The RStudio Viewer pane has an **Export** menu that enables you to export D3 visualizations as PNG files as well as copy visualizations to the clipboard:
 
 <img src="images/export_menu.png" class="screenshot" width=600/>

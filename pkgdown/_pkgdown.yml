@@ -44,8 +44,12 @@ reference:
       - r2d3
       - as_d3_data
       - default_sizing
+  
+  - title: "Publishing"
+    contents:
       - save_d3_html
-      
+      - save_d3_png
+
   - title: "Shiny"
     contents:
       - d3Output

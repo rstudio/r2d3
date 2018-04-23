@@ -13,8 +13,6 @@ vignette: >
 - more gallery examples
 - consider svg/png export: 
     http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
-    rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
-- cross-ref articles
 -->
 
 ```{r setup, include=FALSE}
