@@ -1,4 +1,4 @@
-// !preview r2d3 data = read.csv("population.csv"), d3_version = 4
+// !preview r2d3 data = c(), d3_version = 4, dependencies = "stackedbars.css"
 
 // Based on: http://bl.ocks.org/mbostock/3943967
 
