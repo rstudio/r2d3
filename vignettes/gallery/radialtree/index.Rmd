@@ -1,5 +1,5 @@
 ---
-title: "Gallery: bullets"
+title: "Gallery: radialtree"
 ---
 
 ```{r setup, include=FALSE}
@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 ```
 
 <div id="source-link">
-<https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/bullets>
+<https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/radialtree>
 </div>
 
 <div class="row">
@@ -37,35 +37,27 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 <div class="col-sm-9">
 
 ```{r, echo=TRUE, eval=FALSE}
-r2d3(data = jsonlite::read_json("bullets.json"), d3_version = 3, container = "div", dependencies = c("d3_bullet.js"), script = "bullets.js")
+r2d3(data = read.csv("flare.csv"), d3_version = 4, dependencies = "radialtree.css", script = "radialtree.js")
 ```
 
 ```{r, echo=FALSE}
-r2d3(data = jsonlite::read_json("bullets.json"), d3_version = 3, container = "div", dependencies = c("d3_bullet.js"), script = "bullets.js", width="100%")
+r2d3(data = read.csv("flare.csv"), d3_version = 4, dependencies = "radialtree.css", script = "radialtree.js", width="100%")
 ```
 
 
-#### bullets.js
+#### radialtree.js
 
 ```{r, results='asis'}
 cat("```js\n")
-writeLines(readLines("bullets.js"))
+writeLines(readLines("radialtree.js"))
 cat("```\n")
 ```
 
-#### d3_bullet.js
-
-```{r, results='asis'}
-cat("```js\n")
-writeLines(readLines("d3_bullet.js"))
-cat("```\n")
-```
-
-#### bullets.css
+#### radialtree.css
 
 ```{r, results='asis'}
 cat("```css\n")
-writeLines(readLines("bullets.css"))
+writeLines(readLines("radialtree.css"))
 cat("```\n")
 ```
 
@@ -78,7 +70,7 @@ cat("```\n")
 ```{js}
 $('#source-link').appendTo($('.page-header')).css('display', 'block');
 $('.template-vignette>.row>.col-md-9').attr('class', 'col-md-12');
-$('a.list-group-item[href="../bullets/"]').addClass('active');
+$('a.list-group-item[href="../radialtree/"]').addClass('active');
 $('a[href="../../../articles/gallery.html"]').parent().addClass('active');
 ```
 
