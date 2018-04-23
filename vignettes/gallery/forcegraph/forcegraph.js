@@ -3,6 +3,7 @@
 // Based on: https://bl.ocks.org/mbostock/4063570
 
 var color = d3.scaleOrdinal(d3.schemeCategory20);
+var radius = 5;
 
 var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.id; }))
@@ -22,7 +23,7 @@ r2d3.onRender(function(graph, svg, width, height, options) {
     .selectAll("circle")
     .data(graph.nodes)
     .enter().append("circle")
-      .attr("r", 5)
+      .attr("r", radius)
       .attr("fill", function(d) { return color(d.group); })
       .call(d3.drag()
           .on("start", dragstarted)
@@ -40,6 +41,11 @@ r2d3.onRender(function(graph, svg, width, height, options) {
       .links(graph.links);
 
   function ticked() {
+    //constrains the nodes to be within a box
+    node
+      .attr("cx", function(d) { return d.x = Math.max(radius, Math.min(width - radius, d.x)); })
+      .attr("cy", function(d) { return d.y = Math.max(radius, Math.min(height - radius, d.y)); });
+      
     link
         .attr("x1", function(d) { return d.source.x; })
         .attr("y1", function(d) { return d.source.y; })
