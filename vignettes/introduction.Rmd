@@ -114,7 +114,7 @@ On the other hand with **r2d3**, these variables are *provided automatically* so
 
 The [daily build](https://dailies.rstudio.com) of RStudio includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:
 
-<img src="images/new_d3_script.png" class="screenshot" width=600/>
+<img src="images/new_script.png" class="screenshot" width=600/>
 
 A simple template for a D3 script (the barchart.js example shown above) is provided by default. You can use the **Preview** command (Ctrl+Shift+Center) to render the visualization:
 

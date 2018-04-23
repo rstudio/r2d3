@@ -3,10 +3,13 @@
 ^\.Rprofile$
 LICENSE.md
 README.Rmd
-pkgdown
-docs
-tools
-sandbox
+^pkgdown.*$
+^docs.*$
+^images.*$
+^scratch.*$
+^tools.*$
+^sandbox.*$
+vignettes/gallery
 vignettes/gallery.Rmd
 
 
