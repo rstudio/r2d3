@@ -7,7 +7,47 @@ code_partial <- readLines("tools/code-partial.Rmd")
 gallery_dirs <- list.dirs("vignettes/gallery", recursive = FALSE)
 gallery_dirs_list <- iteratelist(basename(gallery_dirs), value="dir")
 
+create_thumbnail <- function(data) {
+  current_dir <- getwd()
+  on.exit(setwd(current_dir))
+  
+  setwd(file.path("vignettes/gallery", data$name))
+  
+  render_script <- paste(data$name, ".js", sep = "")
+
+  render_command <- paste(
+    "r2d3::r2d3(",
+    data$preview_args,
+    ", script = \"",
+    render_script,
+    "\", sizing = htmlwidgets::sizingPolicy(browser.fill = TRUE, padding = 0)",
+    ")",
+    sep = ""
+  )
+  
+  renderer <- parse(text = render_command)
+  
+  widget <- eval(renderer)
+  
+  render_dir <- tempfile()
+  dir.create(render_dir)
+  render_file <- file.path(normalizePath(render_dir), "index.html")
+  
+  htmlwidgets::saveWidget(widget, render_file)
+  
+  webshot_url <- paste("file://", render_file, sep = "")
+  webshot_target <-  paste("../../images/", data$name, "_thumbnail.png", sep = "")
+  webshot::webshot(
+    webshot_url,
+    webshot_target,
+    vwidth = 692,
+    vheight = 474,
+    delay = 3
+  )
+}
+
 for (dir in gallery_dirs) {
+  message("Processing: ", basename(dir))
   
   # base name
   name <- basename(dir)
@@ -46,6 +86,9 @@ for (dir in gallery_dirs) {
     code_partial = code_partial
   ))  
   cat(output, file = gallery_rmd)
+  
+  # create thumbnail
+  create_thumbnail(data)
 }
 
 
