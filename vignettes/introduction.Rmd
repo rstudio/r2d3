@@ -186,7 +186,7 @@ server <- function(input, output) {
   output$d3 <- renderD3({
     r2d3(
       floor(runif(5, 5, input$bar_max)),
-      system.file("baranims.js", package = "r2d3")
+      script = "baranims.js"
     )
   })
 }

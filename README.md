@@ -2,13 +2,9 @@ r2d3: R interface to D3 visualizations
 ================
 
 <!-- TODO
-- complete gallery
-   - morley resizing (wide)
-   - calendar resizing
+- more gallery examples
 - consider svg/png export: 
     http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
-    rbokeh widget to png: https://rdrr.io/cran/rbokeh/man/widget2png.html
-- cross-ref articles
 -->
 
 <img src="images/r2d3-hex.png" width=180 align="right" style="border: none; margin-right: 10px;"/>
@@ -146,7 +142,7 @@ The [daily build](https://dailies.rstudio.com) of RStudio includes
 support for previewing D3 scripts as you write them. To try this out,
 create a D3 script using the new file menu:
 
-<img src="images/new_d3_script.png" class="screenshot" width=600/>
+<img src="images/new_script.png" class="screenshot" width=600/>
 
 A simple template for a D3 script (the barchart.js example shown above)
 is provided by default. You can use the **Preview** command
@@ -226,7 +222,7 @@ server <- function(input, output) {
   output$d3 <- renderD3({
     r2d3(
       floor(runif(5, 5, input$bar_max)),
-      system.file("baranims.js", package = "r2d3")
+      script = "baranims.js"
     )
   })
 }
