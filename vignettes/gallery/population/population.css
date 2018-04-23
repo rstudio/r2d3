@@ -1,5 +1,5 @@
 svg {
-  font: 10px sans-serif;
+  font: sans-serif;
 }
 
 .y.axis path {
@@ -18,7 +18,7 @@ svg {
 }
 
 .title {
-  font: 300 78px Helvetica Neue;
+  font: Helvetica Neue;
   fill: #666;
 }
 

@@ -1,10 +1,10 @@
-// !preview r2d3 data = read.csv("population.csv"), d3_version = 3, dependencies = "population.css"
+// !preview r2d3 data = read.csv("population.csv"), d3_version = 3, dependencies = "population.css", options = list(year = 2000)
 
 // Based on: https://bl.ocks.org/mbostock/4062085
 
-var margin = {top: 20, right: 40, bottom: 30, left: 20},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom,
+var margin = {top: 0, right: width / 24, bottom: height / 30, left: 0},
+    width = width - margin.left - margin.right,
+    height = height - margin.top - margin.bottom,
     barWidth = Math.floor(width / 19) - 1;
 
 var x = d3.scale.linear()
@@ -23,6 +23,7 @@ var yAxis = d3.svg.axis()
 svg
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
+  .style("font-size", Math.min(width, height) / 60)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -33,10 +34,11 @@ var birthyears = svg.append("g")
 // A label for the current year.
 var title = svg.append("text")
     .attr("class", "title")
-    .attr("dy", ".71em")
-    .text(2000);
+    .attr("dy", "1em")
+    .attr("font-size", Math.min(width, height) / 6)
+    .text(options.year);
 
-r2d3.onRender(function(data, svg, width, height, options) {
+r2d3.onRender(function(data, svg, w, h, options) {
 
   // Convert strings to numbers.
   data.forEach(function(d) {
