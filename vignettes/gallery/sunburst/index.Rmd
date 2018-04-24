@@ -49,7 +49,7 @@ r2d3(data = jsonlite::read_json("flare.json"), d3_version = 3, dependencies = "s
 
 ```{r, results='asis'}
 cat("```js\n")
-writeLines(readLines("sunburst.js"))
+writeLines(readLines("sunburst.js", warn = FALSE))
 cat("```\n")
 ```
 
@@ -57,7 +57,7 @@ cat("```\n")
 
 ```{r, results='asis'}
 cat("```css\n")
-writeLines(readLines("sunburst.css"))
+writeLines(readLines("sunburst.css", warn = FALSE))
 cat("```\n")
 ```
 

@@ -3,7 +3,7 @@
 
 ```{r, results='asis'}
 cat("```{{lang}}\n")
-writeLines(readLines("{{file}}"))
+writeLines(readLines("{{file}}", warn = FALSE))
 cat("```\n")
 ```
 

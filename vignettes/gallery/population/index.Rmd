@@ -49,7 +49,7 @@ r2d3(data = read.csv("population.csv"), d3_version = 3, dependencies = "populati
 
 ```{r, results='asis'}
 cat("```js\n")
-writeLines(readLines("population.js"))
+writeLines(readLines("population.js", warn = FALSE))
 cat("```\n")
 ```
 
@@ -57,7 +57,7 @@ cat("```\n")
 
 ```{r, results='asis'}
 cat("```css\n")
-writeLines(readLines("population.css"))
+writeLines(readLines("population.css", warn = FALSE))
 cat("```\n")
 ```
 
