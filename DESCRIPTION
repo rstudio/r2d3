@@ -1,6 +1,6 @@
 Package: r2d3
 Type: Package
-Title: R to D3 rendering tools
+Title: R Interface to D3 Visualizations
 Version: 0.2
 Authors@R: c(
     person("Javier", "Luraschi", email = "javier@rstudio.com", role = c("aut", "cre")),
@@ -18,7 +18,6 @@ Depends:
 Imports:
   htmlwidgets (>= 1.2), htmltools, jsonlite
 Suggests:
-  covr,
   knitr,
   rmarkdown,
   shiny,
