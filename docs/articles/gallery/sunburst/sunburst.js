@@ -1,4 +1,4 @@
-// !preview r2d3 data = jsonlite::read_json("flare.json"), d3_version = 3, dependencies = "sunburst.css"
+// !preview r2d3 data = jsonlite::read_json("flare.json"), d3_version = 3
 
 // Based on: https://bl.ocks.org/mbostock/4063423
 

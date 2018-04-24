@@ -37,11 +37,11 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 <div class="col-sm-9">
 
 ```{r, echo=TRUE, eval=FALSE}
-r2d3(data = jsonlite::read_json("flare.json"), d3_version = 3, dependencies = "sunburst.css", script = "sunburst.js")
+r2d3(data = jsonlite::read_json("flare.json"), d3_version = 3, script = "sunburst.js")
 ```
 
 ```{r, echo=FALSE}
-r2d3(data = jsonlite::read_json("flare.json"), d3_version = 3, dependencies = "sunburst.css", script = "sunburst.js", width="100%")
+r2d3(data = jsonlite::read_json("flare.json"), d3_version = 3, script = "sunburst.js", width="100%")
 ```
 
 

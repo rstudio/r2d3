@@ -1,4 +1,4 @@
-// !preview r2d3 data = read.csv("population.csv"), d3_version = 3, dependencies = "population.css", options = list(year = 2000)
+// !preview r2d3 data = read.csv("population.csv"), d3_version = 3, options = list(year = 2000)
 
 // Based on: https://bl.ocks.org/mbostock/4062085
 

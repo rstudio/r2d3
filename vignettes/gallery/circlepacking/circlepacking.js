@@ -1,4 +1,4 @@
-// !preview r2d3 data = jsonlite::read_json("flare.json"), d3_version = 4, dependencies = "circlepacking.css"
+// !preview r2d3 data = jsonlite::read_json("flare.json"), d3_version = 4
 
 // Based on: https://bl.ocks.org/mbostock/4063530
 
