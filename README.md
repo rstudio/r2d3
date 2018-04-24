@@ -1,4 +1,4 @@
-r2d3: R interface to D3 visualizations
+r2d3: R Interface to D3 Visualizations
 ================
 
 <img src="tools/readme/r2d3-hex.png" width=180 align="right" style="border: none; margin-right: 10px;"/>
