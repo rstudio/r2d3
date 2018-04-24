@@ -102,7 +102,8 @@ r2d3 <- function(
     theme = list(
       default = default_theme(),
       runtime = runtime_theme()
-    )
+    ),
+    custom = getOption(paste("r2d3.container.", container, sep = ""))
   )
   
   # resolve viewer if it's explicitly specified

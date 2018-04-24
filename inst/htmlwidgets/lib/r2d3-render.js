@@ -43,14 +43,27 @@ function R2D3(el, width, height) {
       self.root = null;
     }
     
-    var root = self.d3().select(el).append(self.container)
-      .attr("width", self.width)
-      .attr("height", self.height);
+    var root = null;
+    
+    if (x.custom) {
+      var context = function(custom, d3, width, height, options, theme) {
+        return eval(custom);
+      };
       
-    if (self.theme.background) root.style("background", self.theme.background);
-    if (self.theme.foreground) {
-      root.style("fill", self.theme.foreground);
-      root.style("color", self.theme.foreground);
+      var customEl = context(x.custom, self.d3(), self.width, self.height, self.options, self.theme);
+      el.appendChild(customEl);
+      root = self.d3().select(customEl);
+    }
+    else {
+      root = self.d3().select(el).append(self.container)
+        .attr("width", self.width)
+        .attr("height", self.height);
+        
+      if (self.theme.background) root.style("background", self.theme.background);
+      if (self.theme.foreground) {
+        root.style("fill", self.theme.foreground);
+        root.style("color", self.theme.foreground);
+      }
     }
       
     self.setRoot(root);
