@@ -8,7 +8,7 @@ var sites = d3.range(100)
     .map(function(d) { return [Math.random() * width, Math.random() * height]; });
 
 var voronoi = d3.voronoi()
-    .extent([[-1, -1], [width + 1, height + 1]]);
+    .extent([[-8, -8], [width + 8, height + 8]]);
 
 var polygon = svg.append("g")
     .attr("class", "polygons")
