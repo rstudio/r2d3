@@ -12,5 +12,8 @@ warnings_are_errors: true
 r_packages:
   - covr
 
+r_github_packages:
+  - rstudio/shinytest
+
 after_success:
   - Rscript -e 'covr::codecov()'

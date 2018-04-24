@@ -10,5 +10,6 @@ README.Rmd
 ^sandbox.*$
 ^vignettes.*$
 ^\.travis\.yml$
+^testthat/barchart/.*$
 
 
