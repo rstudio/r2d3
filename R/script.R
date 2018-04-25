@@ -1,12 +1,28 @@
 # Prepares a D3 script to be embedable into a widget
-script_wrap <- function(contents, container) {
+script_wrap <- function(deps, script, container) {
+  deps_contents <- script_read(deps)
+  script_contents <- script_read(script)
+  
+  script_contents <- paste(
+    # some libraries expect the container to be created from the extended d3 object.
+    container, " = d3.select(", container, ".node());",
+    "\n",
+    script_contents,
+    sep = ""
+  )
+  
   paste(
-    c(
-      paste("var d3Script = function(d3, r2d3, data, ", container, ", width, height, options, theme, console) {", sep = ""),
-      contents,
-      "};"
-    ),
-    collapse = "\n"
+    "var d3Script = function(d3, r2d3, data, ", container, ", width, height, options, theme, console) {",
+    "\n",
+    # some libraries expect d3 to be accessible as this.d3
+    "this.d3 = d3;",
+    "\n",
+    deps_contents,
+    "\n",
+    script_contents,
+    "\n",
+    "};",
+    sep = ""
   )
 }
 
