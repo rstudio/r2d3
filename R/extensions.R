@@ -51,13 +51,21 @@ d3_extensions_url <- function() {
 #' Create a R2D3 dependency from a D3 extension, a list of available
 #' extensions can be retrieved using `d3_available_extensions()`.
 #' 
-#' @param component 
+#' @param name The name of the D3 extension
+#' @param target Target path to download the extension to, defaults to \code{tempdir()}.
 #' 
 #' @importFrom htmltools htmlDependency
 #' 
 #' @seealso [d3_available_extensions()]
 #' 
 #' @export
-d3_extension <- function(component) {
+d3_extension <- function(name, target = tempdir()) {
+  extension_info <- d3_available_extensions(name)
+  target_file <- file.path(target, basename(extension_info$download))
   
+  if (!file.exists(target_file)) {
+    download.file(extension_info$download, target_file)
+  }
+  
+  normalizePath(target_file)
 }
