@@ -13,7 +13,7 @@ server <- function(input, output) {
   output$d3 <- renderD3({
     r2d3(
       rep(input$bar_max, 5),
-      script = "../baranim.js"
+      script = "../baranims.js"
     )
   })
 }
