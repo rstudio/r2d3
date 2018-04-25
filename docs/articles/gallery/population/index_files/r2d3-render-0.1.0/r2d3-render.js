@@ -269,9 +269,9 @@ function R2D3(el, width, height) {
     self.render();
     
     if (self.renderer === null) {
-      self.onRender(function(data, container, width, height, options) {
+      self.renderer = function(data, container, width, height, options) {
         self.callD3Script();
-      });
+      };
     }
     
     if (self.resizer === null) {

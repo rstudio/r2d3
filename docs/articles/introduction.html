@@ -255,7 +255,7 @@ svg.selectAll('rect')
 <a class="sourceLine" id="cb5-13" data-line-number="13">  output<span class="op">$</span>d3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/d3-shiny.html">renderD3</a></span>({</a>
 <a class="sourceLine" id="cb5-14" data-line-number="14">    <span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(</a>
 <a class="sourceLine" id="cb5-15" data-line-number="15">      <span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">5</span>, input<span class="op">$</span>bar_max)),</a>
-<a class="sourceLine" id="cb5-16" data-line-number="16">      <span class="dt">script =</span> <span class="st">"baranims.js"</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">      <span class="dt">script =</span> <span class="kw">system.file</span>(<span class="st">"examples/baranims.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)</a>
 <a class="sourceLine" id="cb5-17" data-line-number="17">    )</a>
 <a class="sourceLine" id="cb5-18" data-line-number="18">  })</a>
 <a class="sourceLine" id="cb5-19" data-line-number="19">}</a>
