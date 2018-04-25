@@ -1,0 +1,109 @@
+---
+title: "Using D3 Extensions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using D3 Extensions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+## Overview
+
+There are many D3 extensions available that can also be used from **r2d3**. The functionality D3 extensions provide goes from adding support for conventions that simplify your D3 code, to advanced filtering functions to effectively manage datasets in the browser.
+
+This article explains how to find, use and add new extensions to **r2d3**.
+
+## Finding Extensions
+
+ou can explore some of them directly from **r2d3** by calling `d3_available_extensions()` which will return a data frame with useful extensions that can be used with ease.
+
+```r
+d3_available_extensions()
+```
+
+## Using Extensions
+
+D3 extensions can be automatically downloaded using `d3_extension()` which can be then used in `r2d3()` as a dependency in the `dependencies` parameter:
+
+```r
+r2d3(
+  data = c(),
+  script = "script.js",
+  dependencies = d3_extension("extension-name)
+)
+```
+
+By default, the extension is downloaded in `tempdir()` which is usually cleaned after your r session restarts. To avoid multiple downloads and support working offline, you can also specify the `target` parameter with an specific download location.
+
+This section contains two examples of D3 extensions already available in **r2d3**.
+
+### Jetpack
+
+[Jetpack](https://github.com/gka/d3-jetpack) provides nifty convenience wrappers that speed up your daily work. For instance, you can easily set up margins by making use of `d3.conventions()`, which provides a transform in the SVG element with specified margins and returns the modified element to simplify your code:
+
+```js
+// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), dependencies = d3_extension("d3-jetpack")
+
+var { svg, margin, height, width } = d3.conventions({
+  sel: svg,
+  totalWidth: width,
+  totalHeight: height,
+  margin: { top: 60, bottom: 60 }
+});
+
+var barHeight = Math.ceil(height / data.length);
+
+svg.selectAll('rect')
+  .data(data)
+  .enter().append('rect')
+    .attr('width', function(d) { return d * width; })
+    .attr('height', barHeight)
+    .attr('y', function(d, i) { return i * barHeight; })
+    .attr('fill', 'steelblue');
+```
+
+### Rickshaw
+
+[Rickshaw](https://github.com/shutterstock/rickshaw) provides a toolkit for creating interactive real-time graphs. The following example makes use of [dplyr](http://dplyr.tidyverse.org/) to prepare the data in a format the extension understands and requests a scatter plot from this library:
+
+```js
+// !preview r2d3 data = dplyr::transmute(Orange, x = age, y = circumference), container = "div", dependencies = d3_extension("rickshaw"), d3_version = 3, options = list(type = "scatterplot")
+
+var graph = new Rickshaw.Graph({
+  element: div.node(),
+  width: width,
+  height: height,
+  renderer: options.type,
+  series: [{
+    color: 'orange',
+    data: data
+  }]
+});
+
+graph.render();
+```
+
+Notice since the type of plot is being specied as an **r2d3** option, it can easily be changed to a bar chart as well:
+
+```js
+// !preview r2d3 data = dplyr::transmute(Orange, x = age, y = circumference), container = "div", dependencies = d3_extension("rickshaw"), d3_version = 3, options = list(type = "bar")
+```
+
+## Adding Extensions
+
+There are many resources online with lists of D3 extensions, see for instance [https://github.com/wbkd/awesome-d3](https://github.com/wbkd/awesome-d3). Any extension can be used by manually downloading the D3 extension and including it as a `dependency`as follows:
+
+```r
+r2d3(data = c(), script = "vis.js", dependencies = c("downloaded-d3-extension.js")
+```
+
+However, you can also consider adding this extension to **r2d3** in two ways:
+
+1) Open a new GitHub issue in [here](https://github.com/rstudio/r2d3/issues/new) to help us consider new extensions to add in the **r2d3** repo.
+2) Send a PR to **r2d3** by adding an entry to [extensions.csv](https://github.com/rstudio/r2d3/tree/master/inst/extdata/extensions.csv).
+
+

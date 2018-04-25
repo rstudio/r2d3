@@ -1,0 +1,3 @@
+name,description,min,max,source,download
+d3-jetpack,Nifty convenience wrappers that speed up your daily work,3,5,https://github.com/gka/d3-jetpack,https://raw.githubusercontent.com/gka/d3-jetpack/master/build/d3v4%2Bjetpack.js
+rickshaw,Toolkit for creating interactive real-time graphs,3,3,https://github.com/shutterstock/rickshaw,https://raw.githubusercontent.com/shutterstock/rickshaw/master/rickshaw.js

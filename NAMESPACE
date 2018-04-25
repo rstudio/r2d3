@@ -3,6 +3,8 @@
 S3method(as_d3_data,default)
 export(as_d3_data)
 export(d3Output)
+export(d3_available_extensions)
+export(d3_extension)
 export(default_sizing)
 export(html_dependency_d3)
 export(r2d3)
