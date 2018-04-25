@@ -94,7 +94,8 @@ r2d3 <- function(
     container = container,
     options = options,
     script = script_wrap(
-      script_read(c(inline_dependencies$js, script)),
+      inline_dependencies$js,
+      script,
       container
     ),
     style = script_read(inline_dependencies$css),
