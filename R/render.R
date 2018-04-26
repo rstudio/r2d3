@@ -70,16 +70,19 @@ r2d3 <- function(
       dependencies <- list(dependencies)
     
     inline_dependencies <- list(
-      js = Filter(function(e) is.character(e) && !identical(file_ext(e), "css"), dependencies),
+      js = Filter(function(e) is.character(e) && identical(file_ext(e), "js"), dependencies),
       css = Filter(function(e) is.character(e) && identical(file_ext(e), "css"), dependencies)
     )
     inline_dependencies$js <- as.character(inline_dependencies$js)
     inline_dependencies$css <- as.character(c(inline_dependencies$css, css))
   }
   
+  # resolve extension dependencies
+  extension_dependencies <- as.character(Filter(function(e) is.character(e) && e %in% all_extensions(), dependencies))
+  
   # resolve html dependencies
   html_dependencies <- Filter(function(e) inherits(e, "html_dependency"), dependencies)
-  html_dependencies <- append(html_dependencies, list(html_dependency_d3(version)))
+  html_dependencies <- append(html_dependencies, html_dependencies_d3(version, extensions = extension_dependencies))
 
   # convert to d3 data
   data <- as_d3_data(data)

@@ -45,9 +45,44 @@ Finally, you can explicitly include a CSS file of any name via the `css` paramet
 r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js", css = "theme.css")
 ```
 
+## d3-jetpack
+
+The **r2d3** package has built-in support for [d3-jetpack](https://github.com/gka/d3-jetpack), a set of convenience wrappers designed to speed up daily work with d3. You can include d3-jetpack in your visualization by specifing "d3-jetpack" in the `dependencies` parameter of `r2d3()`. For example:
+
+```{r}
+r2d3(
+  data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), 
+  script = "barchart.js", dependencies = "d3-jetpack"
+)
+```
+
+One commonly used d3-jetpack function is [`d3.conventions()`](https://github.com/gka/d3-jetpack#conventions). To use `d3.conventions()` with **r2d3** you need to forward the root element and size information provided automatically by **r2d3** to `d3.conventions()` as follows:
+
+```{js, eval=FALSE, echo=TRUE}
+// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), dependencies = "d3-jetpack"
+
+var { svg, margin, height, width } = d3.conventions({
+  sel: svg,
+  totalWidth: width,
+  totalHeight: height,
+  margin: { top: 10, bottom: 10 }
+});
+
+var barHeight = Math.ceil(height / data.length);
+
+svg.selectAll('rect')
+  .data(data)
+  .enter().append('rect')
+    .attr('width', function(d) { return d * width; })
+    .attr('height', barHeight)
+    .attr('y', function(d, i) { return i * barHeight; })
+    .attr('fill', 'steelblue');
+```
+
+
 ## JavaScript
 
-If your visualization depends on additional JavaScript files (e.g. some common code that you want to re-use) you can specify this using the `dependencies` parameter of `r2d3()`. For example:
+If your visualization depends on additional JavaScript files (e.g. a d3 extension or some common code that you want to re-use) you can specify this using the `dependencies` parameter of `r2d3()`. For example:
 
 ```{r}
 r2d3(
@@ -55,6 +90,7 @@ r2d3(
   script = "barchart.js", dependencies = "utils.js"
 )
 ```
+
 
 ## External Libraries
 

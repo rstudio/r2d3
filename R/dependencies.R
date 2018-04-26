@@ -1,12 +1,14 @@
 
 
-#' D3 HTML dependency
+#' D3 HTML dependencies
 #' 
-#' Create an HTML dependency for the D3 library.
+#' Create HTML dependencies for D3 and optional extensions
 #' 
 #' @param version Major version of D3
+#' @param extensions D3 extensions to include. Currently the only supported
+#'   extension is "jetpack" (<https://github.com/gka/d3-jetpack>).
 #' 
-#' @details Create an HTML dependency for a version of D3. Each version has 
+#' @details Create list of HTML dependencies for D3. Each version has 
 #'   a distinct root D3 object so it's possible to combine multiple versions
 #'   of D3 on a single page. For example, D3 v5 is accessed via `d3v5` and
 #'   D3 v4 is accessed via `d3v4`. Note however that D3 v3 is accessed via 
@@ -21,7 +23,7 @@
 #' @importFrom htmltools htmlDependency
 #' 
 #' @export
-html_dependency_d3 <- function(version = c("5", "4", "3")) {
+html_dependencies_d3 <- function(version = c("5", "4", "3"), extensions = NULL) {
   
   # validate version and determine full version number
   version <- match.arg(version)
@@ -34,13 +36,38 @@ html_dependency_d3 <- function(version = c("5", "4", "3")) {
   if (version != "3")
     name <- paste0(name, "v", version)
   
-  # return dependency
-  htmlDependency(
-    name = name,
-    version = version_long,
-    src = system.file(file.path("d3", version_long), package = "r2d3"),
-    script = "d3.js"
+  # base dependency on d3
+  html_dependencies <- list(
+    htmlDependency(
+      name = name,
+      version = version_long,
+      src = system.file(file.path("d3", version_long), package = "r2d3"),
+      script = "d3.js"
+    )
   )
+  
+  # validate extensions
+  if (!is.null(extensions) && length(extensions) > 0) {
+    # validate valid list of extensions
+    extensions <- match.arg(extensions, choices = all_extensions(), several.ok = TRUE)
+    # validate jetpack version requirements
+    if ("d3-jetpack" %in% extensions && as.integer(version) <= 3)
+      stop("d3-jetpack requires d3 version 4 or higher")
+  }
+  
+  # apply extensions
+  append(html_dependencies, lapply(extensions, function(extension) {
+    switch(extension,
+      `d3-jetpack` = htmlDependency(
+        name = "d3-jetpack",
+        version = "2.0.9",
+        src = system.file("d3-jetpack", package = "r2d3"),
+        script = "d3-jetpack.js"
+      )       
+    )
+  }))
 }
 
-
+all_extensions <- function() {
+  c("d3-jetpack")
+}
