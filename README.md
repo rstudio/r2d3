@@ -3,6 +3,11 @@ r2d3: R Interface to D3 Visualizations
 
 <img src="tools/readme/r2d3-hex.png" width=180 align="right" style="border: none; margin-right: 10px;"/>
 
+[![Build
+Status](https://travis-ci.org/rstudio/r2d3.svg?branch=master)](https://travis-ci.org/rstudio/r2d3)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/r2d3)](https://cran.r-project.org/package=r2d3)
+[![codecov](https://codecov.io/gh/rstudio/r2d3/branch/master/graph/badge.svg)](https://codecov.io/gh/rstudio/r2d3)
+
 The **r2d3** package provides a suite of tools for using [D3
 visualizations](https://d3js.org/) with R, including:
 
