@@ -105,9 +105,9 @@
   <div class="contents col-md-9">
     <div id="r2d3-r-interface-to-d3-visualizations" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#r2d3-r-interface-to-d3-visualizations" class="anchor"></a>r2d3: R Interface to D3 Visualizations</h1></div>
-<p><img src="tools/readme/r2d3-hex.png" width="180" align="right" style="border: none; margin-right: 10px;"></p>
-<p><a href="https://travis-ci.org/rstudio/r2d3"><img src="https://travis-ci.org/rstudio/r2d3.svg?branch=master" alt="Build Status"></a> <a href="https://cran.r-project.org/package=r2d3"><img src="https://www.r-pkg.org/badges/version/r2d3" alt="CRAN_Status_Badge"></a> <a href="https://codecov.io/gh/rstudio/r2d3"><img src="https://codecov.io/gh/rstudio/r2d3/branch/master/graph/badge.svg" alt="codecov"></a></p>
+<a href="#r2d3-r-interface-to-d3-visualizations" class="anchor"></a>r2d3: R interface to D3 visualizations</h1></div>
+<p><img src="tools/README/r2d3-hex.png" width="180" align="right" style="border: none; margin-right: 10px;"></p>
+<p><a href="https://travis-ci.org/rstudio/r2d3"><img src="https://travis-ci.org/rstudio/r2d3.svg?branch=master" style="border: none; margin: 0px;"></a><a href="https://cran.r-project.org/package=sparklyr"><img src="https://www.r-pkg.org/badges/version/sparklyr" style="border: none; margin: 0px;"></a><a href="https://codecov.io/gh/rstudio/r2d3"><img src="https://codecov.io/gh/rstudio/r2d3/branch/master/graph/badge.svg" style="border: none; margin: 0px;"></a></p>
 <p>The <strong>r2d3</strong> package provides a suite of tools for using <a href="https://d3js.org/">D3 visualizations</a> with R, including:</p>
 <ul>
 <li><p>Translating R objects into D3 friendly data structures</p></li>
@@ -124,7 +124,7 @@
 <p>With <strong>r2d3</strong>, you can bind data from R to D3 visualizations like the ones found on <a href="https://github.com/d3/d3/wiki/Gallery" class="uri">https://github.com/d3/d3/wiki/Gallery</a>, <a href="https://bl.ocks.org/" class="uri">https://bl.ocks.org/</a>, and <a href="https://vida.io/explore" class="uri">https://vida.io/explore</a>:</p>
 <div style="margin-top: 20px; margin-bottom: 10px;">
 
-<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><img src="tools/readme/chord_thumbnail.png" width="28%" class="illustration gallery-thumbnail"></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><img src="tools/readme/bubbles_thumbnail.png" width="28%" class="illustration gallery-thumbnail"></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><img src="tools/readme/cartogram_thumbnail.png" width="28%" class="illustration gallery-thumbnail"></a>
+<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><img src="tools/README/chord_thumbnail.png" width="28%" class="illustration gallery-thumbnail"></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><img src="tools/README/bubbles_thumbnail.png" width="28%" class="illustration gallery-thumbnail"></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><img src="tools/README/cartogram_thumbnail.png" width="28%" class="illustration gallery-thumbnail"></a>
 
 </div>
 <p>D3 visualizations created with <strong>r2d3</strong> work just like R plots within RStudio, R Markdown documents, and Shiny applications.</p>
@@ -134,7 +134,7 @@
 <p>First, install the package from GitHub as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"rstudio/r2d3"</span>)</a></code></pre></div>
 <p>Next, install the <a href="https://dailies.rstudio.com">daily build</a> of RStudio (you need this version of RStudio to take advantage of various integrated tools for authoring D3 scripts with r2d3):</p>
-<p><a href="https://dailies.rstudio.com"><img src="tools/readme/daily_build.png" class="screenshot" width="600/"></a></p>
+<p><a href="https://dailies.rstudio.com"><img src="tools/README/daily_build.png" class="screenshot" width="600/"></a></p>
 <p>Once you’ve installed the package and the RStudio daily build you have the tools required to work with <strong>r2d3</strong>. Below, we’ll describe basic workflow within RStudio and techniques for including visualizations in R Markdown and Shiny applications.</p>
 </div>
 <div id="about-d3" class="section level2">
@@ -162,7 +162,7 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(r2d3)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a></code></pre></div>
 <p>Which results in the following visualization:</p>
-<p><img src="tools/readme/bar_chart.png" class="illustration" width="600/"></p>
+<p><img src="tools/README/bar_chart.png" class="illustration" width="600/"></p>
 <div id="d3-variables" class="section level3">
 <h3 class="hasAnchor">
 <a href="#d3-variables" class="anchor"></a>D3 Variables</h3>
@@ -191,9 +191,9 @@
 <h2 class="hasAnchor">
 <a href="#d3-preview" class="anchor"></a>D3 Preview</h2>
 <p>The <a href="https://dailies.rstudio.com">daily build</a> of RStudio includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:</p>
-<p><img src="tools/readme/new_script.png" class="screenshot" width="600/"></p>
+<p><img src="tools/README/new_script.png" class="screenshot" width="600/"></p>
 <p>A simple template for a D3 script (the barchart.js example shown above) is provided by default. You can use the <strong>Preview</strong> command (Ctrl+Shift+Center) to render the visualization:</p>
-<p><img src="tools/readme/rstudio_preview.png" class="screenshot" width="600/"></p>
+<p><img src="tools/README/rstudio_preview.png" class="screenshot" width="600/"></p>
 <p>You might wonder where the data comes from for the preview. Note that there is a special comment at the top of the D3 script:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></a></code></pre></div>
 <p>This comment enables you to specify the data (along with any other arguments to the <code><a href="reference/r2d3.html">r2d3()</a></code> function) to use for the preview.</p>
@@ -210,7 +210,7 @@ output: html_document
 library(r2d3)
 r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
 ```</code></pre>
-<p><img src="tools/readme/bar_chart.png" class="illustration" width="600/"></p>
+<p><img src="tools/README/bar_chart.png" class="illustration" width="600/"></p>
 <p>You can also include D3 visualization code inline using the <code>d3</code> R Markdown engine:</p>
 <pre><code>```{r setup}
 library(r2d3)
@@ -226,7 +226,7 @@ svg.selectAll('rect')
       .attr('y', function(d, i) { return i * 22; })
       .attr('fill', options.color);
 ```</code></pre>
-<p><img src="tools/readme/rmarkdown-1.png" class="illustration" width="600/"></p>
+<p><img src="tools/README/rmarkdown-1.png" class="illustration" width="600/"></p>
 <p>Note that in order to use the <code>d3</code> engine you need to add <code>library(r2d3)</code> to the setup chunk (as illustrated above).</p>
 </div>
 <div id="shiny" class="section level2">
@@ -254,7 +254,7 @@ svg.selectAll('rect')
 <a class="sourceLine" id="cb5-19" data-line-number="19">}</a>
 <a class="sourceLine" id="cb5-20" data-line-number="20"></a>
 <a class="sourceLine" id="cb5-21" data-line-number="21"><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/shinyApp">shinyApp</a></span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</a></code></pre></div>
-<p><img src="tools/readme/baranim-1.gif" class="illustration" width="600/"></p>
+<p><img src="tools/README/baranim-1.gif" class="illustration" width="600/"></p>
 </div>
 <div id="learning-more" class="section level2">
 <h2 class="hasAnchor">
