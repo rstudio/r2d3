@@ -1,5 +1,5 @@
 ---
-title: "r2d3: R interface to D3 visualizations"
+title: "r2d3: R Interface to D3 Visualizations"
 output: 
   rmarkdown::html_vignette:
     readme: true
