@@ -411,12 +411,12 @@ function R2D3(el, width, height) {
   };
   
   var parseCallstackRef = function(callstack) {
-    var reg = new RegExp("at [^\\n]+ \\(<anonymous>:([0-9]+):([0-9]+)\\)");
+    var reg = new RegExp("at [^\\n]+ \\((<anonymous>|r2d3-script-[0-9]+):([0-9]+):([0-9]+)\\)");
     var matches = reg.exec(callstack);
-    if (matches && matches.length === 3) {
+    if (matches && matches.length === 4) {
       
-      var line = parseInt(matches[1]);
-      var column = parseInt(matches[2]);
+      var line = parseInt(matches[2]);
+      var column = parseInt(matches[3]);
       var file = null;
       var lineRef = parseLineFileRef(line);
       if (lineRef) {
@@ -435,18 +435,24 @@ function R2D3(el, width, height) {
     }
   };
   
-  var createSourceLink = function(error, line, column, domain) {
+  var createSourceLink = function(path, line, column, domain) {
+    var name = baseName(path);
     var linkEl = document.createElement("a");
-    linkEl.innerText = "(" + error + "#" + line + ":" + column + ")";
+    linkEl.innerText = "(" + name + "#" + line + ":" + column + ")";
     linkEl.href = "#";
     linkEl.color = "#4531d6";
     linkEl.style.display = "inline-block";
     linkEl.style.textDecoration = "none";
     linkEl.onclick = function() {
-      openSource(error, line, column, domain, false);
+      openSource(path, line, column, domain, false);
     };
     
     return linkEl;
+  };
+  
+  var baseName = function(path) {
+    var parts = path.split(new RegExp("/|\\\\"));
+    return parts[parts.length - 1];
   };
   
   var showErrorImpl = function() {
@@ -539,7 +545,10 @@ function R2D3(el, width, height) {
           header.appendChild(document.createElement("br"));
           header.appendChild(document.createTextNode(entry));
         } else if (hostDomain && stackRes) {
-          stackEl.innerText = entry.substr(0, entry.indexOf("(<anony"));
+          stackEl.innerText = entry.substr(
+            0,
+            Math.max(entry.indexOf("(<anony"), entry.indexOf("(r2d3-script-"))
+          );
           var stackLinkEl = createSourceLink(stackRes.file, stackRes.line, stackRes.column, hostDomain);
           stackEl.appendChild(stackLinkEl);
         }

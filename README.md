@@ -1,12 +1,7 @@
-r2d3: R Interface to D3 Visualizations
+r2d3: R interface to D3 visualizations
 ================
 
-<img src="tools/readme/r2d3-hex.png" width=180 align="right" style="border: none; margin-right: 10px;"/>
-
-[![Build
-Status](https://travis-ci.org/rstudio/r2d3.svg?branch=master)](https://travis-ci.org/rstudio/r2d3)
-[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/r2d3)](https://cran.r-project.org/package=r2d3)
-[![codecov](https://codecov.io/gh/rstudio/r2d3/branch/master/graph/badge.svg)](https://codecov.io/gh/rstudio/r2d3)
+<img src="images/r2d3-hex.png" width=180 align="right" style="border: none; margin-right: 10px;"/>
 
 The **r2d3** package provides a suite of tools for using [D3
 visualizations](https://d3js.org/) with R, including:
@@ -42,7 +37,7 @@ ones found on <https://github.com/d3/d3/wiki/Gallery>,
 
 <div style="margin-top: 20px; margin-bottom: 10px;">
 
-<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><img src="tools/readme/chord_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><img src="tools/readme/bubbles_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><img src="tools/readme/cartogram_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>
+<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><img src="images/chord_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><img src="images/bubbles_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><img src="images/cartogram_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>
 
 </div>
 
@@ -62,7 +57,7 @@ Next, install the [daily build](https://dailies.rstudio.com) of RStudio
 integrated tools for authoring D3 scripts with
 r2d3):
 
-<a href="https://dailies.rstudio.com"><img src="tools/readme/daily_build.png" class="screenshot" width=600/></a>
+<a href="https://dailies.rstudio.com"><img src="images/daily_build.png" class="screenshot" width=600/></a>
 
 Once you’ve installed the package and the RStudio daily build you have
 the tools required to work with **r2d3**. Below, we’ll describe basic
@@ -113,7 +108,7 @@ r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
 
 Which results in the following visualization:
 
-<img src="tools/readme/bar_chart.png" class="illustration" width=600/>
+<img src="images/bar_chart.png" class="illustration" width=600/>
 
 ### D3 Variables
 
@@ -151,13 +146,13 @@ The [daily build](https://dailies.rstudio.com) of RStudio includes
 support for previewing D3 scripts as you write them. To try this out,
 create a D3 script using the new file menu:
 
-<img src="tools/readme/new_script.png" class="screenshot" width=600/>
+<img src="images/new_script.png" class="screenshot" width=600/>
 
 A simple template for a D3 script (the barchart.js example shown above)
 is provided by default. You can use the **Preview** command
 (Ctrl+Shift+Center) to render the visualization:
 
-<img src="tools/readme/rstudio_preview.png" class="screenshot" width=600/>
+<img src="images/rstudio_preview.png" class="screenshot" width=600/>
 
 You might wonder where the data comes from for the preview. Note that
 there is a special comment at the top of the D3 script:
@@ -184,7 +179,7 @@ library(r2d3)
 r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
 &#96``</code></pre>
 
-<img src="tools/readme/bar_chart.png" class="illustration" width=600/>
+<img src="images/bar_chart.png" class="illustration" width=600/>
 
 You can also include D3 visualization code inline using the `d3` R
 Markdown engine:
@@ -205,7 +200,7 @@ svg.selectAll('rect')
       .attr('fill', options.color);
 &#96``</code></pre>
 
-<img src="tools/readme/rmarkdown-1.png" class="illustration" width=600/>
+<img src="images/rmarkdown-1.png" class="illustration" width=600/>
 
 Note that in order to use the `d3` engine you need to add
 `library(r2d3)` to the setup chunk (as illustrated above).
@@ -239,7 +234,7 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
-<img src="tools/readme/baranim-1.gif" class="illustration" width=600/>
+<img src="images/baranim-1.gif" class="illustration" width=600/>
 
 ## Learning More
 

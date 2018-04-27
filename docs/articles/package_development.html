@@ -122,7 +122,7 @@
 <li><p>Create a wrapper function for the requisite call to <code><a href="../reference/r2d3.html">r2d3()</a></code> and include that in a package; or</p></li>
 <li><p>Use your D3 script as the basis for the creation of an <a href="http://www.htmlwidgets.org">htmlwidget</a>.</p></li>
 </ol>
-<p>This article covers both of these techniques, and also describes how to use the <code><a href="../reference/html_dependency_d3.html">html_dependency_d3()</a></code> function to include multiple distinct versions of D3 within a document or application.</p>
+<p>This article covers both of these techniques, and also describes how to use the <code><a href="../reference/html_dependencies_d3.html">html_dependencies_d3()</a></code> function to include multiple distinct versions of D3 within a document or application.</p>
 </div>
 <div id="r3d3-wrapper-function" class="section level2">
 <h2 class="hasAnchor">
@@ -148,14 +148,14 @@
 <a href="#creating-an-htmlwidget" class="anchor"></a>Creating an htmlwidget</h2>
 <p>The <code><a href="../reference/r2d3.html">r2d3()</a></code> function provides a generic mechanism for turning a standalone D3 visualization script into an <a href="http://www.htmlwidgets.org">htmlwidget</a>. Depending on your requirements, you may find it more convenient to convert your D3 script into a full blown htmlwidget.</p>
 <p>The <a href="http://www.htmlwidgets.org/develop_intro.html">htmlwidgets interface</a> provides more granular mechanisms for rendering visualizations, including distinguishing between code for one-time initialization, re-rendering based on new data, and resizing.</p>
-<p>If you plan on creating an htmlwidget and wish to use version 4 or 5 of D3, please see the section below on <a href="#using-multiple-versions-of-d3">using multiple versions of d3</a> to ensure that you don’t break other widgets that might be relying on an older version of D3.</p>
+<p>If you plan on creating an htmlwidget and wish to use version 4 or 5 of D3, please see the section below on [using multiple versions of d3] to ensure that you don’t break other widgets that might be relying on an older version of D3.</p>
 <p>Not that the <strong>r2d3</strong> package also supports an <a href="advanced_rendering.html">advanced rendering</a> interface that more closely approximates the htmlwidgets API. Converting your visualization to use to the advanced rendering interface is therefore a good first step towards creating an htmlwidget.</p>
 </div>
-<div id="using-multiple-versions-of-d3" class="section level2">
+<div id="multiple-versions-of-d3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#using-multiple-versions-of-d3" class="anchor"></a>Using multiple versions of D3</h2>
+<a href="#multiple-versions-of-d3" class="anchor"></a>Multiple versions of D3</h2>
 <p>Many existing <a href="http://www.htmlwidgets.org">htmlwidgets</a> use version 3 of the D3 library, which has the potential to cause problems when mixed with D3 visualizations that make use of version 4 or 5 of D3. This is because major versions of D3 are incompatible, so using version 4 or 5 with code written for version 3 will result in errors.</p>
-<p>The <strong>r2d3</strong> package includes an <code><a href="../reference/html_dependency_d3.html">html_dependency_d3()</a></code> function which enables you to use multiple incompatible versions of D3 within a single document or application. This is accomplished by renaming the global D3 object with a version suffix. So when using <code><a href="../reference/html_dependency_d3.html">html_dependency_d3()</a></code> the following are the correct references to D3:</p>
+<p>The <strong>r2d3</strong> package includes an <code><a href="../reference/html_dependencies_d3.html">html_dependencies_d3()</a></code> function which enables you to use multiple incompatible versions of D3 within a single document or application. This is accomplished by renaming the global D3 object with a version suffix. So when using <code><a href="../reference/html_dependencies_d3.html">html_dependencies_d3()</a></code> the following are the correct references to D3:</p>
 <table class="table">
 <thead><tr class="header">
 <th>Version</th>
@@ -220,8 +220,22 @@
 <a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="dt">width =</span> width,</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="dt">height =</span> height,</a>
 <a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="dt">package =</span> <span class="st">"mypackage"</span>,</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="dt">dependencies =</span> r2d3<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/r2d3/topics/html_dependency_d3">html_dependency_d3</a></span>(<span class="dt">version =</span> <span class="st">"4"</span>)</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="dt">dependencies =</span> r2d3<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/r2d3/topics/html_dependencies_d3">html_dependencies_d3</a></span>(<span class="dt">version =</span> <span class="st">"4"</span>)</a>
 <a class="sourceLine" id="cb4-8" data-line-number="8">)</a></code></pre></div>
+</div>
+<div id="d3-jetpack" class="section level2">
+<h2 class="hasAnchor">
+<a href="#d3-jetpack" class="anchor"></a>d3-jetpack</h2>
+<p>The <code><a href="../reference/html_dependencies_d3.html">html_dependencies_d3()</a></code> function has can optionally include <a href="https://github.com/gka/d3-jetpack">d3-jetpack</a> along with D3. Include d3-jetpack by specifying it within the optional <code>extensions</code> argument:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">htmlwidgets<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/htmlwidgets/topics/createWidget">createWidget</a></span>(</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="st">"mywidget"</span>,</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  x,</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="dt">width =</span> width,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="dt">height =</span> height,</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  <span class="dt">package =</span> <span class="st">"mypackage"</span>,</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  <span class="dt">dependencies =</span> r2d3<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/r2d3/topics/html_dependencies_d3">html_dependencies_d3</a></span>(<span class="dt">version =</span> <span class="st">"4"</span>, </a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">                                            <span class="dt">extensions =</span> <span class="st">"d3-jetpack"</span>)</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">)</a></code></pre></div>
 </div>
 </div>
   </div>
@@ -234,7 +248,8 @@
 <li><a href="#overview">Overview</a></li>
       <li><a href="#r3d3-wrapper-function">R3D3 wrapper function</a></li>
       <li><a href="#creating-an-htmlwidget">Creating an htmlwidget</a></li>
-      <li><a href="#using-multiple-versions-of-d3">Using multiple versions of D3</a></li>
+      <li><a href="#multiple-versions-of-d3">Multiple versions of D3</a></li>
+      <li><a href="#d3-jetpack">d3-jetpack</a></li>
       </ul>
 </div>
       </div>
