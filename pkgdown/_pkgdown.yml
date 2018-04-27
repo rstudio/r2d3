@@ -61,5 +61,5 @@ reference:
       
   - title: "Miscellaneous"
     contents:
-      - html_dependency_d3
+      - html_dependencies_d3
 

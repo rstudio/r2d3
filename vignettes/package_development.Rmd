@@ -19,7 +19,7 @@ You can redistribute your D3 visualizations as reusable components if you bundle
 
 2) Use your D3 script as the basis for the creation of an [htmlwidget](http://www.htmlwidgets.org).
 
-This article covers both of these techniques, and also describes how to use the `html_dependency_d3()` function to include multiple distinct versions of D3 within a document or application.
+This article covers both of these techniques, and also describes how to use the `html_dependencies_d3()` function to include multiple distinct versions of D3 within a document or application.
 
 ## R3D3 wrapper function
 
@@ -54,11 +54,11 @@ If you plan on creating an htmlwidget and wish to use version 4 or 5 of D3, plea
 
 Not that the **r2d3** package also supports an [advanced rendering](advanced_rendering.html) interface that more closely approximates the htmlwidgets API. Converting your visualization to use to the advanced rendering interface is therefore a good first step towards creating an htmlwidget.
 
-## Using multiple versions of D3
+## Multiple versions of D3
 
 Many existing [htmlwidgets](http://www.htmlwidgets.org) use version 3 of the D3 library, which has the potential to cause problems when mixed with D3 visualizations that make use of version 4 or 5 of D3. This is because major versions of D3 are incompatible, so using version 4 or 5 with code written for version 3 will result in errors.
 
-The **r2d3** package includes an `html_dependency_d3()` function which enables you to use multiple incompatible versions of D3 within a single document or application. This is accomplished by renaming the global D3 object with a version suffix. So when using `html_dependency_d3()` the following are the correct references to D3:
+The **r2d3** package includes an `html_dependencies_d3()` function which enables you to use multiple incompatible versions of D3 within a single document or application. This is accomplished by renaming the global D3 object with a version suffix. So when using `html_dependencies_d3()` the following are the correct references to D3:
 
 | Version  | Object |
 |---------------------|---------------------|
@@ -123,11 +123,25 @@ htmlwidgets::createWidget(
   width = width,
   height = height,
   package = "mypackage",
-  dependencies = r2d3::html_dependency_d3(version = "4")
+  dependencies = r2d3::html_dependencies_d3(version = "4")
 )
 ```
 
+## d3-jetpack
 
+The `html_dependencies_d3()` function has can optionally include [d3-jetpack](https://github.com/gka/d3-jetpack) along with D3. Include d3-jetpack by specifying it within the optional `extensions` argument:
+
+```{r}
+htmlwidgets::createWidget(
+  "mywidget",
+  x,
+  width = width,
+  height = height,
+  package = "mypackage",
+  dependencies = r2d3::html_dependencies_d3(version = "4", 
+                                            extensions = "d3-jetpack")
+)
+```
 
 
 
