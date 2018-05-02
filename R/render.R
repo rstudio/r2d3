@@ -48,6 +48,10 @@ r2d3 <- function(
   viewer = c("internal", "external", "browser")
   )
 {
+  # allow data to be missing
+  if (missing(data))
+    data <- c()
+  
   # resolve version
   version <- match.arg(as.character(d3_version), choices = c("5", "4", "3"))
   
