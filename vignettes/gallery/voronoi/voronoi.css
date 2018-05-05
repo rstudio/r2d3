@@ -1,22 +1,22 @@
-.links {
+.r2d3 .links {
   stroke: #000;
   stroke-opacity: 0.2;
 }
 
-.polygons {
+.r2d3 .polygons {
   fill: none;
   stroke: #000;
 }
 
-.polygons :first-child {
+.r2d3 .polygons :first-child {
   fill: #f00;
 }
 
-.sites {
+.r2d3 .sites {
   fill: #000;
   stroke: #fff;
 }
 
-.sites :first-child {
+.r2d3 .sites :first-child {
   fill: #fff;
 }

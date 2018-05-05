@@ -1,13 +1,13 @@
 
-.bullet { font: 10px sans-serif; }
-.bullet .marker { stroke: #000; stroke-width: 2px; }
-.bullet .tick line { stroke: #666; stroke-width: .5px; }
-.bullet .range.s0 { fill: #eee; }
-.bullet .range.s1 { fill: #ddd; }
-.bullet .range.s2 { fill: #ccc; }
-.bullet .measure.s0 { fill: lightsteelblue; }
-.bullet .measure.s1 { fill: steelblue; }
-.bullet .title { font-size: 14px; font-weight: bold; }
-.bullet .subtitle { fill: #999; }
+.r2d3 .bullet { font: 10px sans-serif; }
+.r2d3 .bullet .marker { stroke: #000; stroke-width: 2px; }
+.r2d3 .bullet .tick line { stroke: #666; stroke-width: .5px; }
+.r2d3 .bullet .range.s0 { fill: #eee; }
+.r2d3 .bullet .range.s1 { fill: #ddd; }
+.r2d3 .bullet .range.s2 { fill: #ccc; }
+.r2d3 .bullet .measure.s0 { fill: lightsteelblue; }
+.r2d3 .bullet .measure.s1 { fill: steelblue; }
+.r2d3 .bullet .title { font-size: 14px; font-weight: bold; }
+.r2d3 .bullet .subtitle { fill: #999; }
 
-.bullets { line-height: 0; }
+.r2d3 .bullets { line-height: 0; }
