@@ -1,9 +1,9 @@
-.land {
+.r2d3 .land {
   fill: #fff;
   stroke: #ccc;
 }
 
-.state {
+.r2d3 .state {
   fill: #ccc;
   stroke: #666;
 }

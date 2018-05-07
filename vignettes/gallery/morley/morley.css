@@ -1,18 +1,18 @@
-.box {
+.r2d3 .box {
   font: 10px sans-serif;
 }
 
-.box line,
-.box rect,
-.box circle {
+.r2d3 .box line,
+.r2d3 .box rect,
+.r2d3 .box circle {
   stroke-width: 1.5px;
 }
 
-.box .center {
+.r2d3 .box .center {
   stroke-dasharray: 3,3;
 }
 
-.box .outlier {
+.r2d3 .box .outlier {
   fill: none;
   stroke: #ccc;
 }
