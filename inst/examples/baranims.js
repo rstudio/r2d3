@@ -13,6 +13,6 @@ bars.enter()
 bars.exit().remove();
 
 bars.transition()
-  .duration(0)
+  .duration(100)
   .attr("width", function(d) { return d * width; });
   
