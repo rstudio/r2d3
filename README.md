@@ -140,7 +140,7 @@ are provided automatically are:
 1)  So that you can dynamically bind data from R to visualizations; and
 
 2)  So that **r2d3** can automatically handle dynamic resizing for your
-    visualization. Most D3 examples have a static size. This if fine for
+    visualization. Most D3 examples have a static size. This is fine for
     an example but not very robust for including the visualization
     within a report, dashboard, or application.
 
