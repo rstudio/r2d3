@@ -14,18 +14,18 @@ knitr::opts_chunk$set(eval = FALSE)
 
 ## Overview
 
-Integrating Shiny and D3 can be a powerful combination.  It creates more options for users to interact with the app.  Getting to insights from the data is much faster when users are able to modify a Shiny input, or click on a D3 bar plot, and that action produces new results.
+Integrating Shiny and D3 can be a powerful combination. Deriving insights from data is streamlined when users are able to modify a Shiny input, or click on a D3 visualization, and that action produces new results.
 
-There are two ways that D3 visualizations created in `r2d3` can be integrated with Shiny.  The difference has to do with the direction of the communication:
+There are two ways that D3 visualizations can be integrated with Shiny. The difference has to do with the direction of the communication:
 
   1. From **Shiny** to **D3**
   
   1. From **D3** to **Shiny**
 
 
-## From Shiny to D3
+## Shiny to D3
 
-The idea is to allow users to make changes to Shiny parameters, and in turn, have the Shiny app modify the look of the D3 visualization.   The `r2d3` package provides two functions that enables this functionality:
+When going from Shiny to D3, users make changes to Shiny inputs which result in changes to the D3 visualization. The `r2d3` package provides two functions that enables this functionality:
 
 1. `renderD3()` - Works just like `renderPlot()`, it creates a reactive D3 plot that can be used as an `output`.  `renderD3()` is used server-side (`server`):
 
@@ -35,7 +35,7 @@ The idea is to allow users to make changes to Shiny parameters, and in turn, hav
     }
     ```
 
-1. `d3Output()` - Akin to `plotOutput()`, it is used client-side (`ui`).  It allows to call the output of `render3D()`:
+2. `d3Output()` - Akin to `plotOutput()`, it is used client-side (`ui`):
 
     ```r
     ui <- fluidPage(
@@ -45,7 +45,7 @@ The idea is to allow users to make changes to Shiny parameters, and in turn, hav
 
 ### Example
 
-This example shows a Shiny app that modifies the D3 plot's bar length based on the value that the user chooses for the `sliderInput()`:
+This example shows a Shiny app that modifies a D3 plot's bar length based on the value that the user chooses for the `sliderInput()`:
 
 ```{r eval=FALSE}
 library(shiny)
@@ -73,23 +73,23 @@ shinyApp(ui = ui, server = server)
 
 And here is the app in action:
 
-<img src="tools/README/baranim-1.gif" class="illustration" width=600/>
+<img src="images/baranim-1.gif" class="illustration" width=600/>
 
 
-## From D3 to Shiny
+## D3 to Shiny
 
-Having a D3 plot update based on a changing Shiny input is very common. But, what about having an action that happened inside the D3 plot trigger something in Shiny?  
+Having a D3 plot update based on a changing Shiny input is very common. But, what about having an action that happened inside a D3 plot trigger something in Shiny?  
 
-For example, we may want Shiny to know that our D3 bar plot was clicked on, and know which bar was clicked.  This ability becomes necessary when features such as drill-down are needed in the app.
+For example, we may want Shiny to know that our D3 bar plot was clicked on, and know which bar was clicked. Enabling communication from D3 to Shiny requires changes to both D3 and Shiny code:
 
-Enabling communication from D3 to Shiny requires preparation on both scripts:
-
-- *D3 script* - Add a call to the Shiny JS function `Shiny.onInputChange()`.
-- *Shiny script* - Add a reactive function that looks for the JS function call, and performs an action based on the selected value.
+- *D3 script* - Add a call to the Shiny JavaScript function `Shiny.onInputChange()`.
+- *Shiny script* - Add a reactive function that looks for the change and performs an action based on the selected value.
 
 ### Example
 
-In this example, the bar plot will pass to Shiny the data value of the bar plot that the user clicked on.  Shiny will then display the cosine of the data value. 
+In this example, the bar plot will pass to Shiny the data value of the bar that the user clicked on. Shiny will then display the cosine of the value. 
+
+#### D3 Code
 
 Here is the D3 script:
 
@@ -107,65 +107,56 @@ svg.selectAll('rect')
     .attr('fill', 'steelblue')
     .attr("d", function(d) { return d; })
     .on("click", function(){
-            Shiny.onInputChange(
-              "bar_clicked", 
-              d3.select(this).attr("d"));
-        });
+      Shiny.onInputChange(
+        "bar_clicked", 
+        d3.select(this).attr("d"));
+    });
 ```
-
-### D3 Code breakdown
 
 First, we need to decide which attribute (`.attr`) is going to be passed to Shiny when the user clicks.  Any existing attribute can be passed, such as the value of `y` or `width`, but because no current attribute contain the raw value of the data, a new made up attribute is added, we called it `d`.  The `d` attribute is set to rerun the `d` variable.
 
 <img src="images/attr.PNG" class="illustration" width=600/>
 
-Next, the `on()` function is used to capture an event inside the plot.  The first argument is *"click"*, indicating that we want it to be activated when someone clicks on the plot.  The second argument of `on()` is a function, this function will contain a call to the `Shiny.onInputChange()` JS function.  The first argument of the Shiny JS function is the name that the Shiny app will be looking for. Using a name describing what kind of action we are tracking will be preferred, makes it easier for Shiny developers that include this D3 plot to remember the name. In this case, we will use **bar_clicked**.  The second argument is the value that is returned to Shiny, and for that, we will use the `d` attribute we prepared in the previous code entry.
+Next, the `on()` function is used to capture an event inside the plot.The first argument is *"click"*, indicating that we want it to be activated when someone clicks on the plot.  The second argument of `on()` is a function, this function will contain a call to the `Shiny.onInputChange()` JS function. The first argument of the Shiny JS function is the name that the Shiny app will be looking for. In this case, we will use **bar_clicked**.  The second argument is the value that is returned to Shiny, and for that, we will use the `d` attribute created previously.
 
 <img src="images/onclick.PNG" class="illustration" width=600/>
 
-### Shiny
+#### Shiny Code
 
-The `ui` contains a text output called `selected`.  Server-side, a reactive function, called `output$selected()` will used to capture the changes of the bar selection.
-
-In the D3 script, we created an Shiny JS function call, and labeled it:`bar_clicked`.  That call can now be used as if was an Shiny `input` in the app.  In this case, the name to track will be: `input$bar_clicked`.
-
-The `output$selected()` function uses `renderText()` to display the cosine of the bar that was clicked on. The call to `input$bar_clicked` is used inside `renderText()` to execute the `cos()` calculation.
-
-The default value of `input$bar_clicked` will be `NULL` at the startup of the app.  This may be an issue when the raw value is being used to execute something else, such as a calculation.  Shiny's `req()` function can be used to prevent crashes. `req()` stops reactivity if the value of the variable passed as an argument is not valid, read more about this function in Shiny's official site: [Check for required values](http://shiny.rstudio.com/reference/shiny/latest/req.html)
-
-```r
-    output$selected <- renderText({
-        bar_number <- as.numeric(req(input$bar_clicked))
-        if(bar_number > 0) cos(bar_number) 
-    })
-```
-
-Here is the full Shiny app code:
+Here's the code for the Shiny application that interacts with D3:
 
 ```r
 ui <- fluidPage(
-    verbatimTextOutput("selected"),
-    d3Output("d3")
+  verbatimTextOutput("selected"),
+  d3Output("d3")
 )
 
 server <- function(input, output) {
-    output$d3 <- renderD3({
-        r2d3(
-            c(0.3, 0.6, 0.8, 0.95, 0.40),
-            script = "bar.js"
-            )
-    })
-    output$selected <- renderText({
-        bar_number <- as.numeric(req(input$bar_clicked))
-        if(bar_number > 0) cos(bar_number) 
-    })
+  output$d3 <- renderD3({
+    r2d3(
+      c(0.3, 0.6, 0.8, 0.95, 0.40),
+      script = "bar.js"
+    )
+  })
+  output$selected <- renderText({
+    bar_number <- as.numeric(req(input$bar_clicked))
+    if(bar_number > 0) cos(bar_number) 
+  })
 }
 
 shinyApp(ui, server)
 ```
 
-And here is the app in action:
+The `ui` contains a text output named `selected`. Server-side, a reactive function, called `output$selected()` will used to capture the changes of the bar selection.
 
-<img src="images/d3toshiny.gif" class="illustration" width=250/>
+In the D3 script, we called `Shiny.onInputChanged()` with an input named `bar_clicked`. This can now be used as if was an Shiny `input` in the app. In this case, the name to track will be: `input$bar_clicked`.
+
+The `output$selected()` function uses `renderText()` to display the cosine of the bar that was clicked on. The call to `input$bar_clicked` is used inside `renderText()` to execute the `cos()` calculation.
+
+The default value of `input$bar_clicked` will be `NULL` at the startup of the app. In this state you won't want to perform any calculation (as it would result in an error) or display any output. Shiny's `req()` function can be used to prevent errors in this case `req()` stops reactivity if the value of the variable passed as an argument is not valid, read more about this function in Shiny's official site: [Check for required values](http://shiny.rstudio.com/reference/shiny/latest/req.html)
+
+Here is the Shiny application in action:
+
+<img src="images/d3toshiny.gif" class="illustration" width=600/>
 
 
