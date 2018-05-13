@@ -197,6 +197,8 @@ shinyApp(ui = ui, server = server)
 
 <img src="tools/README/baranim-1.gif" class="illustration" width=600/>
 
+See the article on [Using r2d3 with Shiny](https://rstudio.github.io/r2d3/articles/shiny.html) to learn more (including how to create custom Shiny inputs that respond to user interaction with D3 visualizations).
+
 ## Learning More
 
 To learn the basics of D3 and see some examples that might inspire your own work, check out:
@@ -216,6 +218,8 @@ For next steps on learning on how to use **r2d3**, see these articles:
 - [Publishing D3 Visualizations](https://rstudio.github.io/r2d3/articles/publishing.html) --- Publish D3 visualizations as HTML, a static PNG image, or within R Markdown documents and Shiny applications.
 
 Once you are familar with the basics, check out these articles on more advanced topics:
+
+[Using r2d3 with Shiny](https://rstudio.github.io/r2d3/articles/shiny.html) --- Deriving insights from data is streamlined when users are able to modify a Shiny input, or click on a D3 visualization, and that action produces new results.
 
 - [CSS and JavaScript Dependencies](https://rstudio.github.io/r2d3/articles/dependencies.html) --- Incorporating external CSS styles and JavaScript libraries into your visualizations.
 

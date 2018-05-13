@@ -24,6 +24,8 @@ navbar:
           href: articles/publishing.html
         - text: "---"
         - text: Advanced
+        - text: "Using r2d3 with Shiny"
+          href: articles/shiny.html
         - text: "CSS and JavaScript Dependencies "
           href: articles/dependencies.html
         - text: "Advanced Rendering with Callbacks"

@@ -65,6 +65,9 @@
     <li class="divider">
     <li class="dropdown-header">Advanced</li>
     <li>
+      <a href="../articles/shiny.html">Using r2d3 with Shiny</a>
+    </li>
+    <li>
       <a href="../articles/dependencies.html">CSS and JavaScript Dependencies </a>
     </li>
     <li>
@@ -247,7 +250,7 @@ svg.selectAll('rect')
 <a class="sourceLine" id="cb5-4" data-line-number="4">ui &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/inputPanel">inputPanel</a></span>(</a>
 <a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/sliderInput">sliderInput</a></span>(<span class="st">"bar_max"</span>, <span class="dt">label =</span> <span class="st">"Max:"</span>,</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">      <span class="dt">min =</span> <span class="dv">10</span>, <span class="dt">max =</span> <span class="dv">110</span>, <span class="dt">value =</span> <span class="dv">10</span>, <span class="dt">step =</span> <span class="dv">20</span>)</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">                <span class="dt">min =</span> <span class="fl">0.1</span>, <span class="dt">max =</span> <span class="fl">1.0</span>, <span class="dt">value =</span> <span class="fl">0.2</span>, <span class="dt">step =</span> <span class="fl">0.1</span>)</a>
 <a class="sourceLine" id="cb5-8" data-line-number="8">  ),</a>
 <a class="sourceLine" id="cb5-9" data-line-number="9">  <span class="kw"><a href="../reference/d3-shiny.html">d3Output</a></span>(<span class="st">"d3"</span>)</a>
 <a class="sourceLine" id="cb5-10" data-line-number="10">)</a>
@@ -255,7 +258,7 @@ svg.selectAll('rect')
 <a class="sourceLine" id="cb5-12" data-line-number="12">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {</a>
 <a class="sourceLine" id="cb5-13" data-line-number="13">  output<span class="op">$</span>d3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/d3-shiny.html">renderD3</a></span>({</a>
 <a class="sourceLine" id="cb5-14" data-line-number="14">    <span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(</a>
-<a class="sourceLine" id="cb5-15" data-line-number="15">      <span class="kw">floor</span>(<span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">5</span>, input<span class="op">$</span>bar_max)),</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">      <span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">0</span>, input<span class="op">$</span>bar_max),</a>
 <a class="sourceLine" id="cb5-16" data-line-number="16">      <span class="dt">script =</span> <span class="kw">system.file</span>(<span class="st">"examples/baranims.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)</a>
 <a class="sourceLine" id="cb5-17" data-line-number="17">    )</a>
 <a class="sourceLine" id="cb5-18" data-line-number="18">  })</a>
@@ -263,6 +266,7 @@ svg.selectAll('rect')
 <a class="sourceLine" id="cb5-20" data-line-number="20"></a>
 <a class="sourceLine" id="cb5-21" data-line-number="21"><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/shinyApp">shinyApp</a></span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</a></code></pre></div>
 <p><img src="tools/README/baranim-1.gif" class="illustration" width="600/"></p>
+<p>See the article on <a href="https://rstudio.github.io/r2d3/articles/shiny.html">Using r2d3 with Shiny</a> to learn more (including how to create custom Shiny inputs that respond to user interaction with D3 visualizations).</p>
 </div>
 <div id="learning-more" class="section level2">
 <h2 class="hasAnchor">
@@ -280,6 +284,7 @@ svg.selectAll('rect')
 <li><p><a href="https://rstudio.github.io/r2d3/articles/publishing.html">Publishing D3 Visualizations</a> — Publish D3 visualizations as HTML, a static PNG image, or within R Markdown documents and Shiny applications.</p></li>
 </ul>
 <p>Once you are familar with the basics, check out these articles on more advanced topics:</p>
+<p><a href="https://rstudio.github.io/r2d3/articles/shiny.html">Using r2d3 with Shiny</a> — Deriving insights from data is streamlined when users are able to modify a Shiny input, or click on a D3 visualization, and that action produces new results.</p>
 <ul>
 <li><p><a href="https://rstudio.github.io/r2d3/articles/dependencies.html">CSS and JavaScript Dependencies</a> — Incorporating external CSS styles and JavaScript libraries into your visualizations.</p></li>
 <li><p><a href="https://rstudio.github.io/r2d3/articles/advanced_rendering.html">Advanced Rendering with Callbacks</a> — An alternate way to organize D3 scripts that enables you to distinguish between initialization and re-rendering based on new data, as well as handle resizing more dynamically.</p></li>
