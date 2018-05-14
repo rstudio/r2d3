@@ -1,29 +1,29 @@
-.r2d3 svg {
+svg {
   font: sans-serif;
 }
 
-.r2d3 s.y.axis path {
+.y.axis path {
   display: none;
 }
 
-.r2d3 s.y.axis line {
+.y.axis line {
   stroke: #fff;
   stroke-opacity: .2;
   shape-rendering: crispEdges;
 }
 
-.r2d3 s.y.axis .zero line {
+.y.axis .zero line {
   stroke: #000;
   stroke-opacity: 1;
 }
 
-.r2d3 s.title {
+.title {
   font: Helvetica Neue;
   fill: #666;
 }
 
-.r2d3 s.birthyear,
-.r2d3 s.age {
+.birthyear,
+.age {
   text-anchor: middle;
 }
 

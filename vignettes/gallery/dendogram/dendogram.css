@@ -1,20 +1,20 @@
-.r2d3 .node circle {
+.node circle {
   fill: #999;
 }
 
-.r2d3 .node text {
+.node text {
   font-family: sans-serif;
 }
 
-.r2d3 .node--internal circle {
+.node--internal circle {
   fill: #555;
 }
 
-.r2d3 .node--internal text {
+.node--internal text {
   text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
 }
 
-.r2d3 .link {
+.link {
   fill: none;
   stroke: #555;
   stroke-opacity: 0.4;
