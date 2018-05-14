@@ -3,6 +3,9 @@ script_wrap <- function(deps, script, container) {
   deps_contents <- script_read(deps)
   script_contents <- script_read(script)
   
+  if (is.character(script_contents) && length(script_contents) > 1)
+    script_contents <- paste(script_contents, collapse = "\n")
+  
   script_contents <- paste(
     # some libraries expect the container to be created from the extended d3 object.
     container, " = d3.select(", container, ".node());",
