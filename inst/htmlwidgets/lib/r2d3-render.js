@@ -4,6 +4,7 @@ function R2D3(el, width, height) {
   var version = null;
   
   self.data = null;
+  self.shadow = null;
   self.root = self.svg = self.canvas = null;
   self.width = 0;
   self.height = 0;
@@ -38,12 +39,18 @@ function R2D3(el, width, height) {
   };
   
   self.createRoot = function() {
-    if (self.root !== null) {
-      self.d3().select(el).select(self.container).remove();
-      self.root = null;
+    if (self.shadow === null) {
+      self.shadow = el.attachShadow({
+        mode: "open"
+      });
     }
     
-    var root = self.d3().select(el).append(self.container)
+    if (self.root !== null) {
+      self.d3().select(self.shadow).select(self.container).remove();
+      self.setRoot(null);
+    }
+    
+    var root = self.d3().select(self.shadow).append(self.container)
       .attr("width", self.width)
       .attr("height", self.height);
       
@@ -136,7 +143,7 @@ function R2D3(el, width, height) {
       el.appendChild(document.createTextNode(style));
     }
     
-    document.head.appendChild(el);
+    self.root.node().appendChild(el);
   };
   
   self.setVersion = function(newVersion) {
@@ -256,12 +263,13 @@ function R2D3(el, width, height) {
     
     if (!self.root) {
       self.setVersion(x.version);
+      
       self.addScript(x.script);
-      self.addStyle(x.style);
       self.d3Script = d3Script;
       self.setContainer(x.container);
       
       self.createRoot();
+      self.addStyle(x.style);
       
       self.callD3Script();
     }
