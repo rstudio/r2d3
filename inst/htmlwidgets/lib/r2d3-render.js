@@ -14,6 +14,7 @@ function R2D3(el, width, height) {
   self.rendererDefaut = true;
   self.captureErrors = null;
   self.theme = {};
+  self.style = null;
   
   self.setX = function(newX) {
     x = newX;
@@ -59,8 +60,9 @@ function R2D3(el, width, height) {
       root.style("fill", self.theme.foreground);
       root.style("color", self.theme.foreground);
     }
-      
+    
     self.setRoot(root);
+    self.addStyle();
   };
   
   self.setWidth = function(width) {
@@ -131,16 +133,20 @@ function R2D3(el, width, height) {
     self.captureErrors = null;
   };
   
-  self.addStyle = function(style) {
-    if (!style) return;
+  self.setStyle = function(style) {
+    self.style = style;
+  };
+  
+  self.addStyle = function() {
+    if (!self.style) return;
     
     var el = document.createElement("style");
             
     el.type = "text/css";
     if (el.styleSheet) {
-      el.styleSheet.cssText = style;
+      el.styleSheet.cssText = self.style;
     } else {
-      el.appendChild(document.createTextNode(style));
+      el.appendChild(document.createTextNode(self.style));
     }
     
     self.root.node().appendChild(el);
@@ -263,13 +269,12 @@ function R2D3(el, width, height) {
     
     if (!self.root) {
       self.setVersion(x.version);
-      
+      self.setStyle(x.style);
       self.addScript(x.script);
       self.d3Script = d3Script;
       self.setContainer(x.container);
       
       self.createRoot();
-      self.addStyle(x.style);
       
       self.callD3Script();
     }
