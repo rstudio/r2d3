@@ -1,7 +1,7 @@
-.r2d3 .group-tick line {
+.group-tick line {
   stroke: #000;
 }
 
-.r2d3 .ribbons {
+.ribbons {
   fill-opacity: 0.67;
 }
