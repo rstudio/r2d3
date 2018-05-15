@@ -146,9 +146,9 @@
     
 
     <pre class="usage"><span class='fu'>r2d3</span>(<span class='no'>data</span>, <span class='no'>script</span>, <span class='kw'>css</span> <span class='kw'>=</span> <span class='st'>"auto"</span>, <span class='kw'>dependencies</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>d3_version</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"5"</span>, <span class='st'>"4"</span>, <span class='st'>"3"</span>), <span class='kw'>container</span> <span class='kw'>=</span> <span class='st'>"svg"</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sizing</span> <span class='kw'>=</span> <span class='fu'><a href='default_sizing.html'>default_sizing</a></span>(), <span class='kw'>viewer</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"internal"</span>,
-  <span class='st'>"external"</span>, <span class='st'>"browser"</span>))</pre>
+  <span class='kw'>d3_version</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"5"</span>, <span class='st'>"4"</span>, <span class='st'>"3"</span>), <span class='kw'>container</span> <span class='kw'>=</span> <span class='st'>"svg"</span>, <span class='kw'>elementId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>width</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sizing</span> <span class='kw'>=</span> <span class='fu'><a href='default_sizing.html'>default_sizing</a></span>(),
+  <span class='kw'>viewer</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"internal"</span>, <span class='st'>"external"</span>, <span class='st'>"browser"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,16 +163,15 @@
     </tr>
     <tr>
       <th>css</th>
-      <td><p>CSS file containing styles. The default value "auto" will use
-any CSS file located alongside the script file with the same stem
-(e.g. "barplot.css" would be used for "barplot.js") as well as any
-CSS file with the name "styles.css".</p></td>
+      <td><p>CSS file containing styles. The default value "auto" will use any CSS file
+located alongside the script file with the same stem (e.g. "barplot.css" would be
+used for "barplot.js") as well as any CSS file with the name "styles.css".</p></td>
     </tr>
     <tr>
       <th>dependencies</th>
-      <td><p>Additional HTML dependencies. These can take the
-form of paths to JavaScript or CSS files, or alternatively can be
-fully specified dependencies created with <a href='http://www.rdocumentation.org/packages/htmltools/topics/htmlDependency'>htmltools::htmlDependency</a>.</p></td>
+      <td><p>Additional HTML dependencies. These can take the form of paths to
+JavaScript or CSS files, or alternatively can be fully specified dependencies created
+with <a href='http://www.rdocumentation.org/packages/htmltools/topics/htmlDependency'>htmltools::htmlDependency</a>.</p></td>
     </tr>
     <tr>
       <th>options</th>
@@ -180,12 +179,18 @@ fully specified dependencies created with <a href='http://www.rdocumentation.org
     </tr>
     <tr>
       <th>d3_version</th>
-      <td><p>Major D3 version to use, the latest minor version
-is automatically picked.</p></td>
+      <td><p>Major D3 version to use, the latest minor version is automatically
+picked.</p></td>
     </tr>
     <tr>
       <th>container</th>
       <td><p>The 'HTML' container of the D3 output.</p></td>
+    </tr>
+    <tr>
+      <th>elementId</th>
+      <td><p>Use an explicit element ID for the widget (rather than an
+automatically generated one). Useful if you have other JavaScript that needs to
+explicitly discover and interact with a specific widget instance.</p></td>
     </tr>
     <tr>
       <th>width</th>
@@ -201,9 +206,9 @@ is automatically picked.</p></td>
     </tr>
     <tr>
       <th>viewer</th>
-      <td><p>"internal" to use the RStudio internal viewer pane for
-output; "external" to display in an external RStudio window;
-"browser" to display in an external browser.</p></td>
+      <td><p>"internal" to use the RStudio internal viewer pane for output; "external"
+to display in an external RStudio window; "browser" to display in an external
+browser.</p></td>
     </tr>
     </table>
     

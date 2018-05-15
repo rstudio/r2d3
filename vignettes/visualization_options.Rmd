@@ -18,7 +18,8 @@ This article covers various options you can specify for D3 visualizations, inclu
 
 1) Specifying the version of the D3 library to use
 
-2) Specifying the type of HTML container to render content withing (e.g. "svg", "canvas", "div", etc.)
+2) Specifying the type of HTML container to render content withing (e.g. "svg", "canvas", "div", etc.) and
+ the ID of the containing element.
 
 3) Enabling users of your visualization to provide options that affect it's behavior
 
@@ -61,6 +62,13 @@ bars.enter().append("div")
 ```
 
 Note that when specifying the `!preview` comment at the top of the script you should also be sure to add `container = "div"`.
+
+By default a random HTML element ID is generated for your visualization's container. If you want to specify an explicit ID (for example, if you have other JavaScript that needs to explicitly discover and interact with your visualization) then use the `elementId` parameter. For example:
+
+```{r}
+r2d3(data, script = "barchart.js", container = "div", elementId = "my-element")
+```
+
 
 ## User Options
 
