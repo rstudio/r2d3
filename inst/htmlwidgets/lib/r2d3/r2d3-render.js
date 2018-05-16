@@ -183,7 +183,7 @@ function R2D3(el, width, height) {
       entry.style.position = "absolute";
       entry.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
       entry.style.fontSize = "9pt";
-      el.appendChild(entry);
+      self.shadow.appendChild(entry);
       
       entry.style.transform = "translateY(40px)";
       entry.style.opacity = "0";
@@ -497,7 +497,7 @@ function R2D3(el, width, height) {
     var container = document.getElementById("r2d3-error-container");
     if (!container) {
       container = document.createElement("div");
-      el.appendChild(container);
+      self.shadow.appendChild(container);
     }
     else {
       container.innerHTML = "";
