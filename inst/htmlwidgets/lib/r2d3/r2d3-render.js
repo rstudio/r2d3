@@ -39,6 +39,13 @@ function R2D3(el, width, height) {
     self.root = self.svg = self.canvas = root;
   };
   
+  var createContainer = function() {
+    if (self.container == "svg")
+      return document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    else
+      return document.createElement(self.container);
+  };
+  
   self.createRoot = function() {
     if (self.shadow === null) {
       self.shadow = el.attachShadow({
@@ -51,7 +58,9 @@ function R2D3(el, width, height) {
       self.setRoot(null);
     }
     
-    var root = self.d3().select(self.shadow).append(self.container)
+    var container = createContainer();
+    self.shadow.appendChild(container);
+    var root = self.d3().select(container)
       .attr("width", self.width)
       .attr("height", self.height);
       
