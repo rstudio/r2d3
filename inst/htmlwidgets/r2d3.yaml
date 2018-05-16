@@ -4,7 +4,7 @@ dependencies:
     src: htmlwidgets/lib
     script:
       - r2d3-render.js
-  - name: webcomponents-bundle
+  - name: webcomponents
     version: 2.0.0
     src: htmlwidgets/lib
     script:
