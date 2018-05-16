@@ -41,7 +41,7 @@ html_dependencies_d3 <- function(version = c("5", "4", "3"), extensions = NULL) 
     htmlDependency(
       name = name,
       version = version_long,
-      src = system.file(file.path("d3", version_long), package = "r2d3"),
+      src = system.file(file.path("htmlwidgets/lib/d3", version_long), package = "r2d3"),
       script = "d3.js"
     )
   )
@@ -61,7 +61,7 @@ html_dependencies_d3 <- function(version = c("5", "4", "3"), extensions = NULL) 
       `d3-jetpack` = htmlDependency(
         name = "d3-jetpack",
         version = "2.0.9",
-        src = system.file("d3-jetpack", package = "r2d3"),
+        src = system.file("htmlwidgets/lib/d3-jetpack", package = "r2d3"),
         script = "d3-jetpack.js"
       )       
     )
