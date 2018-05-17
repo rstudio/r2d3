@@ -1,4 +1,4 @@
-// !preview r2d3 data = c(), d3_version = 4
+// !preview r2d3 d3_version = 4
 
 // Based on: https://bl.ocks.org/mbostock/4060366
 

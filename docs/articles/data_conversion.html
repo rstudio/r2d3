@@ -19,7 +19,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -105,29 +105,29 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>R to D3 Data Conversion</h1>
             
       
-      <small>Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/data_conversion.Rmd"><code>vignettes/data_conversion.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/data_conversion.Rmd"><code>vignettes/data_conversion.Rmd</code></a></small>
+      <div class="hidden name"><code>data_conversion.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <div id="default-conversion" class="section level2">
 <h2 class="hasAnchor">
 <a href="#default-conversion" class="anchor"></a>Default conversion</h2>
 <p>R objects provided as <code>data</code> for D3 visualizations are converted to JSON using the <a href="https://www.rdocumentation.org/packages/jsonlite/versions/1.5/topics/toJSON%2C%20fromJSON">jsonlite::toJSON()</a> function, and use the same default serialization behavior as <a href="https://shiny.rstudio.com">Shiny</a> and <a href="http://www.htmlwidgets.org/develop_advanced.html#custom-json-serializer">htmlwidgets</a>.</p>
 <p>This corresponds to the following call to <code><a href="http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON">jsonlite::toJSON()</a></code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">jsonlite<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON">toJSON</a></span>(</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  <span class="dt">dataframe =</span> <span class="st">"columns"</span>, <span class="dt">null =</span> <span class="st">"null"</span>, <span class="dt">na =</span> <span class="st">"null"</span>, <span class="dt">auto_unbox =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="dt">digits =</span> <span class="kw">getOption</span>(<span class="st">"shiny.json.digits"</span>, <span class="dv">16</span>), <span class="dt">use_signif =</span> <span class="ot">TRUE</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">  <span class="dt">POSIXt =</span> <span class="st">"ISO8601"</span>, <span class="dt">UTC =</span> <span class="ot">TRUE</span>, <span class="dt">rownames =</span> <span class="ot">FALSE</span>, <span class="dt">keep_vec_names =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  <span class="dt">json_verabitm =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">jsonlite::<span class="kw">toJSON</span>(
+  <span class="dt">dataframe =</span> <span class="st">"columns"</span>, <span class="dt">null =</span> <span class="st">"null"</span>, <span class="dt">na =</span> <span class="st">"null"</span>, <span class="dt">auto_unbox =</span> <span class="ot">TRUE</span>,
+  <span class="dt">digits =</span> <span class="kw">getOption</span>(<span class="st">"shiny.json.digits"</span>, <span class="dv">16</span>), <span class="dt">use_signif =</span> <span class="ot">TRUE</span>, <span class="dt">force =</span> <span class="ot">TRUE</span>,
+  <span class="dt">POSIXt =</span> <span class="st">"ISO8601"</span>, <span class="dt">UTC =</span> <span class="ot">TRUE</span>, <span class="dt">rownames =</span> <span class="ot">FALSE</span>, <span class="dt">keep_vec_names =</span> <span class="ot">TRUE</span>,
+  <span class="dt">json_verabitm =</span> <span class="ot">TRUE</span>
+)</code></pre></div>
 <div id="data-frames" class="section level4">
 <h4 class="hasAnchor">
 <a href="#data-frames" class="anchor"></a>Data frames</h4>
@@ -170,21 +170,20 @@
 <h2 class="hasAnchor">
 <a href="#custom-conversion" class="anchor"></a>Custom conversion</h2>
 <p>If you don’t like the default JSON conversion provided for <code>data</code>, you can write your own function that uses <a href="https://cran.r-project.org/web/packages/jsonlite/index.html">jsonlite</a> to perform a custom conversion. For example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">data_to_json &lt;-<span class="st"> </span><span class="cf">function</span>(data) {</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">  jsonlite<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON">toJSON</a></span>(data, <span class="dt">dataframe =</span> <span class="st">"rows"</span>, <span class="dt">auto_unbox =</span> <span class="ot">FALSE</span>, <span class="dt">rownames =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data =</span> <span class="kw">data_to_json</span>(x), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_to_json &lt;-<span class="st"> </span>function(data) {
+  jsonlite::<span class="kw">toJSON</span>(data, <span class="dt">dataframe =</span> <span class="st">"rows"</span>, <span class="dt">auto_unbox =</span> <span class="ot">FALSE</span>, <span class="dt">rownames =</span> <span class="ot">TRUE</span>)
+}
+
+<span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data =</span> <span class="kw">data_to_json</span>(x), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</code></pre></div>
 <p>When a value returned from <code><a href="http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON">jsonlite::toJSON()</a></code> is passed as the <code>data</code> argument <strong>r2d3</strong> won’t attempt any additional conversion or transformation of the value.</p>
 </div>
 <div id="s3-conversion-method" class="section level2">
 <h2 class="hasAnchor">
 <a href="#s3-conversion-method" class="anchor"></a>S3 conversion method</h2>
 <p>You can implement the <code><a href="../reference/as_d3_data.html">as_d3_data()</a></code> S3 method to provide custom converters for any R class. For example, you could create an S3 method for the <code>igraph</code> class to convert data into a JSON that is optimized for rendering by a D3 network visualization:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">as_d3_data.igraph &lt;-<span class="st"> </span><span class="cf">function</span>(x, ...) {</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="co"># code to serialize igraph to D3 network friendly JSON </span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">}</a></code></pre></div>
-</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">as_d3_data.igraph &lt;-<span class="st"> </span>function(x, ...) {
+  <span class="co"># code to serialize igraph to D3 network friendly JSON </span>
+}</code></pre></div>
 </div>
   </div>
 

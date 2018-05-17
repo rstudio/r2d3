@@ -1,16 +1,16 @@
-.r2d3 circle {
+circle {
   fill: rgb(31, 119, 180);
   fill-opacity: .25;
   stroke: rgb(31, 119, 180);
   stroke-width: 1px;
 }
 
-.r2d3 .leaf circle {
+.leaf circle {
   fill: #ff7f0e;
   fill-opacity: 1;
 }
 
-.r2d3 text {
+text {
   font: sans-serif;
   text-anchor: middle;
 }

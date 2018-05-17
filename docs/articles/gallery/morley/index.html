@@ -19,7 +19,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -104,19 +104,19 @@
 <!--/.navbar -->
 
       
-      </header><script src="index_files/htmlwidgets-1.2/htmlwidgets.js"></script><script src="index_files/r2d3-render-0.1.0/r2d3-render.js"></script><script src="index_files/r2d3-binding-0.2/r2d3.js"></script><script src="index_files/d3-3.5.17/d3.js"></script><div class="row">
-  <div class="col-md-9">
+      </header><script src="index_files/htmlwidgets-1.2/htmlwidgets.js"></script><script src="index_files/r2d3-render-0.1.0/r2d3-render.js"></script><script src="index_files/webcomponents-2.0.0/webcomponents.js"></script><script src="index_files/r2d3-binding-0.2/r2d3.js"></script><script src="index_files/d3-3.5.17/d3.js"></script><div class="row">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Gallery: morley</h1>
             
       
-      <small>Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/gallery/morley/index.Rmd"><code>vignettes/gallery/morley/index.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/gallery/morley/index.Rmd"><code>vignettes/gallery/morley/index.Rmd</code></a></small>
+      <div class="hidden name"><code>index.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <div id="source-link">
 <p><a href="https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/morley" class="uri">https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/morley</a></p>
 </div>
@@ -127,406 +127,406 @@
 </div>
 </div>
 <div class="col-sm-9">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../../../reference/r2d3.html">r2d3</a></span>(<span class="dt">data =</span> <span class="kw">read.csv</span>(<span class="st">"morley.csv"</span>), <span class="dt">d3_version =</span> <span class="dv">3</span>, <span class="dt">container =</span> <span class="st">"div"</span>, <span class="dt">dependencies =</span> <span class="kw">c</span>(<span class="st">"box.js"</span>), <span class="dt">script =</span> <span class="st">"morley.js"</span>)</a></code></pre></div>
-<div id="htmlwidget-38b9213993adc0f42946" style="width:100%;height:480px;" class="r2d3 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-38b9213993adc0f42946">{"x":{"data":{"Expt":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Run":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"Speed":[850,740,900,1070,930,850,950,980,980,880,1000,980,930,650,760,810,1000,1000,960,960,960,940,960,940,880,800,850,880,900,840,830,790,810,880,880,830,800,790,760,800,880,880,880,860,720,720,620,860,970,950,880,910,850,870,840,840,850,840,840,840,890,810,810,820,800,770,760,740,750,760,910,920,890,860,880,720,840,850,850,780]},"type":"data.frame","container":"div","options":null,"script":"var d3Script = function(d3, r2d3, data, div, width, height, options, theme, console) {\nthis.d3 = d3;\n/* R2D3 Source File:  box.js */\n(function() {\n\n// Inspired by http://informationandvisualization.de/blog/box-plot\nd3.box = function() {\n  var width = 1,\n      height = 1,\n      duration = 0,\n      domain = null,\n      value = Number,\n      whiskers = boxWhiskers,\n      quartiles = boxQuartiles,\n      tickFormat = null;\n\n  // For each small multiple…\n  function box(g) {\n    g.each(function(d, i) {\n      d = d.map(value).sort(d3.ascending);\n      var g = d3.select(this),\n          n = d.length,\n          min = d[0],\n          max = d[n - 1];\n\n      // Compute quartiles. Must return exactly 3 elements.\n      var quartileData = d.quartiles = quartiles(d);\n\n      // Compute whiskers. Must return exactly 2 elements, or null.\n      var whiskerIndices = whiskers && whiskers.call(this, d, i),\n          whiskerData = whiskerIndices && whiskerIndices.map(function(i) { return d[i]; });\n\n      // Compute outliers. If no whiskers are specified, all data are \"outliers\".\n      // We compute the outliers as indices, so that we can join across transitions!\n      var outlierIndices = whiskerIndices\n          ? d3.range(0, whiskerIndices[0]).concat(d3.range(whiskerIndices[1] + 1, n))\n          : d3.range(n);\n\n      // Compute the new x-scale.\n      var x1 = d3.scale.linear()\n          .domain(domain && domain.call(this, d, i) || [min, max])\n          .range([height, 0]);\n\n      // Retrieve the old x-scale, if this is an update.\n      var x0 = this.__chart__ || d3.scale.linear()\n          .domain([0, Infinity])\n          .range(x1.range());\n\n      // Stash the new scale.\n      this.__chart__ = x1;\n\n      // Note: the box, median, and box tick elements are fixed in number,\n      // so we only have to handle enter and update. In contrast, the outliers\n      // and other elements are variable, so we need to exit them! Variable\n      // elements also fade in and out.\n\n      // Update center line: the vertical line spanning the whiskers.\n      var center = g.selectAll(\"line.center\")\n          .data(whiskerData ? [whiskerData] : []);\n\n      center.enter().insert(\"line\", \"rect\")\n          .attr(\"class\", \"center\")\n          .attr(\"x1\", width / 2)\n          .attr(\"y1\", function(d) { return x0(d[0]); })\n          .attr(\"x2\", width / 2)\n          .attr(\"y2\", function(d) { return x0(d[1]); })\n          .style(\"opacity\", 1e-6)\n        .transition()\n          .duration(duration)\n          .style(\"opacity\", 1)\n          .attr(\"y1\", function(d) { return x1(d[0]); })\n          .attr(\"y2\", function(d) { return x1(d[1]); });\n\n      center.transition()\n          .duration(duration)\n          .style(\"opacity\", 1)\n          .attr(\"y1\", function(d) { return x1(d[0]); })\n          .attr(\"y2\", function(d) { return x1(d[1]); });\n\n      center.exit().transition()\n          .duration(duration)\n          .style(\"opacity\", 1e-6)\n          .attr(\"y1\", function(d) { return x1(d[0]); })\n          .attr(\"y2\", function(d) { return x1(d[1]); })\n          .remove();\n\n      // Update innerquartile box.\n      var box = g.selectAll(\"rect.box\")\n          .data([quartileData]);\n\n      box.enter().append(\"rect\")\n          .attr(\"class\", \"box\")\n          .attr(\"x\", 0)\n          .attr(\"y\", function(d) { return x0(d[2]); })\n          .attr(\"width\", width)\n          .attr(\"height\", function(d) { return x0(d[0]) - x0(d[2]); })\n        .transition()\n          .duration(duration)\n          .attr(\"y\", function(d) { return x1(d[2]); })\n          .attr(\"height\", function(d) { return x1(d[0]) - x1(d[2]); });\n\n      box.transition()\n          .duration(duration)\n          .attr(\"y\", function(d) { return x1(d[2]); })\n          .attr(\"height\", function(d) { return x1(d[0]) - x1(d[2]); });\n\n      // Update median line.\n      var medianLine = g.selectAll(\"line.median\")\n          .data([quartileData[1]]);\n\n      medianLine.enter().append(\"line\")\n          .attr(\"class\", \"median\")\n          .attr(\"x1\", 0)\n          .attr(\"y1\", x0)\n          .attr(\"x2\", width)\n          .attr(\"y2\", x0)\n        .transition()\n          .duration(duration)\n          .attr(\"y1\", x1)\n          .attr(\"y2\", x1);\n\n      medianLine.transition()\n          .duration(duration)\n          .attr(\"y1\", x1)\n          .attr(\"y2\", x1);\n\n      // Update whiskers.\n      var whisker = g.selectAll(\"line.whisker\")\n          .data(whiskerData || []);\n\n      whisker.enter().insert(\"line\", \"circle, text\")\n          .attr(\"class\", \"whisker\")\n          .attr(\"x1\", 0)\n          .attr(\"y1\", x0)\n          .attr(\"x2\", width)\n          .attr(\"y2\", x0)\n          .style(\"opacity\", 1e-6)\n        .transition()\n          .duration(duration)\n          .attr(\"y1\", x1)\n          .attr(\"y2\", x1)\n          .style(\"opacity\", 1);\n\n      whisker.transition()\n          .duration(duration)\n          .attr(\"y1\", x1)\n          .attr(\"y2\", x1)\n          .style(\"opacity\", 1);\n\n      whisker.exit().transition()\n          .duration(duration)\n          .attr(\"y1\", x1)\n          .attr(\"y2\", x1)\n          .style(\"opacity\", 1e-6)\n          .remove();\n\n      // Update outliers.\n      var outlier = g.selectAll(\"circle.outlier\")\n          .data(outlierIndices, Number);\n\n      outlier.enter().insert(\"circle\", \"text\")\n          .attr(\"class\", \"outlier\")\n          .attr(\"r\", 5)\n          .attr(\"cx\", width / 2)\n          .attr(\"cy\", function(i) { return x0(d[i]); })\n          .style(\"opacity\", 1e-6)\n        .transition()\n          .duration(duration)\n          .attr(\"cy\", function(i) { return x1(d[i]); })\n          .style(\"opacity\", 1);\n\n      outlier.transition()\n          .duration(duration)\n          .attr(\"cy\", function(i) { return x1(d[i]); })\n          .style(\"opacity\", 1);\n\n      outlier.exit().transition()\n          .duration(duration)\n          .attr(\"cy\", function(i) { return x1(d[i]); })\n          .style(\"opacity\", 1e-6)\n          .remove();\n\n      // Compute the tick format.\n      var format = tickFormat || x1.tickFormat(8);\n\n      // Update box ticks.\n      var boxTick = g.selectAll(\"text.box\")\n          .data(quartileData);\n\n      boxTick.enter().append(\"text\")\n          .attr(\"class\", \"box\")\n          .attr(\"dy\", \".3em\")\n          .attr(\"dx\", function(d, i) { return i & 1 ? 6 : -6 })\n          .attr(\"x\", function(d, i) { return i & 1 ? width : 0 })\n          .attr(\"y\", x0)\n          .attr(\"text-anchor\", function(d, i) { return i & 1 ? \"start\" : \"end\"; })\n          .text(format)\n        .transition()\n          .duration(duration)\n          .attr(\"y\", x1);\n\n      boxTick.transition()\n          .duration(duration)\n          .text(format)\n          .attr(\"y\", x1);\n\n      // Update whisker ticks. These are handled separately from the box\n      // ticks because they may or may not exist, and we want don't want\n      // to join box ticks pre-transition with whisker ticks post-.\n      var whiskerTick = g.selectAll(\"text.whisker\")\n          .data(whiskerData || []);\n\n      whiskerTick.enter().append(\"text\")\n          .attr(\"class\", \"whisker\")\n          .attr(\"dy\", \".3em\")\n          .attr(\"dx\", 6)\n          .attr(\"x\", width)\n          .attr(\"y\", x0)\n          .text(format)\n          .style(\"opacity\", 1e-6)\n        .transition()\n          .duration(duration)\n          .attr(\"y\", x1)\n          .style(\"opacity\", 1);\n\n      whiskerTick.transition()\n          .duration(duration)\n          .text(format)\n          .attr(\"y\", x1)\n          .style(\"opacity\", 1);\n\n      whiskerTick.exit().transition()\n          .duration(duration)\n          .attr(\"y\", x1)\n          .style(\"opacity\", 1e-6)\n          .remove();\n    });\n    d3.timer.flush();\n  }\n\n  box.width = function(x) {\n    if (!arguments.length) return width;\n    width = x;\n    return box;\n  };\n\n  box.height = function(x) {\n    if (!arguments.length) return height;\n    height = x;\n    return box;\n  };\n\n  box.tickFormat = function(x) {\n    if (!arguments.length) return tickFormat;\n    tickFormat = x;\n    return box;\n  };\n\n  box.duration = function(x) {\n    if (!arguments.length) return duration;\n    duration = x;\n    return box;\n  };\n\n  box.domain = function(x) {\n    if (!arguments.length) return domain;\n    domain = x == null ? x : d3.functor(x);\n    return box;\n  };\n\n  box.value = function(x) {\n    if (!arguments.length) return value;\n    value = x;\n    return box;\n  };\n\n  box.whiskers = function(x) {\n    if (!arguments.length) return whiskers;\n    whiskers = x;\n    return box;\n  };\n\n  box.quartiles = function(x) {\n    if (!arguments.length) return quartiles;\n    quartiles = x;\n    return box;\n  };\n\n  return box;\n};\n\nfunction boxWhiskers(d) {\n  return [0, d.length - 1];\n}\n\nfunction boxQuartiles(d) {\n  return [\n    d3.quantile(d, .25),\n    d3.quantile(d, .5),\n    d3.quantile(d, .75)\n  ];\n}\n\n})();\ndiv = d3.select(div.node());\n/* R2D3 Source File:  morley.js */\n// !preview r2d3 data = read.csv(\"morley.csv\"), d3_version = 3, container = \"div\", dependencies = c(\"box.js\")\n\n// Based on: https://bl.ocks.org/mbostock/4061502\n\nvar margin = {top: 10, right: 50, bottom: 20, left: 50},\n    width = (width/4) - 10 - margin.left - margin.right,\n    height = height - margin.top - margin.bottom;\n\nvar min = Infinity,\n    max = -Infinity;\n\nvar chart = d3.box()\n    .whiskers(iqr(1.5))\n    .width(width)\n    .height(height);\n\nr2d3.onRender(function(csv, div, w, h, options) {\n  var data = [];\n\n  csv.forEach(function(x) {\n    var e = Math.floor(x.Expt - 1),\n        r = Math.floor(x.Run - 1),\n        s = Math.floor(x.Speed),\n        d = data[e];\n    if (!d) d = data[e] = [s];\n    else d.push(s);\n    if (s > max) max = s;\n    if (s < min) min = s;\n  });\n\n  chart.domain([min, max]);\n\n  var svg = div.selectAll(\"svg\")\n    .data(data)\n  .enter().append(\"svg\")\n    .attr(\"class\", \"box\")\n    .attr(\"width\", width + margin.left + margin.right)\n    .attr(\"height\", height + margin.bottom + margin.top)\n  .append(\"g\")\n    .attr(\"transform\", \"translate(\" + margin.left + \",\" + margin.top + \")\")\n    .call(chart);\n    \n  svg.selectAll(\".box line, .box rect, .box circle \")\n    .attr(\"fill\", theme.background)\n    .attr(\"stroke\", theme.foreground);\n\n  setInterval(function() {\n    svg.datum(randomize).call(chart.duration(1000));\n  }, 2000);\n});\n\nfunction randomize(d) {\n  if (!d.randomizer) d.randomizer = randomizer(d);\n  return d.map(d.randomizer);\n}\n\nfunction randomizer(d) {\n  var k = d3.max(d) * .02;\n  return function(d) {\n    return Math.max(min, Math.min(max, d + k * (Math.random() - .5)));\n  };\n}\n\n// Returns a function to compute the interquartile range.\nfunction iqr(k) {\n  return function(d, i) {\n    var q1 = d.quartiles[0],\n        q3 = d.quartiles[2],\n        iqr = (q3 - q1) * k,\n        i = -1,\n        j = d.length;\n    while (d[++i] < q1 - iqr);\n    while (d[--j] > q3 + iqr);\n    return [i, j];\n  };\n}\n};","style":"/* R2D3 Source File:  morley.css */\n.r2d3 .box {\n  font: 10px sans-serif;\n}\n\n.r2d3 .box line,\n.r2d3 .box rect,\n.r2d3 .box circle {\n  stroke-width: 1.5px;\n}\n\n.r2d3 .box .center {\n  stroke-dasharray: 3,3;\n}\n\n.r2d3 .box .outlier {\n  fill: none;\n  stroke: #ccc;\n}","version":3,"theme":{"default":{"background":"#FFFFFF","foreground":"#000000"},"runtime":null}},"evals":[],"jsHooks":[]}</script><h4 id="morley.js">morley.js</h4>
-<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">// !preview r2d3 data = read.csv("morley.csv"), d3_version = 3, container = "div", dependencies = c("box.js")</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">// Based on: https://bl.ocks.org/mbostock/4061502</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">var</span> margin <span class="op">=</span> <span class="op">{</span><span class="dt">top</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">50</span><span class="op">},</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">    width <span class="op">=</span> (width/<span class="dv">4</span>) <span class="op">-</span> <span class="dv">10</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">left</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">right</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">    height <span class="op">=</span> height <span class="op">-</span> <span class="va">margin</span>.<span class="at">top</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">bottom</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw">var</span> min <span class="op">=</span> <span class="kw">Infinity</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">    max <span class="op">=</span> <span class="op">-</span><span class="kw">Infinity</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="kw">var</span> chart <span class="op">=</span> <span class="va">d3</span>.<span class="at">box</span>()</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">    .<span class="at">whiskers</span>(<span class="at">iqr</span>(<span class="fl">1.5</span>))</a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">    .<span class="at">width</span>(width)</a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">    .<span class="at">height</span>(height)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="va">r2d3</span>.<span class="at">onRender</span>(<span class="kw">function</span>(csv<span class="op">,</span> div<span class="op">,</span> w<span class="op">,</span> h<span class="op">,</span> options) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18">  <span class="kw">var</span> data <span class="op">=</span> []<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20">  <span class="va">csv</span>.<span class="at">forEach</span>(<span class="kw">function</span>(x) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21">    <span class="kw">var</span> e <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">x</span>.<span class="at">Expt</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22">        r <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">x</span>.<span class="at">Run</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23">        s <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">x</span>.<span class="at">Speed</span>)<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24">        d <span class="op">=</span> data[e]<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-25" data-line-number="25">    <span class="cf">if</span> (<span class="op">!</span>d) d <span class="op">=</span> data[e] <span class="op">=</span> [s]<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-26" data-line-number="26">    <span class="cf">else</span> <span class="va">d</span>.<span class="at">push</span>(s)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-27" data-line-number="27">    <span class="cf">if</span> (s <span class="op">&gt;</span> max) max <span class="op">=</span> s<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28">    <span class="cf">if</span> (s <span class="op">&lt;</span> min) min <span class="op">=</span> s<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29">  <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-30" data-line-number="30"></a>
-<a class="sourceLine" id="cb2-31" data-line-number="31">  <span class="va">chart</span>.<span class="at">domain</span>([min<span class="op">,</span> max])<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb2-33" data-line-number="33">  <span class="kw">var</span> svg <span class="op">=</span> <span class="va">div</span>.<span class="at">selectAll</span>(<span class="st">"svg"</span>)</a>
-<a class="sourceLine" id="cb2-34" data-line-number="34">    .<span class="at">data</span>(data)</a>
-<a class="sourceLine" id="cb2-35" data-line-number="35">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"svg"</span>)</a>
-<a class="sourceLine" id="cb2-36" data-line-number="36">    .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"box"</span>)</a>
-<a class="sourceLine" id="cb2-37" data-line-number="37">    .<span class="at">attr</span>(<span class="st">"width"</span><span class="op">,</span> width <span class="op">+</span> <span class="va">margin</span>.<span class="at">left</span> <span class="op">+</span> <span class="va">margin</span>.<span class="at">right</span>)</a>
-<a class="sourceLine" id="cb2-38" data-line-number="38">    .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> height <span class="op">+</span> <span class="va">margin</span>.<span class="at">bottom</span> <span class="op">+</span> <span class="va">margin</span>.<span class="at">top</span>)</a>
-<a class="sourceLine" id="cb2-39" data-line-number="39">  .<span class="at">append</span>(<span class="st">"g"</span>)</a>
-<a class="sourceLine" id="cb2-40" data-line-number="40">    .<span class="at">attr</span>(<span class="st">"transform"</span><span class="op">,</span> <span class="st">"translate("</span> <span class="op">+</span> <span class="va">margin</span>.<span class="at">left</span> <span class="op">+</span> <span class="st">","</span> <span class="op">+</span> <span class="va">margin</span>.<span class="at">top</span> <span class="op">+</span> <span class="st">")"</span>)</a>
-<a class="sourceLine" id="cb2-41" data-line-number="41">    .<span class="at">call</span>(chart)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-42" data-line-number="42">    </a>
-<a class="sourceLine" id="cb2-43" data-line-number="43">  <span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">".box line, .box rect, .box circle "</span>)</a>
-<a class="sourceLine" id="cb2-44" data-line-number="44">    .<span class="at">attr</span>(<span class="st">"fill"</span><span class="op">,</span> <span class="va">theme</span>.<span class="at">background</span>)</a>
-<a class="sourceLine" id="cb2-45" data-line-number="45">    .<span class="at">attr</span>(<span class="st">"stroke"</span><span class="op">,</span> <span class="va">theme</span>.<span class="at">foreground</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-46" data-line-number="46"></a>
-<a class="sourceLine" id="cb2-47" data-line-number="47">  <span class="at">setInterval</span>(<span class="kw">function</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-48" data-line-number="48">    <span class="va">svg</span>.<span class="at">datum</span>(randomize).<span class="at">call</span>(<span class="va">chart</span>.<span class="at">duration</span>(<span class="dv">1000</span>))<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-49" data-line-number="49">  <span class="op">},</span> <span class="dv">2000</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-50" data-line-number="50"><span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-51" data-line-number="51"></a>
-<a class="sourceLine" id="cb2-52" data-line-number="52"><span class="kw">function</span> <span class="at">randomize</span>(d) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-53" data-line-number="53">  <span class="cf">if</span> (<span class="op">!</span><span class="va">d</span>.<span class="at">randomizer</span>) <span class="va">d</span>.<span class="at">randomizer</span> <span class="op">=</span> <span class="at">randomizer</span>(d)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-54" data-line-number="54">  <span class="cf">return</span> <span class="va">d</span>.<span class="at">map</span>(<span class="va">d</span>.<span class="at">randomizer</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-55" data-line-number="55"><span class="op">}</span></a>
-<a class="sourceLine" id="cb2-56" data-line-number="56"></a>
-<a class="sourceLine" id="cb2-57" data-line-number="57"><span class="kw">function</span> <span class="at">randomizer</span>(d) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-58" data-line-number="58">  <span class="kw">var</span> k <span class="op">=</span> <span class="va">d3</span>.<span class="at">max</span>(d) <span class="op">*</span> <span class="fl">.02</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb2-59" data-line-number="59">  <span class="cf">return</span> <span class="kw">function</span>(d) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-60" data-line-number="60">    <span class="cf">return</span> <span class="va">Math</span>.<span class="at">max</span>(min<span class="op">,</span> <span class="va">Math</span>.<span class="at">min</span>(max<span class="op">,</span> d <span class="op">+</span> k <span class="op">*</span> (<span class="va">Math</span>.<span class="at">random</span>() <span class="op">-</span> <span class="fl">.5</span>)))<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-61" data-line-number="61">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb2-62" data-line-number="62"><span class="op">}</span></a>
-<a class="sourceLine" id="cb2-63" data-line-number="63"></a>
-<a class="sourceLine" id="cb2-64" data-line-number="64"><span class="co">// Returns a function to compute the interquartile range.</span></a>
-<a class="sourceLine" id="cb2-65" data-line-number="65"><span class="kw">function</span> <span class="at">iqr</span>(k) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-66" data-line-number="66">  <span class="cf">return</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-67" data-line-number="67">    <span class="kw">var</span> q1 <span class="op">=</span> <span class="va">d</span>.<span class="at">quartiles</span>[<span class="dv">0</span>]<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-68" data-line-number="68">        q3 <span class="op">=</span> <span class="va">d</span>.<span class="at">quartiles</span>[<span class="dv">2</span>]<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-69" data-line-number="69">        iqr <span class="op">=</span> (q3 <span class="op">-</span> q1) <span class="op">*</span> k<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-70" data-line-number="70">        i <span class="op">=</span> <span class="dv">-1</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb2-71" data-line-number="71">        j <span class="op">=</span> <span class="va">d</span>.<span class="at">length</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb2-72" data-line-number="72">    <span class="cf">while</span> (d[<span class="op">++</span>i] <span class="op">&lt;</span> q1 <span class="op">-</span> iqr)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-73" data-line-number="73">    <span class="cf">while</span> (d[<span class="op">--</span>j] <span class="op">&gt;</span> q3 <span class="op">+</span> iqr)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-74" data-line-number="74">    <span class="cf">return</span> [i<span class="op">,</span> j]<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-75" data-line-number="75">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb2-76" data-line-number="76"><span class="op">}</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../../reference/r2d3.html">r2d3</a></span>(<span class="dt">data =</span> <span class="kw">read.csv</span>(<span class="st">"morley.csv"</span>), <span class="dt">d3_version =</span> <span class="dv">3</span>, <span class="dt">container =</span> <span class="st">"div"</span>, <span class="dt">dependencies =</span> <span class="kw">c</span>(<span class="st">"box.js"</span>), <span class="dt">script =</span> <span class="st">"morley.js"</span>)</code></pre></div>
+<div id="htmlwidget-a46fe0d0a8a779fed1c2" style="width:100%;height:432.632880098888px;" class="r2d3 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a46fe0d0a8a779fed1c2">{"x":{"data":{"Expt":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4],"Run":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"Speed":[850,740,900,1070,930,850,950,980,980,880,1000,980,930,650,760,810,1000,1000,960,960,960,940,960,940,880,800,850,880,900,840,830,790,810,880,880,830,800,790,760,800,880,880,880,860,720,720,620,860,970,950,880,910,850,870,840,840,850,840,840,840,890,810,810,820,800,770,760,740,750,760,910,920,890,860,880,720,840,850,850,780]},"type":"data.frame","container":"div","options":null,"script":"var d3Script = function(d3, r2d3, data, div, width, height, options, theme, console) {\nthis.d3 = d3;\n/* R2D3 Source File:  box.js */\n(function() {\n\n// Inspired by http://informationandvisualization.de/blog/box-plot\nd3.box = function() {\n  var width = 1,\n      height = 1,\n      duration = 0,\n      domain = null,\n      value = Number,\n      whiskers = boxWhiskers,\n      quartiles = boxQuartiles,\n      tickFormat = null;\n\n  // For each small multiple…\n  function box(g) {\n    g.each(function(d, i) {\n      d = d.map(value).sort(d3.ascending);\n      var g = d3.select(this),\n          n = d.length,\n          min = d[0],\n          max = d[n - 1];\n\n      // Compute quartiles. Must return exactly 3 elements.\n      var quartileData = d.quartiles = quartiles(d);\n\n      // Compute whiskers. Must return exactly 2 elements, or null.\n      var whiskerIndices = whiskers && whiskers.call(this, d, i),\n          whiskerData = whiskerIndices && whiskerIndices.map(function(i) { return d[i]; });\n\n      // Compute outliers. If no whiskers are specified, all data are \"outliers\".\n      // We compute the outliers as indices, so that we can join across transitions!\n      var outlierIndices = whiskerIndices\n          ? d3.range(0, whiskerIndices[0]).concat(d3.range(whiskerIndices[1] + 1, n))\n          : d3.range(n);\n\n      // Compute the new x-scale.\n      var x1 = d3.scale.linear()\n          .domain(domain && domain.call(this, d, i) || [min, max])\n          .range([height, 0]);\n\n      // Retrieve the old x-scale, if this is an update.\n      var x0 = this.__chart__ || d3.scale.linear()\n          .domain([0, Infinity])\n          .range(x1.range());\n\n      // Stash the new scale.\n      this.__chart__ = x1;\n\n      // Note: the box, median, and box tick elements are fixed in number,\n      // so we only have to handle enter and update. In contrast, the outliers\n      // and other elements are variable, so we need to exit them! Variable\n      // elements also fade in and out.\n\n      // Update center line: the vertical line spanning the whiskers.\n      var center = g.selectAll(\"line.center\")\n          .data(whiskerData ? [whiskerData] : []);\n\n      center.enter().insert(\"line\", \"rect\")\n          .attr(\"class\", \"center\")\n          .attr(\"x1\", width / 2)\n          .attr(\"y1\", function(d) { return x0(d[0]); })\n          .attr(\"x2\", width / 2)\n          .attr(\"y2\", function(d) { return x0(d[1]); })\n          .style(\"opacity\", 1e-6)\n        .transition()\n          .duration(duration)\n          .style(\"opacity\", 1)\n          .attr(\"y1\", function(d) { return x1(d[0]); })\n          .attr(\"y2\", function(d) { return x1(d[1]); });\n\n      center.transition()\n          .duration(duration)\n          .style(\"opacity\", 1)\n          .attr(\"y1\", function(d) { return x1(d[0]); })\n          .attr(\"y2\", function(d) { return x1(d[1]); });\n\n      center.exit().transition()\n          .duration(duration)\n          .style(\"opacity\", 1e-6)\n          .attr(\"y1\", function(d) { return x1(d[0]); })\n          .attr(\"y2\", function(d) { return x1(d[1]); })\n          .remove();\n\n      // Update innerquartile box.\n      var box = g.selectAll(\"rect.box\")\n          .data([quartileData]);\n\n      box.enter().append(\"rect\")\n          .attr(\"class\", \"box\")\n          .attr(\"x\", 0)\n          .attr(\"y\", function(d) { return x0(d[2]); })\n          .attr(\"width\", width)\n          .attr(\"height\", function(d) { return x0(d[0]) - x0(d[2]); })\n        .transition()\n          .duration(duration)\n          .attr(\"y\", function(d) { return x1(d[2]); })\n          .attr(\"height\", function(d) { return x1(d[0]) - x1(d[2]); });\n\n      box.transition()\n          .duration(duration)\n          .attr(\"y\", function(d) { return x1(d[2]); })\n          .attr(\"height\", function(d) { return x1(d[0]) - x1(d[2]); });\n\n      // Update median line.\n      var medianLine = g.selectAll(\"line.median\")\n          .data([quartileData[1]]);\n\n      medianLine.enter().append(\"line\")\n          .attr(\"class\", \"median\")\n          .attr(\"x1\", 0)\n          .attr(\"y1\", x0)\n          .attr(\"x2\", width)\n          .attr(\"y2\", x0)\n        .transition()\n          .duration(duration)\n          .attr(\"y1\", x1)\n          .attr(\"y2\", x1);\n\n      medianLine.transition()\n          .duration(duration)\n          .attr(\"y1\", x1)\n          .attr(\"y2\", x1);\n\n      // Update whiskers.\n      var whisker = g.selectAll(\"line.whisker\")\n          .data(whiskerData || []);\n\n      whisker.enter().insert(\"line\", \"circle, text\")\n          .attr(\"class\", \"whisker\")\n          .attr(\"x1\", 0)\n          .attr(\"y1\", x0)\n          .attr(\"x2\", width)\n          .attr(\"y2\", x0)\n          .style(\"opacity\", 1e-6)\n        .transition()\n          .duration(duration)\n          .attr(\"y1\", x1)\n          .attr(\"y2\", x1)\n          .style(\"opacity\", 1);\n\n      whisker.transition()\n          .duration(duration)\n          .attr(\"y1\", x1)\n          .attr(\"y2\", x1)\n          .style(\"opacity\", 1);\n\n      whisker.exit().transition()\n          .duration(duration)\n          .attr(\"y1\", x1)\n          .attr(\"y2\", x1)\n          .style(\"opacity\", 1e-6)\n          .remove();\n\n      // Update outliers.\n      var outlier = g.selectAll(\"circle.outlier\")\n          .data(outlierIndices, Number);\n\n      outlier.enter().insert(\"circle\", \"text\")\n          .attr(\"class\", \"outlier\")\n          .attr(\"r\", 5)\n          .attr(\"cx\", width / 2)\n          .attr(\"cy\", function(i) { return x0(d[i]); })\n          .style(\"opacity\", 1e-6)\n        .transition()\n          .duration(duration)\n          .attr(\"cy\", function(i) { return x1(d[i]); })\n          .style(\"opacity\", 1);\n\n      outlier.transition()\n          .duration(duration)\n          .attr(\"cy\", function(i) { return x1(d[i]); })\n          .style(\"opacity\", 1);\n\n      outlier.exit().transition()\n          .duration(duration)\n          .attr(\"cy\", function(i) { return x1(d[i]); })\n          .style(\"opacity\", 1e-6)\n          .remove();\n\n      // Compute the tick format.\n      var format = tickFormat || x1.tickFormat(8);\n\n      // Update box ticks.\n      var boxTick = g.selectAll(\"text.box\")\n          .data(quartileData);\n\n      boxTick.enter().append(\"text\")\n          .attr(\"class\", \"box\")\n          .attr(\"dy\", \".3em\")\n          .attr(\"dx\", function(d, i) { return i & 1 ? 6 : -6 })\n          .attr(\"x\", function(d, i) { return i & 1 ? width : 0 })\n          .attr(\"y\", x0)\n          .attr(\"text-anchor\", function(d, i) { return i & 1 ? \"start\" : \"end\"; })\n          .text(format)\n        .transition()\n          .duration(duration)\n          .attr(\"y\", x1);\n\n      boxTick.transition()\n          .duration(duration)\n          .text(format)\n          .attr(\"y\", x1);\n\n      // Update whisker ticks. These are handled separately from the box\n      // ticks because they may or may not exist, and we want don't want\n      // to join box ticks pre-transition with whisker ticks post-.\n      var whiskerTick = g.selectAll(\"text.whisker\")\n          .data(whiskerData || []);\n\n      whiskerTick.enter().append(\"text\")\n          .attr(\"class\", \"whisker\")\n          .attr(\"dy\", \".3em\")\n          .attr(\"dx\", 6)\n          .attr(\"x\", width)\n          .attr(\"y\", x0)\n          .text(format)\n          .style(\"opacity\", 1e-6)\n        .transition()\n          .duration(duration)\n          .attr(\"y\", x1)\n          .style(\"opacity\", 1);\n\n      whiskerTick.transition()\n          .duration(duration)\n          .text(format)\n          .attr(\"y\", x1)\n          .style(\"opacity\", 1);\n\n      whiskerTick.exit().transition()\n          .duration(duration)\n          .attr(\"y\", x1)\n          .style(\"opacity\", 1e-6)\n          .remove();\n    });\n    d3.timer.flush();\n  }\n\n  box.width = function(x) {\n    if (!arguments.length) return width;\n    width = x;\n    return box;\n  };\n\n  box.height = function(x) {\n    if (!arguments.length) return height;\n    height = x;\n    return box;\n  };\n\n  box.tickFormat = function(x) {\n    if (!arguments.length) return tickFormat;\n    tickFormat = x;\n    return box;\n  };\n\n  box.duration = function(x) {\n    if (!arguments.length) return duration;\n    duration = x;\n    return box;\n  };\n\n  box.domain = function(x) {\n    if (!arguments.length) return domain;\n    domain = x == null ? x : d3.functor(x);\n    return box;\n  };\n\n  box.value = function(x) {\n    if (!arguments.length) return value;\n    value = x;\n    return box;\n  };\n\n  box.whiskers = function(x) {\n    if (!arguments.length) return whiskers;\n    whiskers = x;\n    return box;\n  };\n\n  box.quartiles = function(x) {\n    if (!arguments.length) return quartiles;\n    quartiles = x;\n    return box;\n  };\n\n  return box;\n};\n\nfunction boxWhiskers(d) {\n  return [0, d.length - 1];\n}\n\nfunction boxQuartiles(d) {\n  return [\n    d3.quantile(d, .25),\n    d3.quantile(d, .5),\n    d3.quantile(d, .75)\n  ];\n}\n\n})();\ndiv = d3.select(div.node());\n/* R2D3 Source File:  morley.js */\n// !preview r2d3 data = read.csv(\"morley.csv\"), d3_version = 3, container = \"div\", dependencies = c(\"box.js\")\n\n// Based on: https://bl.ocks.org/mbostock/4061502\n\nvar margin = {top: 10, right: 50, bottom: 20, left: 50},\n    width = (width/4) - 10 - margin.left - margin.right,\n    height = height - margin.top - margin.bottom;\n\nvar min = Infinity,\n    max = -Infinity;\n\nvar chart = d3.box()\n    .whiskers(iqr(1.5))\n    .width(width)\n    .height(height);\n\nr2d3.onRender(function(csv, div, w, h, options) {\n  var data = [];\n\n  csv.forEach(function(x) {\n    var e = Math.floor(x.Expt - 1),\n        r = Math.floor(x.Run - 1),\n        s = Math.floor(x.Speed),\n        d = data[e];\n    if (!d) d = data[e] = [s];\n    else d.push(s);\n    if (s > max) max = s;\n    if (s < min) min = s;\n  });\n\n  chart.domain([min, max]);\n\n  var svg = div.selectAll(\"svg\")\n    .data(data)\n  .enter().append(\"svg\")\n    .attr(\"class\", \"box\")\n    .attr(\"width\", width + margin.left + margin.right)\n    .attr(\"height\", height + margin.bottom + margin.top)\n  .append(\"g\")\n    .attr(\"transform\", \"translate(\" + margin.left + \",\" + margin.top + \")\")\n    .call(chart);\n    \n  svg.selectAll(\".box line, .box rect, .box circle \")\n    .attr(\"fill\", theme.background)\n    .attr(\"stroke\", theme.foreground);\n\n  setInterval(function() {\n    svg.datum(randomize).call(chart.duration(1000));\n  }, 2000);\n});\n\nfunction randomize(d) {\n  if (!d.randomizer) d.randomizer = randomizer(d);\n  return d.map(d.randomizer);\n}\n\nfunction randomizer(d) {\n  var k = d3.max(d) * .02;\n  return function(d) {\n    return Math.max(min, Math.min(max, d + k * (Math.random() - .5)));\n  };\n}\n\n// Returns a function to compute the interquartile range.\nfunction iqr(k) {\n  return function(d, i) {\n    var q1 = d.quartiles[0],\n        q3 = d.quartiles[2],\n        iqr = (q3 - q1) * k,\n        i = -1,\n        j = d.length;\n    while (d[++i] < q1 - iqr);\n    while (d[--j] > q3 + iqr);\n    return [i, j];\n  };\n}\n};","style":"/* R2D3 Source File:  morley.css */\n.box {\n  font: 10px sans-serif;\n}\n\n.box line,\n.box rect,\n.box circle {\n  stroke-width: 1.5px;\n}\n\n.box .center {\n  stroke-dasharray: 3,3;\n}\n\n.box .outlier {\n  fill: none;\n  stroke: #ccc;\n}","version":3,"theme":{"default":{"background":"#FFFFFF","foreground":"#000000"},"runtime":null}},"evals":[],"jsHooks":[]}</script><h4 id="morley.js">morley.js</h4>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// !preview r2d3 data = read.csv("morley.csv"), d3_version = 3, container = "div", dependencies = c("box.js")</span>
+
+<span class="co">// Based on: https://bl.ocks.org/mbostock/4061502</span>
+
+<span class="kw">var</span> margin <span class="op">=</span> <span class="op">{</span><span class="dt">top</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">50</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">50</span><span class="op">},</span>
+    width <span class="op">=</span> (width/<span class="dv">4</span>) <span class="op">-</span> <span class="dv">10</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">left</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">right</span><span class="op">,</span>
+    height <span class="op">=</span> height <span class="op">-</span> <span class="va">margin</span>.<span class="at">top</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">bottom</span><span class="op">;</span>
+
+<span class="kw">var</span> min <span class="op">=</span> <span class="kw">Infinity</span><span class="op">,</span>
+    max <span class="op">=</span> <span class="op">-</span><span class="kw">Infinity</span><span class="op">;</span>
+
+<span class="kw">var</span> chart <span class="op">=</span> <span class="va">d3</span>.<span class="at">box</span>()
+    .<span class="at">whiskers</span>(<span class="at">iqr</span>(<span class="fl">1.5</span>))
+    .<span class="at">width</span>(width)
+    .<span class="at">height</span>(height)<span class="op">;</span>
+
+<span class="va">r2d3</span>.<span class="at">onRender</span>(<span class="kw">function</span>(csv<span class="op">,</span> div<span class="op">,</span> w<span class="op">,</span> h<span class="op">,</span> options) <span class="op">{</span>
+  <span class="kw">var</span> data <span class="op">=</span> []<span class="op">;</span>
+
+  <span class="va">csv</span>.<span class="at">forEach</span>(<span class="kw">function</span>(x) <span class="op">{</span>
+    <span class="kw">var</span> e <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">x</span>.<span class="at">Expt</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">,</span>
+        r <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">x</span>.<span class="at">Run</span> <span class="op">-</span> <span class="dv">1</span>)<span class="op">,</span>
+        s <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(<span class="va">x</span>.<span class="at">Speed</span>)<span class="op">,</span>
+        d <span class="op">=</span> data[e]<span class="op">;</span>
+    <span class="cf">if</span> (<span class="op">!</span>d) d <span class="op">=</span> data[e] <span class="op">=</span> [s]<span class="op">;</span>
+    <span class="cf">else</span> <span class="va">d</span>.<span class="at">push</span>(s)<span class="op">;</span>
+    <span class="cf">if</span> (s <span class="op">&gt;</span> max) max <span class="op">=</span> s<span class="op">;</span>
+    <span class="cf">if</span> (s <span class="op">&lt;</span> min) min <span class="op">=</span> s<span class="op">;</span>
+  <span class="op">}</span>)<span class="op">;</span>
+
+  <span class="va">chart</span>.<span class="at">domain</span>([min<span class="op">,</span> max])<span class="op">;</span>
+
+  <span class="kw">var</span> svg <span class="op">=</span> <span class="va">div</span>.<span class="at">selectAll</span>(<span class="st">"svg"</span>)
+    .<span class="at">data</span>(data)
+  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"svg"</span>)
+    .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"box"</span>)
+    .<span class="at">attr</span>(<span class="st">"width"</span><span class="op">,</span> width <span class="op">+</span> <span class="va">margin</span>.<span class="at">left</span> <span class="op">+</span> <span class="va">margin</span>.<span class="at">right</span>)
+    .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> height <span class="op">+</span> <span class="va">margin</span>.<span class="at">bottom</span> <span class="op">+</span> <span class="va">margin</span>.<span class="at">top</span>)
+  .<span class="at">append</span>(<span class="st">"g"</span>)
+    .<span class="at">attr</span>(<span class="st">"transform"</span><span class="op">,</span> <span class="st">"translate("</span> <span class="op">+</span> <span class="va">margin</span>.<span class="at">left</span> <span class="op">+</span> <span class="st">","</span> <span class="op">+</span> <span class="va">margin</span>.<span class="at">top</span> <span class="op">+</span> <span class="st">")"</span>)
+    .<span class="at">call</span>(chart)<span class="op">;</span>
+    
+  <span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">".box line, .box rect, .box circle "</span>)
+    .<span class="at">attr</span>(<span class="st">"fill"</span><span class="op">,</span> <span class="va">theme</span>.<span class="at">background</span>)
+    .<span class="at">attr</span>(<span class="st">"stroke"</span><span class="op">,</span> <span class="va">theme</span>.<span class="at">foreground</span>)<span class="op">;</span>
+
+  <span class="at">setInterval</span>(<span class="kw">function</span>() <span class="op">{</span>
+    <span class="va">svg</span>.<span class="at">datum</span>(randomize).<span class="at">call</span>(<span class="va">chart</span>.<span class="at">duration</span>(<span class="dv">1000</span>))<span class="op">;</span>
+  <span class="op">},</span> <span class="dv">2000</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span>
+
+<span class="kw">function</span> <span class="at">randomize</span>(d) <span class="op">{</span>
+  <span class="cf">if</span> (<span class="op">!</span><span class="va">d</span>.<span class="at">randomizer</span>) <span class="va">d</span>.<span class="at">randomizer</span> <span class="op">=</span> <span class="at">randomizer</span>(d)<span class="op">;</span>
+  <span class="cf">return</span> <span class="va">d</span>.<span class="at">map</span>(<span class="va">d</span>.<span class="at">randomizer</span>)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">randomizer</span>(d) <span class="op">{</span>
+  <span class="kw">var</span> k <span class="op">=</span> <span class="va">d3</span>.<span class="at">max</span>(d) <span class="op">*</span> .<span class="dv">02</span><span class="op">;</span>
+  <span class="cf">return</span> <span class="kw">function</span>(d) <span class="op">{</span>
+    <span class="cf">return</span> <span class="va">Math</span>.<span class="at">max</span>(min<span class="op">,</span> <span class="va">Math</span>.<span class="at">min</span>(max<span class="op">,</span> d <span class="op">+</span> k <span class="op">*</span> (<span class="va">Math</span>.<span class="at">random</span>() <span class="op">-</span> .<span class="dv">5</span>)))<span class="op">;</span>
+  <span class="op">};</span>
+<span class="op">}</span>
+
+<span class="co">// Returns a function to compute the interquartile range.</span>
+<span class="kw">function</span> <span class="at">iqr</span>(k) <span class="op">{</span>
+  <span class="cf">return</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span>
+    <span class="kw">var</span> q1 <span class="op">=</span> <span class="va">d</span>.<span class="at">quartiles</span>[<span class="dv">0</span>]<span class="op">,</span>
+        q3 <span class="op">=</span> <span class="va">d</span>.<span class="at">quartiles</span>[<span class="dv">2</span>]<span class="op">,</span>
+        iqr <span class="op">=</span> (q3 <span class="op">-</span> q1) <span class="op">*</span> k<span class="op">,</span>
+        i <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">,</span>
+        j <span class="op">=</span> <span class="va">d</span>.<span class="at">length</span><span class="op">;</span>
+    <span class="cf">while</span> (d[<span class="op">++</span>i] <span class="op">&lt;</span> q1 <span class="op">-</span> iqr)<span class="op">;</span>
+    <span class="cf">while</span> (d[<span class="op">--</span>j] <span class="op">&gt;</span> q3 <span class="op">+</span> iqr)<span class="op">;</span>
+    <span class="cf">return</span> [i<span class="op">,</span> j]<span class="op">;</span>
+  <span class="op">};</span>
+<span class="op">}</span></code></pre></div>
 <h4 id="box.js">box.js</h4>
-<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" data-line-number="1">(<span class="kw">function</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">// Inspired by http://informationandvisualization.de/blog/box-plot</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="va">d3</span>.<span class="at">box</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="kw">var</span> width <span class="op">=</span> <span class="dv">1</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">      height <span class="op">=</span> <span class="dv">1</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">      duration <span class="op">=</span> <span class="dv">0</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">      domain <span class="op">=</span> <span class="kw">null</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">      value <span class="op">=</span> Number<span class="op">,</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">      whiskers <span class="op">=</span> boxWhiskers<span class="op">,</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11">      quartiles <span class="op">=</span> boxQuartiles<span class="op">,</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12">      tickFormat <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14">  <span class="co">// For each small multiple…</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15">  <span class="kw">function</span> <span class="at">box</span>(g) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16">    <span class="va">g</span>.<span class="at">each</span>(<span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17">      d <span class="op">=</span> <span class="va">d</span>.<span class="at">map</span>(value).<span class="at">sort</span>(<span class="va">d3</span>.<span class="at">ascending</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18">      <span class="kw">var</span> g <span class="op">=</span> <span class="va">d3</span>.<span class="at">select</span>(<span class="kw">this</span>)<span class="op">,</span></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19">          n <span class="op">=</span> <span class="va">d</span>.<span class="at">length</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb3-20" data-line-number="20">          min <span class="op">=</span> d[<span class="dv">0</span>]<span class="op">,</span></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21">          max <span class="op">=</span> d[n <span class="op">-</span> <span class="dv">1</span>]<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23">      <span class="co">// Compute quartiles. Must return exactly 3 elements.</span></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24">      <span class="kw">var</span> quartileData <span class="op">=</span> <span class="va">d</span>.<span class="at">quartiles</span> <span class="op">=</span> <span class="at">quartiles</span>(d)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb3-26" data-line-number="26">      <span class="co">// Compute whiskers. Must return exactly 2 elements, or null.</span></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27">      <span class="kw">var</span> whiskerIndices <span class="op">=</span> whiskers <span class="op">&amp;&amp;</span> <span class="va">whiskers</span>.<span class="at">call</span>(<span class="kw">this</span><span class="op">,</span> d<span class="op">,</span> i)<span class="op">,</span></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28">          whiskerData <span class="op">=</span> whiskerIndices <span class="op">&amp;&amp;</span> <span class="va">whiskerIndices</span>.<span class="at">map</span>(<span class="kw">function</span>(i) <span class="op">{</span> <span class="cf">return</span> d[i]<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-29" data-line-number="29"></a>
-<a class="sourceLine" id="cb3-30" data-line-number="30">      <span class="co">// Compute outliers. If no whiskers are specified, all data are "outliers".</span></a>
-<a class="sourceLine" id="cb3-31" data-line-number="31">      <span class="co">// We compute the outliers as indices, so that we can join across transitions!</span></a>
-<a class="sourceLine" id="cb3-32" data-line-number="32">      <span class="kw">var</span> outlierIndices <span class="op">=</span> whiskerIndices</a>
-<a class="sourceLine" id="cb3-33" data-line-number="33">          <span class="op">?</span> <span class="va">d3</span>.<span class="at">range</span>(<span class="dv">0</span><span class="op">,</span> whiskerIndices[<span class="dv">0</span>]).<span class="at">concat</span>(<span class="va">d3</span>.<span class="at">range</span>(whiskerIndices[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> n))</a>
-<a class="sourceLine" id="cb3-34" data-line-number="34">          : <span class="va">d3</span>.<span class="at">range</span>(n)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-35" data-line-number="35"></a>
-<a class="sourceLine" id="cb3-36" data-line-number="36">      <span class="co">// Compute the new x-scale.</span></a>
-<a class="sourceLine" id="cb3-37" data-line-number="37">      <span class="kw">var</span> x1 <span class="op">=</span> <span class="va">d3</span>.<span class="va">scale</span>.<span class="at">linear</span>()</a>
-<a class="sourceLine" id="cb3-38" data-line-number="38">          .<span class="at">domain</span>(domain <span class="op">&amp;&amp;</span> <span class="va">domain</span>.<span class="at">call</span>(<span class="kw">this</span><span class="op">,</span> d<span class="op">,</span> i) <span class="op">||</span> [min<span class="op">,</span> max])</a>
-<a class="sourceLine" id="cb3-39" data-line-number="39">          .<span class="at">range</span>([height<span class="op">,</span> <span class="dv">0</span>])<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-40" data-line-number="40"></a>
-<a class="sourceLine" id="cb3-41" data-line-number="41">      <span class="co">// Retrieve the old x-scale, if this is an update.</span></a>
-<a class="sourceLine" id="cb3-42" data-line-number="42">      <span class="kw">var</span> x0 <span class="op">=</span> <span class="kw">this</span>.<span class="at">__chart__</span> <span class="op">||</span> <span class="va">d3</span>.<span class="va">scale</span>.<span class="at">linear</span>()</a>
-<a class="sourceLine" id="cb3-43" data-line-number="43">          .<span class="at">domain</span>([<span class="dv">0</span><span class="op">,</span> <span class="kw">Infinity</span>])</a>
-<a class="sourceLine" id="cb3-44" data-line-number="44">          .<span class="at">range</span>(<span class="va">x1</span>.<span class="at">range</span>())<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-45" data-line-number="45"></a>
-<a class="sourceLine" id="cb3-46" data-line-number="46">      <span class="co">// Stash the new scale.</span></a>
-<a class="sourceLine" id="cb3-47" data-line-number="47">      <span class="kw">this</span>.<span class="at">__chart__</span> <span class="op">=</span> x1<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-48" data-line-number="48"></a>
-<a class="sourceLine" id="cb3-49" data-line-number="49">      <span class="co">// Note: the box, median, and box tick elements are fixed in number,</span></a>
-<a class="sourceLine" id="cb3-50" data-line-number="50">      <span class="co">// so we only have to handle enter and update. In contrast, the outliers</span></a>
-<a class="sourceLine" id="cb3-51" data-line-number="51">      <span class="co">// and other elements are variable, so we need to exit them! Variable</span></a>
-<a class="sourceLine" id="cb3-52" data-line-number="52">      <span class="co">// elements also fade in and out.</span></a>
-<a class="sourceLine" id="cb3-53" data-line-number="53"></a>
-<a class="sourceLine" id="cb3-54" data-line-number="54">      <span class="co">// Update center line: the vertical line spanning the whiskers.</span></a>
-<a class="sourceLine" id="cb3-55" data-line-number="55">      <span class="kw">var</span> center <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"line.center"</span>)</a>
-<a class="sourceLine" id="cb3-56" data-line-number="56">          .<span class="at">data</span>(whiskerData <span class="op">?</span> [whiskerData] : [])<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-57" data-line-number="57"></a>
-<a class="sourceLine" id="cb3-58" data-line-number="58">      <span class="va">center</span>.<span class="at">enter</span>().<span class="at">insert</span>(<span class="st">"line"</span><span class="op">,</span> <span class="st">"rect"</span>)</a>
-<a class="sourceLine" id="cb3-59" data-line-number="59">          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"center"</span>)</a>
-<a class="sourceLine" id="cb3-60" data-line-number="60">          .<span class="at">attr</span>(<span class="st">"x1"</span><span class="op">,</span> width / <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb3-61" data-line-number="61">          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x0</span>(d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-62" data-line-number="62">          .<span class="at">attr</span>(<span class="st">"x2"</span><span class="op">,</span> width / <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb3-63" data-line-number="63">          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x0</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-64" data-line-number="64">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)</a>
-<a class="sourceLine" id="cb3-65" data-line-number="65">        .<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-66" data-line-number="66">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-67" data-line-number="67">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb3-68" data-line-number="68">          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-69" data-line-number="69">          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-70" data-line-number="70"></a>
-<a class="sourceLine" id="cb3-71" data-line-number="71">      <span class="va">center</span>.<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-72" data-line-number="72">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-73" data-line-number="73">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb3-74" data-line-number="74">          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-75" data-line-number="75">          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-76" data-line-number="76"></a>
-<a class="sourceLine" id="cb3-77" data-line-number="77">      <span class="va">center</span>.<span class="at">exit</span>().<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-78" data-line-number="78">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-79" data-line-number="79">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)</a>
-<a class="sourceLine" id="cb3-80" data-line-number="80">          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-81" data-line-number="81">          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-82" data-line-number="82">          .<span class="at">remove</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-83" data-line-number="83"></a>
-<a class="sourceLine" id="cb3-84" data-line-number="84">      <span class="co">// Update innerquartile box.</span></a>
-<a class="sourceLine" id="cb3-85" data-line-number="85">      <span class="kw">var</span> box <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"rect.box"</span>)</a>
-<a class="sourceLine" id="cb3-86" data-line-number="86">          .<span class="at">data</span>([quartileData])<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-87" data-line-number="87"></a>
-<a class="sourceLine" id="cb3-88" data-line-number="88">      <span class="va">box</span>.<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"rect"</span>)</a>
-<a class="sourceLine" id="cb3-89" data-line-number="89">          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"box"</span>)</a>
-<a class="sourceLine" id="cb3-90" data-line-number="90">          .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb3-91" data-line-number="91">          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x0</span>(d[<span class="dv">2</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-92" data-line-number="92">          .<span class="at">attr</span>(<span class="st">"width"</span><span class="op">,</span> width)</a>
-<a class="sourceLine" id="cb3-93" data-line-number="93">          .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x0</span>(d[<span class="dv">0</span>]) <span class="op">-</span> <span class="at">x0</span>(d[<span class="dv">2</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-94" data-line-number="94">        .<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-95" data-line-number="95">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-96" data-line-number="96">          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">2</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-97" data-line-number="97">          .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">0</span>]) <span class="op">-</span> <span class="at">x1</span>(d[<span class="dv">2</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-98" data-line-number="98"></a>
-<a class="sourceLine" id="cb3-99" data-line-number="99">      <span class="va">box</span>.<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-100" data-line-number="100">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-101" data-line-number="101">          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">2</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-102" data-line-number="102">          .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">0</span>]) <span class="op">-</span> <span class="at">x1</span>(d[<span class="dv">2</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-103" data-line-number="103"></a>
-<a class="sourceLine" id="cb3-104" data-line-number="104">      <span class="co">// Update median line.</span></a>
-<a class="sourceLine" id="cb3-105" data-line-number="105">      <span class="kw">var</span> medianLine <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"line.median"</span>)</a>
-<a class="sourceLine" id="cb3-106" data-line-number="106">          .<span class="at">data</span>([quartileData[<span class="dv">1</span>]])<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-107" data-line-number="107"></a>
-<a class="sourceLine" id="cb3-108" data-line-number="108">      <span class="va">medianLine</span>.<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"line"</span>)</a>
-<a class="sourceLine" id="cb3-109" data-line-number="109">          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"median"</span>)</a>
-<a class="sourceLine" id="cb3-110" data-line-number="110">          .<span class="at">attr</span>(<span class="st">"x1"</span><span class="op">,</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb3-111" data-line-number="111">          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x0)</a>
-<a class="sourceLine" id="cb3-112" data-line-number="112">          .<span class="at">attr</span>(<span class="st">"x2"</span><span class="op">,</span> width)</a>
-<a class="sourceLine" id="cb3-113" data-line-number="113">          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x0)</a>
-<a class="sourceLine" id="cb3-114" data-line-number="114">        .<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-115" data-line-number="115">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-116" data-line-number="116">          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x1)</a>
-<a class="sourceLine" id="cb3-117" data-line-number="117">          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x1)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-118" data-line-number="118"></a>
-<a class="sourceLine" id="cb3-119" data-line-number="119">      <span class="va">medianLine</span>.<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-120" data-line-number="120">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-121" data-line-number="121">          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x1)</a>
-<a class="sourceLine" id="cb3-122" data-line-number="122">          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x1)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-123" data-line-number="123"></a>
-<a class="sourceLine" id="cb3-124" data-line-number="124">      <span class="co">// Update whiskers.</span></a>
-<a class="sourceLine" id="cb3-125" data-line-number="125">      <span class="kw">var</span> whisker <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"line.whisker"</span>)</a>
-<a class="sourceLine" id="cb3-126" data-line-number="126">          .<span class="at">data</span>(whiskerData <span class="op">||</span> [])<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-127" data-line-number="127"></a>
-<a class="sourceLine" id="cb3-128" data-line-number="128">      <span class="va">whisker</span>.<span class="at">enter</span>().<span class="at">insert</span>(<span class="st">"line"</span><span class="op">,</span> <span class="st">"circle, text"</span>)</a>
-<a class="sourceLine" id="cb3-129" data-line-number="129">          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"whisker"</span>)</a>
-<a class="sourceLine" id="cb3-130" data-line-number="130">          .<span class="at">attr</span>(<span class="st">"x1"</span><span class="op">,</span> <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb3-131" data-line-number="131">          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x0)</a>
-<a class="sourceLine" id="cb3-132" data-line-number="132">          .<span class="at">attr</span>(<span class="st">"x2"</span><span class="op">,</span> width)</a>
-<a class="sourceLine" id="cb3-133" data-line-number="133">          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x0)</a>
-<a class="sourceLine" id="cb3-134" data-line-number="134">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)</a>
-<a class="sourceLine" id="cb3-135" data-line-number="135">        .<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-136" data-line-number="136">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-137" data-line-number="137">          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x1)</a>
-<a class="sourceLine" id="cb3-138" data-line-number="138">          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x1)</a>
-<a class="sourceLine" id="cb3-139" data-line-number="139">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-140" data-line-number="140"></a>
-<a class="sourceLine" id="cb3-141" data-line-number="141">      <span class="va">whisker</span>.<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-142" data-line-number="142">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-143" data-line-number="143">          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x1)</a>
-<a class="sourceLine" id="cb3-144" data-line-number="144">          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x1)</a>
-<a class="sourceLine" id="cb3-145" data-line-number="145">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-146" data-line-number="146"></a>
-<a class="sourceLine" id="cb3-147" data-line-number="147">      <span class="va">whisker</span>.<span class="at">exit</span>().<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-148" data-line-number="148">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-149" data-line-number="149">          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x1)</a>
-<a class="sourceLine" id="cb3-150" data-line-number="150">          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x1)</a>
-<a class="sourceLine" id="cb3-151" data-line-number="151">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)</a>
-<a class="sourceLine" id="cb3-152" data-line-number="152">          .<span class="at">remove</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-153" data-line-number="153"></a>
-<a class="sourceLine" id="cb3-154" data-line-number="154">      <span class="co">// Update outliers.</span></a>
-<a class="sourceLine" id="cb3-155" data-line-number="155">      <span class="kw">var</span> outlier <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"circle.outlier"</span>)</a>
-<a class="sourceLine" id="cb3-156" data-line-number="156">          .<span class="at">data</span>(outlierIndices<span class="op">,</span> Number)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-157" data-line-number="157"></a>
-<a class="sourceLine" id="cb3-158" data-line-number="158">      <span class="va">outlier</span>.<span class="at">enter</span>().<span class="at">insert</span>(<span class="st">"circle"</span><span class="op">,</span> <span class="st">"text"</span>)</a>
-<a class="sourceLine" id="cb3-159" data-line-number="159">          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"outlier"</span>)</a>
-<a class="sourceLine" id="cb3-160" data-line-number="160">          .<span class="at">attr</span>(<span class="st">"r"</span><span class="op">,</span> <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb3-161" data-line-number="161">          .<span class="at">attr</span>(<span class="st">"cx"</span><span class="op">,</span> width / <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb3-162" data-line-number="162">          .<span class="at">attr</span>(<span class="st">"cy"</span><span class="op">,</span> <span class="kw">function</span>(i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x0</span>(d[i])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-163" data-line-number="163">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)</a>
-<a class="sourceLine" id="cb3-164" data-line-number="164">        .<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-165" data-line-number="165">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-166" data-line-number="166">          .<span class="at">attr</span>(<span class="st">"cy"</span><span class="op">,</span> <span class="kw">function</span>(i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[i])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-167" data-line-number="167">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-168" data-line-number="168"></a>
-<a class="sourceLine" id="cb3-169" data-line-number="169">      <span class="va">outlier</span>.<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-170" data-line-number="170">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-171" data-line-number="171">          .<span class="at">attr</span>(<span class="st">"cy"</span><span class="op">,</span> <span class="kw">function</span>(i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[i])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-172" data-line-number="172">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-173" data-line-number="173"></a>
-<a class="sourceLine" id="cb3-174" data-line-number="174">      <span class="va">outlier</span>.<span class="at">exit</span>().<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-175" data-line-number="175">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-176" data-line-number="176">          .<span class="at">attr</span>(<span class="st">"cy"</span><span class="op">,</span> <span class="kw">function</span>(i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[i])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-177" data-line-number="177">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)</a>
-<a class="sourceLine" id="cb3-178" data-line-number="178">          .<span class="at">remove</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-179" data-line-number="179"></a>
-<a class="sourceLine" id="cb3-180" data-line-number="180">      <span class="co">// Compute the tick format.</span></a>
-<a class="sourceLine" id="cb3-181" data-line-number="181">      <span class="kw">var</span> format <span class="op">=</span> tickFormat <span class="op">||</span> <span class="va">x1</span>.<span class="at">tickFormat</span>(<span class="dv">8</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-182" data-line-number="182"></a>
-<a class="sourceLine" id="cb3-183" data-line-number="183">      <span class="co">// Update box ticks.</span></a>
-<a class="sourceLine" id="cb3-184" data-line-number="184">      <span class="kw">var</span> boxTick <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"text.box"</span>)</a>
-<a class="sourceLine" id="cb3-185" data-line-number="185">          .<span class="at">data</span>(quartileData)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-186" data-line-number="186"></a>
-<a class="sourceLine" id="cb3-187" data-line-number="187">      <span class="va">boxTick</span>.<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"text"</span>)</a>
-<a class="sourceLine" id="cb3-188" data-line-number="188">          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"box"</span>)</a>
-<a class="sourceLine" id="cb3-189" data-line-number="189">          .<span class="at">attr</span>(<span class="st">"dy"</span><span class="op">,</span> <span class="st">".3em"</span>)</a>
-<a class="sourceLine" id="cb3-190" data-line-number="190">          .<span class="at">attr</span>(<span class="st">"dx"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">&amp;</span> <span class="dv">1</span> <span class="op">?</span> <span class="dv">6</span> : <span class="dv">-6</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-191" data-line-number="191">          .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">&amp;</span> <span class="dv">1</span> <span class="op">?</span> width : <span class="dv">0</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-192" data-line-number="192">          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x0)</a>
-<a class="sourceLine" id="cb3-193" data-line-number="193">          .<span class="at">attr</span>(<span class="st">"text-anchor"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">&amp;</span> <span class="dv">1</span> <span class="op">?</span> <span class="st">"start"</span> : <span class="st">"end"</span><span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb3-194" data-line-number="194">          .<span class="at">text</span>(format)</a>
-<a class="sourceLine" id="cb3-195" data-line-number="195">        .<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-196" data-line-number="196">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-197" data-line-number="197">          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x1)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-198" data-line-number="198"></a>
-<a class="sourceLine" id="cb3-199" data-line-number="199">      <span class="va">boxTick</span>.<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-200" data-line-number="200">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-201" data-line-number="201">          .<span class="at">text</span>(format)</a>
-<a class="sourceLine" id="cb3-202" data-line-number="202">          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x1)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-203" data-line-number="203"></a>
-<a class="sourceLine" id="cb3-204" data-line-number="204">      <span class="co">// Update whisker ticks. These are handled separately from the box</span></a>
-<a class="sourceLine" id="cb3-205" data-line-number="205">      <span class="co">// ticks because they may or may not exist, and we want don't want</span></a>
-<a class="sourceLine" id="cb3-206" data-line-number="206">      <span class="co">// to join box ticks pre-transition with whisker ticks post-.</span></a>
-<a class="sourceLine" id="cb3-207" data-line-number="207">      <span class="kw">var</span> whiskerTick <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"text.whisker"</span>)</a>
-<a class="sourceLine" id="cb3-208" data-line-number="208">          .<span class="at">data</span>(whiskerData <span class="op">||</span> [])<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-209" data-line-number="209"></a>
-<a class="sourceLine" id="cb3-210" data-line-number="210">      <span class="va">whiskerTick</span>.<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"text"</span>)</a>
-<a class="sourceLine" id="cb3-211" data-line-number="211">          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"whisker"</span>)</a>
-<a class="sourceLine" id="cb3-212" data-line-number="212">          .<span class="at">attr</span>(<span class="st">"dy"</span><span class="op">,</span> <span class="st">".3em"</span>)</a>
-<a class="sourceLine" id="cb3-213" data-line-number="213">          .<span class="at">attr</span>(<span class="st">"dx"</span><span class="op">,</span> <span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb3-214" data-line-number="214">          .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> width)</a>
-<a class="sourceLine" id="cb3-215" data-line-number="215">          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x0)</a>
-<a class="sourceLine" id="cb3-216" data-line-number="216">          .<span class="at">text</span>(format)</a>
-<a class="sourceLine" id="cb3-217" data-line-number="217">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)</a>
-<a class="sourceLine" id="cb3-218" data-line-number="218">        .<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-219" data-line-number="219">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-220" data-line-number="220">          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x1)</a>
-<a class="sourceLine" id="cb3-221" data-line-number="221">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-222" data-line-number="222"></a>
-<a class="sourceLine" id="cb3-223" data-line-number="223">      <span class="va">whiskerTick</span>.<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-224" data-line-number="224">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-225" data-line-number="225">          .<span class="at">text</span>(format)</a>
-<a class="sourceLine" id="cb3-226" data-line-number="226">          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x1)</a>
-<a class="sourceLine" id="cb3-227" data-line-number="227">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-228" data-line-number="228"></a>
-<a class="sourceLine" id="cb3-229" data-line-number="229">      <span class="va">whiskerTick</span>.<span class="at">exit</span>().<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb3-230" data-line-number="230">          .<span class="at">duration</span>(duration)</a>
-<a class="sourceLine" id="cb3-231" data-line-number="231">          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x1)</a>
-<a class="sourceLine" id="cb3-232" data-line-number="232">          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)</a>
-<a class="sourceLine" id="cb3-233" data-line-number="233">          .<span class="at">remove</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-234" data-line-number="234">    <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-235" data-line-number="235">    <span class="va">d3</span>.<span class="va">timer</span>.<span class="at">flush</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-236" data-line-number="236">  <span class="op">}</span></a>
-<a class="sourceLine" id="cb3-237" data-line-number="237"></a>
-<a class="sourceLine" id="cb3-238" data-line-number="238">  <span class="va">box</span>.<span class="at">width</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-239" data-line-number="239">    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> width<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-240" data-line-number="240">    width <span class="op">=</span> x<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-241" data-line-number="241">    <span class="cf">return</span> box<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-242" data-line-number="242">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb3-243" data-line-number="243"></a>
-<a class="sourceLine" id="cb3-244" data-line-number="244">  <span class="va">box</span>.<span class="at">height</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-245" data-line-number="245">    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> height<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-246" data-line-number="246">    height <span class="op">=</span> x<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-247" data-line-number="247">    <span class="cf">return</span> box<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-248" data-line-number="248">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb3-249" data-line-number="249"></a>
-<a class="sourceLine" id="cb3-250" data-line-number="250">  <span class="va">box</span>.<span class="at">tickFormat</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-251" data-line-number="251">    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> tickFormat<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-252" data-line-number="252">    tickFormat <span class="op">=</span> x<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-253" data-line-number="253">    <span class="cf">return</span> box<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-254" data-line-number="254">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb3-255" data-line-number="255"></a>
-<a class="sourceLine" id="cb3-256" data-line-number="256">  <span class="va">box</span>.<span class="at">duration</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-257" data-line-number="257">    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> duration<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-258" data-line-number="258">    duration <span class="op">=</span> x<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-259" data-line-number="259">    <span class="cf">return</span> box<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-260" data-line-number="260">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb3-261" data-line-number="261"></a>
-<a class="sourceLine" id="cb3-262" data-line-number="262">  <span class="va">box</span>.<span class="at">domain</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-263" data-line-number="263">    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> domain<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-264" data-line-number="264">    domain <span class="op">=</span> x <span class="op">==</span> <span class="kw">null</span> <span class="op">?</span> x : <span class="va">d3</span>.<span class="at">functor</span>(x)<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-265" data-line-number="265">    <span class="cf">return</span> box<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-266" data-line-number="266">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb3-267" data-line-number="267"></a>
-<a class="sourceLine" id="cb3-268" data-line-number="268">  <span class="va">box</span>.<span class="at">value</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-269" data-line-number="269">    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> value<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-270" data-line-number="270">    value <span class="op">=</span> x<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-271" data-line-number="271">    <span class="cf">return</span> box<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-272" data-line-number="272">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb3-273" data-line-number="273"></a>
-<a class="sourceLine" id="cb3-274" data-line-number="274">  <span class="va">box</span>.<span class="at">whiskers</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-275" data-line-number="275">    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> whiskers<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-276" data-line-number="276">    whiskers <span class="op">=</span> x<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-277" data-line-number="277">    <span class="cf">return</span> box<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-278" data-line-number="278">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb3-279" data-line-number="279"></a>
-<a class="sourceLine" id="cb3-280" data-line-number="280">  <span class="va">box</span>.<span class="at">quartiles</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-281" data-line-number="281">    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> quartiles<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-282" data-line-number="282">    quartiles <span class="op">=</span> x<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-283" data-line-number="283">    <span class="cf">return</span> box<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-284" data-line-number="284">  <span class="op">};</span></a>
-<a class="sourceLine" id="cb3-285" data-line-number="285"></a>
-<a class="sourceLine" id="cb3-286" data-line-number="286">  <span class="cf">return</span> box<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-287" data-line-number="287"><span class="op">};</span></a>
-<a class="sourceLine" id="cb3-288" data-line-number="288"></a>
-<a class="sourceLine" id="cb3-289" data-line-number="289"><span class="kw">function</span> <span class="at">boxWhiskers</span>(d) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-290" data-line-number="290">  <span class="cf">return</span> [<span class="dv">0</span><span class="op">,</span> <span class="va">d</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-291" data-line-number="291"><span class="op">}</span></a>
-<a class="sourceLine" id="cb3-292" data-line-number="292"></a>
-<a class="sourceLine" id="cb3-293" data-line-number="293"><span class="kw">function</span> <span class="at">boxQuartiles</span>(d) <span class="op">{</span></a>
-<a class="sourceLine" id="cb3-294" data-line-number="294">  <span class="cf">return</span> [</a>
-<a class="sourceLine" id="cb3-295" data-line-number="295">    <span class="va">d3</span>.<span class="at">quantile</span>(d<span class="op">,</span> <span class="fl">.25</span>)<span class="op">,</span></a>
-<a class="sourceLine" id="cb3-296" data-line-number="296">    <span class="va">d3</span>.<span class="at">quantile</span>(d<span class="op">,</span> <span class="fl">.5</span>)<span class="op">,</span></a>
-<a class="sourceLine" id="cb3-297" data-line-number="297">    <span class="va">d3</span>.<span class="at">quantile</span>(d<span class="op">,</span> <span class="fl">.75</span>)</a>
-<a class="sourceLine" id="cb3-298" data-line-number="298">  ]<span class="op">;</span></a>
-<a class="sourceLine" id="cb3-299" data-line-number="299"><span class="op">}</span></a>
-<a class="sourceLine" id="cb3-300" data-line-number="300"></a>
-<a class="sourceLine" id="cb3-301" data-line-number="301"><span class="op">}</span>)()<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">(<span class="kw">function</span>() <span class="op">{</span>
+
+<span class="co">// Inspired by http://informationandvisualization.de/blog/box-plot</span>
+<span class="va">d3</span>.<span class="at">box</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
+  <span class="kw">var</span> width <span class="op">=</span> <span class="dv">1</span><span class="op">,</span>
+      height <span class="op">=</span> <span class="dv">1</span><span class="op">,</span>
+      duration <span class="op">=</span> <span class="dv">0</span><span class="op">,</span>
+      domain <span class="op">=</span> <span class="kw">null</span><span class="op">,</span>
+      value <span class="op">=</span> Number<span class="op">,</span>
+      whiskers <span class="op">=</span> boxWhiskers<span class="op">,</span>
+      quartiles <span class="op">=</span> boxQuartiles<span class="op">,</span>
+      tickFormat <span class="op">=</span> <span class="kw">null</span><span class="op">;</span>
+
+  <span class="co">// For each small multiple…</span>
+  <span class="kw">function</span> <span class="at">box</span>(g) <span class="op">{</span>
+    <span class="va">g</span>.<span class="at">each</span>(<span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span>
+      d <span class="op">=</span> <span class="va">d</span>.<span class="at">map</span>(value).<span class="at">sort</span>(<span class="va">d3</span>.<span class="at">ascending</span>)<span class="op">;</span>
+      <span class="kw">var</span> g <span class="op">=</span> <span class="va">d3</span>.<span class="at">select</span>(<span class="kw">this</span>)<span class="op">,</span>
+          n <span class="op">=</span> <span class="va">d</span>.<span class="at">length</span><span class="op">,</span>
+          min <span class="op">=</span> d[<span class="dv">0</span>]<span class="op">,</span>
+          max <span class="op">=</span> d[n <span class="op">-</span> <span class="dv">1</span>]<span class="op">;</span>
+
+      <span class="co">// Compute quartiles. Must return exactly 3 elements.</span>
+      <span class="kw">var</span> quartileData <span class="op">=</span> <span class="va">d</span>.<span class="at">quartiles</span> <span class="op">=</span> <span class="at">quartiles</span>(d)<span class="op">;</span>
+
+      <span class="co">// Compute whiskers. Must return exactly 2 elements, or null.</span>
+      <span class="kw">var</span> whiskerIndices <span class="op">=</span> whiskers <span class="op">&amp;&amp;</span> <span class="va">whiskers</span>.<span class="at">call</span>(<span class="kw">this</span><span class="op">,</span> d<span class="op">,</span> i)<span class="op">,</span>
+          whiskerData <span class="op">=</span> whiskerIndices <span class="op">&amp;&amp;</span> <span class="va">whiskerIndices</span>.<span class="at">map</span>(<span class="kw">function</span>(i) <span class="op">{</span> <span class="cf">return</span> d[i]<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+
+      <span class="co">// Compute outliers. If no whiskers are specified, all data are "outliers".</span>
+      <span class="co">// We compute the outliers as indices, so that we can join across transitions!</span>
+      <span class="kw">var</span> outlierIndices <span class="op">=</span> whiskerIndices
+          <span class="op">?</span> <span class="va">d3</span>.<span class="at">range</span>(<span class="dv">0</span><span class="op">,</span> whiskerIndices[<span class="dv">0</span>]).<span class="at">concat</span>(<span class="va">d3</span>.<span class="at">range</span>(whiskerIndices[<span class="dv">1</span>] <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> n))
+          : <span class="va">d3</span>.<span class="at">range</span>(n)<span class="op">;</span>
+
+      <span class="co">// Compute the new x-scale.</span>
+      <span class="kw">var</span> x1 <span class="op">=</span> <span class="va">d3</span>.<span class="va">scale</span>.<span class="at">linear</span>()
+          .<span class="at">domain</span>(domain <span class="op">&amp;&amp;</span> <span class="va">domain</span>.<span class="at">call</span>(<span class="kw">this</span><span class="op">,</span> d<span class="op">,</span> i) <span class="op">||</span> [min<span class="op">,</span> max])
+          .<span class="at">range</span>([height<span class="op">,</span> <span class="dv">0</span>])<span class="op">;</span>
+
+      <span class="co">// Retrieve the old x-scale, if this is an update.</span>
+      <span class="kw">var</span> x0 <span class="op">=</span> <span class="kw">this</span>.<span class="at">__chart__</span> <span class="op">||</span> <span class="va">d3</span>.<span class="va">scale</span>.<span class="at">linear</span>()
+          .<span class="at">domain</span>([<span class="dv">0</span><span class="op">,</span> <span class="kw">Infinity</span>])
+          .<span class="at">range</span>(<span class="va">x1</span>.<span class="at">range</span>())<span class="op">;</span>
+
+      <span class="co">// Stash the new scale.</span>
+      <span class="kw">this</span>.<span class="at">__chart__</span> <span class="op">=</span> x1<span class="op">;</span>
+
+      <span class="co">// Note: the box, median, and box tick elements are fixed in number,</span>
+      <span class="co">// so we only have to handle enter and update. In contrast, the outliers</span>
+      <span class="co">// and other elements are variable, so we need to exit them! Variable</span>
+      <span class="co">// elements also fade in and out.</span>
+
+      <span class="co">// Update center line: the vertical line spanning the whiskers.</span>
+      <span class="kw">var</span> center <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"line.center"</span>)
+          .<span class="at">data</span>(whiskerData <span class="op">?</span> [whiskerData] : [])<span class="op">;</span>
+
+      <span class="va">center</span>.<span class="at">enter</span>().<span class="at">insert</span>(<span class="st">"line"</span><span class="op">,</span> <span class="st">"rect"</span>)
+          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"center"</span>)
+          .<span class="at">attr</span>(<span class="st">"x1"</span><span class="op">,</span> width / <span class="dv">2</span>)
+          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x0</span>(d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">attr</span>(<span class="st">"x2"</span><span class="op">,</span> width / <span class="dv">2</span>)
+          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x0</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)
+        .<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)
+          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+
+      <span class="va">center</span>.<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)
+          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+
+      <span class="va">center</span>.<span class="at">exit</span>().<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)
+          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">remove</span>()<span class="op">;</span>
+
+      <span class="co">// Update innerquartile box.</span>
+      <span class="kw">var</span> box <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"rect.box"</span>)
+          .<span class="at">data</span>([quartileData])<span class="op">;</span>
+
+      <span class="va">box</span>.<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"rect"</span>)
+          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"box"</span>)
+          .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> <span class="dv">0</span>)
+          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x0</span>(d[<span class="dv">2</span>])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">attr</span>(<span class="st">"width"</span><span class="op">,</span> width)
+          .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x0</span>(d[<span class="dv">0</span>]) <span class="op">-</span> <span class="at">x0</span>(d[<span class="dv">2</span>])<span class="op">;</span> <span class="op">}</span>)
+        .<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">2</span>])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">0</span>]) <span class="op">-</span> <span class="at">x1</span>(d[<span class="dv">2</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+
+      <span class="va">box</span>.<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">2</span>])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[<span class="dv">0</span>]) <span class="op">-</span> <span class="at">x1</span>(d[<span class="dv">2</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+
+      <span class="co">// Update median line.</span>
+      <span class="kw">var</span> medianLine <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"line.median"</span>)
+          .<span class="at">data</span>([quartileData[<span class="dv">1</span>]])<span class="op">;</span>
+
+      <span class="va">medianLine</span>.<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"line"</span>)
+          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"median"</span>)
+          .<span class="at">attr</span>(<span class="st">"x1"</span><span class="op">,</span> <span class="dv">0</span>)
+          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x0)
+          .<span class="at">attr</span>(<span class="st">"x2"</span><span class="op">,</span> width)
+          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x0)
+        .<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x1)
+          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x1)<span class="op">;</span>
+
+      <span class="va">medianLine</span>.<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x1)
+          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x1)<span class="op">;</span>
+
+      <span class="co">// Update whiskers.</span>
+      <span class="kw">var</span> whisker <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"line.whisker"</span>)
+          .<span class="at">data</span>(whiskerData <span class="op">||</span> [])<span class="op">;</span>
+
+      <span class="va">whisker</span>.<span class="at">enter</span>().<span class="at">insert</span>(<span class="st">"line"</span><span class="op">,</span> <span class="st">"circle, text"</span>)
+          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"whisker"</span>)
+          .<span class="at">attr</span>(<span class="st">"x1"</span><span class="op">,</span> <span class="dv">0</span>)
+          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x0)
+          .<span class="at">attr</span>(<span class="st">"x2"</span><span class="op">,</span> width)
+          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x0)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)
+        .<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x1)
+          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x1)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span>
+
+      <span class="va">whisker</span>.<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x1)
+          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x1)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span>
+
+      <span class="va">whisker</span>.<span class="at">exit</span>().<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"y1"</span><span class="op">,</span> x1)
+          .<span class="at">attr</span>(<span class="st">"y2"</span><span class="op">,</span> x1)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)
+          .<span class="at">remove</span>()<span class="op">;</span>
+
+      <span class="co">// Update outliers.</span>
+      <span class="kw">var</span> outlier <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"circle.outlier"</span>)
+          .<span class="at">data</span>(outlierIndices<span class="op">,</span> Number)<span class="op">;</span>
+
+      <span class="va">outlier</span>.<span class="at">enter</span>().<span class="at">insert</span>(<span class="st">"circle"</span><span class="op">,</span> <span class="st">"text"</span>)
+          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"outlier"</span>)
+          .<span class="at">attr</span>(<span class="st">"r"</span><span class="op">,</span> <span class="dv">5</span>)
+          .<span class="at">attr</span>(<span class="st">"cx"</span><span class="op">,</span> width / <span class="dv">2</span>)
+          .<span class="at">attr</span>(<span class="st">"cy"</span><span class="op">,</span> <span class="kw">function</span>(i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x0</span>(d[i])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)
+        .<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"cy"</span><span class="op">,</span> <span class="kw">function</span>(i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[i])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span>
+
+      <span class="va">outlier</span>.<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"cy"</span><span class="op">,</span> <span class="kw">function</span>(i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[i])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span>
+
+      <span class="va">outlier</span>.<span class="at">exit</span>().<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"cy"</span><span class="op">,</span> <span class="kw">function</span>(i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x1</span>(d[i])<span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)
+          .<span class="at">remove</span>()<span class="op">;</span>
+
+      <span class="co">// Compute the tick format.</span>
+      <span class="kw">var</span> format <span class="op">=</span> tickFormat <span class="op">||</span> <span class="va">x1</span>.<span class="at">tickFormat</span>(<span class="dv">8</span>)<span class="op">;</span>
+
+      <span class="co">// Update box ticks.</span>
+      <span class="kw">var</span> boxTick <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"text.box"</span>)
+          .<span class="at">data</span>(quartileData)<span class="op">;</span>
+
+      <span class="va">boxTick</span>.<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"text"</span>)
+          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"box"</span>)
+          .<span class="at">attr</span>(<span class="st">"dy"</span><span class="op">,</span> <span class="st">".3em"</span>)
+          .<span class="at">attr</span>(<span class="st">"dx"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">&amp;</span> <span class="dv">1</span> <span class="op">?</span> <span class="dv">6</span> : <span class="op">-</span><span class="dv">6</span> <span class="op">}</span>)
+          .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">&amp;</span> <span class="dv">1</span> <span class="op">?</span> width : <span class="dv">0</span> <span class="op">}</span>)
+          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x0)
+          .<span class="at">attr</span>(<span class="st">"text-anchor"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">&amp;</span> <span class="dv">1</span> <span class="op">?</span> <span class="st">"start"</span> : <span class="st">"end"</span><span class="op">;</span> <span class="op">}</span>)
+          .<span class="at">text</span>(format)
+        .<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x1)<span class="op">;</span>
+
+      <span class="va">boxTick</span>.<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">text</span>(format)
+          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x1)<span class="op">;</span>
+
+      <span class="co">// Update whisker ticks. These are handled separately from the box</span>
+      <span class="co">// ticks because they may or may not exist, and we want don't want</span>
+      <span class="co">// to join box ticks pre-transition with whisker ticks post-.</span>
+      <span class="kw">var</span> whiskerTick <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">"text.whisker"</span>)
+          .<span class="at">data</span>(whiskerData <span class="op">||</span> [])<span class="op">;</span>
+
+      <span class="va">whiskerTick</span>.<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"text"</span>)
+          .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"whisker"</span>)
+          .<span class="at">attr</span>(<span class="st">"dy"</span><span class="op">,</span> <span class="st">".3em"</span>)
+          .<span class="at">attr</span>(<span class="st">"dx"</span><span class="op">,</span> <span class="dv">6</span>)
+          .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> width)
+          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x0)
+          .<span class="at">text</span>(format)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)
+        .<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x1)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span>
+
+      <span class="va">whiskerTick</span>.<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">text</span>(format)
+          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x1)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="dv">1</span>)<span class="op">;</span>
+
+      <span class="va">whiskerTick</span>.<span class="at">exit</span>().<span class="at">transition</span>()
+          .<span class="at">duration</span>(duration)
+          .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> x1)
+          .<span class="at">style</span>(<span class="st">"opacity"</span><span class="op">,</span> <span class="fl">1e-6</span>)
+          .<span class="at">remove</span>()<span class="op">;</span>
+    <span class="op">}</span>)<span class="op">;</span>
+    <span class="va">d3</span>.<span class="va">timer</span>.<span class="at">flush</span>()<span class="op">;</span>
+  <span class="op">}</span>
+
+  <span class="va">box</span>.<span class="at">width</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> width<span class="op">;</span>
+    width <span class="op">=</span> x<span class="op">;</span>
+    <span class="cf">return</span> box<span class="op">;</span>
+  <span class="op">};</span>
+
+  <span class="va">box</span>.<span class="at">height</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> height<span class="op">;</span>
+    height <span class="op">=</span> x<span class="op">;</span>
+    <span class="cf">return</span> box<span class="op">;</span>
+  <span class="op">};</span>
+
+  <span class="va">box</span>.<span class="at">tickFormat</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> tickFormat<span class="op">;</span>
+    tickFormat <span class="op">=</span> x<span class="op">;</span>
+    <span class="cf">return</span> box<span class="op">;</span>
+  <span class="op">};</span>
+
+  <span class="va">box</span>.<span class="at">duration</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> duration<span class="op">;</span>
+    duration <span class="op">=</span> x<span class="op">;</span>
+    <span class="cf">return</span> box<span class="op">;</span>
+  <span class="op">};</span>
+
+  <span class="va">box</span>.<span class="at">domain</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> domain<span class="op">;</span>
+    domain <span class="op">=</span> x <span class="op">==</span> <span class="kw">null</span> <span class="op">?</span> x : <span class="va">d3</span>.<span class="at">functor</span>(x)<span class="op">;</span>
+    <span class="cf">return</span> box<span class="op">;</span>
+  <span class="op">};</span>
+
+  <span class="va">box</span>.<span class="at">value</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> value<span class="op">;</span>
+    value <span class="op">=</span> x<span class="op">;</span>
+    <span class="cf">return</span> box<span class="op">;</span>
+  <span class="op">};</span>
+
+  <span class="va">box</span>.<span class="at">whiskers</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> whiskers<span class="op">;</span>
+    whiskers <span class="op">=</span> x<span class="op">;</span>
+    <span class="cf">return</span> box<span class="op">;</span>
+  <span class="op">};</span>
+
+  <span class="va">box</span>.<span class="at">quartiles</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span>
+    <span class="cf">if</span> (<span class="op">!</span><span class="va">arguments</span>.<span class="at">length</span>) <span class="cf">return</span> quartiles<span class="op">;</span>
+    quartiles <span class="op">=</span> x<span class="op">;</span>
+    <span class="cf">return</span> box<span class="op">;</span>
+  <span class="op">};</span>
+
+  <span class="cf">return</span> box<span class="op">;</span>
+<span class="op">};</span>
+
+<span class="kw">function</span> <span class="at">boxWhiskers</span>(d) <span class="op">{</span>
+  <span class="cf">return</span> [<span class="dv">0</span><span class="op">,</span> <span class="va">d</span>.<span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">boxQuartiles</span>(d) <span class="op">{</span>
+  <span class="cf">return</span> [
+    <span class="va">d3</span>.<span class="at">quantile</span>(d<span class="op">,</span> .<span class="dv">25</span>)<span class="op">,</span>
+    <span class="va">d3</span>.<span class="at">quantile</span>(d<span class="op">,</span> .<span class="dv">5</span>)<span class="op">,</span>
+    <span class="va">d3</span>.<span class="at">quantile</span>(d<span class="op">,</span> .<span class="dv">75</span>)
+  ]<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="op">}</span>)()<span class="op">;</span></code></pre></div>
 <h4 id="morley.css">morley.css</h4>
-<div class="sourceCode" id="cb4"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="fu">.r2d3</span> <span class="fu">.box</span> {</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="kw">font</span>: <span class="dv">10px</span> <span class="dv">sans-serif</span>;</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">}</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="fu">.r2d3</span> <span class="fu">.box</span> line,</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="fu">.r2d3</span> <span class="fu">.box</span> rect,</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="fu">.r2d3</span> <span class="fu">.box</span> circle {</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">  stroke-width: <span class="dv">1.5px</span>;</a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">}</a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="fu">.r2d3</span> <span class="fu">.box</span> <span class="fu">.center</span> {</a>
-<a class="sourceLine" id="cb4-12" data-line-number="12">  stroke-dasharray: <span class="dv">3</span>,<span class="dv">3</span>;</a>
-<a class="sourceLine" id="cb4-13" data-line-number="13">}</a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="fu">.r2d3</span> <span class="fu">.box</span> <span class="fu">.outlier</span> {</a>
-<a class="sourceLine" id="cb4-16" data-line-number="16">  fill: <span class="dv">none</span>;</a>
-<a class="sourceLine" id="cb4-17" data-line-number="17">  stroke: <span class="dv">#ccc</span>;</a>
-<a class="sourceLine" id="cb4-18" data-line-number="18">}</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css"><span class="fl">.box</span> <span class="kw">{</span>
+  <span class="kw">font:</span> <span class="dt">10px</span> <span class="dt">sans-serif</span><span class="kw">;</span>
+<span class="kw">}</span>
+
+<span class="fl">.box</span> line,
+<span class="fl">.box</span> rect,
+<span class="fl">.box</span> circle <span class="kw">{</span>
+  <span class="kw">stroke-width:</span> <span class="dt">1.5px</span><span class="kw">;</span>
+<span class="kw">}</span>
+
+<span class="fl">.box</span> <span class="fl">.center</span> <span class="kw">{</span>
+  <span class="kw">stroke-dasharray:</span> <span class="dt">3</span>,<span class="dt">3</span><span class="kw">;</span>
+<span class="kw">}</span>
+
+<span class="fl">.box</span> <span class="fl">.outlier</span> <span class="kw">{</span>
+  <span class="kw">fill:</span> <span class="dt">none</span><span class="kw">;</span>
+  <span class="kw">stroke:</span> <span class="dt">#ccc</span><span class="kw">;</span>
+<span class="kw">}</span></code></pre></div>
 </div>
 </div>
 <script type="text/javascript">
@@ -536,7 +536,6 @@ $('a.list-group-item[href="../morley/"]').addClass('active');
 $('a[href="../../../articles/gallery.html"]').parent().addClass('active');
 </script>
 </div>
-  </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
       </div>

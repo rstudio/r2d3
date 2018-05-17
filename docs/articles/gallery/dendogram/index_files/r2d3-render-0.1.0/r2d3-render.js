@@ -4,6 +4,7 @@ function R2D3(el, width, height) {
   var version = null;
   
   self.data = null;
+  self.shadow = null;
   self.root = self.svg = self.canvas = null;
   self.width = 0;
   self.height = 0;
@@ -13,6 +14,7 @@ function R2D3(el, width, height) {
   self.rendererDefaut = true;
   self.captureErrors = null;
   self.theme = {};
+  self.style = null;
   
   self.setX = function(newX) {
     x = newX;
@@ -37,13 +39,28 @@ function R2D3(el, width, height) {
     self.root = self.svg = self.canvas = root;
   };
   
+  var createContainer = function() {
+    if (self.container == "svg")
+      return document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    else
+      return document.createElement(self.container);
+  };
+  
   self.createRoot = function() {
-    if (self.root !== null) {
-      self.d3().select(el).select(self.container).remove();
-      self.root = null;
+    if (self.shadow === null) {
+      self.shadow = el.attachShadow({
+        mode: "open"
+      });
     }
     
-    var root = self.d3().select(el).append(self.container)
+    if (self.root !== null) {
+      self.d3().select(self.shadow).select(self.container).remove();
+      self.setRoot(null);
+    }
+    
+    var container = createContainer();
+    self.shadow.appendChild(container);
+    var root = self.d3().select(container)
       .attr("width", self.width)
       .attr("height", self.height);
       
@@ -52,8 +69,9 @@ function R2D3(el, width, height) {
       root.style("fill", self.theme.foreground);
       root.style("color", self.theme.foreground);
     }
-      
+    
     self.setRoot(root);
+    self.addStyle();
   };
   
   self.setWidth = function(width) {
@@ -124,19 +142,23 @@ function R2D3(el, width, height) {
     self.captureErrors = null;
   };
   
-  self.addStyle = function(style) {
-    if (!style) return;
+  self.setStyle = function(style) {
+    self.style = style;
+  };
+  
+  self.addStyle = function() {
+    if (!self.style) return;
     
     var el = document.createElement("style");
             
     el.type = "text/css";
     if (el.styleSheet) {
-      el.styleSheet.cssText = style;
+      el.styleSheet.cssText = self.style;
     } else {
-      el.appendChild(document.createTextNode(style));
+      el.appendChild(document.createTextNode(self.style));
     }
     
-    document.head.appendChild(el);
+    self.root.node().appendChild(el);
   };
   
   self.setVersion = function(newVersion) {
@@ -170,7 +192,7 @@ function R2D3(el, width, height) {
       entry.style.position = "absolute";
       entry.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
       entry.style.fontSize = "9pt";
-      el.appendChild(entry);
+      self.shadow.appendChild(entry);
       
       entry.style.transform = "translateY(40px)";
       entry.style.opacity = "0";
@@ -256,8 +278,8 @@ function R2D3(el, width, height) {
     
     if (!self.root) {
       self.setVersion(x.version);
+      self.setStyle(x.style);
       self.addScript(x.script);
-      self.addStyle(x.style);
       self.d3Script = d3Script;
       self.setContainer(x.container);
       
@@ -484,7 +506,7 @@ function R2D3(el, width, height) {
     var container = document.getElementById("r2d3-error-container");
     if (!container) {
       container = document.createElement("div");
-      el.appendChild(container);
+      self.shadow.appendChild(container);
     }
     else {
       container.innerHTML = "";

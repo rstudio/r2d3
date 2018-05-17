@@ -25,6 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
   <link href="../extra.css" rel="stylesheet">
   <script src="../extra.js"></script>
 <meta property="og:title" content="Save a D3 visualization as a PNG image — save_d3_png" />
@@ -40,8 +43,6 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-
 
 
   </head>
@@ -134,16 +135,19 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Save a D3 visualization as a PNG image</h1>
-    <small>Source: <a href='https://github.com/rstudio/r2d3/blob/master/R/publish.R'><code>R/publish.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/rstudio/r2d3/blob/master/R/publish.R'><code>R/publish.R</code></a></small>
+    <div class="hidden name"><code>save_d3_png.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Save a D3 visualization to PNG (e.g. for including in another document).</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>save_d3_png</span>(<span class='no'>d3</span>, <span class='no'>file</span>, <span class='kw'>background</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>992</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>744</span>,
   <span class='kw'>delay</span> <span class='kw'>=</span> <span class='fl'>0.2</span>, <span class='kw'>zoom</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
@@ -196,11 +200,11 @@ report that there is a HiDPI device).</p></td>
 an offscreen web browser and taking a screenshot of the rendered web page.</p>
 <p>Using the <code>save_d3_png()</code> function requires that you install the
 <span class="pkg">webshot</span> package, as well as the phantom.js headless browser (which
-you can install using the function <code><a href='http://www.rdocumentation.org/packages/webshot/topics/install_phantomjs'>webshot::install_phantomjs()</a></code>).</p>
+you can install using the function <code>webshot::install_phantomjs()</code>).</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='save_d3_html.html'>save_d3_html()</a></code></p>
+    <div class='dont-index'><p><code><a href='save_d3_html.html'>save_d3_html()</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

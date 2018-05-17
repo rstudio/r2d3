@@ -19,7 +19,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -104,19 +104,19 @@
 <!--/.navbar -->
 
       
-      </header><script src="index_files/htmlwidgets-1.2/htmlwidgets.js"></script><script src="index_files/r2d3-render-0.1.0/r2d3-render.js"></script><script src="index_files/r2d3-binding-0.2/r2d3.js"></script><script src="index_files/d3v5-5.0.0/d3.js"></script><div class="row">
-  <div class="col-md-9">
+      </header><script src="index_files/htmlwidgets-1.2/htmlwidgets.js"></script><script src="index_files/r2d3-render-0.1.0/r2d3-render.js"></script><script src="index_files/webcomponents-2.0.0/webcomponents.js"></script><script src="index_files/r2d3-binding-0.2/r2d3.js"></script><script src="index_files/d3v5-5.0.0/d3.js"></script><div class="row">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Gallery: streamgraph</h1>
             
       
-      <small>Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/gallery/streamgraph/index.Rmd"><code>vignettes/gallery/streamgraph/index.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/gallery/streamgraph/index.Rmd"><code>vignettes/gallery/streamgraph/index.Rmd</code></a></small>
+      <div class="hidden name"><code>index.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <div id="source-link">
 <p><a href="https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/streamgraph" class="uri">https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/streamgraph</a></p>
 </div>
@@ -127,86 +127,86 @@
 </div>
 </div>
 <div class="col-sm-9">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../../../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(), <span class="dt">script =</span> <span class="st">"streamgraph.js"</span>)</a></code></pre></div>
-<div id="htmlwidget-06e032cd415f33943a4a" style="width:100%;height:480px;" class="r2d3 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-06e032cd415f33943a4a">{"x":{"data":null,"type":"NULL","container":"svg","options":null,"script":"var d3Script = function(d3, r2d3, data, svg, width, height, options, theme, console) {\nthis.d3 = d3;\n\nsvg = d3.select(svg.node());\n/* R2D3 Source File:  streamgraph.js */\n// !preview r2d3 data=c()\n\n// Based on: https://bl.ocks.org/mbostock/4060954\n\nvar n = 20, // number of layers\n    m = 200, // number of samples per layer\n    k = 10; // number of bumps per layer\n\nvar stack = d3.stack().keys(d3.range(n)).offset(d3.stackOffsetWiggle),\n    layers0 = stack(d3.transpose(d3.range(n).map(function() { return bumps(m, k); }))),\n    layers1 = stack(d3.transpose(d3.range(n).map(function() { return bumps(m, k); }))),\n    layers = layers0.concat(layers1);\n\nvar x = d3.scaleLinear()\n    .domain([0, m - 1])\n    .range([0, width]);\n\nvar y = d3.scaleLinear()\n    .domain([d3.min(layers, stackMin), d3.max(layers, stackMax)])\n    .range([height, 0]);\n\nvar z = d3.interpolateCool;\n\nvar area = d3.area()\n    .x(function(d, i) { return x(i); })\n    .y0(function(d) { return y(d[0]); })\n    .y1(function(d) { return y(d[1]); });\n\nvar widthOrginal = width;\nvar heightOrginal = height;\nvar root = svg.append(\"g\");\n\nroot\n  .selectAll(\"path\")\n  .data(layers0)\n  .enter().append(\"path\")\n    .attr(\"d\", area)\n    .attr(\"fill\", function() { return z(Math.random()); });\n\nfunction stackMax(layer) {\n  return d3.max(layer, function(d) { return d[1]; });\n}\n\nfunction stackMin(layer) {\n  return d3.min(layer, function(d) { return d[0]; });\n}\n\nfunction transition() {\n  var t;\n  d3.selectAll(\"path\")\n    .data((t = layers1, layers1 = layers0, layers0 = t))\n    .transition()\n      .duration(2500)\n      .attr(\"d\", area);\n}\n\n// Inspired by Lee Byron’s test data generator.\nfunction bumps(n, m) {\n  var a = [], i;\n  for (i = 0; i < n; ++i) a[i] = 0;\n  for (i = 0; i < m; ++i) bump(a, n);\n  return a;\n}\n\nfunction bump(a, n) {\n  var x = 1 / (0.1 + Math.random()),\n      y = 2 * Math.random() - 0.5,\n      z = 10 / (0.1 + Math.random());\n  for (var i = 0; i < n; i++) {\n    var w = (i / n - y) * z;\n    a[i] += x * Math.exp(-w * w);\n  }\n}\n\nr2d3.onResize(function(width, height) {\n  root.attr(\"transform\", \"scale(\" + width / widthOrginal + \",\" + height / heightOrginal + \")\");\n});\n};","style":null,"version":5,"theme":{"default":{"background":"#FFFFFF","foreground":"#000000"},"runtime":null}},"evals":[],"jsHooks":[]}</script><h4 id="streamgraph.js">streamgraph.js</h4>
-<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">// !preview r2d3 data=c()</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">// Based on: https://bl.ocks.org/mbostock/4060954</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">var</span> n <span class="op">=</span> <span class="dv">20</span><span class="op">,</span> <span class="co">// number of layers</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">    m <span class="op">=</span> <span class="dv">200</span><span class="op">,</span> <span class="co">// number of samples per layer</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">    k <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> <span class="co">// number of bumps per layer</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="kw">var</span> stack <span class="op">=</span> <span class="va">d3</span>.<span class="at">stack</span>().<span class="at">keys</span>(<span class="va">d3</span>.<span class="at">range</span>(n)).<span class="at">offset</span>(<span class="va">d3</span>.<span class="at">stackOffsetWiggle</span>)<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">    layers0 <span class="op">=</span> <span class="at">stack</span>(<span class="va">d3</span>.<span class="at">transpose</span>(<span class="va">d3</span>.<span class="at">range</span>(n).<span class="at">map</span>(<span class="kw">function</span>() <span class="op">{</span> <span class="cf">return</span> <span class="at">bumps</span>(m<span class="op">,</span> k)<span class="op">;</span> <span class="op">}</span>)))<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">    layers1 <span class="op">=</span> <span class="at">stack</span>(<span class="va">d3</span>.<span class="at">transpose</span>(<span class="va">d3</span>.<span class="at">range</span>(n).<span class="at">map</span>(<span class="kw">function</span>() <span class="op">{</span> <span class="cf">return</span> <span class="at">bumps</span>(m<span class="op">,</span> k)<span class="op">;</span> <span class="op">}</span>)))<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">    layers <span class="op">=</span> <span class="va">layers0</span>.<span class="at">concat</span>(layers1)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="kw">var</span> x <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleLinear</span>()</a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">    .<span class="at">domain</span>([<span class="dv">0</span><span class="op">,</span> m <span class="op">-</span> <span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">    .<span class="at">range</span>([<span class="dv">0</span><span class="op">,</span> width])<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="kw">var</span> y <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleLinear</span>()</a>
-<a class="sourceLine" id="cb2-19" data-line-number="19">    .<span class="at">domain</span>([<span class="va">d3</span>.<span class="at">min</span>(layers<span class="op">,</span> stackMin)<span class="op">,</span> <span class="va">d3</span>.<span class="at">max</span>(layers<span class="op">,</span> stackMax)])</a>
-<a class="sourceLine" id="cb2-20" data-line-number="20">    .<span class="at">range</span>([height<span class="op">,</span> <span class="dv">0</span>])<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"><span class="kw">var</span> z <span class="op">=</span> <span class="va">d3</span>.<span class="at">interpolateCool</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"></a>
-<a class="sourceLine" id="cb2-24" data-line-number="24"><span class="kw">var</span> area <span class="op">=</span> <span class="va">d3</span>.<span class="at">area</span>()</a>
-<a class="sourceLine" id="cb2-25" data-line-number="25">    .<span class="at">x</span>(<span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x</span>(i)<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-26" data-line-number="26">    .<span class="at">y0</span>(<span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-27" data-line-number="27">    .<span class="at">y1</span>(<span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28"></a>
-<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="kw">var</span> widthOrginal <span class="op">=</span> width<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-30" data-line-number="30"><span class="kw">var</span> heightOrginal <span class="op">=</span> height<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-31" data-line-number="31"><span class="kw">var</span> root <span class="op">=</span> <span class="va">svg</span>.<span class="at">append</span>(<span class="st">"g"</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-32" data-line-number="32"></a>
-<a class="sourceLine" id="cb2-33" data-line-number="33">root</a>
-<a class="sourceLine" id="cb2-34" data-line-number="34">  .<span class="at">selectAll</span>(<span class="st">"path"</span>)</a>
-<a class="sourceLine" id="cb2-35" data-line-number="35">  .<span class="at">data</span>(layers0)</a>
-<a class="sourceLine" id="cb2-36" data-line-number="36">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"path"</span>)</a>
-<a class="sourceLine" id="cb2-37" data-line-number="37">    .<span class="at">attr</span>(<span class="st">"d"</span><span class="op">,</span> area)</a>
-<a class="sourceLine" id="cb2-38" data-line-number="38">    .<span class="at">attr</span>(<span class="st">"fill"</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span> <span class="cf">return</span> <span class="at">z</span>(<span class="va">Math</span>.<span class="at">random</span>())<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-39" data-line-number="39"></a>
-<a class="sourceLine" id="cb2-40" data-line-number="40"><span class="kw">function</span> <span class="at">stackMax</span>(layer) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-41" data-line-number="41">  <span class="cf">return</span> <span class="va">d3</span>.<span class="at">max</span>(layer<span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d[<span class="dv">1</span>]<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-42" data-line-number="42"><span class="op">}</span></a>
-<a class="sourceLine" id="cb2-43" data-line-number="43"></a>
-<a class="sourceLine" id="cb2-44" data-line-number="44"><span class="kw">function</span> <span class="at">stackMin</span>(layer) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-45" data-line-number="45">  <span class="cf">return</span> <span class="va">d3</span>.<span class="at">min</span>(layer<span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d[<span class="dv">0</span>]<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-46" data-line-number="46"><span class="op">}</span></a>
-<a class="sourceLine" id="cb2-47" data-line-number="47"></a>
-<a class="sourceLine" id="cb2-48" data-line-number="48"><span class="kw">function</span> <span class="at">transition</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-49" data-line-number="49">  <span class="kw">var</span> t<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-50" data-line-number="50">  <span class="va">d3</span>.<span class="at">selectAll</span>(<span class="st">"path"</span>)</a>
-<a class="sourceLine" id="cb2-51" data-line-number="51">    .<span class="at">data</span>((t <span class="op">=</span> layers1<span class="op">,</span> layers1 <span class="op">=</span> layers0<span class="op">,</span> layers0 <span class="op">=</span> t))</a>
-<a class="sourceLine" id="cb2-52" data-line-number="52">    .<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb2-53" data-line-number="53">      .<span class="at">duration</span>(<span class="dv">2500</span>)</a>
-<a class="sourceLine" id="cb2-54" data-line-number="54">      .<span class="at">attr</span>(<span class="st">"d"</span><span class="op">,</span> area)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-55" data-line-number="55"><span class="op">}</span></a>
-<a class="sourceLine" id="cb2-56" data-line-number="56"></a>
-<a class="sourceLine" id="cb2-57" data-line-number="57"><span class="co">// Inspired by Lee Byron’s test data generator.</span></a>
-<a class="sourceLine" id="cb2-58" data-line-number="58"><span class="kw">function</span> <span class="at">bumps</span>(n<span class="op">,</span> m) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-59" data-line-number="59">  <span class="kw">var</span> a <span class="op">=</span> []<span class="op">,</span> i<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-60" data-line-number="60">  <span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> <span class="op">++</span>i) a[i] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb2-61" data-line-number="61">  <span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> m<span class="op">;</span> <span class="op">++</span>i) <span class="at">bump</span>(a<span class="op">,</span> n)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-62" data-line-number="62">  <span class="cf">return</span> a<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-63" data-line-number="63"><span class="op">}</span></a>
-<a class="sourceLine" id="cb2-64" data-line-number="64"></a>
-<a class="sourceLine" id="cb2-65" data-line-number="65"><span class="kw">function</span> <span class="at">bump</span>(a<span class="op">,</span> n) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-66" data-line-number="66">  <span class="kw">var</span> x <span class="op">=</span> <span class="dv">1</span> / (<span class="fl">0.1</span> <span class="op">+</span> <span class="va">Math</span>.<span class="at">random</span>())<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-67" data-line-number="67">      y <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="va">Math</span>.<span class="at">random</span>() <span class="op">-</span> <span class="fl">0.5</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb2-68" data-line-number="68">      z <span class="op">=</span> <span class="dv">10</span> / (<span class="fl">0.1</span> <span class="op">+</span> <span class="va">Math</span>.<span class="at">random</span>())<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-69" data-line-number="69">  <span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-70" data-line-number="70">    <span class="kw">var</span> w <span class="op">=</span> (i / n <span class="op">-</span> y) <span class="op">*</span> z<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-71" data-line-number="71">    a[i] <span class="op">+=</span> x <span class="op">*</span> <span class="va">Math</span>.<span class="at">exp</span>(<span class="op">-</span>w <span class="op">*</span> w)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-72" data-line-number="72">  <span class="op">}</span></a>
-<a class="sourceLine" id="cb2-73" data-line-number="73"><span class="op">}</span></a>
-<a class="sourceLine" id="cb2-74" data-line-number="74"></a>
-<a class="sourceLine" id="cb2-75" data-line-number="75"><span class="va">r2d3</span>.<span class="at">onResize</span>(<span class="kw">function</span>(width<span class="op">,</span> height) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-76" data-line-number="76">  <span class="va">root</span>.<span class="at">attr</span>(<span class="st">"transform"</span><span class="op">,</span> <span class="st">"scale("</span> <span class="op">+</span> width / widthOrginal <span class="op">+</span> <span class="st">","</span> <span class="op">+</span> height / heightOrginal <span class="op">+</span> <span class="st">")"</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-77" data-line-number="77"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(), <span class="dt">script =</span> <span class="st">"streamgraph.js"</span>)</code></pre></div>
+<div id="htmlwidget-64e31f9eb1c6e4ae5b49" style="width:100%;height:432.632880098888px;" class="r2d3 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-64e31f9eb1c6e4ae5b49">{"x":{"data":null,"type":"NULL","container":"svg","options":null,"script":"var d3Script = function(d3, r2d3, data, svg, width, height, options, theme, console) {\nthis.d3 = d3;\n\nsvg = d3.select(svg.node());\n/* R2D3 Source File:  streamgraph.js */\n// !preview r2d3 data=c()\n\n// Based on: https://bl.ocks.org/mbostock/4060954\n\nvar n = 20, // number of layers\n    m = 200, // number of samples per layer\n    k = 10; // number of bumps per layer\n\nvar stack = d3.stack().keys(d3.range(n)).offset(d3.stackOffsetWiggle),\n    layers0 = stack(d3.transpose(d3.range(n).map(function() { return bumps(m, k); }))),\n    layers1 = stack(d3.transpose(d3.range(n).map(function() { return bumps(m, k); }))),\n    layers = layers0.concat(layers1);\n\nvar x = d3.scaleLinear()\n    .domain([0, m - 1])\n    .range([0, width]);\n\nvar y = d3.scaleLinear()\n    .domain([d3.min(layers, stackMin), d3.max(layers, stackMax)])\n    .range([height, 0]);\n\nvar z = d3.interpolateCool;\n\nvar area = d3.area()\n    .x(function(d, i) { return x(i); })\n    .y0(function(d) { return y(d[0]); })\n    .y1(function(d) { return y(d[1]); });\n\nvar widthOrginal = width;\nvar heightOrginal = height;\nvar root = svg.append(\"g\");\n\nroot\n  .selectAll(\"path\")\n  .data(layers0)\n  .enter().append(\"path\")\n    .attr(\"d\", area)\n    .attr(\"fill\", function() { return z(Math.random()); });\n\nfunction stackMax(layer) {\n  return d3.max(layer, function(d) { return d[1]; });\n}\n\nfunction stackMin(layer) {\n  return d3.min(layer, function(d) { return d[0]; });\n}\n\nfunction transition() {\n  var t;\n  d3.selectAll(\"path\")\n    .data((t = layers1, layers1 = layers0, layers0 = t))\n    .transition()\n      .duration(2500)\n      .attr(\"d\", area);\n}\n\n// Inspired by Lee Byron’s test data generator.\nfunction bumps(n, m) {\n  var a = [], i;\n  for (i = 0; i < n; ++i) a[i] = 0;\n  for (i = 0; i < m; ++i) bump(a, n);\n  return a;\n}\n\nfunction bump(a, n) {\n  var x = 1 / (0.1 + Math.random()),\n      y = 2 * Math.random() - 0.5,\n      z = 10 / (0.1 + Math.random());\n  for (var i = 0; i < n; i++) {\n    var w = (i / n - y) * z;\n    a[i] += x * Math.exp(-w * w);\n  }\n}\n\nr2d3.onResize(function(width, height) {\n  root.attr(\"transform\", \"scale(\" + width / widthOrginal + \",\" + height / heightOrginal + \")\");\n});\n};","style":null,"version":5,"theme":{"default":{"background":"#FFFFFF","foreground":"#000000"},"runtime":null}},"evals":[],"jsHooks":[]}</script><h4 id="streamgraph.js">streamgraph.js</h4>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// !preview r2d3 data=c()</span>
+
+<span class="co">// Based on: https://bl.ocks.org/mbostock/4060954</span>
+
+<span class="kw">var</span> n <span class="op">=</span> <span class="dv">20</span><span class="op">,</span> <span class="co">// number of layers</span>
+    m <span class="op">=</span> <span class="dv">200</span><span class="op">,</span> <span class="co">// number of samples per layer</span>
+    k <span class="op">=</span> <span class="dv">10</span><span class="op">;</span> <span class="co">// number of bumps per layer</span>
+
+<span class="kw">var</span> stack <span class="op">=</span> <span class="va">d3</span>.<span class="at">stack</span>().<span class="at">keys</span>(<span class="va">d3</span>.<span class="at">range</span>(n)).<span class="at">offset</span>(<span class="va">d3</span>.<span class="at">stackOffsetWiggle</span>)<span class="op">,</span>
+    layers0 <span class="op">=</span> <span class="at">stack</span>(<span class="va">d3</span>.<span class="at">transpose</span>(<span class="va">d3</span>.<span class="at">range</span>(n).<span class="at">map</span>(<span class="kw">function</span>() <span class="op">{</span> <span class="cf">return</span> <span class="at">bumps</span>(m<span class="op">,</span> k)<span class="op">;</span> <span class="op">}</span>)))<span class="op">,</span>
+    layers1 <span class="op">=</span> <span class="at">stack</span>(<span class="va">d3</span>.<span class="at">transpose</span>(<span class="va">d3</span>.<span class="at">range</span>(n).<span class="at">map</span>(<span class="kw">function</span>() <span class="op">{</span> <span class="cf">return</span> <span class="at">bumps</span>(m<span class="op">,</span> k)<span class="op">;</span> <span class="op">}</span>)))<span class="op">,</span>
+    layers <span class="op">=</span> <span class="va">layers0</span>.<span class="at">concat</span>(layers1)<span class="op">;</span>
+
+<span class="kw">var</span> x <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleLinear</span>()
+    .<span class="at">domain</span>([<span class="dv">0</span><span class="op">,</span> m <span class="op">-</span> <span class="dv">1</span>])
+    .<span class="at">range</span>([<span class="dv">0</span><span class="op">,</span> width])<span class="op">;</span>
+
+<span class="kw">var</span> y <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleLinear</span>()
+    .<span class="at">domain</span>([<span class="va">d3</span>.<span class="at">min</span>(layers<span class="op">,</span> stackMin)<span class="op">,</span> <span class="va">d3</span>.<span class="at">max</span>(layers<span class="op">,</span> stackMax)])
+    .<span class="at">range</span>([height<span class="op">,</span> <span class="dv">0</span>])<span class="op">;</span>
+
+<span class="kw">var</span> z <span class="op">=</span> <span class="va">d3</span>.<span class="at">interpolateCool</span><span class="op">;</span>
+
+<span class="kw">var</span> area <span class="op">=</span> <span class="va">d3</span>.<span class="at">area</span>()
+    .<span class="at">x</span>(<span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x</span>(i)<span class="op">;</span> <span class="op">}</span>)
+    .<span class="at">y0</span>(<span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)
+    .<span class="at">y1</span>(<span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+
+<span class="kw">var</span> widthOrginal <span class="op">=</span> width<span class="op">;</span>
+<span class="kw">var</span> heightOrginal <span class="op">=</span> height<span class="op">;</span>
+<span class="kw">var</span> root <span class="op">=</span> <span class="va">svg</span>.<span class="at">append</span>(<span class="st">"g"</span>)<span class="op">;</span>
+
+root
+  .<span class="at">selectAll</span>(<span class="st">"path"</span>)
+  .<span class="at">data</span>(layers0)
+  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"path"</span>)
+    .<span class="at">attr</span>(<span class="st">"d"</span><span class="op">,</span> area)
+    .<span class="at">attr</span>(<span class="st">"fill"</span><span class="op">,</span> <span class="kw">function</span>() <span class="op">{</span> <span class="cf">return</span> <span class="at">z</span>(<span class="va">Math</span>.<span class="at">random</span>())<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+
+<span class="kw">function</span> <span class="at">stackMax</span>(layer) <span class="op">{</span>
+  <span class="cf">return</span> <span class="va">d3</span>.<span class="at">max</span>(layer<span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d[<span class="dv">1</span>]<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">stackMin</span>(layer) <span class="op">{</span>
+  <span class="cf">return</span> <span class="va">d3</span>.<span class="at">min</span>(layer<span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d[<span class="dv">0</span>]<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">transition</span>() <span class="op">{</span>
+  <span class="kw">var</span> t<span class="op">;</span>
+  <span class="va">d3</span>.<span class="at">selectAll</span>(<span class="st">"path"</span>)
+    .<span class="at">data</span>((t <span class="op">=</span> layers1<span class="op">,</span> layers1 <span class="op">=</span> layers0<span class="op">,</span> layers0 <span class="op">=</span> t))
+    .<span class="at">transition</span>()
+      .<span class="at">duration</span>(<span class="dv">2500</span>)
+      .<span class="at">attr</span>(<span class="st">"d"</span><span class="op">,</span> area)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="co">// Inspired by Lee Byron’s test data generator.</span>
+<span class="kw">function</span> <span class="at">bumps</span>(n<span class="op">,</span> m) <span class="op">{</span>
+  <span class="kw">var</span> a <span class="op">=</span> []<span class="op">,</span> i<span class="op">;</span>
+  <span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> <span class="op">++</span>i) a[i] <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+  <span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> m<span class="op">;</span> <span class="op">++</span>i) <span class="at">bump</span>(a<span class="op">,</span> n)<span class="op">;</span>
+  <span class="cf">return</span> a<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">bump</span>(a<span class="op">,</span> n) <span class="op">{</span>
+  <span class="kw">var</span> x <span class="op">=</span> <span class="dv">1</span> / (<span class="fl">0.1</span> <span class="op">+</span> <span class="va">Math</span>.<span class="at">random</span>())<span class="op">,</span>
+      y <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="va">Math</span>.<span class="at">random</span>() <span class="op">-</span> <span class="fl">0.5</span><span class="op">,</span>
+      z <span class="op">=</span> <span class="dv">10</span> / (<span class="fl">0.1</span> <span class="op">+</span> <span class="va">Math</span>.<span class="at">random</span>())<span class="op">;</span>
+  <span class="cf">for</span> (<span class="kw">var</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> n<span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span>
+    <span class="kw">var</span> w <span class="op">=</span> (i / n <span class="op">-</span> y) <span class="op">*</span> z<span class="op">;</span>
+    a[i] <span class="op">+=</span> x <span class="op">*</span> <span class="va">Math</span>.<span class="at">exp</span>(<span class="op">-</span>w <span class="op">*</span> w)<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span>
+
+<span class="va">r2d3</span>.<span class="at">onResize</span>(<span class="kw">function</span>(width<span class="op">,</span> height) <span class="op">{</span>
+  <span class="va">root</span>.<span class="at">attr</span>(<span class="st">"transform"</span><span class="op">,</span> <span class="st">"scale("</span> <span class="op">+</span> width / widthOrginal <span class="op">+</span> <span class="st">","</span> <span class="op">+</span> height / heightOrginal <span class="op">+</span> <span class="st">")"</span>)<span class="op">;</span>
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
 </div>
 </div>
 <script type="text/javascript">
@@ -216,7 +216,6 @@ $('a.list-group-item[href="../streamgraph/"]').addClass('active');
 $('a[href="../../../articles/gallery.html"]').parent().addClass('active');
 </script>
 </div>
-  </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
       </div>

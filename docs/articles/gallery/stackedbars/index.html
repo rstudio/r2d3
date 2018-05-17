@@ -19,7 +19,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -104,19 +104,19 @@
 <!--/.navbar -->
 
       
-      </header><script src="index_files/htmlwidgets-1.2/htmlwidgets.js"></script><script src="index_files/r2d3-render-0.1.0/r2d3-render.js"></script><script src="index_files/r2d3-binding-0.2/r2d3.js"></script><script src="index_files/d3v4-4.13.0/d3.js"></script><div class="row">
-  <div class="col-md-9">
+      </header><script src="index_files/htmlwidgets-1.2/htmlwidgets.js"></script><script src="index_files/r2d3-render-0.1.0/r2d3-render.js"></script><script src="index_files/webcomponents-2.0.0/webcomponents.js"></script><script src="index_files/r2d3-binding-0.2/r2d3.js"></script><script src="index_files/d3v4-4.13.0/d3.js"></script><div class="row">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Gallery: stackedbars</h1>
             
       
-      <small>Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/gallery/stackedbars/index.Rmd"><code>vignettes/gallery/stackedbars/index.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/r2d3/blob/master/vignettes/gallery/stackedbars/index.Rmd"><code>vignettes/gallery/stackedbars/index.Rmd</code></a></small>
+      <div class="hidden name"><code>index.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <div id="source-link">
 <p><a href="https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/stackedbars" class="uri">https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/stackedbars</a></p>
 </div>
@@ -127,144 +127,144 @@
 </div>
 </div>
 <div class="col-sm-9">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="../../../reference/r2d3.html">r2d3</a></span>(<span class="dt">data =</span> <span class="kw">c</span>(), <span class="dt">d3_version =</span> <span class="dv">4</span>, <span class="dt">script =</span> <span class="st">"stackedbars.js"</span>)</a></code></pre></div>
-<div id="htmlwidget-6b433ad26ffe08f50acf" style="width:100%;height:480px;" class="r2d3 html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6b433ad26ffe08f50acf">{"x":{"data":null,"type":"NULL","container":"svg","options":null,"script":"var d3Script = function(d3, r2d3, data, svg, width, height, options, theme, console) {\nthis.d3 = d3;\n\nsvg = d3.select(svg.node());\n/* R2D3 Source File:  stackedbars.js */\n// !preview r2d3 d3_version = 4\n\n// Based on: http://bl.ocks.org/mbostock/3943967\n\nvar n = 4, // The number of series.\n    m = 58; // The number of values per series.\n\n// The xz array has m elements, representing the x-values shared by all series.\n// The yz array has n elements, representing the y-values of each of the n series.\n// Each yz[i] is an array of m non-negative numbers representing a y-value for xz[i].\n// The y01z array has the same structure as yz, but with stacked [y₀, y₁] instead of y.\nvar xz = d3.range(m),\n    yz = d3.range(n).map(function() { return bumps(m); }),\n    y01z = d3.stack().keys(d3.range(n))(d3.transpose(yz)),\n    yMax = d3.max(yz, function(y) { return d3.max(y); }),\n    y1Max = d3.max(y01z, function(y) { return d3.max(y, function(d) { return d[1]; }); });\n\nvar margin = {top: 40, right: 10, bottom: 20, left: 10},\n    width = width - margin.left - margin.right,\n    height = height - margin.top - margin.bottom,\n    g = svg.append(\"g\").attr(\"transform\", \"translate(\" + margin.left + \",\" + margin.top + \")\");\n\nvar x = d3.scaleBand()\n    .domain(xz)\n    .rangeRound([0, width])\n    .padding(0.08);\n\nvar y = d3.scaleLinear()\n    .domain([0, y1Max])\n    .range([height, 0]);\n\nvar color = d3.scaleOrdinal()\n    .domain(d3.range(n))\n    .range(d3.schemeCategory20c);\n\nvar series = g.selectAll(\".series\")\n  .data(y01z)\n  .enter().append(\"g\")\n    .attr(\"fill\", function(d, i) { return color(i); });\n\nvar rect = series.selectAll(\"rect\")\n  .data(function(d) { return d; })\n  .enter().append(\"rect\")\n    .attr(\"x\", function(d, i) { return x(i); })\n    .attr(\"y\", height)\n    .attr(\"width\", x.bandwidth())\n    .attr(\"height\", 0);\n\nrect.transition()\n    .delay(function(d, i) { return i * 10; })\n    .attr(\"y\", function(d) { return y(d[1]); })\n    .attr(\"height\", function(d) { return y(d[0]) - y(d[1]); });\n\ng.append(\"g\")\n    .attr(\"class\", \"axis axis--x\")\n    .attr(\"transform\", \"translate(0,\" + height + \")\")\n    .style(\"font-size\", Math.min(width, height * 2) / 90)\n    .call(d3.axisBottom(x)\n        .tickSize(0)\n        .tickPadding(6));\n\nd3.selectAll(\"input\")\n    .on(\"change\", changed);\n\nvar timeout = d3.timeout(function() {\n  d3.select(\"input[value=\\\"grouped\\\"]\")\n      .property(\"checked\", true)\n      .dispatch(\"change\");\n}, 2000);\n\nfunction changed() {\n  timeout.stop();\n  if (this.value === \"grouped\") transitionGrouped();\n  else transitionStacked();\n}\n\nfunction transitionGrouped() {\n  y.domain([0, yMax]);\n\n  rect.transition()\n      .duration(500)\n      .delay(function(d, i) { return i * 10; })\n      .attr(\"x\", function(d, i) { return x(i) + x.bandwidth() / n * this.parentNode.__data__.key; })\n      .attr(\"width\", x.bandwidth() / n)\n    .transition()\n      .attr(\"y\", function(d) { return y(d[1] - d[0]); })\n      .attr(\"height\", function(d) { return y(0) - y(d[1] - d[0]); });\n}\n\nfunction transitionStacked() {\n  y.domain([0, y1Max]);\n\n  rect.transition()\n      .duration(500)\n      .delay(function(d, i) { return i * 10; })\n      .attr(\"y\", function(d) { return y(d[1]); })\n      .attr(\"height\", function(d) { return y(d[0]) - y(d[1]); })\n    .transition()\n      .attr(\"x\", function(d, i) { return x(i); })\n      .attr(\"width\", x.bandwidth());\n}\n\n// Returns an array of m psuedorandom, smoothly-varying non-negative numbers.\n// Inspired by Lee Byron’s test data generator.\n// http://leebyron.com/streamgraph/\nfunction bumps(m) {\n  var values = [], i, j, w, x, y, z;\n\n  // Initialize with uniform random values in [0.1, 0.2).\n  for (i = 0; i < m; ++i) {\n    values[i] = 0.1 + 0.1 * Math.random();\n  }\n\n  // Add five random bumps.\n  for (j = 0; j < 5; ++j) {\n    x = 1 / (0.1 + Math.random());\n    y = 2 * Math.random() - 0.5;\n    z = 10 / (0.1 + Math.random());\n    for (i = 0; i < m; i++) {\n      w = (i / m - y) * z;\n      values[i] += x * Math.exp(-w * w);\n    }\n  }\n\n  // Ensure all values are positive.\n  for (i = 0; i < m; ++i) {\n    values[i] = Math.max(0, values[i]);\n  }\n\n  return values;\n}\n};","style":"/* R2D3 Source File:  stackedbars.css */\n.r2d3 label {\n  display: block;\n}","version":4,"theme":{"default":{"background":"#FFFFFF","foreground":"#000000"},"runtime":null}},"evals":[],"jsHooks":[]}</script><h4 id="stackedbars.js">stackedbars.js</h4>
-<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">// !preview r2d3 d3_version = 4</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">// Based on: http://bl.ocks.org/mbostock/3943967</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">var</span> n <span class="op">=</span> <span class="dv">4</span><span class="op">,</span> <span class="co">// The number of series.</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">    m <span class="op">=</span> <span class="dv">58</span><span class="op">;</span> <span class="co">// The number of values per series.</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">// The xz array has m elements, representing the x-values shared by all series.</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">// The yz array has n elements, representing the y-values of each of the n series.</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">// Each yz[i] is an array of m non-negative numbers representing a y-value for xz[i].</span></a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">// The y01z array has the same structure as yz, but with stacked [y₀, y₁] instead of y.</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="kw">var</span> xz <span class="op">=</span> <span class="va">d3</span>.<span class="at">range</span>(m)<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">    yz <span class="op">=</span> <span class="va">d3</span>.<span class="at">range</span>(n).<span class="at">map</span>(<span class="kw">function</span>() <span class="op">{</span> <span class="cf">return</span> <span class="at">bumps</span>(m)<span class="op">;</span> <span class="op">}</span>)<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">    y01z <span class="op">=</span> <span class="va">d3</span>.<span class="at">stack</span>().<span class="at">keys</span>(<span class="va">d3</span>.<span class="at">range</span>(n))(<span class="va">d3</span>.<span class="at">transpose</span>(yz))<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">    yMax <span class="op">=</span> <span class="va">d3</span>.<span class="at">max</span>(yz<span class="op">,</span> <span class="kw">function</span>(y) <span class="op">{</span> <span class="cf">return</span> <span class="va">d3</span>.<span class="at">max</span>(y)<span class="op">;</span> <span class="op">}</span>)<span class="op">,</span></a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">    y1Max <span class="op">=</span> <span class="va">d3</span>.<span class="at">max</span>(y01z<span class="op">,</span> <span class="kw">function</span>(y) <span class="op">{</span> <span class="cf">return</span> <span class="va">d3</span>.<span class="at">max</span>(y<span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d[<span class="dv">1</span>]<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="kw">var</span> margin <span class="op">=</span> <span class="op">{</span><span class="dt">top</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">10</span><span class="op">},</span></a>
-<a class="sourceLine" id="cb2-19" data-line-number="19">    width <span class="op">=</span> width <span class="op">-</span> <span class="va">margin</span>.<span class="at">left</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">right</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb2-20" data-line-number="20">    height <span class="op">=</span> height <span class="op">-</span> <span class="va">margin</span>.<span class="at">top</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">bottom</span><span class="op">,</span></a>
-<a class="sourceLine" id="cb2-21" data-line-number="21">    g <span class="op">=</span> <span class="va">svg</span>.<span class="at">append</span>(<span class="st">"g"</span>).<span class="at">attr</span>(<span class="st">"transform"</span><span class="op">,</span> <span class="st">"translate("</span> <span class="op">+</span> <span class="va">margin</span>.<span class="at">left</span> <span class="op">+</span> <span class="st">","</span> <span class="op">+</span> <span class="va">margin</span>.<span class="at">top</span> <span class="op">+</span> <span class="st">")"</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb2-23" data-line-number="23"><span class="kw">var</span> x <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleBand</span>()</a>
-<a class="sourceLine" id="cb2-24" data-line-number="24">    .<span class="at">domain</span>(xz)</a>
-<a class="sourceLine" id="cb2-25" data-line-number="25">    .<span class="at">rangeRound</span>([<span class="dv">0</span><span class="op">,</span> width])</a>
-<a class="sourceLine" id="cb2-26" data-line-number="26">    .<span class="at">padding</span>(<span class="fl">0.08</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-27" data-line-number="27"></a>
-<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="kw">var</span> y <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleLinear</span>()</a>
-<a class="sourceLine" id="cb2-29" data-line-number="29">    .<span class="at">domain</span>([<span class="dv">0</span><span class="op">,</span> y1Max])</a>
-<a class="sourceLine" id="cb2-30" data-line-number="30">    .<span class="at">range</span>([height<span class="op">,</span> <span class="dv">0</span>])<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb2-32" data-line-number="32"><span class="kw">var</span> color <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleOrdinal</span>()</a>
-<a class="sourceLine" id="cb2-33" data-line-number="33">    .<span class="at">domain</span>(<span class="va">d3</span>.<span class="at">range</span>(n))</a>
-<a class="sourceLine" id="cb2-34" data-line-number="34">    .<span class="at">range</span>(<span class="va">d3</span>.<span class="at">schemeCategory20c</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-35" data-line-number="35"></a>
-<a class="sourceLine" id="cb2-36" data-line-number="36"><span class="kw">var</span> series <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">".series"</span>)</a>
-<a class="sourceLine" id="cb2-37" data-line-number="37">  .<span class="at">data</span>(y01z)</a>
-<a class="sourceLine" id="cb2-38" data-line-number="38">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"g"</span>)</a>
-<a class="sourceLine" id="cb2-39" data-line-number="39">    .<span class="at">attr</span>(<span class="st">"fill"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> <span class="at">color</span>(i)<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-40" data-line-number="40"></a>
-<a class="sourceLine" id="cb2-41" data-line-number="41"><span class="kw">var</span> rect <span class="op">=</span> <span class="va">series</span>.<span class="at">selectAll</span>(<span class="st">"rect"</span>)</a>
-<a class="sourceLine" id="cb2-42" data-line-number="42">  .<span class="at">data</span>(<span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-43" data-line-number="43">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"rect"</span>)</a>
-<a class="sourceLine" id="cb2-44" data-line-number="44">    .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x</span>(i)<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-45" data-line-number="45">    .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> height)</a>
-<a class="sourceLine" id="cb2-46" data-line-number="46">    .<span class="at">attr</span>(<span class="st">"width"</span><span class="op">,</span> <span class="va">x</span>.<span class="at">bandwidth</span>())</a>
-<a class="sourceLine" id="cb2-47" data-line-number="47">    .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-48" data-line-number="48"></a>
-<a class="sourceLine" id="cb2-49" data-line-number="49"><span class="va">rect</span>.<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb2-50" data-line-number="50">    .<span class="at">delay</span>(<span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> <span class="dv">10</span><span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-51" data-line-number="51">    .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-52" data-line-number="52">    .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">0</span>]) <span class="op">-</span> <span class="at">y</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-53" data-line-number="53"></a>
-<a class="sourceLine" id="cb2-54" data-line-number="54"><span class="va">g</span>.<span class="at">append</span>(<span class="st">"g"</span>)</a>
-<a class="sourceLine" id="cb2-55" data-line-number="55">    .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"axis axis--x"</span>)</a>
-<a class="sourceLine" id="cb2-56" data-line-number="56">    .<span class="at">attr</span>(<span class="st">"transform"</span><span class="op">,</span> <span class="st">"translate(0,"</span> <span class="op">+</span> height <span class="op">+</span> <span class="st">")"</span>)</a>
-<a class="sourceLine" id="cb2-57" data-line-number="57">    .<span class="at">style</span>(<span class="st">"font-size"</span><span class="op">,</span> <span class="va">Math</span>.<span class="at">min</span>(width<span class="op">,</span> height <span class="op">*</span> <span class="dv">2</span>) / <span class="dv">90</span>)</a>
-<a class="sourceLine" id="cb2-58" data-line-number="58">    .<span class="at">call</span>(<span class="va">d3</span>.<span class="at">axisBottom</span>(x)</a>
-<a class="sourceLine" id="cb2-59" data-line-number="59">        .<span class="at">tickSize</span>(<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb2-60" data-line-number="60">        .<span class="at">tickPadding</span>(<span class="dv">6</span>))<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-61" data-line-number="61"></a>
-<a class="sourceLine" id="cb2-62" data-line-number="62"><span class="va">d3</span>.<span class="at">selectAll</span>(<span class="st">"input"</span>)</a>
-<a class="sourceLine" id="cb2-63" data-line-number="63">    .<span class="at">on</span>(<span class="st">"change"</span><span class="op">,</span> changed)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-64" data-line-number="64"></a>
-<a class="sourceLine" id="cb2-65" data-line-number="65"><span class="kw">var</span> timeout <span class="op">=</span> <span class="va">d3</span>.<span class="at">timeout</span>(<span class="kw">function</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-66" data-line-number="66">  <span class="va">d3</span>.<span class="at">select</span>(<span class="st">"input[value=</span><span class="sc">\"</span><span class="st">grouped</span><span class="sc">\"</span><span class="st">]"</span>)</a>
-<a class="sourceLine" id="cb2-67" data-line-number="67">      .<span class="at">property</span>(<span class="st">"checked"</span><span class="op">,</span> <span class="kw">true</span>)</a>
-<a class="sourceLine" id="cb2-68" data-line-number="68">      .<span class="at">dispatch</span>(<span class="st">"change"</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-69" data-line-number="69"><span class="op">},</span> <span class="dv">2000</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-70" data-line-number="70"></a>
-<a class="sourceLine" id="cb2-71" data-line-number="71"><span class="kw">function</span> <span class="at">changed</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-72" data-line-number="72">  <span class="va">timeout</span>.<span class="at">stop</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-73" data-line-number="73">  <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">value</span> <span class="op">===</span> <span class="st">"grouped"</span>) <span class="at">transitionGrouped</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-74" data-line-number="74">  <span class="cf">else</span> <span class="at">transitionStacked</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-75" data-line-number="75"><span class="op">}</span></a>
-<a class="sourceLine" id="cb2-76" data-line-number="76"></a>
-<a class="sourceLine" id="cb2-77" data-line-number="77"><span class="kw">function</span> <span class="at">transitionGrouped</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-78" data-line-number="78">  <span class="va">y</span>.<span class="at">domain</span>([<span class="dv">0</span><span class="op">,</span> yMax])<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-79" data-line-number="79"></a>
-<a class="sourceLine" id="cb2-80" data-line-number="80">  <span class="va">rect</span>.<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb2-81" data-line-number="81">      .<span class="at">duration</span>(<span class="dv">500</span>)</a>
-<a class="sourceLine" id="cb2-82" data-line-number="82">      .<span class="at">delay</span>(<span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> <span class="dv">10</span><span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-83" data-line-number="83">      .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x</span>(i) <span class="op">+</span> <span class="va">x</span>.<span class="at">bandwidth</span>() / n <span class="op">*</span> <span class="kw">this</span>.<span class="va">parentNode</span>.<span class="va">__data__</span>.<span class="at">key</span><span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-84" data-line-number="84">      .<span class="at">attr</span>(<span class="st">"width"</span><span class="op">,</span> <span class="va">x</span>.<span class="at">bandwidth</span>() / n)</a>
-<a class="sourceLine" id="cb2-85" data-line-number="85">    .<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb2-86" data-line-number="86">      .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">1</span>] <span class="op">-</span> d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-87" data-line-number="87">      .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(<span class="dv">0</span>) <span class="op">-</span> <span class="at">y</span>(d[<span class="dv">1</span>] <span class="op">-</span> d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-88" data-line-number="88"><span class="op">}</span></a>
-<a class="sourceLine" id="cb2-89" data-line-number="89"></a>
-<a class="sourceLine" id="cb2-90" data-line-number="90"><span class="kw">function</span> <span class="at">transitionStacked</span>() <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-91" data-line-number="91">  <span class="va">y</span>.<span class="at">domain</span>([<span class="dv">0</span><span class="op">,</span> y1Max])<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-92" data-line-number="92"></a>
-<a class="sourceLine" id="cb2-93" data-line-number="93">  <span class="va">rect</span>.<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb2-94" data-line-number="94">      .<span class="at">duration</span>(<span class="dv">500</span>)</a>
-<a class="sourceLine" id="cb2-95" data-line-number="95">      .<span class="at">delay</span>(<span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> <span class="dv">10</span><span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-96" data-line-number="96">      .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-97" data-line-number="97">      .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">0</span>]) <span class="op">-</span> <span class="at">y</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-98" data-line-number="98">    .<span class="at">transition</span>()</a>
-<a class="sourceLine" id="cb2-99" data-line-number="99">      .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x</span>(i)<span class="op">;</span> <span class="op">}</span>)</a>
-<a class="sourceLine" id="cb2-100" data-line-number="100">      .<span class="at">attr</span>(<span class="st">"width"</span><span class="op">,</span> <span class="va">x</span>.<span class="at">bandwidth</span>())<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-101" data-line-number="101"><span class="op">}</span></a>
-<a class="sourceLine" id="cb2-102" data-line-number="102"></a>
-<a class="sourceLine" id="cb2-103" data-line-number="103"><span class="co">// Returns an array of m psuedorandom, smoothly-varying non-negative numbers.</span></a>
-<a class="sourceLine" id="cb2-104" data-line-number="104"><span class="co">// Inspired by Lee Byron’s test data generator.</span></a>
-<a class="sourceLine" id="cb2-105" data-line-number="105"><span class="co">// http://leebyron.com/streamgraph/</span></a>
-<a class="sourceLine" id="cb2-106" data-line-number="106"><span class="kw">function</span> <span class="at">bumps</span>(m) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-107" data-line-number="107">  <span class="kw">var</span> values <span class="op">=</span> []<span class="op">,</span> i<span class="op">,</span> j<span class="op">,</span> w<span class="op">,</span> x<span class="op">,</span> y<span class="op">,</span> z<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-108" data-line-number="108"></a>
-<a class="sourceLine" id="cb2-109" data-line-number="109">  <span class="co">// Initialize with uniform random values in [0.1, 0.2).</span></a>
-<a class="sourceLine" id="cb2-110" data-line-number="110">  <span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> m<span class="op">;</span> <span class="op">++</span>i) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-111" data-line-number="111">    values[i] <span class="op">=</span> <span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> <span class="va">Math</span>.<span class="at">random</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-112" data-line-number="112">  <span class="op">}</span></a>
-<a class="sourceLine" id="cb2-113" data-line-number="113"></a>
-<a class="sourceLine" id="cb2-114" data-line-number="114">  <span class="co">// Add five random bumps.</span></a>
-<a class="sourceLine" id="cb2-115" data-line-number="115">  <span class="cf">for</span> (j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> <span class="op">++</span>j) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-116" data-line-number="116">    x <span class="op">=</span> <span class="dv">1</span> / (<span class="fl">0.1</span> <span class="op">+</span> <span class="va">Math</span>.<span class="at">random</span>())<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-117" data-line-number="117">    y <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="va">Math</span>.<span class="at">random</span>() <span class="op">-</span> <span class="fl">0.5</span><span class="op">;</span></a>
-<a class="sourceLine" id="cb2-118" data-line-number="118">    z <span class="op">=</span> <span class="dv">10</span> / (<span class="fl">0.1</span> <span class="op">+</span> <span class="va">Math</span>.<span class="at">random</span>())<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-119" data-line-number="119">    <span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> m<span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-120" data-line-number="120">      w <span class="op">=</span> (i / m <span class="op">-</span> y) <span class="op">*</span> z<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-121" data-line-number="121">      values[i] <span class="op">+=</span> x <span class="op">*</span> <span class="va">Math</span>.<span class="at">exp</span>(<span class="op">-</span>w <span class="op">*</span> w)<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-122" data-line-number="122">    <span class="op">}</span></a>
-<a class="sourceLine" id="cb2-123" data-line-number="123">  <span class="op">}</span></a>
-<a class="sourceLine" id="cb2-124" data-line-number="124"></a>
-<a class="sourceLine" id="cb2-125" data-line-number="125">  <span class="co">// Ensure all values are positive.</span></a>
-<a class="sourceLine" id="cb2-126" data-line-number="126">  <span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> m<span class="op">;</span> <span class="op">++</span>i) <span class="op">{</span></a>
-<a class="sourceLine" id="cb2-127" data-line-number="127">    values[i] <span class="op">=</span> <span class="va">Math</span>.<span class="at">max</span>(<span class="dv">0</span><span class="op">,</span> values[i])<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-128" data-line-number="128">  <span class="op">}</span></a>
-<a class="sourceLine" id="cb2-129" data-line-number="129"></a>
-<a class="sourceLine" id="cb2-130" data-line-number="130">  <span class="cf">return</span> values<span class="op">;</span></a>
-<a class="sourceLine" id="cb2-131" data-line-number="131"><span class="op">}</span></a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../../../reference/r2d3.html">r2d3</a></span>(<span class="dt">data =</span> <span class="kw">c</span>(), <span class="dt">d3_version =</span> <span class="dv">4</span>, <span class="dt">script =</span> <span class="st">"stackedbars.js"</span>)</code></pre></div>
+<div id="htmlwidget-e684097eea6606718496" style="width:100%;height:432.632880098888px;" class="r2d3 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e684097eea6606718496">{"x":{"data":null,"type":"NULL","container":"svg","options":null,"script":"var d3Script = function(d3, r2d3, data, svg, width, height, options, theme, console) {\nthis.d3 = d3;\n\nsvg = d3.select(svg.node());\n/* R2D3 Source File:  stackedbars.js */\n// !preview r2d3 d3_version = 4\n\n// Based on: http://bl.ocks.org/mbostock/3943967\n\nvar n = 4, // The number of series.\n    m = 58; // The number of values per series.\n\n// The xz array has m elements, representing the x-values shared by all series.\n// The yz array has n elements, representing the y-values of each of the n series.\n// Each yz[i] is an array of m non-negative numbers representing a y-value for xz[i].\n// The y01z array has the same structure as yz, but with stacked [y₀, y₁] instead of y.\nvar xz = d3.range(m),\n    yz = d3.range(n).map(function() { return bumps(m); }),\n    y01z = d3.stack().keys(d3.range(n))(d3.transpose(yz)),\n    yMax = d3.max(yz, function(y) { return d3.max(y); }),\n    y1Max = d3.max(y01z, function(y) { return d3.max(y, function(d) { return d[1]; }); });\n\nvar margin = {top: 40, right: 10, bottom: 20, left: 10},\n    width = width - margin.left - margin.right,\n    height = height - margin.top - margin.bottom,\n    g = svg.append(\"g\").attr(\"transform\", \"translate(\" + margin.left + \",\" + margin.top + \")\");\n\nvar x = d3.scaleBand()\n    .domain(xz)\n    .rangeRound([0, width])\n    .padding(0.08);\n\nvar y = d3.scaleLinear()\n    .domain([0, y1Max])\n    .range([height, 0]);\n\nvar color = d3.scaleOrdinal()\n    .domain(d3.range(n))\n    .range(d3.schemeCategory20c);\n\nvar series = g.selectAll(\".series\")\n  .data(y01z)\n  .enter().append(\"g\")\n    .attr(\"fill\", function(d, i) { return color(i); });\n\nvar rect = series.selectAll(\"rect\")\n  .data(function(d) { return d; })\n  .enter().append(\"rect\")\n    .attr(\"x\", function(d, i) { return x(i); })\n    .attr(\"y\", height)\n    .attr(\"width\", x.bandwidth())\n    .attr(\"height\", 0);\n\nrect.transition()\n    .delay(function(d, i) { return i * 10; })\n    .attr(\"y\", function(d) { return y(d[1]); })\n    .attr(\"height\", function(d) { return y(d[0]) - y(d[1]); });\n\ng.append(\"g\")\n    .attr(\"class\", \"axis axis--x\")\n    .attr(\"transform\", \"translate(0,\" + height + \")\")\n    .style(\"font-size\", Math.min(width, height * 2) / 90)\n    .call(d3.axisBottom(x)\n        .tickSize(0)\n        .tickPadding(6));\n\nd3.selectAll(\"input\")\n    .on(\"change\", changed);\n\nvar timeout = d3.timeout(function() {\n  d3.select(\"input[value=\\\"grouped\\\"]\")\n      .property(\"checked\", true)\n      .dispatch(\"change\");\n}, 2000);\n\nfunction changed() {\n  timeout.stop();\n  if (this.value === \"grouped\") transitionGrouped();\n  else transitionStacked();\n}\n\nfunction transitionGrouped() {\n  y.domain([0, yMax]);\n\n  rect.transition()\n      .duration(500)\n      .delay(function(d, i) { return i * 10; })\n      .attr(\"x\", function(d, i) { return x(i) + x.bandwidth() / n * this.parentNode.__data__.key; })\n      .attr(\"width\", x.bandwidth() / n)\n    .transition()\n      .attr(\"y\", function(d) { return y(d[1] - d[0]); })\n      .attr(\"height\", function(d) { return y(0) - y(d[1] - d[0]); });\n}\n\nfunction transitionStacked() {\n  y.domain([0, y1Max]);\n\n  rect.transition()\n      .duration(500)\n      .delay(function(d, i) { return i * 10; })\n      .attr(\"y\", function(d) { return y(d[1]); })\n      .attr(\"height\", function(d) { return y(d[0]) - y(d[1]); })\n    .transition()\n      .attr(\"x\", function(d, i) { return x(i); })\n      .attr(\"width\", x.bandwidth());\n}\n\n// Returns an array of m psuedorandom, smoothly-varying non-negative numbers.\n// Inspired by Lee Byron’s test data generator.\n// http://leebyron.com/streamgraph/\nfunction bumps(m) {\n  var values = [], i, j, w, x, y, z;\n\n  // Initialize with uniform random values in [0.1, 0.2).\n  for (i = 0; i < m; ++i) {\n    values[i] = 0.1 + 0.1 * Math.random();\n  }\n\n  // Add five random bumps.\n  for (j = 0; j < 5; ++j) {\n    x = 1 / (0.1 + Math.random());\n    y = 2 * Math.random() - 0.5;\n    z = 10 / (0.1 + Math.random());\n    for (i = 0; i < m; i++) {\n      w = (i / m - y) * z;\n      values[i] += x * Math.exp(-w * w);\n    }\n  }\n\n  // Ensure all values are positive.\n  for (i = 0; i < m; ++i) {\n    values[i] = Math.max(0, values[i]);\n  }\n\n  return values;\n}\n};","style":"/* R2D3 Source File:  stackedbars.css */\nlabel {\n  display: block;\n}","version":4,"theme":{"default":{"background":"#FFFFFF","foreground":"#000000"},"runtime":null}},"evals":[],"jsHooks":[]}</script><h4 id="stackedbars.js">stackedbars.js</h4>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// !preview r2d3 d3_version = 4</span>
+
+<span class="co">// Based on: http://bl.ocks.org/mbostock/3943967</span>
+
+<span class="kw">var</span> n <span class="op">=</span> <span class="dv">4</span><span class="op">,</span> <span class="co">// The number of series.</span>
+    m <span class="op">=</span> <span class="dv">58</span><span class="op">;</span> <span class="co">// The number of values per series.</span>
+
+<span class="co">// The xz array has m elements, representing the x-values shared by all series.</span>
+<span class="co">// The yz array has n elements, representing the y-values of each of the n series.</span>
+<span class="co">// Each yz[i] is an array of m non-negative numbers representing a y-value for xz[i].</span>
+<span class="co">// The y01z array has the same structure as yz, but with stacked [y₀, y₁] instead of y.</span>
+<span class="kw">var</span> xz <span class="op">=</span> <span class="va">d3</span>.<span class="at">range</span>(m)<span class="op">,</span>
+    yz <span class="op">=</span> <span class="va">d3</span>.<span class="at">range</span>(n).<span class="at">map</span>(<span class="kw">function</span>() <span class="op">{</span> <span class="cf">return</span> <span class="at">bumps</span>(m)<span class="op">;</span> <span class="op">}</span>)<span class="op">,</span>
+    y01z <span class="op">=</span> <span class="va">d3</span>.<span class="at">stack</span>().<span class="at">keys</span>(<span class="va">d3</span>.<span class="at">range</span>(n))(<span class="va">d3</span>.<span class="at">transpose</span>(yz))<span class="op">,</span>
+    yMax <span class="op">=</span> <span class="va">d3</span>.<span class="at">max</span>(yz<span class="op">,</span> <span class="kw">function</span>(y) <span class="op">{</span> <span class="cf">return</span> <span class="va">d3</span>.<span class="at">max</span>(y)<span class="op">;</span> <span class="op">}</span>)<span class="op">,</span>
+    y1Max <span class="op">=</span> <span class="va">d3</span>.<span class="at">max</span>(y01z<span class="op">,</span> <span class="kw">function</span>(y) <span class="op">{</span> <span class="cf">return</span> <span class="va">d3</span>.<span class="at">max</span>(y<span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d[<span class="dv">1</span>]<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+
+<span class="kw">var</span> margin <span class="op">=</span> <span class="op">{</span><span class="dt">top</span><span class="op">:</span> <span class="dv">40</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">10</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">10</span><span class="op">},</span>
+    width <span class="op">=</span> width <span class="op">-</span> <span class="va">margin</span>.<span class="at">left</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">right</span><span class="op">,</span>
+    height <span class="op">=</span> height <span class="op">-</span> <span class="va">margin</span>.<span class="at">top</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">bottom</span><span class="op">,</span>
+    g <span class="op">=</span> <span class="va">svg</span>.<span class="at">append</span>(<span class="st">"g"</span>).<span class="at">attr</span>(<span class="st">"transform"</span><span class="op">,</span> <span class="st">"translate("</span> <span class="op">+</span> <span class="va">margin</span>.<span class="at">left</span> <span class="op">+</span> <span class="st">","</span> <span class="op">+</span> <span class="va">margin</span>.<span class="at">top</span> <span class="op">+</span> <span class="st">")"</span>)<span class="op">;</span>
+
+<span class="kw">var</span> x <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleBand</span>()
+    .<span class="at">domain</span>(xz)
+    .<span class="at">rangeRound</span>([<span class="dv">0</span><span class="op">,</span> width])
+    .<span class="at">padding</span>(<span class="fl">0.08</span>)<span class="op">;</span>
+
+<span class="kw">var</span> y <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleLinear</span>()
+    .<span class="at">domain</span>([<span class="dv">0</span><span class="op">,</span> y1Max])
+    .<span class="at">range</span>([height<span class="op">,</span> <span class="dv">0</span>])<span class="op">;</span>
+
+<span class="kw">var</span> color <span class="op">=</span> <span class="va">d3</span>.<span class="at">scaleOrdinal</span>()
+    .<span class="at">domain</span>(<span class="va">d3</span>.<span class="at">range</span>(n))
+    .<span class="at">range</span>(<span class="va">d3</span>.<span class="at">schemeCategory20c</span>)<span class="op">;</span>
+
+<span class="kw">var</span> series <span class="op">=</span> <span class="va">g</span>.<span class="at">selectAll</span>(<span class="st">".series"</span>)
+  .<span class="at">data</span>(y01z)
+  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"g"</span>)
+    .<span class="at">attr</span>(<span class="st">"fill"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> <span class="at">color</span>(i)<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+
+<span class="kw">var</span> rect <span class="op">=</span> <span class="va">series</span>.<span class="at">selectAll</span>(<span class="st">"rect"</span>)
+  .<span class="at">data</span>(<span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d<span class="op">;</span> <span class="op">}</span>)
+  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">"rect"</span>)
+    .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x</span>(i)<span class="op">;</span> <span class="op">}</span>)
+    .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> height)
+    .<span class="at">attr</span>(<span class="st">"width"</span><span class="op">,</span> <span class="va">x</span>.<span class="at">bandwidth</span>())
+    .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="dv">0</span>)<span class="op">;</span>
+
+<span class="va">rect</span>.<span class="at">transition</span>()
+    .<span class="at">delay</span>(<span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> <span class="dv">10</span><span class="op">;</span> <span class="op">}</span>)
+    .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)
+    .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">0</span>]) <span class="op">-</span> <span class="at">y</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+
+<span class="va">g</span>.<span class="at">append</span>(<span class="st">"g"</span>)
+    .<span class="at">attr</span>(<span class="st">"class"</span><span class="op">,</span> <span class="st">"axis axis--x"</span>)
+    .<span class="at">attr</span>(<span class="st">"transform"</span><span class="op">,</span> <span class="st">"translate(0,"</span> <span class="op">+</span> height <span class="op">+</span> <span class="st">")"</span>)
+    .<span class="at">style</span>(<span class="st">"font-size"</span><span class="op">,</span> <span class="va">Math</span>.<span class="at">min</span>(width<span class="op">,</span> height <span class="op">*</span> <span class="dv">2</span>) / <span class="dv">90</span>)
+    .<span class="at">call</span>(<span class="va">d3</span>.<span class="at">axisBottom</span>(x)
+        .<span class="at">tickSize</span>(<span class="dv">0</span>)
+        .<span class="at">tickPadding</span>(<span class="dv">6</span>))<span class="op">;</span>
+
+<span class="va">d3</span>.<span class="at">selectAll</span>(<span class="st">"input"</span>)
+    .<span class="at">on</span>(<span class="st">"change"</span><span class="op">,</span> changed)<span class="op">;</span>
+
+<span class="kw">var</span> timeout <span class="op">=</span> <span class="va">d3</span>.<span class="at">timeout</span>(<span class="kw">function</span>() <span class="op">{</span>
+  <span class="va">d3</span>.<span class="at">select</span>(<span class="st">"input[value=</span><span class="sc">\"</span><span class="st">grouped</span><span class="sc">\"</span><span class="st">]"</span>)
+      .<span class="at">property</span>(<span class="st">"checked"</span><span class="op">,</span> <span class="kw">true</span>)
+      .<span class="at">dispatch</span>(<span class="st">"change"</span>)<span class="op">;</span>
+<span class="op">},</span> <span class="dv">2000</span>)<span class="op">;</span>
+
+<span class="kw">function</span> <span class="at">changed</span>() <span class="op">{</span>
+  <span class="va">timeout</span>.<span class="at">stop</span>()<span class="op">;</span>
+  <span class="cf">if</span> (<span class="kw">this</span>.<span class="at">value</span> <span class="op">===</span> <span class="st">"grouped"</span>) <span class="at">transitionGrouped</span>()<span class="op">;</span>
+  <span class="cf">else</span> <span class="at">transitionStacked</span>()<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">transitionGrouped</span>() <span class="op">{</span>
+  <span class="va">y</span>.<span class="at">domain</span>([<span class="dv">0</span><span class="op">,</span> yMax])<span class="op">;</span>
+
+  <span class="va">rect</span>.<span class="at">transition</span>()
+      .<span class="at">duration</span>(<span class="dv">500</span>)
+      .<span class="at">delay</span>(<span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> <span class="dv">10</span><span class="op">;</span> <span class="op">}</span>)
+      .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x</span>(i) <span class="op">+</span> <span class="va">x</span>.<span class="at">bandwidth</span>() / n <span class="op">*</span> <span class="kw">this</span>.<span class="va">parentNode</span>.<span class="va">__data__</span>.<span class="at">key</span><span class="op">;</span> <span class="op">}</span>)
+      .<span class="at">attr</span>(<span class="st">"width"</span><span class="op">,</span> <span class="va">x</span>.<span class="at">bandwidth</span>() / n)
+    .<span class="at">transition</span>()
+      .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">1</span>] <span class="op">-</span> d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)
+      .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(<span class="dv">0</span>) <span class="op">-</span> <span class="at">y</span>(d[<span class="dv">1</span>] <span class="op">-</span> d[<span class="dv">0</span>])<span class="op">;</span> <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">transitionStacked</span>() <span class="op">{</span>
+  <span class="va">y</span>.<span class="at">domain</span>([<span class="dv">0</span><span class="op">,</span> y1Max])<span class="op">;</span>
+
+  <span class="va">rect</span>.<span class="at">transition</span>()
+      .<span class="at">duration</span>(<span class="dv">500</span>)
+      .<span class="at">delay</span>(<span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> <span class="dv">10</span><span class="op">;</span> <span class="op">}</span>)
+      .<span class="at">attr</span>(<span class="st">"y"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)
+      .<span class="at">attr</span>(<span class="st">"height"</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> <span class="at">y</span>(d[<span class="dv">0</span>]) <span class="op">-</span> <span class="at">y</span>(d[<span class="dv">1</span>])<span class="op">;</span> <span class="op">}</span>)
+    .<span class="at">transition</span>()
+      .<span class="at">attr</span>(<span class="st">"x"</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> <span class="at">x</span>(i)<span class="op">;</span> <span class="op">}</span>)
+      .<span class="at">attr</span>(<span class="st">"width"</span><span class="op">,</span> <span class="va">x</span>.<span class="at">bandwidth</span>())<span class="op">;</span>
+<span class="op">}</span>
+
+<span class="co">// Returns an array of m psuedorandom, smoothly-varying non-negative numbers.</span>
+<span class="co">// Inspired by Lee Byron’s test data generator.</span>
+<span class="co">// http://leebyron.com/streamgraph/</span>
+<span class="kw">function</span> <span class="at">bumps</span>(m) <span class="op">{</span>
+  <span class="kw">var</span> values <span class="op">=</span> []<span class="op">,</span> i<span class="op">,</span> j<span class="op">,</span> w<span class="op">,</span> x<span class="op">,</span> y<span class="op">,</span> z<span class="op">;</span>
+
+  <span class="co">// Initialize with uniform random values in [0.1, 0.2).</span>
+  <span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> m<span class="op">;</span> <span class="op">++</span>i) <span class="op">{</span>
+    values[i] <span class="op">=</span> <span class="fl">0.1</span> <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> <span class="va">Math</span>.<span class="at">random</span>()<span class="op">;</span>
+  <span class="op">}</span>
+
+  <span class="co">// Add five random bumps.</span>
+  <span class="cf">for</span> (j <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> j <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> <span class="op">++</span>j) <span class="op">{</span>
+    x <span class="op">=</span> <span class="dv">1</span> / (<span class="fl">0.1</span> <span class="op">+</span> <span class="va">Math</span>.<span class="at">random</span>())<span class="op">;</span>
+    y <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> <span class="va">Math</span>.<span class="at">random</span>() <span class="op">-</span> <span class="fl">0.5</span><span class="op">;</span>
+    z <span class="op">=</span> <span class="dv">10</span> / (<span class="fl">0.1</span> <span class="op">+</span> <span class="va">Math</span>.<span class="at">random</span>())<span class="op">;</span>
+    <span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> m<span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span>
+      w <span class="op">=</span> (i / m <span class="op">-</span> y) <span class="op">*</span> z<span class="op">;</span>
+      values[i] <span class="op">+=</span> x <span class="op">*</span> <span class="va">Math</span>.<span class="at">exp</span>(<span class="op">-</span>w <span class="op">*</span> w)<span class="op">;</span>
+    <span class="op">}</span>
+  <span class="op">}</span>
+
+  <span class="co">// Ensure all values are positive.</span>
+  <span class="cf">for</span> (i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> m<span class="op">;</span> <span class="op">++</span>i) <span class="op">{</span>
+    values[i] <span class="op">=</span> <span class="va">Math</span>.<span class="at">max</span>(<span class="dv">0</span><span class="op">,</span> values[i])<span class="op">;</span>
+  <span class="op">}</span>
+
+  <span class="cf">return</span> values<span class="op">;</span>
+<span class="op">}</span></code></pre></div>
 <h4 id="stackedbars.css">stackedbars.css</h4>
-<div class="sourceCode" id="cb3"><pre class="sourceCode css"><code class="sourceCode css"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="fu">.r2d3</span> label {</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="kw">display</span>: <span class="dv">block</span>;</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">}</a></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css">label <span class="kw">{</span>
+  <span class="kw">display:</span> <span class="dt">block</span><span class="kw">;</span>
+<span class="kw">}</span></code></pre></div>
 </div>
 </div>
 <script type="text/javascript">
@@ -274,7 +274,6 @@ $('a.list-group-item[href="../stackedbars/"]').addClass('active');
 $('a[href="../../../articles/gallery.html"]').parent().addClass('active');
 </script>
 </div>
-  </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
       </div>
