@@ -24,8 +24,6 @@ Suggests:
   shinytest,
   testthat,
   webshot
-Remotes:
-  rstudio/shinytest
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 URL: https://github.com/rstudio/r2d3
