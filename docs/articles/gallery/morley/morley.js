@@ -2,7 +2,7 @@
 
 // Based on: https://bl.ocks.org/mbostock/4061502
 
-var margin = {top: 10, right: 50, bottom: 20, left: 50},
+var margin = {top: 10, right: 40, bottom: 20, left: 40},
     width = (width/4) - 10 - margin.left - margin.right,
     height = height - margin.top - margin.bottom;
 
