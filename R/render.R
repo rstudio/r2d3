@@ -26,6 +26,12 @@
 #'
 #' @import htmlwidgets
 #' @import tools
+#' 
+#' @details
+#' 
+#' In order to scope CSS styles when multiple widgets are rendered, the Shadow DOM and
+#' the wecomponents polyfill is used, this feature can be turned off by setting the 
+#' \code{r2d3.shadow} option to \code{FALSE}.
 #'
 #' @examples
 #'
@@ -113,7 +119,8 @@ r2d3 <- function(
     theme = list(
       default = default_theme(),
       runtime = runtime_theme()
-    )
+    ),
+    useShadow = getOption("r2d3.shadow", TRUE)
   )
   
   # resolve viewer if it's explicitly specified

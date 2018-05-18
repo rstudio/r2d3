@@ -46,6 +46,11 @@ browser.}
 \description{
 Visualize data using a custom D3 visualization script
 }
+\details{
+In order to scope CSS styles when multiple widgets are rendered, the Shadow DOM and
+the wecomponents polyfill is used, this feature can be turned off by setting the
+\code{r2d3.shadow} option to \code{FALSE}.
+}
 \examples{
 
 library(r2d3)
