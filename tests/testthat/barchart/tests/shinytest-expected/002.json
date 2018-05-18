@@ -24,7 +24,8 @@
             "foreground": "#000000"
           },
           "runtime": null
-        }
+        },
+        "useShadow": true
       },
       "evals": [
 
