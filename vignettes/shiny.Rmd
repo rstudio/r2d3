@@ -82,7 +82,7 @@ Having a D3 plot update based on a changing Shiny input is very common. But, wha
 
 For example, we may want Shiny to know that our D3 bar plot was clicked on, and know which bar was clicked. Enabling communication from D3 to Shiny requires changes to both D3 and Shiny code:
 
-- *D3 script* - Add a call to the Shiny JavaScript function `Shiny.onInputChange()`.
+- *D3 script* - Add a call to the Shiny JavaScript function `Shiny.setInputValue()`.  
 - *Shiny script* - Add a reactive function that looks for the change and performs an action based on the selected value.
 
 ### Example
@@ -107,7 +107,7 @@ svg.selectAll('rect')
     .attr('fill', 'steelblue')
     .attr("d", function(d) { return d; })
     .on("click", function(){
-      Shiny.onInputChange(
+      Shiny.setInputValue(
         "bar_clicked", 
         d3.select(this).attr("d"));
     });
@@ -117,7 +117,7 @@ First, we need to decide which attribute (`.attr`) is going to be passed to Shin
 
 <img src="images/attr.PNG" class="illustration" width=600/>
 
-Next, the `on()` function is used to capture an event inside the plot.The first argument is *"click"*, indicating that we want it to be activated when someone clicks on the plot.  The second argument of `on()` is a function, this function will contain a call to the `Shiny.onInputChange()` JS function. The first argument of the Shiny JS function is the name that the Shiny app will be looking for. In this case, we will use **bar_clicked**.  The second argument is the value that is returned to Shiny, and for that, we will use the `d` attribute created previously.
+Next, the `on()` function is used to capture an event inside the plot.The first argument is *"click"*, indicating that we want it to be activated when someone clicks on the plot.  The second argument of `on()` is a function, this function will contain a call to the `Shiny.setInputValue()` JS function. The first argument of the Shiny JS function is the name that the Shiny app will be looking for. In this case, we will use **bar_clicked**.  The second argument is the value that is returned to Shiny, and for that, we will use the `d` attribute created previously.
 
 <img src="images/onclick.PNG" class="illustration" width=600/>
 
@@ -149,7 +149,7 @@ shinyApp(ui, server)
 
 The `ui` contains a text output named `selected`. Server-side, a reactive function, called `output$selected()` will used to capture the changes of the bar selection.
 
-In the D3 script, we called `Shiny.onInputChanged()` with an input named `bar_clicked`. This can now be used as if was an Shiny `input` in the app. In this case, the name to track will be: `input$bar_clicked`.
+In the D3 script, we called `Shiny.setInputValued()` with an input named `bar_clicked`. This can now be used as if was an Shiny `input` in the app. In this case, the name to track will be: `input$bar_clicked`.  **The `Shiny.setInputValued()` JS function is recognized by the `shiny` package version 1.1 and above.**
 
 The `output$selected()` function uses `renderText()` to display the cosine of the bar that was clicked on. The call to `input$bar_clicked` is used inside `renderText()` to execute the `cos()` calculation.
 
