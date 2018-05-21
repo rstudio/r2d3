@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">r2d3</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.0</span>
       </span>
     </div>
 
@@ -141,10 +141,9 @@
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting Started</h2>
 <p>First, install the package from GitHub as follows:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">devtools::<span class="kw">install_github</span>(<span class="st">"rstudio/r2d3"</span>)</code></pre></div>
-<p>Next, install the <a href="https://dailies.rstudio.com">daily build</a> of RStudio (you need this version of RStudio to take advantage of various integrated tools for authoring D3 scripts with r2d3):</p>
-<p><a href="https://dailies.rstudio.com"><img src="tools/README/daily_build.png" class="screenshot" width="600/"></a></p>
-<p>Once you’ve installed the package and the RStudio daily build you have the tools required to work with <strong>r2d3</strong>. Below, we’ll describe basic workflow within RStudio and techniques for including visualizations in R Markdown and Shiny applications.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"rstudio/r2d3"</span>)</a></code></pre></div>
+<p>Next, install the <a href="https://www.rstudio.com/rstudio/download/preview/">preview release of RStudio v1.2</a> of RStudio (you need this version of RStudio to take advantage of various integrated tools for authoring D3 scripts with r2d3).</p>
+<p>Once you’ve installed the package and the RStudio v1.2 preview release you have the tools required to work with <strong>r2d3</strong>. Below, we’ll describe basic workflow within RStudio and techniques for including visualizations in R Markdown and Shiny applications.</p>
 </div>
 <div id="about-d3" class="section level2">
 <h2 class="hasAnchor">
@@ -156,20 +155,20 @@
 <h2 class="hasAnchor">
 <a href="#d3-scripts" class="anchor"></a>D3 Scripts</h2>
 <p>To use <strong>r2d3</strong>, write a D3 script and then pass R data to it using the <code><a href="../reference/r2d3.html">r2d3()</a></code> function. For example, here’s a simple D3 script that draws a bar chart (“barchart.js”):</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span>
-
-<span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span>
-
-<span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)
-  .<span class="at">data</span>(data)
-  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)
-    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d <span class="op">*</span> width<span class="op">;</span> <span class="op">}</span>)
-    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)
-    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)
-    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'steelblue'</span>)<span class="op">;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  .<span class="at">data</span>(data)</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d <span class="op">*</span> width<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'steelblue'</span>)<span class="op">;</span></a></code></pre></div>
 <p>To render the script within R you call the <code><a href="../reference/r2d3.html">r2d3()</a></code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(r2d3)
-<span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(r2d3)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a></code></pre></div>
 <p>Which results in the following visualization:</p>
 <p><img src="tools/README/bar_chart.png" class="illustration" width="600/"></p>
 <div id="d3-variables" class="section level3">
@@ -201,12 +200,12 @@
 <div id="d3-preview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#d3-preview" class="anchor"></a>D3 Preview</h2>
-<p>The <a href="https://dailies.rstudio.com">daily build</a> of RStudio includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:</p>
+<p>The <a href="https://www.rstudio.com/rstudio/download/preview/">RStudio v1.2 preview release</a> of RStudio includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:</p>
 <p><img src="tools/README/new_script.png" class="screenshot" width="600/"></p>
 <p>A simple template for a D3 script (the barchart.js example shown above) is provided by default. You can use the <strong>Preview</strong> command (Ctrl+Shift+Center) to render the visualization:</p>
 <p><img src="tools/README/rstudio_preview.png" class="screenshot" width="600/"></p>
 <p>You might wonder where the data comes from for the preview. Note that there is a special comment at the top of the D3 script:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></a></code></pre></div>
 <p>This comment enables you to specify the data (along with any other arguments to the <code><a href="../reference/r2d3.html">r2d3()</a></code> function) to use for the preview.</p>
 </div>
 <div id="r-markdown" class="section level2">
@@ -244,27 +243,27 @@ svg.selectAll('rect')
 <h2 class="hasAnchor">
 <a href="#shiny" class="anchor"></a>Shiny</h2>
 <p>The <code><a href="../reference/d3-shiny.html">renderD3()</a></code> and <code><a href="../reference/d3-shiny.html">d3Output()</a></code> functions enable you to include D3 visualizations within Shiny applications:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
-<span class="kw">library</span>(r2d3)
-
-ui &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/inputPanel">inputPanel</a></span>(
-    <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/sliderInput">sliderInput</a></span>(<span class="st">"bar_max"</span>, <span class="dt">label =</span> <span class="st">"Max:"</span>,
-                <span class="dt">min =</span> <span class="fl">0.1</span>, <span class="dt">max =</span> <span class="fl">1.0</span>, <span class="dt">value =</span> <span class="fl">0.2</span>, <span class="dt">step =</span> <span class="fl">0.1</span>)
-  ),
-  <span class="kw"><a href="../reference/d3-shiny.html">d3Output</a></span>(<span class="st">"d3"</span>)
-)
-
-server &lt;-<span class="st"> </span>function(input, output) {
-  output$d3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/d3-shiny.html">renderD3</a></span>({
-    <span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(
-      <span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">0</span>, input$bar_max),
-      <span class="dt">script =</span> <span class="kw">system.file</span>(<span class="st">"examples/baranims.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)
-    )
-  })
-}
-
-<span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/shinyApp">shinyApp</a></span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">library</span>(r2d3)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">ui &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/inputPanel">inputPanel</a></span>(</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/sliderInput">sliderInput</a></span>(<span class="st">"bar_max"</span>, <span class="dt">label =</span> <span class="st">"Max:"</span>,</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">                <span class="dt">min =</span> <span class="fl">0.1</span>, <span class="dt">max =</span> <span class="fl">1.0</span>, <span class="dt">value =</span> <span class="fl">0.2</span>, <span class="dt">step =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">  ),</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">  <span class="kw"><a href="../reference/d3-shiny.html">d3Output</a></span>(<span class="st">"d3"</span>)</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">)</a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">  output<span class="op">$</span>d3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/d3-shiny.html">renderD3</a></span>({</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">    <span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(</a>
+<a class="sourceLine" id="cb5-15" data-line-number="15">      <span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">0</span>, input<span class="op">$</span>bar_max),</a>
+<a class="sourceLine" id="cb5-16" data-line-number="16">      <span class="dt">script =</span> <span class="kw">system.file</span>(<span class="st">"examples/baranims.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)</a>
+<a class="sourceLine" id="cb5-17" data-line-number="17">    )</a>
+<a class="sourceLine" id="cb5-18" data-line-number="18">  })</a>
+<a class="sourceLine" id="cb5-19" data-line-number="19">}</a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/shinyApp">shinyApp</a></span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</a></code></pre></div>
 <p><img src="tools/README/baranim-1.gif" class="illustration" width="600/"></p>
 <p>See the article on <a href="https://rstudio.github.io/r2d3/articles/shiny.html">Using r2d3 with Shiny</a> to learn more (including how to create custom Shiny inputs that respond to user interaction with D3 visualizations).</p>
 </div>

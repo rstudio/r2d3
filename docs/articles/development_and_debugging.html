@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">r2d3</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.0</span>
       </span>
     </div>
 
@@ -125,17 +125,17 @@
 <li><p>Using integrated tools for <strong>r2d3</strong> within RStudio to preview visualizations; and</p></li>
 <li><p>Using browser debugging tools to pinpoint errors in your code.</p></li>
 </ol>
-<p>Note that the development tools described above are only fully supported within the <a href="https://dailies.rstudio.com">daily build</a> of RStudio (as opposed to the current stable release) so you should download the daily build before trying these features out.</p>
+<p>Note that the development tools described above are only fully supported within the <a href="https://www.rstudio.com/rstudio/download/preview/">RStudio v1.2 preview release</a> (as opposed to the current stable release) so you should download the daily build before trying these features out.</p>
 </div>
 <div id="rstudio-preview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#rstudio-preview" class="anchor"></a>RStudio Preview</h2>
-<p>The <a href="https://dailies.rstudio.com">daily build</a> of RStudio includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:</p>
+<p>The <a href="https://www.rstudio.com/rstudio/download/preview/">RStudio v1.2 preview release</a> includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:</p>
 <p><img src="images/new_script.png" class="screenshot" width="600/"></p>
 <p>A simple template for a D3 script (the barchart.js example shown above) is provided by default. You can use the <strong>Preview</strong> command (Ctrl+Shift+Center) to render the visualization:</p>
 <p><img src="images/rstudio_preview.png" class="screenshot" width="600/"></p>
 <p>You might wonder where the data comes from for the preview. Note that there is a special comment at the top of the D3 script:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></a></code></pre></div>
 <p>This comment enables you to specify the data (along with any other arguments to the <code><a href="../reference/r2d3.html">r2d3()</a></code> function) to use for the preview.</p>
 <div id="error-navigation" class="section level3">
 <h3 class="hasAnchor">
@@ -170,7 +170,7 @@
 </table>
 <p>The “external” option is useful if your visualization requires more space than an RStudio pane affords. The “browser” option is useful if you need access to browser debugging tools during development.</p>
 <p>Here’s an example of adding the <code>viewer</code> argument to the preview comment at the top of a D3 script:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), viewer="external"</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), viewer="external"</span></a></code></pre></div>
 </div>
 </div>
 <div id="console-logging" class="section level2">
@@ -178,32 +178,32 @@
 <a href="#console-logging" class="anchor"></a>Console Logging</h2>
 <p>When troubleshooting a visualization it is also often useful to print diagnostics to the JavaScript console. This is usually accomplished by calling <code>console.log()</code> with a message that can help you troubleshoot the problem at hand.</p>
 <p>For instance, the following script does not trigger any runtime errors but also does not render anything at all:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span>
-
-<span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">ceil</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span>
-
-<span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)
-  .<span class="at">data</span>(data)
-  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)
-    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d<span class="op">;</span> <span class="op">}</span>)
-    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)
-    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)
-    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'steelblue'</span>)<span class="op">;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">ceil</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  .<span class="at">data</span>(data)</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'steelblue'</span>)<span class="op">;</span></a></code></pre></div>
 <p>In this case, we think the problem might be with the <code>width</code> so we print this value to the console as follows:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span>
-
-<span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">ceil</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span>
-
-<span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)
-  .<span class="at">data</span>(data)
-  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)
-    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span>
-      <span class="va">console</span>.<span class="at">log</span>(<span class="st">"The width has value "</span> <span class="op">+</span> d)
-      <span class="cf">return</span> d <span class="op">*</span> width <span class="op">*</span> <span class="dv">0</span><span class="op">;</span>
-    <span class="op">}</span>)
-    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)
-    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)
-    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'steelblue'</span>)<span class="op">;</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">ceil</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  .<span class="at">data</span>(data)</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">      <span class="va">console</span>.<span class="at">log</span>(<span class="st">"The width has value "</span> <span class="op">+</span> d)</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">      <span class="cf">return</span> d <span class="op">*</span> width <span class="op">*</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">    <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'steelblue'</span>)<span class="op">;</span></a></code></pre></div>
 <p><strong>r2d3</strong> renders renders the JavaScript console output directly into the visualization. For this example, this will show that the <code>width</code> is <code>0.2</code>, which is too small to be visible:</p>
 <p><img src="images/console_logging.png" class="illustration" width="600/"></p>
 </div>
@@ -213,7 +213,7 @@
 <p>If you need to debug errors or other unexpected behavior in your D3 script, you can use the <em>Show in new window</em> window command within the RStudio Viewer to show the visualization in an external web browser:</p>
 <p><img src="images/show_in_new_window.png" class="illustration" width="600/"></p>
 <p>It’s also possible to add the <code>viewer="browser"</code> option to your <code>!preview</code> comment at the top of the file to skip the RStudio Viewer and route the visualization directly to an external browser:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), viewer="browser"</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), viewer="browser"</span></a></code></pre></div>
 <p>Once you’ve opened the visualization you can use your browser <strong>Developer Tools</strong> to do additional debugging (typically you’ll need to reload the page after you’ve opened the developer tools pane in order to reproduce the error):</p>
 <p><img src="images/browser_developer_tools.png" class="screenshot" width="600/"></p>
 <p>Your original D3 script and dependencies are available as a <code>r2d3-script-###</code> script which can be used to set breakpoints or inspect errors in detail:</p>

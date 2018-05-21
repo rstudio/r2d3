@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">r2d3</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.0</span>
       </span>
     </div>
 
@@ -138,13 +138,13 @@
 <h3 class="hasAnchor">
 <a href="#save-as-html" class="anchor"></a>Save as HTML</h3>
 <p>You can use the <code><a href="../reference/save_d3_html.html">save_d3_html()</a></code> function to save a D3 visualization as an HTML file. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(r2d3)
-viz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)
-<span class="kw"><a href="../reference/save_d3_html.html">save_d3_html</a></span>(viz, <span class="dt">file =</span> <span class="st">"viz.html"</span>)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(r2d3)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">viz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="../reference/save_d3_html.html">save_d3_html</a></span>(viz, <span class="dt">file =</span> <span class="st">"viz.html"</span>)</a></code></pre></div>
 <p>By default, the HTML file will be self-contained (all CSS and JavaScript dependencies will be embedded with the file) so that it’s easy to share. If you want the dependencies written to a separate directory you can set <code>selfcontained = FALSE</code>. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(r2d3)
-viz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)
-<span class="kw"><a href="../reference/save_d3_html.html">save_d3_html</a></span>(viz, <span class="dt">file =</span> <span class="st">"viz.html"</span>, <span class="dt">selfcontained =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(r2d3)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">viz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="../reference/save_d3_html.html">save_d3_html</a></span>(viz, <span class="dt">file =</span> <span class="st">"viz.html"</span>, <span class="dt">selfcontained =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Setting <code>selfcontained = FALSE</code> is useful if you want to embed your D3 visualization within another HTML page since it separates the visualization itself from various link and script dependencies that need to be placed in the HTML head.</p>
 </div>
 <div id="rpubs-rstudio-connect" class="section level3">
@@ -161,10 +161,10 @@ viz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r2d3.ht
 <h3 class="hasAnchor">
 <a href="#save_d3_png" class="anchor"></a>save_d3_png()</h3>
 <p>You can use the <code><a href="../reference/save_d3_png.html">save_d3_png()</a></code> function to save a D3 visualization as a PNG image. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(r2d3)
-viz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)
-<span class="kw"><a href="../reference/save_d3_png.html">save_d3_png</a></span>(viz, <span class="dt">file =</span> <span class="st">"viz.png"</span>)</code></pre></div>
-<p>Using the <code><a href="../reference/save_d3_png.html">save_d3_png()</a></code> function requires that you install the <a href="https://cran.r-project.org/package=webshot">webshot</a> package, as well as the phantom.js headless browser (which you can install using the function <code>webshot::install_phantomjs()</code>).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(r2d3)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">viz &lt;-<span class="st"> </span><span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(<span class="dt">data=</span><span class="kw">c</span>(<span class="fl">0.3</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span>, <span class="fl">0.95</span>, <span class="fl">0.40</span>, <span class="fl">0.20</span>), <span class="dt">script =</span> <span class="st">"barchart.js"</span>)</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw"><a href="../reference/save_d3_png.html">save_d3_png</a></span>(viz, <span class="dt">file =</span> <span class="st">"viz.png"</span>)</a></code></pre></div>
+<p>Using the <code><a href="../reference/save_d3_png.html">save_d3_png()</a></code> function requires that you install the <a href="https://cran.r-project.org/package=webshot">webshot</a> package, as well as the phantom.js headless browser (which you can install using the function <code><a href="http://www.rdocumentation.org/packages/webshot/topics/install_phantomjs">webshot::install_phantomjs()</a></code>).</p>
 </div>
 <div id="rstudio-viewer" class="section level3">
 <h3 class="hasAnchor">
@@ -217,27 +217,27 @@ svg.selectAll('rect')
 <h2 class="hasAnchor">
 <a href="#shiny-applications" class="anchor"></a>Shiny applications</h2>
 <p>The <code><a href="../reference/d3-shiny.html">renderD3()</a></code> and <code><a href="../reference/d3-shiny.html">d3Output()</a></code> functions enable you to include D3 visualizations within <a href="https://shiny.rstudio.com">Shiny</a> applications:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(shiny)
-<span class="kw">library</span>(r2d3)
-
-ui &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(
-  <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/inputPanel">inputPanel</a></span>(
-    <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/sliderInput">sliderInput</a></span>(<span class="st">"bar_max"</span>, <span class="dt">label =</span> <span class="st">"Max:"</span>,
-                <span class="dt">min =</span> <span class="fl">0.1</span>, <span class="dt">max =</span> <span class="fl">1.0</span>, <span class="dt">value =</span> <span class="fl">0.2</span>, <span class="dt">step =</span> <span class="fl">0.1</span>)
-  ),
-  <span class="kw"><a href="../reference/d3-shiny.html">d3Output</a></span>(<span class="st">"d3"</span>)
-)
-
-server &lt;-<span class="st"> </span>function(input, output) {
-  output$d3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/d3-shiny.html">renderD3</a></span>({
-    <span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(
-      <span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">0</span>, input$bar_max),
-      <span class="dt">script =</span> <span class="kw">system.file</span>(<span class="st">"examples/baranims.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)
-    )
-  })
-}
-
-<span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/shinyApp">shinyApp</a></span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">library</span>(shiny)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw">library</span>(r2d3)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">ui &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/fluidPage">fluidPage</a></span>(</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/inputPanel">inputPanel</a></span>(</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">    <span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/sliderInput">sliderInput</a></span>(<span class="st">"bar_max"</span>, <span class="dt">label =</span> <span class="st">"Max:"</span>,</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">                <span class="dt">min =</span> <span class="fl">0.1</span>, <span class="dt">max =</span> <span class="fl">1.0</span>, <span class="dt">value =</span> <span class="fl">0.2</span>, <span class="dt">step =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">  ),</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">  <span class="kw"><a href="../reference/d3-shiny.html">d3Output</a></span>(<span class="st">"d3"</span>)</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">)</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {</a>
+<a class="sourceLine" id="cb4-13" data-line-number="13">  output<span class="op">$</span>d3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/d3-shiny.html">renderD3</a></span>({</a>
+<a class="sourceLine" id="cb4-14" data-line-number="14">    <span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(</a>
+<a class="sourceLine" id="cb4-15" data-line-number="15">      <span class="kw">runif</span>(<span class="dv">5</span>, <span class="dv">0</span>, input<span class="op">$</span>bar_max),</a>
+<a class="sourceLine" id="cb4-16" data-line-number="16">      <span class="dt">script =</span> <span class="kw">system.file</span>(<span class="st">"examples/baranims.js"</span>, <span class="dt">package =</span> <span class="st">"r2d3"</span>)</a>
+<a class="sourceLine" id="cb4-17" data-line-number="17">    )</a>
+<a class="sourceLine" id="cb4-18" data-line-number="18">  })</a>
+<a class="sourceLine" id="cb4-19" data-line-number="19">}</a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="kw"><a href="http://www.rdocumentation.org/packages/shiny/topics/shinyApp">shinyApp</a></span>(<span class="dt">ui =</span> ui, <span class="dt">server =</span> server)</a></code></pre></div>
 <p><img src="images/baranim-1.gif" class="illustration" width="600/"></p>
 </div>
   </div>

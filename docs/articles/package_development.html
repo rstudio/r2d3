@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">r2d3</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.0</span>
       </span>
     </div>
 
@@ -137,14 +137,14 @@
 <li><p>You should include <code>width</code> and <code>height</code> parameters to enable callers of the function to explicitly override your <a href="visualization_options.html#custom-sizing">sizing policy</a>.</p></li>
 </ol>
 <p>Here’s an example wrapper function which illustrates:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d3_barchart &lt;-<span class="st"> </span>function(data, <span class="dt">color =</span> <span class="st">"orange"</span>, <span class="dt">width =</span> <span class="ot">NULL</span>, <span class="dt">height =</span> <span class="ot">NULL</span>) {
-  r2d3::<span class="kw"><a href="../reference/r2d3.html">r2d3</a></span>(
-    <span class="dt">data =</span> data,
-    <span class="dt">script =</span> <span class="kw">system.file</span>(<span class="st">"d3/barchart/barchart.js"</span>, <span class="dt">package =</span> <span class="st">"d3barchart"</span>),
-    <span class="dt">width =</span> width,
-    <span class="dt">height =</span> height
-  )
-}</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">d3_barchart &lt;-<span class="st"> </span><span class="cf">function</span>(data, <span class="dt">color =</span> <span class="st">"orange"</span>, <span class="dt">width =</span> <span class="ot">NULL</span>, <span class="dt">height =</span> <span class="ot">NULL</span>) {</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">  r2d3<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/r2d3/topics/r2d3">r2d3</a></span>(</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="dt">data =</span> data,</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">    <span class="dt">script =</span> <span class="kw">system.file</span>(<span class="st">"d3/barchart/barchart.js"</span>, <span class="dt">package =</span> <span class="st">"d3barchart"</span>),</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">    <span class="dt">width =</span> width,</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">    <span class="dt">height =</span> height</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">  )</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">}</a></code></pre></div>
 </div>
 <div id="creating-an-htmlwidget" class="section level2">
 <h2 class="hasAnchor">
@@ -180,65 +180,65 @@
 </tbody>
 </table>
 <p>For example, if you are using version 4 of D3 then your code might look like this:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> outerRadius <span class="op">=</span> <span class="va">Math</span>.<span class="at">min</span>(width<span class="op">,</span> height) <span class="op">*</span> <span class="fl">0.5</span> <span class="op">-</span> <span class="dv">40</span><span class="op">,</span>
-    innerRadius <span class="op">=</span> outerRadius <span class="op">-</span> <span class="dv">30</span><span class="op">;</span>
-
-<span class="kw">var</span> formatValue <span class="op">=</span> <span class="va">d3v4</span>.<span class="at">formatPrefix</span>(<span class="st">",.0"</span><span class="op">,</span> <span class="fl">1e3</span>)<span class="op">;</span>
-
-<span class="kw">var</span> chord <span class="op">=</span> <span class="va">d3v4</span>.<span class="at">chord</span>()
-    .<span class="at">padAngle</span>(<span class="fl">0.05</span>)
-    .<span class="at">sortSubgroups</span>(<span class="va">d3v4</span>.<span class="at">descending</span>)<span class="op">;</span>
-
-<span class="kw">var</span> arc <span class="op">=</span> <span class="va">d3v4</span>.<span class="at">arc</span>()
-    .<span class="at">innerRadius</span>(innerRadius)
-    .<span class="at">outerRadius</span>(outerRadius)<span class="op">;</span>
-
-<span class="kw">var</span> ribbon <span class="op">=</span> <span class="va">d3v4</span>.<span class="at">ribbon</span>()
-    .<span class="at">radius</span>(innerRadius)<span class="op">;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">var</span> outerRadius <span class="op">=</span> <span class="va">Math</span>.<span class="at">min</span>(width<span class="op">,</span> height) <span class="op">*</span> <span class="fl">0.5</span> <span class="op">-</span> <span class="dv">40</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">    innerRadius <span class="op">=</span> outerRadius <span class="op">-</span> <span class="dv">30</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">var</span> formatValue <span class="op">=</span> <span class="va">d3v4</span>.<span class="at">formatPrefix</span>(<span class="st">",.0"</span><span class="op">,</span> <span class="fl">1e3</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">var</span> chord <span class="op">=</span> <span class="va">d3v4</span>.<span class="at">chord</span>()</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">    .<span class="at">padAngle</span>(<span class="fl">0.05</span>)</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    .<span class="at">sortSubgroups</span>(<span class="va">d3v4</span>.<span class="at">descending</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="kw">var</span> arc <span class="op">=</span> <span class="va">d3v4</span>.<span class="at">arc</span>()</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">    .<span class="at">innerRadius</span>(innerRadius)</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">    .<span class="at">outerRadius</span>(outerRadius)<span class="op">;</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="kw">var</span> ribbon <span class="op">=</span> <span class="va">d3v4</span>.<span class="at">ribbon</span>()</a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">    .<span class="at">radius</span>(innerRadius)<span class="op">;</span></a></code></pre></div>
 <p>Note that all references to the D3 library use <code>d3v4</code>.</p>
 <p>Alternatively you could also create a local <code>d3</code> alias like this:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> d3 <span class="op">=</span> d3v4<span class="op">;</span>
-
-<span class="kw">var</span> outerRadius <span class="op">=</span> <span class="va">Math</span>.<span class="at">min</span>(width<span class="op">,</span> height) <span class="op">*</span> <span class="fl">0.5</span> <span class="op">-</span> <span class="dv">40</span><span class="op">,</span>
-    innerRadius <span class="op">=</span> outerRadius <span class="op">-</span> <span class="dv">30</span><span class="op">;</span>
-
-<span class="kw">var</span> formatValue <span class="op">=</span> <span class="va">d3</span>.<span class="at">formatPrefix</span>(<span class="st">",.0"</span><span class="op">,</span> <span class="fl">1e3</span>)<span class="op">;</span>
-
-<span class="kw">var</span> chord <span class="op">=</span> <span class="va">d3</span>.<span class="at">chord</span>()
-    .<span class="at">padAngle</span>(<span class="fl">0.05</span>)
-    .<span class="at">sortSubgroups</span>(<span class="va">d3</span>.<span class="at">descending</span>)<span class="op">;</span>
-
-<span class="kw">var</span> arc <span class="op">=</span> <span class="va">d3</span>.<span class="at">arc</span>()
-    .<span class="at">innerRadius</span>(innerRadius)
-    .<span class="at">outerRadius</span>(outerRadius)<span class="op">;</span>
-
-<span class="kw">var</span> ribbon <span class="op">=</span> <span class="va">d3</span>.<span class="at">ribbon</span>()
-    .<span class="at">radius</span>(innerRadius)<span class="op">;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">var</span> d3 <span class="op">=</span> d3v4<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">var</span> outerRadius <span class="op">=</span> <span class="va">Math</span>.<span class="at">min</span>(width<span class="op">,</span> height) <span class="op">*</span> <span class="fl">0.5</span> <span class="op">-</span> <span class="dv">40</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">    innerRadius <span class="op">=</span> outerRadius <span class="op">-</span> <span class="dv">30</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw">var</span> formatValue <span class="op">=</span> <span class="va">d3</span>.<span class="at">formatPrefix</span>(<span class="st">",.0"</span><span class="op">,</span> <span class="fl">1e3</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">var</span> chord <span class="op">=</span> <span class="va">d3</span>.<span class="at">chord</span>()</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">    .<span class="at">padAngle</span>(<span class="fl">0.05</span>)</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">    .<span class="at">sortSubgroups</span>(<span class="va">d3</span>.<span class="at">descending</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="kw">var</span> arc <span class="op">=</span> <span class="va">d3</span>.<span class="at">arc</span>()</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">    .<span class="at">innerRadius</span>(innerRadius)</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">    .<span class="at">outerRadius</span>(outerRadius)<span class="op">;</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="kw">var</span> ribbon <span class="op">=</span> <span class="va">d3</span>.<span class="at">ribbon</span>()</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">    .<span class="at">radius</span>(innerRadius)<span class="op">;</span></a></code></pre></div>
 <p>This local alias technique is in fact what <code>r3d3()</code> does when executing D3 visualization scripts so you can always use <code>d3</code> to reference the D3 library and know you are getting the correct version.</p>
 <p>However, if you are <a href="#creating-an-htmlwidget">creating an htmlwidget</a> you will need to be sure to reference the correct version of D3 (i.e. <code>d3</code>, <code>d3v4</code>, or <code>d3v4</code>) explicitly.</p>
 <p>To incorporate the renamed, multiple-version friendly D3 libraries provided by <strong>r2d3</strong> into an <a href="http://www.htmlwidgets.org">htmlwidget</a> you can use the <code>dependencies</code> argument of the <code><a href="http://www.rdocumentation.org/packages/htmlwidgets/topics/createWidget">htmlwidgets::createWidget()</a></code> function. For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">htmlwidgets::<span class="kw">createWidget</span>(
-  <span class="st">"mywidget"</span>,
-  x,
-  <span class="dt">width =</span> width,
-  <span class="dt">height =</span> height,
-  <span class="dt">package =</span> <span class="st">"mypackage"</span>,
-  <span class="dt">dependencies =</span> r2d3::<span class="kw"><a href="../reference/html_dependencies_d3.html">html_dependencies_d3</a></span>(<span class="dt">version =</span> <span class="st">"4"</span>)
-)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">htmlwidgets<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/htmlwidgets/topics/createWidget">createWidget</a></span>(</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="st">"mywidget"</span>,</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  x,</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="dt">width =</span> width,</a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="dt">height =</span> height,</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="dt">package =</span> <span class="st">"mypackage"</span>,</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="dt">dependencies =</span> r2d3<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/r2d3/topics/html_dependencies_d3">html_dependencies_d3</a></span>(<span class="dt">version =</span> <span class="st">"4"</span>)</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">)</a></code></pre></div>
 </div>
 <div id="d3-jetpack" class="section level2">
 <h2 class="hasAnchor">
 <a href="#d3-jetpack" class="anchor"></a>d3-jetpack</h2>
 <p>The <code><a href="../reference/html_dependencies_d3.html">html_dependencies_d3()</a></code> function has can optionally include <a href="https://github.com/gka/d3-jetpack">d3-jetpack</a> along with D3. Include d3-jetpack by specifying it within the optional <code>extensions</code> argument:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">htmlwidgets::<span class="kw">createWidget</span>(
-  <span class="st">"mywidget"</span>,
-  x,
-  <span class="dt">width =</span> width,
-  <span class="dt">height =</span> height,
-  <span class="dt">package =</span> <span class="st">"mypackage"</span>,
-  <span class="dt">dependencies =</span> r2d3::<span class="kw"><a href="../reference/html_dependencies_d3.html">html_dependencies_d3</a></span>(<span class="dt">version =</span> <span class="st">"4"</span>, 
-                                            <span class="dt">extensions =</span> <span class="st">"d3-jetpack"</span>)
-)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">htmlwidgets<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/htmlwidgets/topics/createWidget">createWidget</a></span>(</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="st">"mywidget"</span>,</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  x,</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="dt">width =</span> width,</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="dt">height =</span> height,</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">  <span class="dt">package =</span> <span class="st">"mypackage"</span>,</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  <span class="dt">dependencies =</span> r2d3<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/r2d3/topics/html_dependencies_d3">html_dependencies_d3</a></span>(<span class="dt">version =</span> <span class="st">"4"</span>, </a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">                                            <span class="dt">extensions =</span> <span class="st">"d3-jetpack"</span>)</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">)</a></code></pre></div>
 </div>
   </div>
 

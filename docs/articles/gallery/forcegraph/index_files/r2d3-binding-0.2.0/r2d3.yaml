@@ -1,0 +1,11 @@
+dependencies:
+  - name: r2d3-render
+    version: 0.1.0
+    src: htmlwidgets/lib/r2d3
+    script:
+      - r2d3-render.js
+  - name: webcomponents
+    version: 2.0.0
+    src: htmlwidgets/lib/webcomponents
+    script:
+      - webcomponents.js

@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">r2d3</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.0</span>
       </span>
     </div>
 
@@ -150,15 +150,15 @@
 <a href="#coding-d3-for-r2d3" class="anchor"></a>Coding D3 for r2d3</h2>
 <p>When you are learning D3 or translating D3 examples for use with R it’s important to keep in mind that D3 examples will generally include code to load data, create an SVG or other root element, and establish a width and height for the visualization. On the other hand with <strong>r2d3</strong>, these variables are <em>provided automatically</em> so do not need to be created. Here is some code you’ll typically see in D3 examples:</p>
 <p>Creating an SVG element to contain the visualization:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> svg <span class="op">=</span> <span class="va">d3</span>.<span class="at">select</span>(<span class="st">"body"</span>).<span class="at">append</span>(<span class="st">"svg"</span>)<span class="op">;</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">var</span> svg <span class="op">=</span> <span class="va">d3</span>.<span class="at">select</span>(<span class="st">"body"</span>).<span class="at">append</span>(<span class="st">"svg"</span>)<span class="op">;</span></a></code></pre></div>
 <p>Hard-coding margins, width, and height for the visualization:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> margin <span class="op">=</span> <span class="op">{</span><span class="dt">top</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">70</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">40</span><span class="op">},</span>
-    width <span class="op">=</span> <span class="dv">600</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">left</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">right</span><span class="op">,</span>
-    height <span class="op">=</span> <span class="dv">300</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">top</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">bottom</span><span class="op">;</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">var</span> margin <span class="op">=</span> <span class="op">{</span><span class="dt">top</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">right</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span> <span class="dt">bottom</span><span class="op">:</span> <span class="dv">70</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> <span class="dv">40</span><span class="op">},</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">    width <span class="op">=</span> <span class="dv">600</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">left</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">right</span><span class="op">,</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    height <span class="op">=</span> <span class="dv">300</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">top</span> <span class="op">-</span> <span class="va">margin</span>.<span class="at">bottom</span><span class="op">;</span></a></code></pre></div>
 <p>Loading data for the visualization:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="va">d3</span>.<span class="at">csv</span>(<span class="st">"bar-data.csv"</span><span class="op">,</span> <span class="kw">function</span>(error<span class="op">,</span> data) <span class="op">{</span>
-  
-<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="va">d3</span>.<span class="at">csv</span>(<span class="st">"bar-data.csv"</span><span class="op">,</span> <span class="kw">function</span>(error<span class="op">,</span> data) <span class="op">{</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  </a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="op">}</span>)<span class="op">;</span></a></code></pre></div>
 <p>Code like the above isn’t necessary with <strong>r2d3</strong>, since the following variables are provided automatically to your D3 script:</p>
 <ul>
 <li>
@@ -175,17 +175,17 @@
 <code>theme</code> — Colors for the current theme</li>
 </ul>
 <p>For example, here’s a simple <strong>r2d3</strong> script which makes use of these automatically provided variables:</p>
-<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span>
-
-<span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span>
-
-<span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)
-  .<span class="at">data</span>(data)
-  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)
-    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d <span class="op">*</span> width<span class="op">;</span> <span class="op">}</span>)
-    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)
-    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)
-    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'steelblue'</span>)<span class="op">;</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode js"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw">var</span> barHeight <span class="op">=</span> <span class="va">Math</span>.<span class="at">floor</span>(height / <span class="va">data</span>.<span class="at">length</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="va">svg</span>.<span class="at">selectAll</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  .<span class="at">data</span>(data)</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  .<span class="at">enter</span>().<span class="at">append</span>(<span class="st">'rect'</span>)</a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    .<span class="at">attr</span>(<span class="st">'width'</span><span class="op">,</span> <span class="kw">function</span>(d) <span class="op">{</span> <span class="cf">return</span> d <span class="op">*</span> width<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">    .<span class="at">attr</span>(<span class="st">'height'</span><span class="op">,</span> barHeight)</a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">    .<span class="at">attr</span>(<span class="st">'y'</span><span class="op">,</span> <span class="kw">function</span>(d<span class="op">,</span> i) <span class="op">{</span> <span class="cf">return</span> i <span class="op">*</span> barHeight<span class="op">;</span> <span class="op">}</span>)</a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">    .<span class="at">attr</span>(<span class="st">'fill'</span><span class="op">,</span> <span class="st">'steelblue'</span>)<span class="op">;</span></a></code></pre></div>
 </div>
   </div>
 
