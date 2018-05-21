@@ -7,6 +7,7 @@
 #' @param version Major version of D3
 #' @param extensions D3 extensions to include. Currently the only supported
 #'   extension is "jetpack" (<https://github.com/gka/d3-jetpack>).
+#' @param minified Use minified JavaScript files when available?
 #' 
 #' @details Create list of HTML dependencies for D3. Each version has 
 #'   a distinct root D3 object so it's possible to combine multiple versions
@@ -23,7 +24,10 @@
 #' @importFrom htmltools htmlDependency
 #' 
 #' @export
-html_dependencies_d3 <- function(version = c("5", "4", "3"), extensions = NULL) {
+html_dependencies_d3 <- function(
+  version = c("5", "4", "3"),
+  extensions = NULL,
+  minified = TRUE) {
   
   # validate version and determine full version number
   version <- match.arg(version)
@@ -42,7 +46,7 @@ html_dependencies_d3 <- function(version = c("5", "4", "3"), extensions = NULL) 
       name = name,
       version = version_long,
       src = system.file(file.path("www/d3", version_long), package = "r2d3"),
-      script = "d3.js"
+      script = ifelse(minified, "d3.min.js", "d3.js")
     )
   )
   

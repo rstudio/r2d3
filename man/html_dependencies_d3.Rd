@@ -4,13 +4,16 @@
 \alias{html_dependencies_d3}
 \title{D3 HTML dependencies}
 \usage{
-html_dependencies_d3(version = c("5", "4", "3"), extensions = NULL)
+html_dependencies_d3(version = c("5", "4", "3"), extensions = NULL,
+  minified = TRUE)
 }
 \arguments{
 \item{version}{Major version of D3}
 
 \item{extensions}{D3 extensions to include. Currently the only supported
 extension is "jetpack" (\url{https://github.com/gka/d3-jetpack}).}
+
+\item{minified}{Use minified JavaScript files when available?}
 }
 \description{
 Create HTML dependencies for D3 and optional extensions
