@@ -56,17 +56,15 @@ First, install the package from GitHub as follows:
 devtools::install_github("rstudio/r2d3")
 ```
 
-Next, install the [daily build](https://dailies.rstudio.com) of RStudio
-(you need this version of RStudio to take advantage of various
-integrated tools for authoring D3 scripts with
-r2d3):
+Next, install the [preview release of RStudio
+v1.2](https://www.rstudio.com/rstudio/download/preview/) of RStudio (you
+need this version of RStudio to take advantage of various integrated
+tools for authoring D3 scripts with r2d3).
 
-<a href="https://dailies.rstudio.com"><img src="tools/README/daily_build.png" class="screenshot" width=600/></a>
-
-Once you’ve installed the package and the RStudio daily build you have
-the tools required to work with **r2d3**. Below, we’ll describe basic
-workflow within RStudio and techniques for including visualizations in R
-Markdown and Shiny applications.
+Once you’ve installed the package and the RStudio v1.2 preview release
+you have the tools required to work with **r2d3**. Below, we’ll describe
+basic workflow within RStudio and techniques for including
+visualizations in R Markdown and Shiny applications.
 
 ## About D3
 
@@ -140,15 +138,16 @@ are provided automatically are:
 1)  So that you can dynamically bind data from R to visualizations; and
 
 2)  So that **r2d3** can automatically handle dynamic resizing for your
-    visualization. Most D3 examples have a static size. This is fine for
+    visualization. Most D3 examples have a static size. This if fine for
     an example but not very robust for including the visualization
     within a report, dashboard, or application.
 
 ## D3 Preview
 
-The [daily build](https://dailies.rstudio.com) of RStudio includes
-support for previewing D3 scripts as you write them. To try this out,
-create a D3 script using the new file menu:
+The [RStudio v1.2 preview
+release](https://www.rstudio.com/rstudio/download/preview/) of RStudio
+includes support for previewing D3 scripts as you write them. To try
+this out, create a D3 script using the new file menu:
 
 <img src="tools/README/new_script.png" class="screenshot" width=600/>
 
@@ -241,6 +240,11 @@ shinyApp(ui = ui, server = server)
 
 <img src="tools/README/baranim-1.gif" class="illustration" width=600/>
 
+See the article on [Using r2d3 with
+Shiny](https://rstudio.github.io/r2d3/articles/shiny.html) to learn more
+(including how to create custom Shiny inputs that respond to user
+interaction with D3 visualizations).
+
 ## Learning More
 
 To learn the basics of D3 and see some examples that might inspire your
@@ -276,6 +280,12 @@ For next steps on learning on how to use **r2d3**, see these articles:
 
 Once you are familar with the basics, check out these articles on more
 advanced topics:
+
+[Using r2d3 with
+Shiny](https://rstudio.github.io/r2d3/articles/shiny.html) — Deriving
+insights from data is streamlined when users are able to modify a Shiny
+input, or click on a D3 visualization, and that action produces new
+results.
 
   - [CSS and JavaScript
     Dependencies](https://rstudio.github.io/r2d3/articles/dependencies.html)

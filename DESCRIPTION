@@ -16,7 +16,7 @@ LazyData: TRUE
 Depends:
   R (>= 3.1.2)
 Imports:
-  htmlwidgets (>= 1.2), htmltools, jsonlite
+  htmlwidgets (>= 1.2), htmltools, jsonlite, rstudioapi
 Suggests:
   knitr,
   rmarkdown,
