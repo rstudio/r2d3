@@ -11,5 +11,6 @@ README.Rmd
 ^vignettes.*$
 ^\.travis\.yml$
 ^testthat/barchart/.*$
-
-
+tools/gallery.R
+tools/code-partial.Rmd
+tools/gallery-template.Rmd
