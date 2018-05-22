@@ -37,11 +37,11 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 <div class="col-sm-9">
 
 ```{r, echo=TRUE, eval=FALSE}
-r2d3(data = c(), d3_version = 4, script = "stackedbars.js")
+r2d3(d3_version = 4, script = "stackedbars.js")
 ```
 
 ```{r, echo=FALSE}
-r2d3(data = c(), d3_version = 4, script = "stackedbars.js", width="100%")
+r2d3(d3_version = 4, script = "stackedbars.js", width="100%")
 ```
 
 
