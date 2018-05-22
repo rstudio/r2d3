@@ -42,7 +42,7 @@ html_dependencies_d3 <- function(version = c("5", "4", "3"), extensions = NULL) 
       name = name,
       version = version_long,
       src = system.file(file.path("www/d3", version_long), package = "r2d3"),
-      script = "d3.js"
+      script = "d3.min.js"
     )
   )
   

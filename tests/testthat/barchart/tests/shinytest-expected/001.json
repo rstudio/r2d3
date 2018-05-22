@@ -41,7 +41,7 @@
             "href": "d3v5-5.0.0"
           },
           "meta": null,
-          "script": "d3.js",
+          "script": "d3.min.js",
           "stylesheet": null,
           "head": null,
           "attachment": null,
