@@ -8,7 +8,14 @@ README.Rmd
 ^images.*$
 ^scratch.*$
 ^sandbox.*$
-^vignettes.*$
+^vignettes/development_and_debugging.*$
+^vignettes/gallery.*$
+^vignettes/images/.*\.png$
+^vignettes/images/.*\.gif$
+^vignettes/introduction.*$
+^vignettes/publishing.*$
+^vignettes/shiny.*$
+^vignettes/tools.*$
 ^\.travis\.yml$
 ^testthat/barchart/.*$
 tools/gallery.R
