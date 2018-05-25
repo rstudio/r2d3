@@ -18,7 +18,7 @@ There are a number of excellent resources available for learning how to do data 
 
 ## Books
 
-<img src="images/d3_book.png" width=130 align="right" style="margin-left: 20px"/>
+<img src="images/d3_book.jpg" width=130 align="right" style="margin-left: 20px"/>
 
 There are a number of books about D3 available, but only one has been updated to work with more recent versions of D3 (versions 4 and 5). That book is Scott Murray's [Interactive Data Visualization for the Web: An Introduction to Designing with D3](https://www.amazon.com/Interactive-Data-Visualization-Web-Introduction/dp/1491921285/). The book covers D3 from the ground up, presuming no existing experience with data visualization or web development.
 
