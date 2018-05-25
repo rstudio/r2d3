@@ -72,7 +72,7 @@ After we apply `HTMLWidgets.dataframeToD3()`, it will become:
 
 ## Custom conversion
 
-If you don't like the default JSON conversion provided for `data`, you can write your own function that uses [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html) to perform a custom conversion. For example:
+If you don't like the default JSON conversion provided for `data`, you can write your own function that uses [jsonlite](https://CRAN.R-project.org/package=jsonlite) to perform a custom conversion. For example:
 
 ```{r}
 data_to_json <- function(data) {
