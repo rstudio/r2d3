@@ -22,7 +22,7 @@ visualizations](https://d3js.org/) with R, including:
     Markdown](https://rmarkdown.rstudio.com/) reports, presentations,
     and dashboards
 
-  - Creating interacive D3 applications with
+  - Creating interactive D3 applications with
     [Shiny](https://shiny.rstudio.com/)
 
   - Distributing D3 based [htmlwidgets](http://www.htmlwidgets.org) in R
