@@ -29,3 +29,13 @@ using the \code{r2d3()} function to include D3 code within a document
 or application this dependency is included automatically so calling
 this function is unnecessary.
 }
+\examples{
+
+library(r2d3)
+r2d3(
+  data = c (0.3, 0.6, 0.8, 0.95, 0.40, 0.20),
+  script = system.file("examples/barchart.js", package = "r2d3"),
+  dependencies = "d3-jetpack"
+)
+
+}

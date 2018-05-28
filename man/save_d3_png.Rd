@@ -42,14 +42,6 @@ Using the \code{save_d3_png()} function requires that you install the
 \pkg{webshot} package, as well as the phantom.js headless browser (which
 you can install using the function \code{webshot::install_phantomjs()}).
 }
-\examples{
-\dontrun{
-library(r2d3)
-viz <- r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
-save_d3_png(viz, file = "viz.png")
-}
-  
-}
 \seealso{
 \code{\link[=save_d3_html]{save_d3_html()}}
 }
