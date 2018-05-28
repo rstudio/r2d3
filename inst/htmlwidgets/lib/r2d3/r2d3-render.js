@@ -422,6 +422,8 @@ function R2D3(el, width, height) {
   
   var parseLineFileRef = function(line) {
     var lines = x.script.split("\n");
+    line = Math.min(lines.length - 1, line);
+    
     var header = "/* R2D3 Source File: ";
     var file = null;
     for (var maybe = line; line && maybe >= 0; maybe--) {
