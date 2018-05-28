@@ -195,12 +195,9 @@ Defaults to white.</p></td>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>library</span>(<span class='no'>r2d3</span>)
+    <pre class="examples"><div class='input'><span class='fu'>library</span>(<span class='no'>r2d3</span>)
 <span class='no'>viz</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='r2d3.html'>r2d3</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>0.3</span>, <span class='fl'>0.6</span>, <span class='fl'>0.8</span>, <span class='fl'>0.95</span>, <span class='fl'>0.40</span>, <span class='fl'>0.20</span>), <span class='kw'>script</span> <span class='kw'>=</span> <span class='st'>"barchart.js"</span>)
-<span class='fu'>save_d3_html</span>(<span class='no'>viz</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='st'>"viz.html"</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
+<span class='fu'>save_d3_html</span>(<span class='no'>viz</span>, <span class='kw'>file</span> <span class='kw'>=</span> <span class='fu'>tempfile</span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".html"</span>))</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

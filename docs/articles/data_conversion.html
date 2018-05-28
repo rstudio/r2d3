@@ -169,7 +169,7 @@
 <div id="custom-conversion" class="section level2">
 <h2 class="hasAnchor">
 <a href="#custom-conversion" class="anchor"></a>Custom conversion</h2>
-<p>If you don’t like the default JSON conversion provided for <code>data</code>, you can write your own function that uses <a href="https://cran.r-project.org/web/packages/jsonlite/index.html">jsonlite</a> to perform a custom conversion. For example:</p>
+<p>If you don’t like the default JSON conversion provided for <code>data</code>, you can write your own function that uses <a href="https://CRAN.R-project.org/package=jsonlite">jsonlite</a> to perform a custom conversion. For example:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">data_to_json &lt;-<span class="st"> </span><span class="cf">function</span>(data) {</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">  jsonlite<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/jsonlite/topics/fromJSON">toJSON</a></span>(data, <span class="dt">dataframe =</span> <span class="st">"rows"</span>, <span class="dt">auto_unbox =</span> <span class="ot">FALSE</span>, <span class="dt">rownames =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">}</a>
