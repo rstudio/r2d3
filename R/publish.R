@@ -23,6 +23,11 @@
 #' viz <- r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
 #' save_d3_html(viz, file = tempfile(fileext = ".html"))
 #' 
+#' @details
+#' 
+#' Using \code{selfcontained} set to \code{TRUE} requires \href{http://pandoc.org}{pandoc}
+#' to be installed.
+#' 
 #' @seealso [save_d3_png()]
 #' 
 #' @export

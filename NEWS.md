@@ -1,3 +1,8 @@
+# r2d3 0.2.1
+
+- Skip tests that require pandoc to support CRAN's solaris environment.
+- Fix diagnostics message for dependencies with incorrect paths.
+
 # r2d3 0.2.0
 
 - Translate R objects into D3 friendly data structures

@@ -29,6 +29,10 @@ Defaults to white.}
 \description{
 Save a D3 visualization to an HTML file (e.g. for sharing with others).
 }
+\details{
+Using \code{selfcontained} set to \code{TRUE} requires \href{http://pandoc.org}{pandoc}
+to be installed.
+}
 \examples{
 library(r2d3)
 viz <- r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
