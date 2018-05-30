@@ -1,7 +1,7 @@
 Package: r2d3
 Type: Package
 Title: Interface to 'D3' Visualizations
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: c(
     person("Javier", "Luraschi", email = "javier@rstudio.com", role = c("aut", "cre")),
     person("JJ", "Allaire", role = c("aut")),

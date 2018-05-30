@@ -1,3 +1,7 @@
+# r2d3 0.2.2
+
+- Fix examples that require pandoc to support CRAN's solaris environment.
+
 # r2d3 0.2.1
 
 - Skip tests that require pandoc to support CRAN's solaris environment.
