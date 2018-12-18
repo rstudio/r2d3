@@ -54,7 +54,7 @@ library(r2d3)
 ui <- fluidPage(
   inputPanel(
     sliderInput("bar_max", label = "Max:",
-      min = 10, max = 110, value = 10, step = 20)
+      min = 0, max = 1, value = 1, step = 0.05)
   ),
   d3Output("d3")
 )
@@ -62,7 +62,7 @@ ui <- fluidPage(
 server <- function(input, output) {
   output$d3 <- renderD3({
     r2d3(
-      floor(runif(5, 5, input$bar_max)),
+      runif(5, 0, input$bar_max),
       script = system.file("examples/baranims.js", package = "r2d3")
     )
   })
