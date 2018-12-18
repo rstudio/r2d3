@@ -172,9 +172,10 @@ runtime_theme <- function() {
   if (exists(".rs.api.getThemeInfo")) {
     rstudio_default <- get(".rs.api.getThemeInfo")()
     
+    # https://github.com/rstudio/rstudio/issues/4055
     list(
-      background = rstudio_default$background,
-      foreground = rstudio_default$color
+      background = "#FFFFFF",
+      foreground = "#000000"
     )
   } else {
     NULL
