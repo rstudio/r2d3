@@ -1,3 +1,7 @@
+# r2d3 0.2.3
+
+- Fix default theme when running under RStudio 1.2 (#50).
+
 # r2d3 0.2.2
 
 - Fix examples that require pandoc to support CRAN's solaris environment.
