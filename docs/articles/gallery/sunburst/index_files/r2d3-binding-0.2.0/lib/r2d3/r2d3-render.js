@@ -188,65 +188,65 @@ function R2D3(el, width, height) {
   
   var consoleLog = function(data) {
     console.log(data);
-
-    var entry = document.createElement("div");
-    lastConsoleEntry = entry;
-    entry.style.bottom = "0";
-    entry.style.left = "0";
-    entry.style.right = "0";
-    entry.style.background = "rgb(244, 248, 249)";
-    entry.style.border = "1px solid #d6dadc";
-    entry.style.padding = "8px 15px 8px 15px";
-    entry.style.position = "absolute";
-    entry.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
-    entry.style.fontSize = "9pt";
-    self.shadow.appendChild(entry);
     
-    entry.style.transform = "translateY(40px)";
-    entry.style.opacity = "0";
-    entry.style.transition = "all 0.25s";
-    
-    entry.onmouseenter = function(e) {
-      consoleHovering = true;
-    };
-    
-    entry.onmouseleave = function(e) {
-      if (lastConsoleEntry == e.target) consoleHovering = false;
-    };
-    
-    setTimeout(function() {
-      entry.style.transform = "translateY(0)";
-      entry.style.opacity = "1";
-      entry.style.transition = "all 0.5s";
-    }, 50);
+    var entry = document.getElementById("r2d3-console-entry");
+    if (!entry) {
+      entry = document.createElement("div");
+      entry.id = "r2d3-console-entry";
+      entry.style.bottom = "0";
+      entry.style.left = "0";
+      entry.style.right = "0";
+      entry.style.background = "rgb(244, 248, 249)";
+      entry.style.border = "1px solid #d6dadc";
+      entry.style.padding = "8px 15px 8px 15px";
+      entry.style.position = "absolute";
+      entry.style.fontFamily = "'Lucida Sans', 'DejaVu Sans', 'Lucida Grande', 'Segoe UI', Verdana, Helvetica, sans-serif, serif";
+      entry.style.fontSize = "9pt";
+      self.shadow.appendChild(entry);
+      
+      entry.style.transform = "translateY(40px)";
+      entry.style.opacity = "0";
+      entry.style.transition = "all 0.25s";
+      
+      entry.onmouseenter = function() {
+        consoleHovering = true;
+      };
+      
+      entry.onmouseleave = function() {
+        consoleHovering = false;
+      };
+      
+      setTimeout(function() {
+        entry.style.transform = "translateY(0)";
+        entry.style.opacity = "1";
+        entry.style.transition = "all 0.5s";
+      }, 50);
+    }
     
     entry.innerText = data;
     
-    (function(entry) {
-      setTimeout(function() {
-        var hideConsole = function() {
-          entry.style.opacity = "0";
-          entry.addEventListener("transitionend", function(event) {
-            event.target.parentNode.removeChild(event.target);
-          });
-        };
-        
-        var retryHide = function() {
-          if (consoleHovering && lastConsoleEntry == entry) {
-            setTimeout(retryHide, 100);
-          }
-          else {
-            hideConsole();
-          }
-        };
-        
-        retryHide();
-      }, 3000);
-    })(entry);
+    clearTimeout(consoleTimeout);
+    consoleTimeout = setTimeout(function() {
+      var hideConsole = function() {
+        entry.style.transform = "translateY(-60px)";
+        entry.style.opacity = "0";
+        entry.addEventListener("transitionend", function(event) {
+          entry = document.getElementById("r2d3-console-entry");
+          if (entry) el.removeChild(entry);
+          consoleHovering = false;
+        });
+      };
+      
+      if (consoleHovering) {
+        entry.onmouseleave = hideConsole;
+      }
+      else {
+        hideConsole();
+      }
+    }, 3000);
   };
-  
+  var consoleTimeout = null;
   var consoleHovering = false;
-  var lastConsoleEntry = null;
   var createConsoleOverride = function(type) {
     return function(data) {
       consoleLog(type + data);

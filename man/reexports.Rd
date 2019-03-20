@@ -4,7 +4,6 @@
 \name{reexports}
 \alias{reexports}
 \alias{sizingPolicy}
-\alias{reexports}
 \alias{read_json}
 \title{Objects exported from other packages}
 \keyword{internal}

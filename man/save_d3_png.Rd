@@ -4,8 +4,8 @@
 \alias{save_d3_png}
 \title{Save a D3 visualization as a PNG image}
 \usage{
-save_d3_png(d3, file, background = "white", width = 992, height = 744,
-  delay = 0.2, zoom = 1)
+save_d3_png(d3, file, background = "white", width = 992,
+  height = 744, delay = 0.2, zoom = 1)
 }
 \arguments{
 \item{d3}{D3 visualization to save}
