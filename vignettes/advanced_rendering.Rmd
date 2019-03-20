@@ -91,10 +91,10 @@ By default, when the element which contains your visualization is resized, **r2d
 You can provide an explicit resize handler by implementing the `r2d3.onResize()` callback. For example, in a force directed D3 layout you might do this in the `onResize()` callback:
 
 ```js
-r2d3.onResize(width, height) {
+r2d3.onResize(function(width, height) {
   force.force("center", d3.forceCenter(width / 2, height / 2))
     .restart();
-}
+});
 ```
 
 
