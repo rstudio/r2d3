@@ -1,3 +1,7 @@
+# r2d3 0.2.4
+
+- Avoid width and height from changing when refreshing rendering (#59).
+
 # r2d3 0.2.3
 
 - Fix default theme when running under RStudio 1.2 (#50).
