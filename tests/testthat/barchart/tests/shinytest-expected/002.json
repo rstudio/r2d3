@@ -36,9 +36,9 @@
       "deps": [
         {
           "name": "d3v5",
-          "version": "5.0.0",
+          "version": "5.9.2",
           "src": {
-            "href": "d3v5-5.0.0"
+            "href": "d3v5-5.9.2"
           },
           "meta": null,
           "script": "d3.min.js",

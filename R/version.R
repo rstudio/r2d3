@@ -1,7 +1,7 @@
 # Completes major version to full version
 version_complete <- function(minor) {
   versions <- list(
-    "5" = "5.0.0",
+    "5" = "5.9.2",
     "4" = "4.13.0",
     "3" = "3.5.17"
   )

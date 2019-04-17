@@ -1,5 +1,7 @@
 # r2d3 0.2.4
 
+- Update D3 v5 from 5.0.0 to 5.9.2 (#54).
+
 - Avoid width and height from changing when refreshing rendering (#59).
 
 # r2d3 0.2.3
