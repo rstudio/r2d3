@@ -153,7 +153,7 @@ this out, create a D3 script using the new file menu:
 
 A simple template for a D3 script (the barchart.js example shown above)
 is provided by default. You can use the **Preview** command
-(Ctrl+Shift+Center) to render the
+(Ctrl+Shift+Enter) to render the
 visualization:
 
 <img src="tools/README/rstudio_preview.png" class="screenshot" width=600/>
