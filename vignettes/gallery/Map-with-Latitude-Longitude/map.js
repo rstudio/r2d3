@@ -1,4 +1,4 @@
-// !preview r2d3 data = jsonlite::read_json("test.json"), d3_version = 3, dependencies = "topojson.min.js"
+// !preview r2d3 data = jsonlite::read_json("test.json"), d3_version = 3, dependencies = c("topojson.min.js", "http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js")
 
 // Based on http://bl.ocks.org/lokesh005/7640d9b562bf59b561d6
 var places = [
