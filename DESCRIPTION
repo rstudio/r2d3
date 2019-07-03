@@ -24,6 +24,7 @@ Imports:
 Suggests:
   knitr,
   rmarkdown,
+  R6,
   shiny,
   shinytest,
   testthat,
