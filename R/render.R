@@ -26,11 +26,11 @@
 #'
 #' @import htmlwidgets
 #' @import tools
-#' 
+#'
 #' @details
-#' 
+#'
 #' In order to scope CSS styles when multiple widgets are rendered, the Shadow DOM and
-#' the wecomponents polyfill is used, this feature can be turned off by setting the 
+#' the wecomponents polyfill is used, this feature can be turned off by setting the
 #' \code{r2d3.shadow} option to \code{FALSE}.
 #'
 #' @examples
@@ -48,7 +48,7 @@ r2d3 <- function(
   css = "auto",
   dependencies = NULL,
   options = NULL,
-  d3_version = c("5", "4", "3"),
+  d3_version = c("6", "5", "4", "3"),
   container = "svg",
   elementId = NULL,
   width = NULL,
@@ -60,10 +60,10 @@ r2d3 <- function(
   # allow data to be missing
   if (missing(data))
     data <- c()
-  
+
   # resolve version
-  version <- match.arg(as.character(d3_version), choices = c("5", "4", "3"))
-  
+  version <- match.arg(as.character(d3_version), choices = c("6", "5", "4", "3"))
+
   # auto-detect css styles
   if (identical(css, "auto")) {
     # auto-detect based on js filename and "styles.css"
@@ -73,15 +73,15 @@ r2d3 <- function(
     if (length(css) == 0)
       css <- NULL
   }
-  
+
   # resolve inline dependencies
   inline_dependencies <- NULL
   if (!is.null(dependencies) || !is.null(css)) {
-    
+
     # force dependencies to list if necessary
     if (inherits(dependencies, "html_dependency"))
       dependencies <- list(dependencies)
-    
+
     inline_dependencies <- list(
       js = Filter(function(e) is.character(e) && identical(file_ext(e), "js"), dependencies),
       css = Filter(function(e) is.character(e) && identical(file_ext(e), "css"), dependencies)
@@ -89,20 +89,20 @@ r2d3 <- function(
     inline_dependencies$js <- as.character(inline_dependencies$js)
     inline_dependencies$css <- as.character(c(inline_dependencies$css, css))
   }
-  
+
   # resolve extension dependencies
   extension_dependencies <- as.character(Filter(function(e) is.character(e) && e %in% all_extensions(), dependencies))
-  
+
   # resolve html dependencies
   html_dependencies <- Filter(function(e) inherits(e, "html_dependency"), dependencies)
   html_dependencies <- append(html_dependencies, html_dependencies_d3(version, extensions = extension_dependencies))
 
   # convert to d3 data
   data <- as_d3_data(data)
-  
+
   # determine type
   type <- if (inherits(data, "data.frame")) "data.frame" else class(data)[[1]]
-  
+
   # forward options using x
   x <- list(
     data = data,
@@ -122,7 +122,7 @@ r2d3 <- function(
     ),
     useShadow = getOption("r2d3.shadow", TRUE)
   )
-  
+
   # resolve viewer if it's explicitly specified
   if (!missing(viewer)) {
     viewer <- match.arg(viewer)
@@ -131,7 +131,7 @@ r2d3 <- function(
       sizing$browser$external <- viewer == "browser"
     }
   }
-  
+
   # create widget
   htmlwidgets::createWidget(
     name = 'r2d3',
@@ -146,10 +146,10 @@ r2d3 <- function(
 }
 
 #' Default sizing policy for r2d3 widgets
-#' 
+#'
 #' @details Use [htmlwidgets::sizingPolicy()] to specify an
 #'   alternate policy.
-#' 
+#'
 #' @keywords internal
 #' @export
 default_sizing <- function() {
@@ -171,7 +171,7 @@ default_theme <- function() {
 runtime_theme <- function() {
   if (exists(".rs.api.getThemeInfo")) {
     rstudio_default <- get(".rs.api.getThemeInfo")()
-    
+
     # https://github.com/rstudio/rstudio/issues/4055
     list(
       background = "#FFFFFF",
