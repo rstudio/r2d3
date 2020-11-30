@@ -1,3 +1,7 @@
+# r2d3 0.2.4.9000
+
+- Support for D3 v6 (@dkjoluju, #85).
+
 # r2d3 0.2.4
 
 - Update D3 v5 from 5.0.0 to 5.9.2 (#54).
