@@ -115,7 +115,7 @@ The [RStudio v1.2 preview release](https://www.rstudio.com/rstudio/download/prev
 
 <img src="tools/README/new_script.png" class="screenshot" width=600/>
 
-A simple template for a D3 script (the barchart.js example shown above) is provided by default. You can use the **Preview** command (Ctrl+Shift+Center) to render the visualization:
+A simple template for a D3 script (the barchart.js example shown above) is provided by default. You can use the **Preview** command (Ctrl+Shift+Enter) to render the visualization:
 
 <img src="tools/README/rstudio_preview.png" class="screenshot" width=600/>
 
