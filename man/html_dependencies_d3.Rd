@@ -4,7 +4,7 @@
 \alias{html_dependencies_d3}
 \title{D3 HTML dependencies}
 \usage{
-html_dependencies_d3(version = c("5", "4", "3"), extensions = NULL)
+html_dependencies_d3(version = c("6", "5", "4", "3"), extensions = NULL)
 }
 \arguments{
 \item{version}{Major version of D3}

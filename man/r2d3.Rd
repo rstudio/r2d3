@@ -4,10 +4,20 @@
 \alias{r2d3}
 \title{D3 visualization}
 \usage{
-r2d3(data, script, css = "auto", dependencies = NULL, options = NULL,
-  d3_version = c("5", "4", "3"), container = "svg", elementId = NULL,
-  width = NULL, height = NULL, sizing = default_sizing(),
-  viewer = c("internal", "external", "browser"))
+r2d3(
+  data,
+  script,
+  css = "auto",
+  dependencies = NULL,
+  options = NULL,
+  d3_version = c("6", "5", "4", "3"),
+  container = "svg",
+  elementId = NULL,
+  width = NULL,
+  height = NULL,
+  sizing = default_sizing(),
+  viewer = c("internal", "external", "browser")
+)
 }
 \arguments{
 \item{data}{Data to be passed to D3 script.}

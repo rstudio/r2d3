@@ -4,9 +4,15 @@
 \alias{save_d3_html}
 \title{Save a D3 visualization as HTML}
 \usage{
-save_d3_html(d3, file, selfcontained = TRUE, libdir = NULL,
-  background = "white", title = "D3 Visualization",
-  knitrOptions = list())
+save_d3_html(
+  d3,
+  file,
+  selfcontained = TRUE,
+  libdir = NULL,
+  background = "white",
+  title = "D3 Visualization",
+  knitrOptions = list()
+)
 }
 \arguments{
 \item{d3}{D3 visualization to save}
