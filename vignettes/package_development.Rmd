@@ -21,7 +21,7 @@ You can redistribute your D3 visualizations as reusable components if you bundle
 
 This article covers both of these techniques, and also describes how to use the `html_dependencies_d3()` function to include multiple distinct versions of D3 within a document or application.
 
-## R3D3 wrapper function
+## R2D3 wrapper function
 
 The simplest way to include a D3 visualization you have created with **r2d3** in an R package is to create a wrapper function. There are a few things to keep in mind when creating a wrapper function:
 
