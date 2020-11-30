@@ -17,7 +17,7 @@
         "options": null,
         "script": "var d3Script = function(d3, r2d3, data, svg, width, height, options, theme, console) {\nthis.d3 = d3;\n\nsvg = d3.select(svg.node());\n/* R2D3 Source File:  ../baranims.js */\n// !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)\n//\n// r2d3: https://rstudio.github.io/r2d3\n//\n\nvar barHeight = Math.floor(height / data.length);\n\nvar bars = r2d3.svg.selectAll('rect')\n    .data(r2d3.data);\n    \nbars.enter()\n    .append('rect')\n      .attr('width', function(d) { return d * width; })\n      .attr('height', barHeight)\n      .attr('y', function(d, i) { return i * barHeight; })\n      .attr('fill', 'steelblue');\n\nbars.exit().remove();\n\nbars.transition()\n  .duration(0)\n  .attr(\"width\", function(d) { return d * width; });\n};",
         "style": null,
-        "version": 5,
+        "version": 6,
         "theme": {
           "default": {
             "background": "#FFFFFF",
@@ -35,10 +35,10 @@
       ],
       "deps": [
         {
-          "name": "d3v5",
-          "version": "5.9.2",
+          "name": "d3v6",
+          "version": "6.2.0",
           "src": {
-            "href": "d3v5-5.9.2"
+            "href": "d3v6-6.2.0"
           },
           "meta": null,
           "script": "d3.min.js",
