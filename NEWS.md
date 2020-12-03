@@ -1,4 +1,4 @@
-# r2d3 0.2.4.9000
+# r2d3 0.2.5
 
 - Support for D3 v6 (@dkjoluju, #85).
 
