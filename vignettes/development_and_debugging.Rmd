@@ -19,11 +19,11 @@ This article describes recommend workflow for developing D3 visualizations, incl
 
 2) Using browser debugging tools to pinpoint errors in your code.
 
-Note that the development tools described above are only fully supported within the [RStudio v1.2 preview release](https://www.rstudio.com/rstudio/download/preview/) (as opposed to the current stable release) so you should download the daily build before trying these features out.
+Note that the development tools described above are only fully supported within the [RStudio v1.2 preview release](https://rstudio.com/products/rstudio/download/) (as opposed to the current stable release) so you should download the daily build before trying these features out.
 
 ## RStudio Preview
 
-The [RStudio v1.2 preview release](https://www.rstudio.com/rstudio/download/preview/) includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:
+The [RStudio v1.2 preview release](https://rstudio.com/products/rstudio/download/) includes support for previewing D3 scripts as you write them. To try this out, create a D3 script using the new file menu:
 
 <img src="images/new_script.png" class="screenshot" width=600/>
 

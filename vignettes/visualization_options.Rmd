@@ -175,5 +175,5 @@ The `viewer` argument to the `r2d3()` function enables you to customize how D3 v
 
 The "external" option is useful if your visualization requires more space than an RStudio pane affords. The "browser" option is useful if you need access to browser debugging tools during development.
 
-Note that the `viewer` options described above are only fully supported within the [preview release of RStudio v1.2](https://www.rstudio.com/rstudio/download/preview/) (as opposed to the current stable release).
+Note that the `viewer` options described above are only fully supported within the [preview release of RStudio v1.2](https://rstudio.com/products/rstudio/download/) (as opposed to the current stable release).
 

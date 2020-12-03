@@ -57,7 +57,7 @@ devtools::install_github("rstudio/r2d3")
 ```
 
 Next, install the [preview release of RStudio
-v1.2](https://www.rstudio.com/rstudio/download/preview/) of RStudio (you
+v1.2](https://rstudio.com/products/rstudio/download/) of RStudio (you
 need this version of RStudio to take advantage of various integrated
 tools for authoring D3 scripts with r2d3).
 
@@ -145,7 +145,7 @@ are provided automatically are:
 ## D3 Preview
 
 The [RStudio v1.2 preview
-release](https://www.rstudio.com/rstudio/download/preview/) of RStudio
+release](https://rstudio.com/products/rstudio/download/) of RStudio
 includes support for previewing D3 scripts as you write them. To try
 this out, create a D3 script using the new file menu:
 
