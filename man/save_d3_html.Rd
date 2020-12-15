@@ -37,7 +37,7 @@ Defaults to white.}
 Save a D3 visualization to an HTML file (e.g. for sharing with others).
 }
 \details{
-Using \code{selfcontained} set to \code{TRUE} requires \href{http://pandoc.org}{pandoc}
+Using \code{selfcontained} set to \code{TRUE} requires \href{https://pandoc.org/}{pandoc}
 to be installed.
 }
 \examples{
