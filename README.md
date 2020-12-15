@@ -14,7 +14,7 @@ visualizations](https://d3js.org/) with R, including:
 
   - Rendering D3 scripts within the [RStudio
     Viewer](https://support.rstudio.com/hc/en-us/articles/202133558-Extending-RStudio-with-the-Viewer-Pane)
-    and [R Notebooks](https://rmarkdown.rstudio.com/r_notebooks.html)
+    and [R Notebooks](https://bookdown.org/yihui/rmarkdown/notebook.html)
 
   - Publishing D3 visualizations to the web
 

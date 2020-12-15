@@ -30,7 +30,7 @@ There are several good self paced online tutorials for learning D3 available, th
 
 1) [Intro to D3.js from Square](http://square.github.io/intro-to-d3/)
 
-2) [D3 in Depth from Peter Cook](http://d3indepth.com/)
+2) [D3 in Depth from Peter Cook](https://www.d3indepth.com/)
 
 3) [Dashing D3.js](https://www.dashingd3js.com/)
 

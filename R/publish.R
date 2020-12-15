@@ -33,7 +33,7 @@
 #' )
 #' @details
 #' 
-#' Using \code{selfcontained} set to \code{TRUE} requires \href{http://pandoc.org}{pandoc}
+#' Using \code{selfcontained} set to \code{TRUE} requires \href{https://pandoc.org/}{pandoc}
 #' to be installed.
 #' 
 #' @seealso [save_d3_png()]

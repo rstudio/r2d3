@@ -21,7 +21,7 @@ The **r2d3** package provides a suite of tools for using [D3 visualizations](htt
 
 - Translating R objects into D3 friendly data structures
 
-- Rendering D3 scripts within the [RStudio Viewer](https://support.rstudio.com/hc/en-us/articles/202133558-Extending-RStudio-with-the-Viewer-Pane) and [R Notebooks](https://rmarkdown.rstudio.com/r_notebooks.html)
+- Rendering D3 scripts within the [RStudio Viewer](https://support.rstudio.com/hc/en-us/articles/202133558-Extending-RStudio-with-the-Viewer-Pane) and [R Notebooks](https://bookdown.org/yihui/rmarkdown/notebook.html)
 
 - Publishing D3 visualizations to the web
 
