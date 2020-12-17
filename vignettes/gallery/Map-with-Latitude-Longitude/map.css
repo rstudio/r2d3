@@ -1,0 +1,44 @@
+.canton-boundary {
+	fill: none;
+	stroke: #fff;
+	stroke-linejoin: round;
+  }
+  
+  text {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 10px;
+	text-anchor: middle;
+  }
+  
+  
+  .d3-tip {
+				line-height: 1;
+				font-weight: bold;
+				padding: 12px;
+				background: black;
+				color: #fff;
+				border-radius: 2px;
+				opacity: 0.001%;
+			  }
+			  .d3-tip:after {
+				box-sizing: border-box;
+				display: inline;
+				font-size: 10px;
+				width: 100%;
+				line-height: 1;
+				color: black;
+				content: "\25BC";
+				position: absolute;
+				text-align: center;
+				opacity: 0.001%;
+			  }
+  
+			  .d3-tip.n:after {
+				margin: -1px 0 0 0;
+				top: 100%;
+				left: 0;
+				opacity: 0.001%;
+			  }
+			  .area:hover {
+				  fill: brown;
+			  }
