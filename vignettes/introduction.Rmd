@@ -1,6 +1,6 @@
 ---
 title: "r2d3: R Interface to D3 Visualizations"
-output: 
+output:
   rmarkdown::html_vignette:
     readme: true
 vignette: >
@@ -12,8 +12,8 @@ vignette: >
 ```{r setup, include=FALSE}
 library(r2d3)
 ```
- 
-<a href="https://travis-ci.org/rstudio/r2d3"><img src="https://travis-ci.org/rstudio/r2d3.svg?branch=master" style="border: none; margin: 0px; margin-right: 5px;"/></a> <a href="https://cran.r-project.org/package=r2d3"><img src="https://www.r-pkg.org/badges/version/r2d3" style="border: none; margin: 0px; margin-right: 5px;"/></a> <a href="https://codecov.io/gh/rstudio/r2d3"><img src="https://codecov.io/gh/rstudio/r2d3/branch/master/graph/badge.svg" style="border: none; margin: 0px; margin-right: 5px;"/></a>
+
+<a href="https://travis-ci.org/rstudio/r2d3"><img src="https://travis-ci.org/rstudio/r2d3.svg?branch=main" style="border: none; margin: 0px; margin-right: 5px;"/></a> <a href="https://cran.r-project.org/package=r2d3"><img src="https://www.r-pkg.org/badges/version/r2d3" style="border: none; margin: 0px; margin-right: 5px;"/></a> <a href="https://codecov.io/gh/rstudio/r2d3"><img src="https://codecov.io/gh/rstudio/r2d3/branch/main/graph/badge.svg" style="border: none; margin: 0px; margin-right: 5px;"/></a>
 
 <img src="tools/README/r2d3-hex.png" width=180 align="right" style="border: none; margin-right: 10px;"/>
 
@@ -34,7 +34,7 @@ The **r2d3** package provides a suite of tools for using [D3 visualizations](htt
 <div style="clear: both"></div>
 <br/>
 
-With **r2d3**, you can bind data from R to D3 visualizations like the ones found on <https://github.com/d3/d3/wiki/Gallery>, <https://bl.ocks.org/>, and <https://vida.io/explore>: 
+With **r2d3**, you can bind data from R to D3 visualizations like the ones found on <https://github.com/d3/d3/wiki/Gallery>, <https://bl.ocks.org/>, and <https://vida.io/explore>:
 
 <div style="margin-top: 20px; margin-bottom: 10px;">
 <a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><img src="tools/README/chord_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>&nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><img src="tools/README/bubbles_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>&nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><img src="tools/README/cartogram_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>
@@ -53,7 +53,7 @@ devtools::install_github("rstudio/r2d3")
 
 Next, install the [preview release of RStudio v1.2](https://rstudio.com/products/rstudio/download/) of RStudio (you need this version of RStudio to take advantage of various integrated tools for authoring D3 scripts with r2d3).
 
-Once you've installed the package and the RStudio v1.2 preview release you have the tools required to work with **r2d3**. Below, we'll describe basic workflow within RStudio and techniques for including visualizations in R Markdown and Shiny applications. 
+Once you've installed the package and the RStudio v1.2 preview release you have the tools required to work with **r2d3**. Below, we'll describe basic workflow within RStudio and techniques for including visualizations in R Markdown and Shiny applications.
 
 ## About D3
 
@@ -101,7 +101,7 @@ Note that data is provided to the script using the `data` argument to the `r2d3(
 - `options` --- Additional options provided by the user
 - `theme` --- Colors for the current theme
 
-When you are learning D3 or translating D3 examples for use with R it's important to keep in mind that D3 examples will generally include code to load data, create an SVG or other root element, and establish a width and height for the visualization. 
+When you are learning D3 or translating D3 examples for use with R it's important to keep in mind that D3 examples will generally include code to load data, create an SVG or other root element, and establish a width and height for the visualization.
 
 On the other hand with **r2d3**, these variables are *provided automatically* so do not need to be created. The reasons these variables are provided automatically are:
 
@@ -209,7 +209,7 @@ For next steps on learning on how to use **r2d3**, see these articles:
 
 - [R to D3 Data Conversion](https://rstudio.github.io/r2d3/articles/data_conversion.html) --- Customize the conversion of R objects to D3-friendly JSON.
 
-- [D3 Visualization Options](https://rstudio.github.io/r2d3/articles/visualization_options.html) --- Control various aspects of D3 rendering and expose user-level options for your D3 script. 
+- [D3 Visualization Options](https://rstudio.github.io/r2d3/articles/visualization_options.html) --- Control various aspects of D3 rendering and expose user-level options for your D3 script.
 
 - [Development and Debugging](https://rstudio.github.io/r2d3/articles/development_and_debugging.html) --- Recommended tools and workflow for developing D3 visualizations.
 
@@ -223,9 +223,4 @@ Once you are familar with the basics, check out these articles on more advanced 
 
 - [Advanced Rendering with Callbacks](https://rstudio.github.io/r2d3/articles/advanced_rendering.html) --- An alternate way to organize D3 scripts that enables you to distinguish between initialization and re-rendering based on new data, as well as handle resizing more dynamically.
 
-- [Package Development](https://rstudio.github.io/r2d3/articles/package_development.html) -- Create re-usable D3 visualizations by including them in an R package. 
-
-
-
-
-
+- [Package Development](https://rstudio.github.io/r2d3/articles/package_development.html) -- Create re-usable D3 visualizations by including them in an R package.

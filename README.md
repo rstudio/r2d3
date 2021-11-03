@@ -1,9 +1,9 @@
 r2d3: R Interface to D3 Visualizations
 ================
 
-<a href="https://travis-ci.org/rstudio/r2d3"><img src="https://travis-ci.org/rstudio/r2d3.svg?branch=master" style="border: none; margin: 0px; margin-right: 5px;"/></a>
+<a href="https://travis-ci.org/rstudio/r2d3"><img src="https://travis-ci.org/rstudio/r2d3.svg?branch=main" style="border: none; margin: 0px; margin-right: 5px;"/></a>
 <a href="https://cran.r-project.org/package=r2d3"><img src="https://www.r-pkg.org/badges/version/r2d3" style="border: none; margin: 0px; margin-right: 5px;"/></a>
-<a href="https://codecov.io/gh/rstudio/r2d3"><img src="https://codecov.io/gh/rstudio/r2d3/branch/master/graph/badge.svg" style="border: none; margin: 0px; margin-right: 5px;"/></a>
+<a href="https://codecov.io/gh/rstudio/r2d3"><img src="https://codecov.io/gh/rstudio/r2d3/branch/main/graph/badge.svg" style="border: none; margin: 0px; margin-right: 5px;"/></a>
 
 <img src="tools/README/r2d3-hex.png" width=180 align="right" style="border: none; margin-right: 10px;"/>
 

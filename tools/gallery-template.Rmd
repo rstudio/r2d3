@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo=FALSE, comment=NA)
 ```
 
 <div id="source-link">
-<https://github.com/rstudio/r2d3/tree/master/vignettes/gallery/{{name}}>
+<https://github.com/rstudio/r2d3/tree/main/vignettes/gallery/{{name}}>
 </div>
 
 <div class="row">
@@ -46,6 +46,3 @@ $('.template-vignette>.row>.col-md-9').attr('class', 'col-md-12');
 $('a.list-group-item[href="../{{name}}/"]').addClass('active');
 $('a[href="../../../articles/gallery.html"]').parent().addClass('active');
 ```
-
-
-
