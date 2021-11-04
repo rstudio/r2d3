@@ -110,4 +110,4 @@ PerformanceReporter <- R6::R6Class("PerformanceReporter",
                                    )
 )
 
-test_check("r2d3", reporter = "default")
+test_check("r2d3")
