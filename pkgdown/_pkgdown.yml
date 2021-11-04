@@ -1,3 +1,4 @@
+url: https://rstudio.github.io/r2d3/
 
 template:
   params:
@@ -38,19 +39,19 @@ navbar:
       href: articles/gallery.html
     - text: "Reference"
       href: reference/index.html
-      
+
 reference:
 
   - title: "Rendering"
     contents:
       - r2d3
       - default_sizing
-  
+
   - title: "Data"
     contents:
       - as_d3_data
       - read_json
-  
+
   - title: "Publishing"
     contents:
       - save_d3_html
@@ -60,8 +61,7 @@ reference:
     contents:
       - d3Output
       - renderD3
-      
+
   - title: "Miscellaneous"
     contents:
       - html_dependencies_d3
-
