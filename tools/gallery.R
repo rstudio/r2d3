@@ -91,9 +91,9 @@ for (dir in gallery_dirs) {
   gallery_rmd <- file.path(dir, "index.Rmd")
   output <- whisker.render(whisker_template, data = data, partials = list(
     code_partial = code_partial
-  ))  
-  cat(output, file = gallery_rmd)
-  
+  ))
+  cat(output, "\n", file = gallery_rmd)
+
   # create thumbnail
   create_thumbnail(data)
 }
