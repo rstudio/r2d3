@@ -1,5 +1,8 @@
 url: https://rstudio.github.io/r2d3/
 
+development:
+  mode: auto
+
 template:
   params:
     bootswatch: flatly
