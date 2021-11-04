@@ -21,3 +21,4 @@ README.Rmd
 tools/gallery.R
 tools/code-partial.Rmd
 tools/gallery-template.Rmd
+^codecov\.yml$
