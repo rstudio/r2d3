@@ -16,7 +16,6 @@ Description: Suite of tools for using 'D3', a library for producing dynamic, int
   packages.
 License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
-LazyData: TRUE
 Depends:
   R (>= 3.1.2)
 Imports:
