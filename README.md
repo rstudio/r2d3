@@ -1,33 +1,33 @@
-r2d3: R Interface to D3 Visualizations  <img src="man/figures/r2d3-hex.png" align="right" alt="" width="120" />
-================
+# r2d3: R Interface to D3 Visualizations <img src="man/figures/r2d3-hex.png" align="right" alt="" width="120" />
 
 <!-- badges: start -->
+
 [![R-CMD-check](https://github.com/rstudio/r2d3/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/r2d3/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/r2d3)](https://CRAN.R-project.org/package=r2d3)
 [![Codecov test coverage](https://codecov.io/gh/rstudio/r2d3/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rstudio/r2d3?branch=main)
-<!-- badges: end -->
 
+<!-- badges: end -->
 
 The **r2d3** package provides a suite of tools for using [D3
 visualizations](https://d3js.org/) with R, including:
 
-  - Translating R objects into D3 friendly data structures
+- Translating R objects into D3 friendly data structures
 
-  - Rendering D3 scripts within the [RStudio
-    Viewer](https://support.rstudio.com/hc/en-us/articles/202133558-Extending-RStudio-with-the-Viewer-Pane)
-    and [R Notebooks](https://bookdown.org/yihui/rmarkdown/notebook.html)
+- Rendering D3 scripts within the [RStudio
+  Viewer](https://support.rstudio.com/hc/en-us/articles/202133558-Extending-RStudio-with-the-Viewer-Pane)
+  and [R Notebooks](https://bookdown.org/yihui/rmarkdown/notebook.html)
 
-  - Publishing D3 visualizations to the web
+- Publishing D3 visualizations to the web
 
-  - Incorporating D3 scripts into [R
-    Markdown](https://rmarkdown.rstudio.com/) reports, presentations,
-    and dashboards
+- Incorporating D3 scripts into [R
+  Markdown](https://rmarkdown.rstudio.com/) reports, presentations,
+  and dashboards
 
-  - Creating interactive D3 applications with
-    [Shiny](https://shiny.rstudio.com/)
+- Creating interactive D3 applications with
+  [Shiny](https://shiny.rstudio.com/)
 
-  - Distributing D3 based [htmlwidgets](http://www.htmlwidgets.org) in R
-    packages
+- Distributing D3 based [htmlwidgets](http://www.htmlwidgets.org) in R
+  packages
 
 <div style="clear: both">
 
@@ -43,21 +43,28 @@ ones found on <https://github.com/d3/d3/wiki/Gallery>,
 <div style="margin-top: 20px; margin-bottom: 10px;">
 
 <a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"
-  ><img
+
+> <img
+
     src="man/figures/chord_thumbnail.png"
     width="28%"
     class="illustration gallery-thumbnail" /></a
->&nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"
-  ><img
+
+> &nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"
+> <img
+
     src="man/figures/bubbles_thumbnail.png"
     width="28%"
     class="illustration gallery-thumbnail" /></a
->&nbsp;&nbsp;<a
-  href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"
-  ><img
+
+> &nbsp;&nbsp;<a
+> href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"
+> <img
+
     src="man/figures/cartogram_thumbnail.png"
     width="28%"
     class="illustration gallery-thumbnail"
+
 /></a>
 
 </div>
@@ -69,7 +76,7 @@ RStudio, R Markdown documents, and Shiny applications.
 
 First, install the package from GitHub as follows:
 
-``` r
+```r
 devtools::install_github("rstudio/r2d3")
 ```
 
@@ -104,23 +111,29 @@ To use **r2d3**, write a D3 script and then pass R data to it using the
 `r2d3()` function. For example, here’s a simple D3 script that draws a
 bar chart (“barchart.js”):
 
-``` js
+```js
 // !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
 
 var barHeight = Math.floor(height / data.length);
 
-svg.selectAll('rect')
+svg
+  .selectAll("rect")
   .data(data)
-  .enter().append('rect')
-    .attr('width', function(d) { return d * width; })
-    .attr('height', barHeight)
-    .attr('y', function(d, i) { return i * barHeight; })
-    .attr('fill', 'steelblue');
+  .enter()
+  .append("rect")
+  .attr("width", function (d) {
+    return d * width;
+  })
+  .attr("height", barHeight)
+  .attr("y", function (d, i) {
+    return i * barHeight;
+  })
+  .attr("fill", "steelblue");
 ```
 
 To render the script within R you call the `r2d3()` function:
 
-``` r
+```r
 library(r2d3)
 r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
 ```
@@ -136,25 +149,25 @@ the `r2d3()` function. This data is then automatically made available to
 the D3 script. There are a number of other special variables available
 within D3 scripts, including:
 
-  - `data` - The R data converted to JavaScript.
-  - `svg` - The svg container for the visualization
-  - `width` - The current width of the container
-  - `height` - The current height of the container
-  - `options` - Additional options provided by the user
-  - `theme` - Colors for the current theme
+- `data` - The R data converted to JavaScript.
+- `svg` - The svg container for the visualization
+- `width` - The current width of the container
+- `height` - The current height of the container
+- `options` - Additional options provided by the user
+- `theme` - Colors for the current theme
 
 When you are learning D3 or translating D3 examples for use with R it’s
 important to keep in mind that D3 examples will generally include code
 to load data, create an SVG or other root element, and establish a width
 and height for the visualization.
 
-On the other hand with **r2d3**, these variables are *provided
-automatically* so do not need to be created. The reasons these variables
+On the other hand with **r2d3**, these variables are _provided
+automatically_ so do not need to be created. The reasons these variables
 are provided automatically are:
 
-1)  So that you can dynamically bind data from R to visualizations; and
+1.  So that you can dynamically bind data from R to visualizations; and
 
-2)  So that **r2d3** can automatically handle dynamic resizing for your
+2.  So that **r2d3** can automatically handle dynamic resizing for your
     visualization. Most D3 examples have a static size. This if fine for
     an example but not very robust for including the visualization
     within a report, dashboard, or application.
@@ -178,7 +191,7 @@ visualization:
 You might wonder where the data comes from for the preview. Note that
 there is a special comment at the top of the D3 script:
 
-``` js
+```js
 // !preview r2d3 data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20)
 ```
 
@@ -231,7 +244,7 @@ Note that in order to use the `d3` engine you need to add
 The `renderD3()` and `d3Output()` functions enable you to include D3
 visualizations within Shiny applications:
 
-``` r
+```r
 library(shiny)
 library(r2d3)
 
@@ -267,32 +280,35 @@ interaction with D3 visualizations).
 To learn the basics of D3 and see some examples that might inspire your
 own work, check out:
 
-  - [Learning
-    D3](https://rstudio.github.io/r2d3/articles/learning_d3.html) -
-    Suggested resources for learning how to create D3 visualizations.
+- [Learning
+  D3](https://rstudio.github.io/r2d3/articles/learning_d3.html) -
+  Suggested resources for learning how to create D3 visualizations.
 
-  - [Gallery of
-    Examples](https://rstudio.github.io/r2d3/articles/gallery.html) -
-    Learn from a wide variety of example D3 visualizations.
+- [Gallery of
+  Examples](https://rstudio.github.io/r2d3/articles/gallery.html) -
+  Learn from a wide variety of example D3 visualizations.
 
 For next steps on learning on how to use **r2d3**, see these articles:
 
-  - [R to D3 Data
-    Conversion](https://rstudio.github.io/r2d3/articles/data_conversion.html)
-    - Customize the conversion of R objects to D3-friendly JSON.
+- [R to D3 Data
+  Conversion](https://rstudio.github.io/r2d3/articles/data_conversion.html)
 
-  - [D3 Visualization
-    Options](https://rstudio.github.io/r2d3/articles/visualization_options.html)
-    - Control various aspects of D3 rendering and expose user-level
+  - Customize the conversion of R objects to D3-friendly JSON.
+
+- [D3 Visualization
+  Options](https://rstudio.github.io/r2d3/articles/visualization_options.html)
+
+  - Control various aspects of D3 rendering and expose user-level
     options for your D3 script.
 
-  - [Development and
-    Debugging](https://rstudio.github.io/r2d3/articles/development_and_debugging.html)
-    - Recommended tools and workflow for developing D3 visualizations.
+- [Development and
+  Debugging](https://rstudio.github.io/r2d3/articles/development_and_debugging.html)
 
-  - [Publishing D3
-    Visualizations](https://rstudio.github.io/r2d3/articles/publishing.html)
-    - Publish D3 visualizations as HTML, a static PNG image, or within R
+  - Recommended tools and workflow for developing D3 visualizations.
+
+- [Publishing D3
+  Visualizations](https://rstudio.github.io/r2d3/articles/publishing.html)
+  - Publish D3 visualizations as HTML, a static PNG image, or within R
     Markdown documents and Shiny applications.
 
 Once you are familar with the basics, check out these articles on more
@@ -304,18 +320,20 @@ insights from data is streamlined when users are able to modify a Shiny
 input, or click on a D3 visualization, and that action produces new
 results.
 
-  - [CSS and JavaScript
-    Dependencies](https://rstudio.github.io/r2d3/articles/dependencies.html)
-    - Incorporating external CSS styles and JavaScript libraries into
+- [CSS and JavaScript
+  Dependencies](https://rstudio.github.io/r2d3/articles/dependencies.html)
+
+  - Incorporating external CSS styles and JavaScript libraries into
     your visualizations.
 
-  - [Advanced Rendering with
-    Callbacks](https://rstudio.github.io/r2d3/articles/advanced_rendering.html)
-    - An alternate way to organize D3 scripts that enables you to
+- [Advanced Rendering with
+  Callbacks](https://rstudio.github.io/r2d3/articles/advanced_rendering.html)
+
+  - An alternate way to organize D3 scripts that enables you to
     distinguish between initialization and re-rendering based on new
     data, as well as handle resizing more dynamically.
 
-  - [Package
-    Development](https://rstudio.github.io/r2d3/articles/package_development.html)
-    – Create re-usable D3 visualizations by including them in an R
-    package.
+- [Package
+  Development](https://rstudio.github.io/r2d3/articles/package_development.html)
+  – Create re-usable D3 visualizations by including them in an R
+  package.
