@@ -7,6 +7,7 @@ code_partial <- readLines("tools/code-partial.Rmd")
 gallery_dirs <- list.dirs("vignettes/gallery", recursive = FALSE)
 gallery_dirs_list <- iteratelist(basename(gallery_dirs), value="dir")
 
+# Generates a thumbnail image and puts it in vignettes/images/
 create_thumbnail <- function(data) {
   current_dir <- getwd()
   on.exit(setwd(current_dir))
