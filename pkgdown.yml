@@ -23,13 +23,12 @@ articles:
   gallery/treemap/index: index.html
   gallery/voronoi/index: index.html
   gallery: gallery.html
-  introduction: introduction.html
   learning_d3: learning_d3.html
   package_development: package_development.html
   publishing: publishing.html
   shiny: shiny.html
   visualization_options: visualization_options.html
-last_built: 2021-11-05T15:46Z
+last_built: 2021-11-05T18:40Z
 urls:
   reference: https://rstudio.github.io/r2d3//reference
   article: https://rstudio.github.io/r2d3//articles

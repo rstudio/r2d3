@@ -50,9 +50,6 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Using</li>
     <li>
-      <a href="../articles/introduction.html">Introduction to r2d3</a>
-    </li>
-    <li>
       <a href="../articles/data_conversion.html">R to D3 Data Conversion</a>
     </li>
     <li>
@@ -189,17 +186,17 @@
 output: html_document
 ---
 
-```{r}
+`r ````{r}
 library(r2d3)
 r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
 ```</code></pre>
 <p><img src="images/bar_chart.png" class="illustration" width="600/"></p>
-<p>You can also include D3 visualization code inline using the <code>d3</code> R Markdown engine:</p>
-<pre><code>```{r setup}
+<p>You can also include D3 visualization code inline using the <code>d3</code> R Markdown eng````</p>
+<pre><code>`r ````{r setup}
 library(r2d3)
-bars &lt;- c(10, 20, 30)
+bars &amp;lt;- c(10, 20, 30)
 ```</code></pre>
-<pre><code>```{d3 data=bars, options=list(color = 'orange')}
+<pre><code>`r ````{d3 data=bars, options=list(color = 'orange')}
 svg.selectAll('rect')
   .data(data)
   .enter()
@@ -223,7 +220,7 @@ svg.selectAll('rect')
 <h2 class="hasAnchor">
 <a href="#shiny-applications" class="anchor"></a>Shiny applications</h2>
 <p>The <code><a href="../reference/d3-shiny.html">renderD3()</a></code> and <code><a href="../reference/d3-shiny.html">d3Output()</a></code> functions enable you to include D3 visualizations within <a href="https://shiny.rstudio.com">Shiny</a> applications:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.rstudio.com/">shiny</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/r2d3/">r2d3</a></span><span class="op">)</span>
 
