@@ -44,13 +44,6 @@ create_thumbnail <- function(data) {
     vheight = 474,
     delay = 3
   )
-  
-  root_target <- paste("../../../docs/articles/images/", data$name, "_thumbnail.png", sep = "")
-  file.copy(
-    webshot_target,
-    root_target,
-    overwrite = TRUE
-  )
 }
 
 for (dir in gallery_dirs) {
