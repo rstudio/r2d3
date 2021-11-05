@@ -43,29 +43,23 @@ ones found on <https://github.com/d3/d3/wiki/Gallery>,
 <div style="margin-top: 20px; margin-bottom: 10px;">
 
 <a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"
-
-> <img
-
+  ><img
     src="man/figures/chord_thumbnail.png"
     width="28%"
     class="illustration gallery-thumbnail" /></a
-
-> &nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"
-> <img
-
+><a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"
+  ><img
     src="man/figures/bubbles_thumbnail.png"
     width="28%"
     class="illustration gallery-thumbnail" /></a
-
-> &nbsp;&nbsp;<a
-> href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"
-> <img
-
+><a
+  href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"
+  ><img
     src="man/figures/cartogram_thumbnail.png"
     width="28%"
     class="illustration gallery-thumbnail"
-
 /></a>
+
 
 </div>
 
@@ -204,26 +198,31 @@ You can include D3 visualizations in an R Markdown document or R
 Notebook. You can do this by calling the `r2d3()` function from within
 an R code chunk:
 
-<pre><code>---
+````
+---
 output: html_document
 ---
 
-&#96``{r}
+```{r}
 library(r2d3)
 r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
-&#96``</code></pre>
+```
+````
 
 <img src="man/figures/bar_chart.png" class="illustration" width=600/>
 
 You can also include D3 visualization code inline using the `d3` R
 Markdown engine:
 
-<pre><code>&#96``{r setup}
+````
+```{r setup}
 library(r2d3)
 bars &lt;- c(10, 20, 30)
-&#96``</code></pre>
+```
+````
 
-<pre><code>&#96``{d3 data=bars, options=list(color = 'orange')}
+````
+```{d3 data=bars, options=list(color = 'orange')}
 svg.selectAll('rect')
   .data(data)
   .enter()
@@ -232,7 +231,8 @@ svg.selectAll('rect')
       .attr('height', '20px')
       .attr('y', function(d, i) { return i * 22; })
       .attr('fill', options.color);
-&#96``</code></pre>
+```
+````
 
 <img src="man/figures/rmarkdown-1.png" class="illustration" width=600/>
 
