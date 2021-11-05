@@ -42,7 +42,23 @@ ones found on <https://github.com/d3/d3/wiki/Gallery>,
 
 <div style="margin-top: 20px; margin-bottom: 10px;">
 
-<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><img src="man/figures/chord_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><img src="man/figures/bubbles_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><img src="man/figures/cartogram_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>
+<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"
+  ><img
+    src="man/figures/chord_thumbnail.png"
+    width="28%"
+    class="illustration gallery-thumbnail" /></a
+>&nbsp;&nbsp;<a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"
+  ><img
+    src="man/figures/bubbles_thumbnail.png"
+    width="28%"
+    class="illustration gallery-thumbnail" /></a
+>&nbsp;&nbsp;<a
+  href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"
+  ><img
+    src="man/figures/cartogram_thumbnail.png"
+    width="28%"
+    class="illustration gallery-thumbnail"
+/></a>
 
 </div>
 
@@ -120,12 +136,12 @@ the `r2d3()` function. This data is then automatically made available to
 the D3 script. There are a number of other special variables available
 within D3 scripts, including:
 
-  - `data` — The R data converted to JavaScript.
-  - `svg` — The svg container for the visualization
-  - `width` — The current width of the container
-  - `height` — The current height of the container
-  - `options` — Additional options provided by the user
-  - `theme` — Colors for the current theme
+  - `data` - The R data converted to JavaScript.
+  - `svg` - The svg container for the visualization
+  - `width` - The current width of the container
+  - `height` - The current height of the container
+  - `options` - Additional options provided by the user
+  - `theme` - Colors for the current theme
 
 When you are learning D3 or translating D3 examples for use with R it’s
 important to keep in mind that D3 examples will generally include code
@@ -252,50 +268,50 @@ To learn the basics of D3 and see some examples that might inspire your
 own work, check out:
 
   - [Learning
-    D3](https://rstudio.github.io/r2d3/articles/learning_d3.html) —
+    D3](https://rstudio.github.io/r2d3/articles/learning_d3.html) -
     Suggested resources for learning how to create D3 visualizations.
 
   - [Gallery of
-    Examples](https://rstudio.github.io/r2d3/articles/gallery.html) —
+    Examples](https://rstudio.github.io/r2d3/articles/gallery.html) -
     Learn from a wide variety of example D3 visualizations.
 
 For next steps on learning on how to use **r2d3**, see these articles:
 
   - [R to D3 Data
     Conversion](https://rstudio.github.io/r2d3/articles/data_conversion.html)
-    — Customize the conversion of R objects to D3-friendly JSON.
+    - Customize the conversion of R objects to D3-friendly JSON.
 
   - [D3 Visualization
     Options](https://rstudio.github.io/r2d3/articles/visualization_options.html)
-    — Control various aspects of D3 rendering and expose user-level
+    - Control various aspects of D3 rendering and expose user-level
     options for your D3 script.
 
   - [Development and
     Debugging](https://rstudio.github.io/r2d3/articles/development_and_debugging.html)
-    — Recommended tools and workflow for developing D3 visualizations.
+    - Recommended tools and workflow for developing D3 visualizations.
 
   - [Publishing D3
     Visualizations](https://rstudio.github.io/r2d3/articles/publishing.html)
-    — Publish D3 visualizations as HTML, a static PNG image, or within R
+    - Publish D3 visualizations as HTML, a static PNG image, or within R
     Markdown documents and Shiny applications.
 
 Once you are familar with the basics, check out these articles on more
 advanced topics:
 
 [Using r2d3 with
-Shiny](https://rstudio.github.io/r2d3/articles/shiny.html) — Deriving
+Shiny](https://rstudio.github.io/r2d3/articles/shiny.html) - Deriving
 insights from data is streamlined when users are able to modify a Shiny
 input, or click on a D3 visualization, and that action produces new
 results.
 
   - [CSS and JavaScript
     Dependencies](https://rstudio.github.io/r2d3/articles/dependencies.html)
-    — Incorporating external CSS styles and JavaScript libraries into
+    - Incorporating external CSS styles and JavaScript libraries into
     your visualizations.
 
   - [Advanced Rendering with
     Callbacks](https://rstudio.github.io/r2d3/articles/advanced_rendering.html)
-    — An alternate way to organize D3 scripts that enables you to
+    - An alternate way to organize D3 scripts that enables you to
     distinguish between initialization and re-rendering based on new
     data, as well as handle resizing more dynamically.
 
