@@ -1,4 +1,4 @@
-r2d3: R Interface to D3 Visualizations  <img src="tools/README/r2d3-hex.png" align="right" alt="" width="120" />
+r2d3: R Interface to D3 Visualizations  <img src="man/figures/r2d3-hex.png" align="right" alt="" width="120" />
 ================
 
 <!-- badges: start -->
@@ -42,7 +42,7 @@ ones found on <https://github.com/d3/d3/wiki/Gallery>,
 
 <div style="margin-top: 20px; margin-bottom: 10px;">
 
-<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><img src="tools/README/chord_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><img src="tools/README/bubbles_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><img src="tools/README/cartogram_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>
+<a href="https://rstudio.github.io/r2d3/articles/gallery/chord/"><img src="man/figures/chord_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/bubbles/"><img src="man/figures/bubbles_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>  <a href="https://rstudio.github.io/r2d3/articles/gallery/cartogram/"><img src="man/figures/cartogram_thumbnail.png" width="28%" class="illustration gallery-thumbnail"/></a>
 
 </div>
 
@@ -111,7 +111,7 @@ r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
 
 Which results in the following visualization:
 
-<img src="tools/README/bar_chart.png" class="illustration" width=600/>
+<img src="man/figures/bar_chart.png" class="illustration" width=600/>
 
 ### D3 Variables
 
@@ -150,14 +150,14 @@ release](https://rstudio.com/products/rstudio/download/) of RStudio
 includes support for previewing D3 scripts as you write them. To try
 this out, create a D3 script using the new file menu:
 
-<img src="tools/README/new_script.png" class="screenshot" width=600/>
+<img src="man/figures/new_script.png" class="screenshot" width=600/>
 
 A simple template for a D3 script (the barchart.js example shown above)
 is provided by default. You can use the **Preview** command
 (Ctrl+Shift+Enter) to render the
 visualization:
 
-<img src="tools/README/rstudio_preview.png" class="screenshot" width=600/>
+<img src="man/figures/rstudio_preview.png" class="screenshot" width=600/>
 
 You might wonder where the data comes from for the preview. Note that
 there is a special comment at the top of the D3 script:
@@ -184,7 +184,7 @@ library(r2d3)
 r2d3(data=c(0.3, 0.6, 0.8, 0.95, 0.40, 0.20), script = "barchart.js")
 &#96``</code></pre>
 
-<img src="tools/README/bar_chart.png" class="illustration" width=600/>
+<img src="man/figures/bar_chart.png" class="illustration" width=600/>
 
 You can also include D3 visualization code inline using the `d3` R
 Markdown engine:
@@ -205,7 +205,7 @@ svg.selectAll('rect')
       .attr('fill', options.color);
 &#96``</code></pre>
 
-<img src="tools/README/rmarkdown-1.png" class="illustration" width=600/>
+<img src="man/figures/rmarkdown-1.png" class="illustration" width=600/>
 
 Note that in order to use the `d3` engine you need to add
 `library(r2d3)` to the setup chunk (as illustrated above).
@@ -239,7 +239,7 @@ server <- function(input, output) {
 shinyApp(ui = ui, server = server)
 ```
 
-<img src="tools/README/baranim-1.gif" class="illustration" width=600/>
+<img src="man/figures/baranim-1.gif" class="illustration" width=600/>
 
 See the article on [Using r2d3 with
 Shiny](https://rstudio.github.io/r2d3/articles/shiny.html) to learn more
