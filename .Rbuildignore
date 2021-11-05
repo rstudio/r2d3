@@ -16,7 +16,6 @@ README.Rmd
 ^vignettes/publishing.*$
 ^vignettes/shiny.*$
 ^vignettes/tools.*$
-^\.travis\.yml$
 ^testthat/barchart/.*$
 tools/gallery.R
 tools/code-partial.Rmd
