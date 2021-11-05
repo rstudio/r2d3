@@ -30,9 +30,14 @@ script_wrap <- function(deps, script, container) {
 }
 
 script_read <- function(script) {
-  if (is.null(script) || length(script) == 0 || !file.exists(script))
+  if (
+    is.null(script) ||
+    length(script) == 0 ||
+    any(!file.exists(script))
+  ) {
     return(script)
-  
+  }
+
   paste(
     sapply(
       script,

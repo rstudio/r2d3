@@ -16,7 +16,6 @@ Description: Suite of tools for using 'D3', a library for producing dynamic, int
   packages.
 License: BSD_3_clause + file LICENSE
 Encoding: UTF-8
-LazyData: TRUE
 Depends:
   R (>= 3.1.2)
 Imports:
@@ -30,7 +29,7 @@ Suggests:
   testthat,
   webshot
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
-URL: https://github.com/rstudio/r2d3
+RoxygenNote: 7.1.2
+URL: https://rstudio.github.io/r2d3/, https://github.com/rstudio/r2d3
 BugReports: https://github.com/rstudio/r2d3/issues
 VignetteBuilder: knitr
