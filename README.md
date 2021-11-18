@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/rstudio/r2d3/workflows/R-CMD-check/badge.svg)](https://github.com/rstudio/r2d3/actions)
+[![R-CMD-check](https://github.com/rstudio/r2d3/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rstudio/r2d3/actions)
 [![CRAN status](https://www.r-pkg.org/badges/version/r2d3)](https://CRAN.R-project.org/package=r2d3)
 [![Codecov test coverage](https://codecov.io/gh/rstudio/r2d3/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rstudio/r2d3?branch=main)
 
