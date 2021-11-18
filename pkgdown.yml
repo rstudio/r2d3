@@ -28,7 +28,7 @@ articles:
   publishing: publishing.html
   shiny: shiny.html
   visualization_options: visualization_options.html
-last_built: 2021-11-05T18:40Z
+last_built: 2021-11-18T21:35Z
 urls:
   reference: https://rstudio.github.io/r2d3//reference
   article: https://rstudio.github.io/r2d3//articles
