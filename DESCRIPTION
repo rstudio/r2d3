@@ -33,3 +33,4 @@ RoxygenNote: 7.1.2
 URL: https://rstudio.github.io/r2d3/, https://github.com/rstudio/r2d3
 BugReports: https://github.com/rstudio/r2d3/issues
 VignetteBuilder: knitr
+
