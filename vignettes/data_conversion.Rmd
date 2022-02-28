@@ -13,7 +13,7 @@ knitr::opts_chunk$set(eval = FALSE)
 
 ## Default conversion
 
-R objects provided as `data` for D3 visualizations are converted to JSON using the [jsonlite::toJSON()](https://www.rdocumentation.org/packages/jsonlite/versions/1.5/topics/toJSON%2C%20fromJSON) function, and use the same default serialization behavior as [Shiny](https://shiny.rstudio.com) and [htmlwidgets](http://www.htmlwidgets.org/develop_advanced.html#custom-json-serializer). 
+R objects provided as `data` for D3 visualizations are converted to JSON using the [jsonlite::toJSON()](https://www.rdocumentation.org/packages/jsonlite/versions/1.5/topics/toJSON%2C%20fromJSON) function, and use the same default serialization behavior as [Shiny](https://shiny.rstudio.com) and [htmlwidgets](https://www.htmlwidgets.org/develop_advanced.html#custom-json-serializer). 
 
 This corresponds to the following call to `jsonlite::toJSON()`:
 
@@ -28,7 +28,7 @@ jsonlite::toJSON(
 
 #### Data frames
 
-Data frames are serialized with a columns orientation as that is a more compact over the wire representation than rows orientation. When the data frame gets to the client **r2d3** calls the [HTMLWidgets.dataframeToD3()](http://www.htmlwidgets.org/develop_advanced.html#htmlwidgets.dataframetod3) method to transform the data to a D3-friendly rows orientation.
+Data frames are serialized with a columns orientation as that is a more compact over the wire representation than rows orientation. When the data frame gets to the client **r2d3** calls the [HTMLWidgets.dataframeToD3()](https://www.htmlwidgets.org/develop_advanced.html#htmlwidgets.dataframetod3) method to transform the data to a D3-friendly rows orientation.
 
 Here is an example of the JSON columns-based representation of an R data frame:
 

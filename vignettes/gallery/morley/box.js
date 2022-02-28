@@ -1,6 +1,6 @@
 (function() {
 
-// Inspired by http://informationandvisualization.de/blog/box-plot
+// Inspired by https://informationandvisualization.de/blog/box-plot
 d3.box = function() {
   var width = 1,
       height = 1,

@@ -158,7 +158,7 @@ In the D3 script, we called `Shiny.setInputValued()` with an input named `bar_cl
 
 The `output$selected()` function uses `renderText()` to display the cosine of the bar that was clicked on. The call to `input$bar_clicked` is used inside `renderText()` to execute the `cos()` calculation.
 
-The default value of `input$bar_clicked` will be `NULL` at the startup of the app. In this state you won't want to perform any calculation (as it would result in an error) or display any output. Shiny's `req()` function can be used to prevent errors in this case `req()` stops reactivity if the value of the variable passed as an argument is not valid, read more about this function in Shiny's official site: [Check for required values](http://shiny.rstudio.com/reference/shiny/latest/req.html)
+The default value of `input$bar_clicked` will be `NULL` at the startup of the app. In this state you won't want to perform any calculation (as it would result in an error) or display any output. Shiny's `req()` function can be used to prevent errors in this case `req()` stops reactivity if the value of the variable passed as an argument is not valid, read more about this function in Shiny's official site: [Check for required values](https://shiny.rstudio.com/reference/shiny/latest/req.html)
 
 Here is the Shiny application in action:
 

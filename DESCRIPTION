@@ -6,7 +6,7 @@ Authors@R: c(
     person("Nick", "Strayer", email = "nick.strayer@rstudio.com", role = c("aut", "cre")),
     person("Javier", "Luraschi", email = "jluraschi@gmail.com", role = c("aut")),
     person("JJ", "Allaire", role = c("aut")),
-    person("Mike", "Bostock", role = c("ctb", "cph"), comment = "d3.js library, http://d3js.org"),
+    person("Mike", "Bostock", role = c("ctb", "cph"), comment = "d3.js library, https://d3js.org"),
     person(family = "RStudio", role = c("cph"))
     )
 Description: Suite of tools for using 'D3', a library for producing dynamic, interactive data

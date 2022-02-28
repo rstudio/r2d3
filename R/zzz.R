@@ -14,7 +14,7 @@
       if (rstudio$version < "1.2.637")
         packageStartupMessage(
           "r2d3 should be run under RStudio v1.2 or higher. Please update at:\n",
-          "https://rstudio.com/products/rstudio/download/\n"
+          "https://www.rstudio.com/products/rstudio/download/\n"
         )
     }
   }

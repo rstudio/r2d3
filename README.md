@@ -26,7 +26,7 @@ visualizations](https://d3js.org/) with R, including:
 - Creating interactive D3 applications with
   [Shiny](https://shiny.rstudio.com/)
 
-- Distributing D3 based [htmlwidgets](http://www.htmlwidgets.org) in R
+- Distributing D3 based [htmlwidgets](https://www.htmlwidgets.org) in R
   packages
 
 <div style="clear: both">
@@ -75,7 +75,7 @@ devtools::install_github("rstudio/r2d3")
 ```
 
 Next, install the [preview release of RStudio
-v1.2](https://rstudio.com/products/rstudio/download/) of RStudio (you
+v1.2](https://www.rstudio.com/products/rstudio/download/) of RStudio (you
 need this version of RStudio to take advantage of various integrated
 tools for authoring D3 scripts with r2d3).
 
@@ -91,7 +91,7 @@ graphics programming (similar to creating custom grid graphics in R).
 It’s therefore a good fit when you need highly custom visualizations
 that aren’t covered by existing libraries. If on the other hand you are
 looking for pre-fabricated D3 / JavaScript visualizations, check out the
-packages created using [htmlwidgets](http://www.htmlwidgets.org), which
+packages created using [htmlwidgets](https://www.htmlwidgets.org), which
 provide a much higher level interface.
 
 If you are completely new to D3, you may also want to check out the
@@ -169,7 +169,7 @@ are provided automatically are:
 ## D3 Preview
 
 The [RStudio v1.2 preview
-release](https://rstudio.com/products/rstudio/download/) of RStudio
+release](https://www.rstudio.com/products/rstudio/download/) of RStudio
 includes support for previewing D3 scripts as you write them. To try
 this out, create a D3 script using the new file menu:
 
