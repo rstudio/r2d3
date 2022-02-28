@@ -1,3 +1,7 @@
+# r2d3 0.2.6
+
+- Fix bug that would cause multiple dependencies for css or js to silently fail.
+
 # r2d3 0.2.5
 
 - Support for D3 v6 (@dkjoluju, #85).

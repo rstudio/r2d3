@@ -127,11 +127,11 @@ Note that in order to use the `d3` engine you need to add `library(r2d3)` to the
 
 ### flexdashboard
 
-The [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard) R Markdown format is a great way to publish a set of related D3 visualizations. You can use flexdashbaord to combine D3 visualizations with narrative, data tables, other [htmlwidgets](http://www.htmlwidgets.org), and static R plots:
+The [flexdashboard](https://pkgs.rstudio.com/flexdashboard/) R Markdown format is a great way to publish a set of related D3 visualizations. You can use flexdashbaord to combine D3 visualizations with narrative, data tables, other [htmlwidgets](https://www.htmlwidgets.org), and static R plots:
 
 <img src="images/flexdashboard.png" class="illustration" width=600/>
 
-Check out the [flexdashboard online documentation](https://rmarkdown.rstudio.com/flexdashboard) for additional details.
+Check out the [flexdashboard online documentation](https://pkgs.rstudio.com/flexdashboard/) for additional details.
 
 
 ## Shiny applications

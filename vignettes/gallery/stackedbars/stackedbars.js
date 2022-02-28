@@ -1,6 +1,6 @@
 // !preview r2d3 d3_version = 4
 
-// Based on: http://bl.ocks.org/mbostock/3943967
+// Based on: https://bl.ocks.org/mbostock/3943967
 
 var n = 4, // The number of series.
     m = 58; // The number of values per series.
@@ -102,7 +102,7 @@ function transitionStacked() {
 
 // Returns an array of m psuedorandom, smoothly-varying non-negative numbers.
 // Inspired by Lee Byron’s test data generator.
-// http://leebyron.com/streamgraph/
+// https://leebyron.com/streamgraph/
 function bumps(m) {
   var values = [], i, j, w, x, y, z;
 

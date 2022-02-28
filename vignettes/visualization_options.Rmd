@@ -106,7 +106,7 @@ When you render a D3 visualization, **r2d3** creates an R [htmlwidget](http://ww
 
 2) Conforming to the currently active `fig.width` and `fig.height` chunk options within [R Markdown](https://rmarkdown.rstudio.com) documents.
 
-3) Filling available space when used in a [Shiny application](https://shiny.rstudio.com) or a [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard).
+3) Filling available space when used in a [Shiny application](https://shiny.rstudio.com) or a [flexdashboard](https://pkgs.rstudio.com/flexdashboard/).
 
 In order to take advantage of this dynamic sizing behavior, your should ensure that your D3 visualization uses the `width` and `height` variables that are provided automatically. Note the use of `height` in the computation of `barHeight` and `width` in the call to `.attr()` in this example:
 
@@ -175,5 +175,5 @@ The `viewer` argument to the `r2d3()` function enables you to customize how D3 v
 
 The "external" option is useful if your visualization requires more space than an RStudio pane affords. The "browser" option is useful if you need access to browser debugging tools during development.
 
-Note that the `viewer` options described above are only fully supported within the [preview release of RStudio v1.2](https://rstudio.com/products/rstudio/download/) (as opposed to the current stable release).
+Note that the `viewer` options described above are only fully supported within the [preview release of RStudio v1.2](https://www.rstudio.com/products/rstudio/download/) (as opposed to the current stable release).
 

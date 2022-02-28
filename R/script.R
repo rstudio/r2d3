@@ -29,12 +29,16 @@ script_wrap <- function(deps, script, container) {
   )
 }
 
+
 script_read <- function(script) {
-  if (
-    is.null(script) ||
+  # Make sure we can properly resolve the scripts as files. If we can't, because
+  # none were passed or because the script was just in-lined, then just return
+  # the scripts back to the caller
+  unresolvable_script_paths <- is.null(script) ||
     length(script) == 0 ||
     any(!file.exists(script))
-  ) {
+  
+  if (unresolvable_script_paths) {
     return(script)
   }
 
