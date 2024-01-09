@@ -1,3 +1,7 @@
+# r2d3 (development version)
+
+ - Update D3 v5 from 5.9.2 to 5.16.0 (@cjyetman).
+ 
 # r2d3 0.2.5
 
 - Support for D3 v6 (@dkjoluju, #85).
