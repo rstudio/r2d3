@@ -2,7 +2,7 @@
 version_complete <- function(minor) {
   versions <- list(
     "6" = "6.2.0",
-    "5" = "5.9.2",
+    "5" = "5.16.0",
     "4" = "4.13.0",
     "3" = "3.5.17"
   )
